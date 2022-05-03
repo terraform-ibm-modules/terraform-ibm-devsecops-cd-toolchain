@@ -46,3 +46,15 @@ variable "slack_user_name" {
   description = "Name of Slack User"
   default     = ""
 }
+
+variable "scc_evidence_repo" {
+}
+
+variable "scc_profile" {
+}
+
+variable "scc_scope" {
+}
+
+variable "ibm_cloud_api_key" {
+}

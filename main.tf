@@ -55,7 +55,8 @@ module "pipeline-cd" {
 module "integrations" {
   source                    = "./integrations"
   depends_on                = [ module.repositories, module.services ]  
-  region                    = var.region  
+  region                    = var.region
+  ibm_cloud_api_key         = var.ibm_cloud_api_key
   toolchain_id              = ibm_toolchain.toolchain_instance.id
   resource_group            = var.resource_group
   key_protect_instance_name = module.services.key_protect_instance_name
@@ -63,6 +64,9 @@ module "integrations" {
   slack_channel_name        = var.slack_channel_name
   slack_api_token           = var.slack_api_token
   slack_user_name           = var.slack_user_name
+  scc_evidence_repo         = module.repositories.evidence_repo_url
+  scc_profile               = var.scc_profile
+  scc_scope                 = var.scc_scope
 }
 
 module "services" {

@@ -151,3 +151,15 @@ variable "slack_user_name" {
   description = "Name of Slack User"
   default     = ""
 }
+
+variable "scc_profile" {
+  type        = string
+  description = "Security and Compliance Profile"
+  default     = "compliance-profile"
+}
+
+variable "scc_scope" {
+  type        = string
+  description = "Security and Compliance Scope"
+  default     = "compliance-scope"
+}

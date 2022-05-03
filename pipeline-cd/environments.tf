@@ -176,19 +176,19 @@ resource "ibm_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
   pipeline_id    = var.pipeline_id                   
 }
 
-# resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_environment" {
-#   name           = "doi-environment"
-#   type           = "TEXT"
-#   value          = ""
-#   pipeline_id    = var.pipeline_id                   
-# }
+resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_environment" {
+  name           = "doi-environment"
+  type           = "TEXT"
+  value          = " "
+  pipeline_id    = var.pipeline_id                   
+}
 
-# resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
-#   name           = "doi_toolchain_id"
-#   type           = "TEXT"
-#   value          = ""
-#   pipeline_id    = var.pipeline_id                   
-# }
+resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
+  name           = "doi_toolchain_id"
+  type           = "TEXT"
+  value          = " "
+  pipeline_id    = var.pipeline_id                   
+}
 
 resource "ibm_tekton_pipeline_property" "cd_pipeline_ibm_cloud_api" {
   name           = "ibmcloud-api"
@@ -212,10 +212,3 @@ resource "ibm_tekton_pipeline_trigger_property" "cd_pipeline_manual_trigger_prop
    pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id
    trigger_id     = ibm_tekton_pipeline_trigger.cd_pipeline_manual_trigger.trigger[0].id
 }
-
-# resource "ibm_tekton_pipeline_property" "cd_pipeline_sonarqube" {
-#   name           = "sonarqube"
-#   type           = "INTEGRATION"
-#   integration_id = ""
-#   pipeline_id    = var.pipeline_id               
-# }

@@ -25,7 +25,7 @@ resource "ibm_toolchain_tool_git" "change_management_repo" {
     repo_name = join("-", [split(".", split("/", var.change_management_repo)[4])[0], formatdate("DDMMYYYYhhmmss", timestamp())])
   }  
   parameters {
-    has_issues          = false
+    has_issues          = true
     enable_traceability = false
   }
 }
@@ -35,11 +35,10 @@ resource "ibm_toolchain_tool_git" "pipeline_repo" {
   toolchain_id = var.toolchain_id
   name         = "pipeline-repo"  
   initialization {
-    type = "clone"
-    source_repo_url = var.pipeline_repo
+    type = "link"
+    repo_url = var.pipeline_repo
     private_repo = true
-    repo_name = join("-", [split(".", split("/", var.pipeline_repo)[4])[0], formatdate("DDMMYYYYhhmmss", timestamp())])
-  } 
+  }  
   parameters {
     has_issues          = false
     enable_traceability = false
@@ -86,7 +85,7 @@ resource "ibm_toolchain_tool_git" "issues_repo" {
     private_repo = true
   }  
   parameters {
-    has_issues          = false
+    has_issues          = true
     enable_traceability = false
   }
 }

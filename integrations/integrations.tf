@@ -42,8 +42,15 @@ resource "ibm_toolchain_tool_custom" "cos_integration" {
   }
 }
 
-resource "ibm_toolchain_tool_orion" "orion_tool" {
+resource "ibm_toolchain_tool_security_compliance" "scc_tool" {
   toolchain_id = var.toolchain_id
+  parameters {
+    name = "Security and Compliance"
+    evidence_repo_name = var.scc_evidence_repo
+    scope = var.scc_scope
+    profile = var.scc_profile
+    api_key = var.ibm_cloud_api_key
+  }
 }
 
 output "keyprotect_integration_name" {
