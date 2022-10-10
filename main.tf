@@ -2,7 +2,7 @@ data "ibm_resource_group" "resource_group" {
   name = var.resource_group
 }
 
-resource "ibm_toolchain" "toolchain_instance" {
+resource "ibm_cd_toolchain" "toolchain_instance" {
   name        = var.toolchain_name
   description = var.toolchain_description
   resource_group_id = data.ibm_resource_group.resource_group.id
@@ -10,7 +10,7 @@ resource "ibm_toolchain" "toolchain_instance" {
 
 module "repositories" {
   source                          = "./repositories"
-  toolchain_id                    = ibm_toolchain.toolchain_instance.id
+  toolchain_id                    = ibm_cd_toolchain.toolchain_instance.id
   resource_group                  = data.ibm_resource_group.resource_group.id  
   ibm_cloud_api_key               = var.ibm_cloud_api_key
   region                          = var.region  
@@ -22,8 +22,8 @@ module "repositories" {
   issues_repo                     = var.issues_repo
 }
 
-resource "ibm_toolchain_tool_pipeline" "cd_pipeline" {
-  toolchain_id = ibm_toolchain.toolchain_instance.id
+resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
+  toolchain_id = ibm_cd_toolchain.toolchain_instance.id
   parameters {
     name = "cd-pipeline"
     type = "tekton"
@@ -36,7 +36,7 @@ module "pipeline-cd" {
   ibm_cloud_api             = var.ibm_cloud_api
   ibm_cloud_api_key         = var.ibm_cloud_api_key
   region                    = var.region
-  pipeline_id               = split("/", ibm_toolchain_tool_pipeline.cd_pipeline.id)[1]
+  pipeline_id               = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group            = var.resource_group
   cluster_name              = var.cluster_name
   cluster_namespace         = var.cluster_namespace
@@ -55,9 +55,9 @@ module "pipeline-cd" {
 module "integrations" {
   source                    = "./integrations"
   depends_on                = [ module.repositories, module.services ]  
-  region                    = var.region
+  region                    = var.kp_region
   ibm_cloud_api_key         = var.ibm_cloud_api_key
-  toolchain_id              = ibm_toolchain.toolchain_instance.id
+  toolchain_id              = ibm_cd_toolchain.toolchain_instance.id
   resource_group            = var.resource_group
   key_protect_instance_name = module.services.key_protect_instance_name
   key_protect_instance_guid = module.services.key_protect_instance_guid
@@ -82,7 +82,7 @@ module "services" {
 }
 
 output "toolchain_id" {
-  value = ibm_toolchain.toolchain_instance.id
+  value = ibm_cd_toolchain.toolchain_instance.id
 }
 
 output "key_protect_instance_id" {

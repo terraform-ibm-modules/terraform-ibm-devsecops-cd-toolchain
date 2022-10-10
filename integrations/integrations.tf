@@ -6,7 +6,7 @@ resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
   roles                       = ["Viewer", "ReaderPlus"]
 }
 
-resource "ibm_toolchain_tool_keyprotect" "keyprotect" {
+resource "ibm_cd_toolchain_tool_keyprotect" "keyprotect" {
   toolchain_id = var.toolchain_id
   parameters {
     name           = var.key_protect_integration_name
@@ -16,20 +16,25 @@ resource "ibm_toolchain_tool_keyprotect" "keyprotect" {
   }
 }
 
-resource "ibm_toolchain_tool_insights" "insights_tool" {
+resource "ibm_cd_toolchain_tool_devopsinsights" "insights_tool" {
   toolchain_id = var.toolchain_id
 }
 
-resource "ibm_toolchain_tool_slack" "slack_tool" {
-  toolchain_id = var.toolchain_id
-  parameters {
-    api_token = var.slack_api_token
-    channel_name = var.slack_channel_name
-    team_url = var.slack_user_name
-  }
-}
+#resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
+#  toolchain_id = var.toolchain_id
+#  parameters {
+#    api_token = var.slack_api_token
+#    channel_name = var.slack_channel_name
+#    team_url = var.slack_user_name
+#    pipeline_start = true
+#    pipeline_success = true
+#    pipeline_fail = true
+#    toolchain_bind = true
+#    toolchain_unbind = true
+#  }
+#}
 
-resource "ibm_toolchain_tool_custom" "cos_integration" {
+resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
   toolchain_id = var.toolchain_id
   parameters {
       type = "cos-bucket"
@@ -42,7 +47,7 @@ resource "ibm_toolchain_tool_custom" "cos_integration" {
   }
 }
 
-resource "ibm_toolchain_tool_security_compliance" "scc_tool" {
+resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
   toolchain_id = var.toolchain_id
   parameters {
     name = "Security and Compliance"

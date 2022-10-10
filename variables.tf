@@ -67,7 +67,11 @@ variable "kp_name" {
   type        = string
   description = "Name of the Key Protect Instance to store the secrets."
 }
-
+variable "kp_region" {
+  type        = string
+  description = "IBM Cloud Region where the Key Protect Instance is created."
+  default     = "ibm:yp:us-south"
+}
 variable "deployment_repo" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."

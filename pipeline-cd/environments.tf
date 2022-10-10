@@ -1,214 +1,214 @@
-resource "ibm_tekton_pipeline_property" "cd_pipeline_change_request_id" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_change_request_id" {
   name           = "change-request-id"
-  type           = "TEXT"
+  type           = "text"
   value          = "notAvailable"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_region" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   name           = "region"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
   name           = "satellite-cluster-group"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_source_environment" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_source_environment" {
   name           = "source-environment"
-  type           = "TEXT"
+  type           = "text"
   value          = "master"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_target_environment" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment" {
   name           = "target-environment"
-  type           = "TEXT"
+  type           = "text"
   value          = "prod"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_use_v2_collector" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_use_v2_collector" {
   name           = "use-v2-collector"
-  type           = "TEXT"
+  type           = "text"
   value          = "1"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_use_v2_summary" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_use_v2_summary" {
   name           = "use-v2-summary"
-  type           = "TEXT"
+  type           = "text"
   value          = "1"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_emergency_label" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_emergency_label" {
   name           = "emergency-label"
-  type           = "TEXT"
+  type           = "text"
   value          = "EMERGENCY"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_version" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
   name           = "version"
-  type           = "TEXT"
+  type           = "text"
   value          = "v1"
   pipeline_id    = var.pipeline_id          
 }
 
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_pipeline_config" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config" {
   name           = "pipeline-config"
-  type           = "TEXT"
+  type           = "text"
   value          = ".pipeline-config.yaml"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_pipeline_config_branch" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_branch" {
   name           = "pipeline-config-branch"
-  type           = "TEXT"
+  type           = "text"
   value          = "master"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
   name           = "pipeline-config-repo"
-  type           = "TEXT"
+  type           = "text"
   value          = var.deployment_repo
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_evidence_repo" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_evidence_repo" {
   name           = "evidence-repo"
-  type           = "TEXT"
+  type           = "text"
   value          = var.evidence_repo
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id       
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_inventory_repo" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_inventory_repo" {
   name           = "inventory-repo"
-  type           = "TEXT"
+  type           = "text"
   value          = var.inventory_repo
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id       
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_incident_repo" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
   name           = "incident-repo"
-  type           = "TEXT"
+  type           = "text"
   value          = var.issues_repo
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id   
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id   
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
   name           = "pipeline-debug"
-  type           = "TEXT"
+  type           = "text"
   value          = "0"
   pipeline_id    = var.pipeline_id          
 }
 
-# resource "ibm_tekton_pipeline_property" "cd_pipeline_pipeline_dockerconfigjson" {
+# resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_dockerconfigjson" {
 #   name           = "pipeline-dockerconfigjson"
-#   type           = "SECURE"
+#   type           = "secure"
 #   value          = " "
 #   pipeline_id    = var.pipeline_id          
 # }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
   name           = "slack-notifications"
-  type           = "TEXT"
+  type           = "text"
   value          = "1"
   pipeline_id    = var.pipeline_id          
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
   name           = "ibmcloud-api-key"
-  type           = "SECURE"
+  type           = "secure"
   value          = format("{vault::%s.ibmcloud-api-key}", var.kp_integration_name)
   pipeline_id    = var.pipeline_id          
 }
 
 // Limitation with issues repository url: How to fetch issues repository url 
 // as it is created internally while creating application repository resource
-resource "ibm_tekton_pipeline_property" "cd_pipeline_cluster_name" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
   name           = "cluster-name"
-  type           = "TEXT"
+  type           = "text"
   value          = var.cluster_name
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id        
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id        
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
   name           = "cluster-namespace"
-  type           = "TEXT"
+  type           = "text"
   value          = var.cluster_namespace
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id      
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id      
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_cluster_region" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
   name           = "cluster-region"
-  type           = "TEXT"
+  type           = "text"
   value          = var.cluster_region
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id       
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
-# resource "ibm_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
+# resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
 #   name           = "cos-api-key"
-#   type           = "SECURE"
+#   type           = "secure"
 #   value          = " "
 #   pipeline_id    = var.pipeline_id                   
 # }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_cos_bucket_name" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_bucket_name" {
   name           = "cos-bucket-name"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id                   
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
   name           = "cos-endpoint"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id                   
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_environment" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_environment" {
   name           = "doi-environment"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id                   
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
   name           = "doi_toolchain_id"
-  type           = "TEXT"
+  type           = "text"
   value          = " "
   pipeline_id    = var.pipeline_id                   
 }
 
-resource "ibm_tekton_pipeline_property" "cd_pipeline_ibm_cloud_api" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibm_cloud_api" {
   name           = "ibmcloud-api"
-  type           = "TEXT"
+  type           = "text"
   value          = var.ibm_cloud_api
-  pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_tekton_pipeline_trigger_property" "cd_pipeline_manual_trigger_property_app_name" {
+resource "ibm_cd_tekton_pipeline_trigger_property" "cd_pipeline_manual_trigger_property_app_name" {
    name           = "app-name"
-   type           = "TEXT"
+   type           = "text"
    value          = "hello-compliance-app"
-   pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id
-   trigger_id     = ibm_tekton_pipeline_trigger.cd_pipeline_manual_trigger.trigger[0].id
+   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+   trigger_id     = ibm_cd_tekton_pipeline_trigger.cd_pipeline_manual_trigger.trigger_id
 }
 
-resource "ibm_tekton_pipeline_trigger_property" "cd_pipeline_manual_trigger_property_repository" {
+resource "ibm_cd_tekton_pipeline_trigger_property" "cd_pipeline_manual_trigger_property_repository" {
    name           = "repository"
-   type           = "TEXT"
+   type           = "text"
    value          = var.inventory_repo
-   pipeline_id    = ibm_tekton_pipeline.cd_pipeline_instance.pipeline_id
-   trigger_id     = ibm_tekton_pipeline_trigger.cd_pipeline_manual_trigger.trigger[0].id
+   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+   trigger_id     = ibm_cd_tekton_pipeline_trigger.cd_pipeline_manual_trigger.trigger_id
 }

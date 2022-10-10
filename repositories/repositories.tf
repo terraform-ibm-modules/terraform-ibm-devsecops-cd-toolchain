@@ -1,5 +1,4 @@
-resource "ibm_toolchain_tool_git" "deployment_repo" {
-  git_provider = var.deployment_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
   toolchain_id = var.toolchain_id
   name         = "deployment-repo"
   initialization {
@@ -14,8 +13,7 @@ resource "ibm_toolchain_tool_git" "deployment_repo" {
   }
 }
 
-resource "ibm_toolchain_tool_git" "change_management_repo" {
-  git_provider = var.change_management_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "change_management_repo" {
   toolchain_id = var.toolchain_id
   name         = "change-management-repo"
   initialization {
@@ -30,8 +28,7 @@ resource "ibm_toolchain_tool_git" "change_management_repo" {
   }
 }
 
-resource "ibm_toolchain_tool_git" "pipeline_repo" {
-  git_provider = var.pipeline_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_repo" {
   toolchain_id = var.toolchain_id
   name         = "pipeline-repo"  
   initialization {
@@ -45,8 +42,7 @@ resource "ibm_toolchain_tool_git" "pipeline_repo" {
   }
 }
 
-resource "ibm_toolchain_tool_git" "inventory_repo" {
-  git_provider = var.inventory_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "inventory_repo" {
   toolchain_id = var.toolchain_id
   name         = "inventory-repo"
   initialization {
@@ -60,8 +56,7 @@ resource "ibm_toolchain_tool_git" "inventory_repo" {
   }
 }
 
-resource "ibm_toolchain_tool_git" "evidence_repo" {
-  git_provider = var.evidence_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "evidence_repo" {
   toolchain_id = var.toolchain_id
   name         = "evidence-repo"
   initialization {
@@ -75,8 +70,7 @@ resource "ibm_toolchain_tool_git" "evidence_repo" {
   }
 }
 
-resource "ibm_toolchain_tool_git" "issues_repo" {
-  git_provider = var.issues_repo_type
+resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
   toolchain_id = var.toolchain_id
   name         = "issues-repo"
   initialization {
@@ -91,25 +85,25 @@ resource "ibm_toolchain_tool_git" "issues_repo" {
 }
 
 output "deployment_repo_url" {
-  value = ibm_toolchain_tool_git.deployment_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.deployment_repo.parameters[0].repo_url
 }
 
 output "change_management_repo_url" {
-  value = ibm_toolchain_tool_git.change_management_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.change_management_repo.parameters[0].repo_url
 }
 
 output "pipeline_repo_url" {
-  value = ibm_toolchain_tool_git.pipeline_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.pipeline_repo.parameters[0].repo_url
 }
 
 output "inventory_repo_url" {
-  value = ibm_toolchain_tool_git.inventory_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.inventory_repo.parameters[0].repo_url
 }
 
 output "evidence_repo_url" {
-  value = ibm_toolchain_tool_git.evidence_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.evidence_repo.parameters[0].repo_url
 }
 
 output "issues_repo_url" {
-  value = ibm_toolchain_tool_git.issues_repo.parameters[0].repo_url
+  value = ibm_cd_toolchain_tool_hostedgit.issues_repo.parameters[0].repo_url
 }

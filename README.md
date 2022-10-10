@@ -9,7 +9,7 @@ The terraform code for DevSecOps CI Toolchain comprises of different folders to 
 Terraform considers each folder as a module, and hence each of these logical groups (folders) are treated by terraform as seperate modules.
 
  1. repositories
-Resource definitions for all the repositories required for the DevSecOps CI Toolchain. All these repositories are created as **`ibm_toolchain_tool_git`** Toolchain Integrations. By default, the terrform template **`clones`** these repositories in your GRIT (default provider) account. If you wish to use a different provider please update the variables in **`variables.tf`** file. The repositories created are:
+Resource definitions for all the repositories required for the DevSecOps CI Toolchain. All these repositories are created as **`ibm_cd_toolchain_tool_git`** Toolchain Integrations. By default, the terrform template **`clones`** these repositories in your GRIT (default provider) account. If you wish to use a different provider please update the variables in **`variables.tf`** file. The repositories created are:
 	 - Application Repository 
 	 - Pipeline Repository 
 	 - Evidence Repository
@@ -17,14 +17,14 @@ Resource definitions for all the repositories required for the DevSecOps CI Tool
 	 - Issues/Incidence Repository
 
 2. pipeline-pr
-Resource definitions for setting up the tekton delivery pipeline. The toolchain i.e. the main module itself creates **`ibm_toolchain_tool_pipeline`** Toolchain Integration. However, all the other resource required by the Delivery Pipeline itself are created within this module. These resources primarily includes
+Resource definitions for setting up the tekton delivery pipeline. The toolchain i.e. the main module itself creates **`ibm_cd_toolchain_tool_pipeline`** Toolchain Integration. However, all the other resource required by the Delivery Pipeline itself are created within this module. These resources primarily includes
 	 - Tekton Pipeline 
 	 - Tekton Pipeline Definitions ( DevSecOps Compliance )
 	 - Tekton Pipeline Triggers
      - Tekton Pipeline Environment Variables
  
 3. pipeline-ci 
-Resource definitions for setting up the tekton delivery pipeline. The toolchain i.e. the main module itself creates **`ibm_toolchain_tool_pipeline`** Toolchain Integration. However, all the other resource required by the Delivery Pipeline itself are created within this module. These resources primarily includes
+Resource definitions for setting up the tekton delivery pipeline. The toolchain i.e. the main module itself creates **`ibm_cd_toolchain_tool_pipeline`** Toolchain Integration. However, all the other resource required by the Delivery Pipeline itself are created within this module. These resources primarily includes
 	 - Tekton Pipeline 
 	 - Tekton Pipeline Definitions ( DevSecOps Compliance )
 	 - Tekton Pipeline Triggers
