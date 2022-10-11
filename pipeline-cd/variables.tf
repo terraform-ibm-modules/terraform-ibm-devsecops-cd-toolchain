@@ -28,7 +28,7 @@ variable "ibm_cloud_api" {
 variable "ibm_cloud_api_key" {
 }
 
-variable "kp_integration_name" {
+variable "sm_integration_name" {
 }
 
 variable "deployment_repo" {
@@ -115,4 +115,19 @@ variable "cd_pipeline_max_concurrent_runs" {
   type        = number
   description = "The number of maximum concurrent runs to be supported by CD Pipeline"
   default     = 1
+}
+
+variable "sm_group" {
+  type        = string
+  description = "The default Secrets Manager group for your secrets. "
+  default     = "Default"
+}
+
+variable "cos_api_key" {
+}
+
+variable "cos_bucket_name" {
+}
+
+variable "cos_endpoint" {
 }
