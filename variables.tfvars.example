@@ -26,7 +26,7 @@ cluster_region                  = "ibm:ys1:us-south"
 registry_namespace              = "my-icr-ns"
 registry_region                 = "ibm:ys1:us-south"
 kp_name                         = "Key Protect Service"
-kp_region                 = "ibm:ys1:us-south"
+kp_region                       = "ibm:ys1:us-south"
 
 /*****************************************************/
 /* Variables for Module "Integrations"               */

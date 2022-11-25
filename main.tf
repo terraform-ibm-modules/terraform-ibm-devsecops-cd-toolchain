@@ -11,9 +11,9 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 module "repositories" {
   source                          = "./repositories"
   toolchain_id                    = ibm_cd_toolchain.toolchain_instance.id
-  resource_group                  = data.ibm_resource_group.resource_group.id  
+  resource_group                  = data.ibm_resource_group.resource_group.id
   ibm_cloud_api_key               = var.ibm_cloud_api_key
-  region                          = var.region  
+  region                          = var.region
   deployment_repo                 = var.deployment_repo
   change_management_repo          = var.change_management_repo
   pipeline_repo                   = var.pipeline_repo
@@ -26,7 +26,6 @@ resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
   toolchain_id = ibm_cd_toolchain.toolchain_instance.id
   parameters {
     name = "cd-pipeline"
-    type = "tekton"
   }
 }
 
@@ -44,11 +43,11 @@ module "pipeline-cd" {
   registry_namespace        = var.registry_namespace
   registry_region           = var.registry_region
   change_management_repo    = module.repositories.change_management_repo_url
-  deployment_repo           = module.repositories.deployment_repo_url 
-  pipeline_repo             = module.repositories.pipeline_repo_url 
-  evidence_repo             = module.repositories.evidence_repo_url 
-  inventory_repo            = module.repositories.inventory_repo_url 
-  issues_repo               = module.repositories.issues_repo_url 
+  deployment_repo           = module.repositories.deployment_repo_url
+  pipeline_repo             = module.repositories.pipeline_repo_url
+  evidence_repo             = module.repositories.evidence_repo_url
+  inventory_repo            = module.repositories.inventory_repo_url
+  issues_repo               = module.repositories.issues_repo_url
   sm_integration_name       = module.integrations.secretsmanager_integration_name
   sm_group                  = var.sm_group
   cos_bucket_name           = var.cos_bucket_name
@@ -58,7 +57,7 @@ module "pipeline-cd" {
 
 module "integrations" {
   source                    = "./integrations"
-  depends_on                = [ module.repositories, module.services ]  
+  depends_on                = [ module.repositories, module.services ]
   region                    = var.sm_region
   ibm_cloud_api_key         = var.ibm_cloud_api_key
   toolchain_id              = ibm_cd_toolchain.toolchain_instance.id
@@ -77,13 +76,13 @@ module "services" {
   source                    = "./services"
   secrets_manager_instance_name = var.sm_name
   region                    = var.region
-  ibm_cloud_api             = var.ibm_cloud_api   
+  ibm_cloud_api             = var.ibm_cloud_api
   cluster_name              = var.cluster_name
   cluster_namespace         = var.cluster_namespace
   cluster_region            = var.cluster_region
   registry_namespace        = var.registry_namespace
   registry_region           = var.registry_region
-  sm_resource_group         = var.resource_group 
+  sm_resource_group         = var.resource_group
 }
 
 output "toolchain_id" {

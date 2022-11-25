@@ -7,29 +7,57 @@ resource "ibm_cd_tekton_pipeline" "cd_pipeline_instance" {
 
 resource "ibm_cd_tekton_pipeline_definition" "cd_pipeline_definition" {
   pipeline_id   = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-  scm_source {
-    url         = var.pipeline_repo
-    branch      = var.pipeline_branch
-    path        = var.pipeline_path
+  source {
+    type = "git"
+    properties {
+      url         = var.pipeline_repo
+      branch      = var.pipeline_branch
+      path        = var.pipeline_path
+    }
   }
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_manual_trigger" {
   pipeline_id       = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-  type            = var.cd_pipeline_manual_trigger_type
-  name            = var.cd_pipeline_manual_trigger_name
-  event_listener  = var.cd_pipeline_manual_trigger_listener_name
-  disabled        = var.cd_pipeline_manual_trigger_disabled
+  type            = "manual"
+  name            = "Manual CD Trigger"
+  event_listener  = "cd-listener"
+  enabled        = "true"
   max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
-
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_promotion_trigger" {
-  pipeline_id       = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-  type            = var.cd_pipeline_promotion_trigger_type
-  name            = var.cd_pipeline_promotion_trigger_name
-  event_listener  = var.cd_pipeline_promotion_trigger_listener_name
-  disabled        = var.cd_pipeline_promotion_trigger_disabled
-  
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  type           = "manual"
+  name           = "Manual Promotion Trigger"
+  event_listener = "promotion-listener"
+  enabled        = "true"
 }
 
+resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_timed_trigger" {
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  type           = "timer"
+  name           = "Git CD Timed Trigger"
+  event_listener = "cd-listener"
+  enabled        = "false"
+  cron           = "0 4 * * *"
+  timezone       = "UTC"
+  max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
+}
+
+resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
+  pipeline_id     = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  name            = "Git CD Trigger"
+  type            = "scm"
+  event_listener  = "cd-listener"
+  events = ["push"]
+  source {
+    type = "git"
+    properties {
+      url     = var.inventory_repo
+      branch  = "prod"
+    }
+  }
+  enabled         = "false"
+  max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
+}

@@ -95,7 +95,7 @@ export IBMCLOUD_RESOURCE_CATALOG_API_ENDPOINT=https://globalcatalog.test.cloud.i
 | app_name                  | Name of the application       |
 | app_image_name            | Name of the docker image for the application     |
 | ibm_cloud_api_key         | Resource Group for the toolchain     |
-| ibm_cloud_api             | IBM Cloud API Endpoint     |
+| ibm_cloud_api 			| IBM Cloud API Endpoint |
 |: Variable for Repositories : |
 | app_repo                  | Git Repository and Issue Tracking (GRIT) repository hosting sample nodejs application |
 | app_repo_type             | hostedgit, github     |
@@ -108,7 +108,7 @@ export IBMCLOUD_RESOURCE_CATALOG_API_ENDPOINT=https://globalcatalog.test.cloud.i
 | issues_repo               | Git Repository and Issue Tracking (GRIT) repository hosting template for Incident/Issues |
 | issues_repo_type          | hostedgit, github     |
 |:    Variables for Services    :|
-| cluster_name              | IBM Cloud IKS Cluster name where the sample application is to be deployed by the toolchain    |
+| cluster_name		        | IBM Cloud IKS Cluster name where the sample application is to be deployed by the toolchain    |
 | cluster_namespace         | Namespace within the IBM Cloud IKS Cluster where the sample application is to be deployed  |
 | cluster_region            | IBM Cloud IKS Cluster region |
 | registry_namespace        | IBM Cloud ICR Namespace where the docker image built for the application is to be pushed |

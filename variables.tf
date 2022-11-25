@@ -62,10 +62,7 @@ variable "registry_region" {
   description = "IBM Cloud Region where the IBM Cloud Container Registry where registry is to be created."
   default     = "ibm:ys1:us-south"
 }
-variable "app_repo" {
-  type        = string
-  description = "Name of the App repo."
-}
+
 variable "sm_name" {
   type        = string
   description = "Name of the Secrets Manager Instance to store the secrets."
@@ -174,19 +171,19 @@ variable "scc_scope" {
 variable "cos_api_key" {
   type        = string
   description = "cos api key"
-  default     = ""
+  default     = " "
 }
 
 variable "cos_endpoint" {
   type        = string
   description = "cos endpoint name"
-  default     = ""
+  default     = " "
 }
 
 variable "cos_bucket_name" {
   type        = string
   description = "cos bucket name"
-  default     = ""
+  default     = " "
 }
 
 variable "sm_group" {
