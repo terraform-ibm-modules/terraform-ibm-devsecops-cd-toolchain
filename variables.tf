@@ -1,4 +1,4 @@
-variable "resource_group" {
+variable "toolchain_resource_group" {
   type        = string
   description = "Resource group within which toolchain will be created"
   default     = "Default"
@@ -15,7 +15,7 @@ variable "ibm_cloud_api" {
   default     = "https://cloud.ibm.com"
 }
 
-variable "region" {
+variable "toolchain_region" {
   type        = string
   description = "IBM Cloud region where your toolchain will be created"
   default     = "us-south"
@@ -75,6 +75,7 @@ variable "sm_region" {
 variable "deployment_repo" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+    default     = ""
 }
 
 variable "deployment_repo_type" {
@@ -86,6 +87,7 @@ variable "deployment_repo_type" {
 variable "change_management_repo" {
     type        = string
     description = "This repository holds the change management requests created for the deployments."
+    default     = ""
 }
 
 variable "change_management_repo_type" {
@@ -196,4 +198,20 @@ variable "sm_resource_group" {
   type        = string
   description = "The default Secrets Manager group for your secrets. "
   default     = "default"
+}
+
+variable "change_repo_clone_from_url" {
+    type        = string
+    description = "(Optional) Override the default management repo , which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+    default     = ""
+}
+variable "deployment_repo_clone_from_url" {
+    type        = string
+    description = "(Optional) Override the default deployment by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+    default     = ""
+}
+
+variable "repositories_prefix" {
+    type        = string
+    description = ""
 }

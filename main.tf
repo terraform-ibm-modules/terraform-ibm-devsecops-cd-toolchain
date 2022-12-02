@@ -1,5 +1,5 @@
 data "ibm_resource_group" "resource_group" {
-  name = var.resource_group
+  name = var.toolchain_resource_group
 }
 
 resource "ibm_cd_toolchain" "toolchain_instance" {
@@ -11,15 +11,19 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 module "repositories" {
   source                          = "./repositories"
   toolchain_id                    = ibm_cd_toolchain.toolchain_instance.id
+  toolchain_crn                   = ibm_cd_toolchain.toolchain_instance.crn
   resource_group                  = data.ibm_resource_group.resource_group.id
   ibm_cloud_api_key               = var.ibm_cloud_api_key
-  region                          = var.region
+  toolchain_region                = var.toolchain_region
   deployment_repo                 = var.deployment_repo
   change_management_repo          = var.change_management_repo
   pipeline_repo                   = var.pipeline_repo
   evidence_repo                   = var.evidence_repo
   inventory_repo                  = var.inventory_repo
   issues_repo                     = var.issues_repo
+  change_repo_clone_from_url      = var.change_repo_clone_from_url
+  deployment_repo_clone_from_url  = var.deployment_repo_clone_from_url
+  repositories_prefix             = var.repositories_prefix
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
@@ -34,9 +38,9 @@ module "pipeline-cd" {
   depends_on                = [ module.repositories, module.integrations, module.services ]
   ibm_cloud_api             = var.ibm_cloud_api
   ibm_cloud_api_key         = var.ibm_cloud_api_key
-  region                    = var.region
+  region                    = var.toolchain_region
   pipeline_id               = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
-  resource_group            = var.resource_group
+  resource_group            = var.toolchain_resource_group
   cluster_name              = var.cluster_name
   cluster_namespace         = var.cluster_namespace
   cluster_region            = var.cluster_region
@@ -61,7 +65,7 @@ module "integrations" {
   region                    = var.sm_region
   ibm_cloud_api_key         = var.ibm_cloud_api_key
   toolchain_id              = ibm_cd_toolchain.toolchain_instance.id
-  resource_group            = var.resource_group
+  resource_group            = var.toolchain_resource_group
   secrets_manager_instance_name = module.services.secrets_manager_instance_name
   secrets_manager_instance_guid = module.services.secrets_manager_instance_guid
   slack_channel_name        = var.slack_channel_name
@@ -75,14 +79,14 @@ module "integrations" {
 module "services" {
   source                    = "./services"
   secrets_manager_instance_name = var.sm_name
-  region                    = var.region
+  region                    = var.toolchain_region
   ibm_cloud_api             = var.ibm_cloud_api
   cluster_name              = var.cluster_name
   cluster_namespace         = var.cluster_namespace
   cluster_region            = var.cluster_region
   registry_namespace        = var.registry_namespace
   registry_region           = var.registry_region
-  sm_resource_group         = var.resource_group
+  sm_resource_group         = var.sm_resource_group
 }
 
 output "toolchain_id" {

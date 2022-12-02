@@ -1,11 +1,40 @@
+locals {
+  # Note terraform 1.3.x allows startswith() function
+  # but terraform 1.x uses regexall
+  is_staging = length(regexall("^crn:v1:staging:.*$", var.toolchain_crn)) > 0
+  # is_staging = startswith(var.toolchain_crn, "crn:v1:staging:")
+  git_dev = "https://dev.us-south.git.test.cloud.ibm.com"
+  git_mon01 = "https://mon01.git.cloud.ibm.com"
+  git_fr2 = "https://private.eu-fr2.git.cloud.ibm.com"
+  compliance_pipelines_git_server = (
+    (local.is_staging) ? local.git_dev 
+    : (var.toolchain_region == "eu-fr2")? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+  )
+  # in dev/staging, compliance_pipelines_git_server is dev and clone_from_git_server is mon01
+  clone_from_git_server = (
+    (local.is_staging) ? local.git_mon01 : local.compliance_pipelines_git_server
+  )
+
+  deployment_repo_source = (
+    (length(var.deployment_repo_clone_from_url) > 0)? var.deployment_repo_clone_from_url
+    : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
+  )
+
+  change_management_repo_source = (
+    (length(var.change_repo_clone_from_url) > 0)? var.change_repo_clone_from_url
+    : format("%s/open-toolchain/compliance-change-management.git", local.clone_from_git_server)
+  )
+}
+
 resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
   toolchain_id = var.toolchain_id
   name         = "deployment-repo"
   initialization {
     type            = "clone_if_not_exists"
-    source_repo_url = var.deployment_repo
+    source_repo_url = local.deployment_repo_source
     private_repo    = true
-    repo_name       = join("-", [ var.deployment_repo, "repo" ])
+    repo_name       = join("-", [ var.repositories_prefix, "config-repo" ])
   }
   parameters {
     toolchain_issues_enabled = false
@@ -18,9 +47,9 @@ resource "ibm_cd_toolchain_tool_hostedgit" "change_management_repo" {
   name         = "change-management-repo"
   initialization {
     type = "clone_if_not_exists"
-    source_repo_url = var.change_management_repo
+    source_repo_url = local.change_management_repo_source
     private_repo = true
-    repo_name    = join("-", [ var.change_management_repo, "repo" ])
+    repo_name    = join("-", [ var.repositories_prefix, "change-repo" ])
   }  
   parameters {
     toolchain_issues_enabled          = true
@@ -107,3 +136,8 @@ output "evidence_repo_url" {
 output "issues_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.issues_repo.parameters[0].repo_url
 }
+
+ output "test_output" {
+  value = format("test output: %s, is_staging %s, clone_from_git_server: %s, compliance_pipelines_git_server: %s",
+     var.toolchain_crn, local.is_staging, local.clone_from_git_server, local.compliance_pipelines_git_server)
+ }
