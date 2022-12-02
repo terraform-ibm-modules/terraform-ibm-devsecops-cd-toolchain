@@ -5,7 +5,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
     type            = "clone_if_not_exists"
     source_repo_url = var.deployment_repo
     private_repo    = true
-    repo_name       = join("-", [split(".", split("/", var.deployment_repo)[4])[0], formatdate("DDMMYYYYhhmmss", timestamp())])
+    repo_name       = join("-", [ var.deployment_repo, "repo" ])
   }
   parameters {
     toolchain_issues_enabled = false
@@ -20,7 +20,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "change_management_repo" {
     type = "clone_if_not_exists"
     source_repo_url = var.change_management_repo
     private_repo = true
-    repo_name = join("-", [split(".", split("/", var.change_management_repo)[4])[0], formatdate("DDMMYYYYhhmmss", timestamp())])
+    repo_name    = join("-", [ var.change_management_repo, "repo" ])
   }  
   parameters {
     toolchain_issues_enabled          = true
