@@ -137,7 +137,7 @@ output "issues_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.issues_repo.parameters[0].repo_url
 }
 
- output "test_output" {
-  value = format("test output: %s, is_staging %s, clone_from_git_server: %s, compliance_pipelines_git_server: %s",
-     var.toolchain_crn, local.is_staging, local.clone_from_git_server, local.compliance_pipelines_git_server)
- }
+ #output "test_output" {
+ # value = format("test output: %s, is_staging %s, clone_from_git_server: %s, compliance_pipelines_git_server: %s",
+ #    var.toolchain_crn, local.is_staging, local.clone_from_git_server, local.compliance_pipelines_git_server)
+ #}

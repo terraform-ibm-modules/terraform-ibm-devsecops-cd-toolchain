@@ -24,7 +24,7 @@ variable "toolchain_region" {
 variable "toolchain_name" {
   type        = string
   description = "Name of the Toolchain."
-  default     = "Terraform Toolchain Empty"
+  default     = "DevSecOps CD Toolchain - Terraform"
 }
 
 variable "toolchain_description" {
