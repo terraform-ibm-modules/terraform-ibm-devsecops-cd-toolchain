@@ -214,4 +214,5 @@ variable "deployment_repo_clone_from_url" {
 variable "repositories_prefix" {
     type        = string
     description = ""
+    default     = "compliance-tf"
 }
