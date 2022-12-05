@@ -96,3 +96,11 @@ output "toolchain_id" {
 output "secrets_manager_instance_id" {
   value = module.services.secrets_manager_instance_guid
 }
+
+output "deployment_repo_url" {
+  value = module.repositories.deployment_repo_url
+}
+
+output "change_management_repo_url" {
+  value = module.repositories.change_management_repo_url
+}
