@@ -36,7 +36,7 @@ variable "toolchain_description" {
 variable "cluster_name" {
   type        = string
   description = "Name of the kubernetes cluster where the application will be deployed."
-  default     = "MyFreeCluster"
+  default     = "mycluster-free"
 }
 
 variable "cluster_namespace" {
