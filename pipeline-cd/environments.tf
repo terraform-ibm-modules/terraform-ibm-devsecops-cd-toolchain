@@ -134,7 +134,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
 // Limitation with issues repository url: How to fetch issues repository url 
 // as it is created internally while creating application repository resource
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
-  name           = "cluster-name"
+  name           = "cluster"
   type           = "text"
   value          = var.cluster_name
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id     
