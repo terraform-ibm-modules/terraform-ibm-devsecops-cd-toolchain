@@ -27,8 +27,8 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
    toolchain_id = var.toolchain_id
    parameters {
      name           = var.secrets_manager_integration_name
-     location         = var.region
-     resource_group_name = var.resource_group
+     location         = var.sm_location
+     resource_group_name = var.sm_resource_group
      instance_name  = var.secrets_manager_instance_name
    }
  }

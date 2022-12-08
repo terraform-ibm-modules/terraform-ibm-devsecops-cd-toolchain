@@ -64,3 +64,9 @@ variable "scc_scope" {
 
 variable "ibm_cloud_api_key" {
 }
+
+variable "sm_resource_group" {
+}
+
+variable "sm_location" {
+}

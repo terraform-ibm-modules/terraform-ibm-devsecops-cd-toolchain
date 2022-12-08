@@ -74,6 +74,8 @@ module "integrations" {
   scc_evidence_repo         = module.repositories.evidence_repo_url
   scc_profile               = var.scc_profile
   scc_scope                 = var.scc_scope
+  sm_location               = var.sm_region
+  sm_resource_group         = var.sm_resource_group
 }
 
 module "services" {
