@@ -35,8 +35,10 @@ data "ibm_resource_group" "sm_resource_group" {
   name = var.sm_resource_group
 }
 data ibm_resource_instance "secrets_manager_instance" {
-  name = var.secrets_manager_instance_name
+  service           = "secrets-manager"
+  name              = var.sm_name
   resource_group_id = data.ibm_resource_group.sm_resource_group.id
+  location          = var.sm_location
 }
 
 output "secrets_manager_instance_guid" {

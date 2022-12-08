@@ -78,7 +78,8 @@ module "integrations" {
 
 module "services" {
   source                    = "./services"
-  secrets_manager_instance_name = var.sm_name
+  sm_name                   = var.sm_name
+  sm_location               = var.sm_region
   region                    = var.toolchain_region
   ibm_cloud_api             = var.ibm_cloud_api
   cluster_name              = var.cluster_name
