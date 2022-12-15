@@ -9,21 +9,28 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 }
 
 module "repositories" {
-  source                          = "./repositories"
-  toolchain_id                    = ibm_cd_toolchain.toolchain_instance.id
-  toolchain_crn                   = ibm_cd_toolchain.toolchain_instance.crn
-  resource_group                  = data.ibm_resource_group.resource_group.id
-  ibm_cloud_api_key               = var.ibm_cloud_api_key
-  toolchain_region                = var.toolchain_region
-  deployment_repo                 = var.deployment_repo
-  change_management_repo          = var.change_management_repo
-  pipeline_repo                   = var.pipeline_repo
-  evidence_repo                   = var.evidence_repo
-  inventory_repo                  = var.inventory_repo
-  issues_repo                     = var.issues_repo
-  change_repo_clone_from_url      = var.change_repo_clone_from_url
-  deployment_repo_clone_from_url  = var.deployment_repo_clone_from_url
-  repositories_prefix             = var.repositories_prefix
+  source                                 = "./repositories"
+  toolchain_id                           = ibm_cd_toolchain.toolchain_instance.id
+  toolchain_crn                          = ibm_cd_toolchain.toolchain_instance.crn
+  resource_group                         = data.ibm_resource_group.resource_group.id
+  ibm_cloud_api_key                      = var.ibm_cloud_api_key
+  toolchain_region                       = var.toolchain_region
+  deployment_repo                        = var.deployment_repo
+  change_management_repo                 = var.change_management_repo
+  pipeline_repo                          = var.pipeline_repo
+  evidence_repo                          = var.evidence_repo
+  inventory_repo                         = var.inventory_repo
+  issues_repo                            = var.issues_repo
+  change_repo_clone_from_url             = var.change_repo_clone_from_url
+  deployment_repo_clone_from_url         = var.deployment_repo_clone_from_url
+  deployment_repo_clone_from_branch      = var.deployment_repo_clone_from_branch
+  deployment_repo_existing_git_provider  = var.deployment_repo_existing_git_provider
+  deployment_repo_existing_git_id        = var.deployment_repo_existing_git_id
+  deployment_repo_clone_to_git_provider  = var.deployment_repo_clone_to_git_provider
+  deployment_repo_clone_to_git_id        = var.deployment_repo_clone_to_git_id
+  deployment_repo_existing_url           = var.deployment_repo_existing_url
+  deployment_repo_existing_branch        = var.deployment_repo_existing_branch
+  repositories_prefix                    = var.repositories_prefix
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {

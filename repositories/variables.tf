@@ -50,7 +50,11 @@ variable "deployment_repo_clone_from_url" {
     description = "(Optional) Override the default deployment app by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
     default     = ""
 }
-
+variable "deployment_repo_clone_from_branch" {
+    type        = string
+    description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
+    default     = ""
+}
 variable "change_repo_clone_from_url" {
     type        = string
     description = "(Optional) Override the default change management repo by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
@@ -59,3 +63,17 @@ variable "change_repo_clone_from_url" {
 
 variable "repositories_prefix" { 
 }
+
+variable "deployment_repo_existing_git_provider" {
+}
+variable "deployment_repo_existing_git_id" {
+}
+variable "deployment_repo_clone_to_git_provider" {
+}
+variable "deployment_repo_clone_to_git_id" {
+}
+variable "deployment_repo_existing_url" {
+}
+variable "deployment_repo_existing_branch" {
+}
+

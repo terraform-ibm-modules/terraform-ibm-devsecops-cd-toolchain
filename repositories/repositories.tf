@@ -16,25 +16,93 @@ locals {
     (local.is_staging) ? local.git_mon01 : local.compliance_pipelines_git_server
   )
 
-  deployment_repo_source = (
-    (length(var.deployment_repo_clone_from_url) > 0)? var.deployment_repo_clone_from_url
-    : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
-  )
+  # deployment_repo_source = (
+  #   (length(var.deployment_repo_clone_from_url) > 0)? var.deployment_repo_clone_from_url
+  #   : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
+  # )
 
   change_management_repo_source = (
     (length(var.change_repo_clone_from_url) > 0)? var.change_repo_clone_from_url
     : format("%s/open-toolchain/compliance-change-management.git", local.clone_from_git_server)
   )
+
+  deployment_repo_mode = ((length(var.deployment_repo_existing_url) > 0)? "byo_deployment"
+    : (length(var.deployment_repo_clone_from_url) > 0) ? "byo_sample"
+    : "auto-sample")
+
+  deployment_repo_clone_from = (
+    (local.deployment_repo_mode == "byo_deployment") ? ""
+    : (local.deployment_repo_mode == "byo_sample") ? var.deployment_repo_clone_from_url
+    : format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
+  )
+ deployment_repo_git_provider = (
+    (local.deployment_repo_mode == "byo_deployment") ? 
+        ((length(var.deployment_repo_existing_git_provider) > 0)? var.deployment_repo_existing_git_provider
+          : "hostedgit"
+        )
+    : (local.deployment_repo_mode == "byo_sample") ?
+        ((length(var.deployment_repo_clone_to_git_provider) > 0)? var.deployment_repo_clone_to_git_provider
+          : "hostedgit"
+        )
+    : "hostedgit"
+  )
+  deployment_repo_git_id = (
+    (local.deployment_repo_mode == "byo_deployment") ? 
+        ((length(var.deployment_repo_existing_git_id) > 0)? var.deployment_repo_existing_git_id
+          : ""
+        )
+    : (local.deployment_repo_mode == "byo_sample") ?
+        ((length(var.deployment_repo_clone_to_git_id) > 0)? var.deployment_repo_clone_to_git_id
+          : ""
+        )
+    : ""
+  )
+  deployment_repo_branch = (
+    (local.deployment_repo_mode == "byo_deployment") ? 
+        ((length(var.deployment_repo_existing_branch) > 0)? var.deployment_repo_existing_branch
+          : file("[Error] var deployment_repo_existing_branch must be provided when using var deployment_repo_existing_url.")
+        )
+    : (local.deployment_repo_mode == "byo_sample") ?
+        ((length(var.deployment_repo_clone_from_branch) > 0)? var.deployment_repo_clone_from_branch
+          : file("[Error] var deployment_repo_clone_from_branch must be provided when using var deployment_repo_clone_from_url.")
+        )
+    : "master" # hello-compliance-deployment has branch master
+  )
 }
 
-resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo" {
+
+resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_clone_from_hostedgit" {
+  count = (local.deployment_repo_git_provider == "hostedgit" 
+            && ((local.deployment_repo_mode == "byo_sample") 
+                 || (local.deployment_repo_mode == "auto-sample") )
+          ) ? 1 : 0
+
   toolchain_id = var.toolchain_id
   name         = "deployment-repo"
   initialization {
-    type            = "clone_if_not_exists"
-    source_repo_url = local.deployment_repo_source
-    private_repo    = true
-    repo_name       = join("-", [ var.repositories_prefix, "config-repo" ])
+    type = "clone_if_not_exists"
+    source_repo_url = local.deployment_repo_clone_from
+    private_repo = true
+    repo_name = join("-", [ var.repositories_prefix, "config-repo" ])
+    git_id = local.deployment_repo_git_id
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+  }
+}
+
+resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_existing_hostedgit" {
+  count = (local.deployment_repo_git_provider == "hostedgit" 
+            && (local.deployment_repo_mode == "byo_deployment")
+          ) ? 1 : 0
+
+  toolchain_id = var.toolchain_id
+  name         = "deployment-repo"
+  initialization {
+    type = "link"
+    repo_url = var.deployment_repo_existing_url
+    git_id = local.deployment_repo_git_id
   }
   parameters {
     toolchain_issues_enabled = false
@@ -114,7 +182,12 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
 }
 
 output "deployment_repo_url" {
-  value = ibm_cd_toolchain_tool_hostedgit.deployment_repo.parameters[0].repo_url
+  value = (((local.deployment_repo_git_provider == "hostedgit") && (local.deployment_repo_mode == "byo_deployment")) 
+          ? ibm_cd_toolchain_tool_hostedgit.deployment_repo_existing_hostedgit[0].parameters[0].repo_url
+          : ((local.deployment_repo_git_provider == "hostedgit") && (local.deployment_repo_mode != "byo_deployment")) 
+          ? ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0].parameters[0].repo_url
+          : file("[Error] internal error in computing local values"))
+  description = "The deployment repository instance url containing an application that can be built and deployed with the reference DevSecOps toolchain templates."
 }
 
 output "change_management_repo_url" {

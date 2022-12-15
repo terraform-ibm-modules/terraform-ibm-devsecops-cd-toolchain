@@ -205,14 +205,54 @@ variable "change_repo_clone_from_url" {
     description = "(Optional) Override the default management repo , which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
     default     = ""
 }
-variable "deployment_repo_clone_from_url" {
-    type        = string
-    description = "(Optional) Override the default deployment by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
-}
 
 variable "repositories_prefix" {
     type        = string
     description = ""
     default     = "compliance-tf"
+}
+
+variable "deployment_repo_existing_git_provider" {
+  type        = string
+  description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
+  default     = "hostedgit"
+}
+
+variable "deployment_repo_existing_git_id" {
+  type        = string
+  description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  default     = ""
+}
+
+variable "deployment_repo_clone_to_git_provider" {
+  type        = string
+  description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
+  default     = ""
+}
+
+variable "deployment_repo_clone_to_git_id" {
+  type        = string
+  description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  default     = ""
+}
+variable "deployment_repo_clone_from_url" {
+    type        = string
+    description = "(Optional) Override the default sample app by providing your own sample deployment url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+    default     = ""
+}
+
+variable "deployment_repo_clone_from_branch" {
+    type        = string
+    description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
+    default     = ""
+}
+variable "deployment_repo_existing_url" {
+    type        = string
+    description = "(Optional) Override to bring your own existing deployment repository URL, which will be used directly instead of cloning the default deployment sample."
+    default     = ""
+}
+variable "deployment_repo_existing_branch" {
+    type        = string
+    description = "Used when deployment_repo_existing_url is provided, the default branch that will be used by the CD build, usually either main or master."
+    default     = ""
 }
