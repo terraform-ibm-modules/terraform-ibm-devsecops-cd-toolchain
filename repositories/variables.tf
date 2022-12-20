@@ -77,3 +77,5 @@ variable "deployment_repo_existing_url" {
 variable "deployment_repo_existing_branch" {
 }
 
+variable "deployment_group" {
+}

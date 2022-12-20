@@ -31,6 +31,7 @@ module "repositories" {
   deployment_repo_existing_url           = var.deployment_repo_existing_url
   deployment_repo_existing_branch        = var.deployment_repo_existing_branch
   repositories_prefix                    = var.repositories_prefix
+  deployment_group                    = var.deployment_group
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
@@ -64,6 +65,7 @@ module "pipeline-cd" {
   cos_bucket_name           = var.cos_bucket_name
   cos_api_key               = var.cos_api_key
   cos_endpoint              = var.cos_endpoint
+  compliance_base_image     = var.compliance_base_image
 }
 
 module "integrations" {

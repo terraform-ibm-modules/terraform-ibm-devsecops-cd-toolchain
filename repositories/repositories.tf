@@ -85,6 +85,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_clone_from_hostedgit
     private_repo = true
     repo_name = join("-", [ var.repositories_prefix, "config-repo" ])
     git_id = local.deployment_repo_git_id
+    owner_id = var.deployment_group
   }
   parameters {
     toolchain_issues_enabled = false

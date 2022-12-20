@@ -202,3 +202,10 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
   value          = ""
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id                
 }
+
+resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
+  name           = "compliance-baseimage"
+  type           = "text"
+  value          = var.compliance_base_image
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}

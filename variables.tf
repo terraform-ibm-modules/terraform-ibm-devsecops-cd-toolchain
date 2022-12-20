@@ -256,3 +256,15 @@ variable "deployment_repo_existing_branch" {
     description = "Used when deployment_repo_existing_url is provided, the default branch that will be used by the CD build, usually either main or master."
     default     = ""
 }
+
+variable "compliance_base_image" {
+  type        = string
+  description = "Pipeline baseimage to run most of the built-in pipeline code"
+  default     = ""
+}
+
+variable "deployment_group" {
+  type        = string
+  description = "Specify group for deployment"
+  default     = ""
+}

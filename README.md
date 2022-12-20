@@ -168,6 +168,8 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | evidence_repo             | The repo url for the Evidence repo created in the CI toolchain | 
 | inventory_repo            | The repo url for the Inventory repo created in the CI toolchain |
 |issues_repo                | The repo url for the Issues repo created in the CI toolchain |
+| deployment_group                | GRIT group where deployment repository will be created |
+
 |    **Variables for Services**    |
 | cluster_name              | IBM Cloud IKS Cluster name where the sample application is to be deployed by the toolchain    |
 | cluster_namespace         | Namespace within the IBM Cloud IKS Cluster where the sample application is to be deployed  |
