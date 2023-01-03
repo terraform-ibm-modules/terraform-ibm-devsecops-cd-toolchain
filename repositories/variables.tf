@@ -79,3 +79,5 @@ variable "deployment_repo_existing_branch" {
 
 variable "deployment_group" {
 }
+variable "change_management_group" {
+}

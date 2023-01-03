@@ -268,3 +268,9 @@ variable "deployment_group" {
   description = "Specify group for deployment"
   default     = ""
 }
+
+variable "change_management_group" {
+  type        = string
+  description = "Specify group for change management repository"
+  default     = ""
+}

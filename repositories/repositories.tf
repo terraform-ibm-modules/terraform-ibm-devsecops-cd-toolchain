@@ -119,6 +119,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "change_management_repo" {
     source_repo_url = local.change_management_repo_source
     private_repo = true
     repo_name    = join("-", [ var.repositories_prefix, "change-repo" ])
+    owner_id = var.change_management_group
   }  
   parameters {
     toolchain_issues_enabled          = true

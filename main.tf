@@ -31,7 +31,8 @@ module "repositories" {
   deployment_repo_existing_url           = var.deployment_repo_existing_url
   deployment_repo_existing_branch        = var.deployment_repo_existing_branch
   repositories_prefix                    = var.repositories_prefix
-  deployment_group                    = var.deployment_group
+  deployment_group                       = var.deployment_group
+  change_management_group                = var.change_management_group
 }
 
 resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
