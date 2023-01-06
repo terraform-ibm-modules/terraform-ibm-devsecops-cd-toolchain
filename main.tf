@@ -117,3 +117,7 @@ output "deployment_repo_url" {
 output "change_management_repo_url" {
   value = module.repositories.change_management_repo_url
 }
+
+output "cd_pipeline_id" {
+  value = module.pipeline-cd.pipeline_id
+}

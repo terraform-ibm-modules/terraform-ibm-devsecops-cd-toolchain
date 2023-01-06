@@ -61,3 +61,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
   enabled         = "false"
   max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
 }
+
+output "pipeline_id" {
+  value = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
