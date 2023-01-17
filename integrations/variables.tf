@@ -76,3 +76,6 @@ variable "authorization_policy_creation" {
    description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
    default     = ""
  }
+
+variable "doi_toolchain_id" {  
+}

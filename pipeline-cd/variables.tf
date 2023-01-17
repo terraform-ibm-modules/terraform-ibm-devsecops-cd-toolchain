@@ -87,6 +87,15 @@ variable "cos_bucket_name" {
 variable "cos_endpoint" {
 }
 
+variable "doi_environment" {
+  type = string
+  default = ""
+}
+
+variable "doi_toolchain_id" {
+  default = ""  
+}
+
 variable "compliance_base_image" {
   type        = string
   description = "Pipeline baseimage to run most of the built-in pipeline code"

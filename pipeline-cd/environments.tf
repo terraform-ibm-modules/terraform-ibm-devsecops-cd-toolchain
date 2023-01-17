@@ -164,14 +164,14 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_bucket_name" {
   name           = "cos-bucket-name"
   type           = "text"
-  value          = ""
+  value          = var.cos_bucket_name
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id                
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
   name           = "cos-endpoint"
   type           = "text"
-  value          = ""
+  value          = var.cos_endpoint
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id             
 }
 
@@ -185,7 +185,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_git_token_environment" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_environment" {
   name           = "doi-environment"
   type           = "text"
-  value          = ""
+  value          = var.doi_environment
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id              
 }
 
@@ -197,9 +197,9 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibm_cloud_api" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_toolchain_id" {
-  name           = "doi_toolchain_id"
+  name           = "doi-toolchain-id"
   type           = "text"
-  value          = ""
+  value          = var.doi_toolchain_id
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id                
 }
 
