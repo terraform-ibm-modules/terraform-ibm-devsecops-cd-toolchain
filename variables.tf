@@ -274,3 +274,9 @@ variable "change_management_group" {
   description = "Specify group for change management repository"
   default     = ""
 }
+
+variable "authorization_policy_creation" {
+   type        = string
+   description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
+   default     = ""
+ }

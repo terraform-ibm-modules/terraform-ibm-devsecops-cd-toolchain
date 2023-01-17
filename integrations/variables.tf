@@ -70,3 +70,9 @@ variable "sm_resource_group" {
 
 variable "sm_location" {
 }
+
+variable "authorization_policy_creation" {
+   type        = string
+   description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
+   default     = ""
+ }

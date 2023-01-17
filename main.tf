@@ -86,6 +86,7 @@ module "integrations" {
   scc_scope                 = var.scc_scope
   sm_location               = var.sm_region
   sm_resource_group         = var.sm_resource_group
+  authorization_policy_creation = var.authorization_policy_creation
 }
 
 module "services" {

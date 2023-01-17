@@ -31,6 +31,7 @@ kp_region                       = "ibm:ys1:us-south"
 /*****************************************************/
 /* Variables for Module "Integrations"               */
 /*****************************************************/
+#authorization_policy_creation   = "disabled"
 slack_channel_name              = "slack-channel"
 slack_api_token                 = "slack-token"
 slack_user_name                 = "slack-user"
