@@ -89,6 +89,7 @@ module "integrations" {
   sm_location                   = var.sm_region
   sm_resource_group             = var.sm_resource_group
   authorization_policy_creation = var.authorization_policy_creation
+  link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
 }
 
