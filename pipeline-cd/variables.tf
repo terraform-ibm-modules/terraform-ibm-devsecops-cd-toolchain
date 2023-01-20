@@ -25,7 +25,9 @@ variable "region" {
 variable "ibm_cloud_api_key" {
 }
 
-variable "sm_integration_name" {
+variable "secret_tool" {
+  type        = string
+  description = "Used as part of secret references to point to the secret store tool integration"
 }
 
 variable "deployment_repo" {
@@ -64,12 +66,6 @@ variable "cd_pipeline_max_concurrent_runs" {
   type        = number
   description = "The number of maximum concurrent runs to be supported by CD Pipeline"
   default     = 1
-}
-
-variable "sm_group" {
-  type        = string
-  description = "The default Secrets Manager group for your secrets. "
-  default     = "Default"
 }
 
 variable "ibm_cloud_api" {

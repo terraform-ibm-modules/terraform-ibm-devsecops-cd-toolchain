@@ -67,9 +67,9 @@ variable "sm_name" {
   type        = string
   description = "Name of the Secrets Manager Instance to store the secrets."
 }
-variable "sm_region" {
+variable "sm_location" {
   type        = string
-  description = "IBM Cloud Region where the Secrets Manager Instance is created."
+  description = "IBM Cloud location/region containing the Secrets Manager instance."
   default     = "us-south"
 }
 variable "deployment_repo" {
@@ -188,7 +188,7 @@ variable "cos_bucket_name" {
   default     = " "
 }
 
-variable "sm_group" {
+variable "sm_secret_group" {
   type        = string
   description = "The default Secrets Manager group for your secrets. "
   default     = "Default"

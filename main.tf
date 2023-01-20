@@ -61,8 +61,7 @@ module "pipeline-cd" {
   evidence_repo          = module.repositories.evidence_repo_url
   inventory_repo         = module.repositories.inventory_repo_url
   issues_repo            = module.repositories.issues_repo_url
-  sm_integration_name    = module.integrations.secretsmanager_integration_name
-  sm_group               = var.sm_group
+  secret_tool            = module.integrations.secret_tool
   cos_bucket_name        = var.cos_bucket_name
   cos_api_key            = var.cos_api_key
   cos_endpoint           = var.cos_endpoint
@@ -74,20 +73,21 @@ module "pipeline-cd" {
 module "integrations" {
   source                        = "./integrations"
   depends_on                    = [module.repositories, module.services]
-  region                        = var.sm_region
+  region                        = var.toolchain_region
   ibm_cloud_api_key             = var.ibm_cloud_api_key
   toolchain_id                  = ibm_cd_toolchain.toolchain_instance.id
   resource_group                = var.toolchain_resource_group
-  secrets_manager_instance_name = module.services.secrets_manager_instance_name
-  secrets_manager_instance_guid = module.services.secrets_manager_instance_guid
   slack_channel_name            = var.slack_channel_name
   slack_api_token               = var.slack_api_token
   slack_user_name               = var.slack_user_name
   scc_evidence_repo             = module.repositories.evidence_repo_url
   scc_profile                   = var.scc_profile
   scc_scope                     = var.scc_scope
-  sm_location                   = var.sm_region
+  sm_name                       = var.sm_name
+  sm_location                   = var.sm_location
   sm_resource_group             = var.sm_resource_group
+  sm_secret_group               = var.sm_secret_group
+  sm_instance_guid              = module.services.sm_instance_guid
   authorization_policy_creation = var.authorization_policy_creation
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
@@ -96,7 +96,7 @@ module "integrations" {
 module "services" {
   source             = "./services"
   sm_name            = var.sm_name
-  sm_location        = var.sm_region
+  sm_location        = var.sm_location
   region             = var.toolchain_region
   ibm_cloud_api      = var.ibm_cloud_api
   cluster_name       = var.cluster_name
@@ -111,8 +111,12 @@ output "toolchain_id" {
   value = ibm_cd_toolchain.toolchain_instance.id
 }
 
+output "secret_tool" {
+  value = module.integrations.secret_tool
+}
+
 output "secrets_manager_instance_id" {
-  value = module.services.secrets_manager_instance_guid
+  value = module.services.sm_instance_guid
 }
 
 output "deployment_repo_url" {

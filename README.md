@@ -171,7 +171,6 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 |issues_repo                | The repo url for the Issues repo created in the CI toolchain |
 | deployment_group                | GRIT group where deployment repository will be created |
 | change_management_group | GRIT group where change management repository will be created |
-
 |    **Variables for Services**    |
 | cluster_name              | IBM Cloud IKS Cluster name where the sample application is to be deployed by the toolchain    |
 | cluster_namespace         | Namespace within the IBM Cloud IKS Cluster where the sample application is to be deployed  |
@@ -185,4 +184,6 @@ Where {toolchain_id} is replaced with the toolchain_id value from the output
 | sm_secret_group           | The Secrets Manager secret group containing your secrets. |
 | cos_endpoint              | Cloud Object Storage endpoint name |
 | cos_bucket_name           | Cloud Object Storage bucket name |
+| link_to_doi_toolchain     | Default 'false'. Use a custom tool integration to link to an existing DevOpsInsights integration using 'doi_toolchain_id' |
+| doi_toolchain_id          | The Id of the toolchain containing the instance of DevOpsInsights
 

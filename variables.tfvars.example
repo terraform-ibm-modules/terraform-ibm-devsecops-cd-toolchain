@@ -25,13 +25,17 @@ cluster_namespace               = "dev-ns"
 cluster_region                  = "ibm:ys1:us-south"
 registry_namespace              = "my-icr-ns"
 registry_region                 = "ibm:ys1:us-south"
-kp_name                         = "Key Protect Service"
-kp_region                       = "ibm:ys1:us-south"
+sm_name                         = "sm-prod-dal"
+sm_location                     = "us-south"
+sm_secret_group                 = "Default"
+sm_resource_group               = "Default"
 
 /*****************************************************/
 /* Variables for Module "Integrations"               */
 /*****************************************************/
-#authorization_policy_creation   = "disabled"
+#doi_toolchain_id               = toolchain Id of the toolchain owning the DevopsInsights integration
+#link_to_doi_toolchain          = false|true (Default: false)
+#authorization_policy_creation  = "disabled"
 slack_channel_name              = "slack-channel"
 slack_api_token                 = "slack-token"
 slack_user_name                 = "slack-user"

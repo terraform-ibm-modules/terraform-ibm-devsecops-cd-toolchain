@@ -3,8 +3,12 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "secrets-manager"
-  target_resource_instance_id = var.secrets_manager_instance_guid
+  target_resource_instance_id = var.sm_instance_guid
   roles                       = ["Viewer", "SecretsReader"]
+}
+
+locals {
+  sm_integration_name = "sm-compliance-secrets"
 }
 
 #resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
@@ -27,10 +31,10 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
  resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
    toolchain_id = var.toolchain_id
    parameters {
-     name           = var.secrets_manager_integration_name
-     location         = var.sm_location
+     name                = local.sm_integration_name
+     location            = var.sm_location
      resource_group_name = var.sm_resource_group
-     instance_name  = var.secrets_manager_instance_name
+     instance_name       = var.sm_name
    }
  }
 
@@ -91,6 +95,17 @@ resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
 #  }
 #}
 
-output "secretsmanager_integration_name" {
-  value = var.secrets_manager_integration_name
+output "secret_tool" {
+  value = format("%s.%s", local.sm_integration_name, var.sm_secret_group)
+  # Before returning this tool integration name
+  # used to construct {vault:: secret references,
+  # the authorization_policy must have been successfully created,
+  # and the tool integration must have been created,
+  # otherwise the secret references would not resolve and
+  # other tools using secret references could give errors during tool integration creation
+  depends_on = [
+    ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy,
+    ibm_cd_toolchain_tool_secretsmanager.secretsmanager
+  ]
+  description = "Used as part of secret references to point to the secret store tool integration"
 }
