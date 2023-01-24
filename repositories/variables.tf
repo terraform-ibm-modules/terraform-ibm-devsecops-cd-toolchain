@@ -8,11 +8,6 @@ variable "change_management_repo" {
     description = "This repository holds the change management requests created for the deployments."
 }
 
-variable "pipeline_repo" {
-    type        = string
-    description = "This repository contains the tekton definitions for compliance pipelines."
-}
-
 variable "inventory_repo" {
     type        = string
     description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."

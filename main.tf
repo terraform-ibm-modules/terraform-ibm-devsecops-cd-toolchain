@@ -17,7 +17,6 @@ module "repositories" {
   toolchain_region                      = var.toolchain_region
   deployment_repo                       = var.deployment_repo
   change_management_repo                = var.change_management_repo
-  pipeline_repo                         = var.pipeline_repo
   evidence_repo                         = var.evidence_repo
   inventory_repo                        = var.inventory_repo
   issues_repo                           = var.issues_repo
@@ -57,7 +56,7 @@ module "pipeline-cd" {
   registry_region        = var.registry_region
   change_management_repo = module.repositories.change_management_repo_url
   deployment_repo        = module.repositories.deployment_repo_url
-  pipeline_repo          = module.repositories.pipeline_repo_url
+  pipeline_repo_url      = module.repositories.pipeline_repo_url
   evidence_repo          = module.repositories.evidence_repo_url
   inventory_repo         = module.repositories.inventory_repo_url
   issues_repo            = module.repositories.issues_repo_url
@@ -129,4 +128,9 @@ output "change_management_repo_url" {
 
 output "cd_pipeline_id" {
   value = module.pipeline-cd.pipeline_id
+}
+
+output "pipeline_repo_url" {
+  value       = module.repositories.pipeline_repo_url
+  description = "This repository url contains the tekton definitions for compliance pipelines"
 }
