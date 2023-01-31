@@ -42,31 +42,32 @@ resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
 }
 
 module "pipeline-cd" {
-  source                 = "./pipeline-cd"
-  depends_on             = [module.repositories, module.integrations, module.services]
-  ibm_cloud_api          = var.ibm_cloud_api
-  ibm_cloud_api_key      = var.ibm_cloud_api_key
-  region                 = var.toolchain_region
-  pipeline_id            = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
-  resource_group         = var.toolchain_resource_group
-  cluster_name           = var.cluster_name
-  cluster_namespace      = var.cluster_namespace
-  cluster_region         = var.cluster_region
-  registry_namespace     = var.registry_namespace
-  registry_region        = var.registry_region
-  change_management_repo = module.repositories.change_management_repo_url
-  deployment_repo        = module.repositories.deployment_repo_url
-  pipeline_repo_url      = module.repositories.pipeline_repo_url
-  evidence_repo          = module.repositories.evidence_repo_url
-  inventory_repo         = module.repositories.inventory_repo_url
-  issues_repo            = module.repositories.issues_repo_url
-  secret_tool            = module.integrations.secret_tool
-  cos_bucket_name        = var.cos_bucket_name
-  cos_api_key            = var.cos_api_key
-  cos_endpoint           = var.cos_endpoint
-  compliance_base_image  = var.compliance_base_image
-  doi_toolchain_id       = var.doi_toolchain_id
-  doi_environment        = var.doi_environment
+  source                                = "./pipeline-cd"
+  depends_on                            = [module.repositories, module.integrations, module.services]
+  ibm_cloud_api                         = var.ibm_cloud_api
+  ibm_cloud_api_key                     = var.ibm_cloud_api_key
+  region                                = var.toolchain_region
+  pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
+  resource_group                        = var.toolchain_resource_group
+  cluster_name                          = var.cluster_name
+  cluster_namespace                     = var.cluster_namespace
+  cluster_region                        = var.cluster_region
+  registry_namespace                    = var.registry_namespace
+  registry_region                       = var.registry_region
+  change_management_repo                = module.repositories.change_management_repo_url
+  deployment_repo                       = module.repositories.deployment_repo_url
+  pipeline_repo_url                     = module.repositories.pipeline_repo_url
+  evidence_repo                         = module.repositories.evidence_repo_url
+  inventory_repo                        = module.repositories.inventory_repo_url
+  issues_repo                           = module.repositories.issues_repo_url
+  secret_tool                           = module.integrations.secret_tool
+  cos_bucket_name                       = var.cos_bucket_name
+  cos_api_key_secret_name               = var.cos_api_key_secret_name
+  cos_endpoint                          = var.cos_endpoint
+  compliance_base_image                 = var.compliance_base_image
+  doi_toolchain_id                      = var.doi_toolchain_id
+  doi_environment                       = var.doi_environment
+  pipeline_ibmcloud_api_key_secret_name = var.pipeline_ibmcloud_api_key_secret_name
 }
 
 module "integrations" {

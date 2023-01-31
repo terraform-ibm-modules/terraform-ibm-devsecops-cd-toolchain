@@ -127,7 +127,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
   name           = "ibmcloud-api-key"
   type           = "secure"
-  value          = format("{vault::%s.ibmcloud-api-key}", var.secret_tool)
+  value          = format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", var.secret_tool)
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
@@ -157,7 +157,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
   name           = "cos-api-key"
   type           = "secure"
-  value          = format("{vault::%s.cos-api-key}", var.secret_tool)
+  value          = format("{vault::%s.${var.cos_api_key_secret_name}}", var.secret_tool)
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

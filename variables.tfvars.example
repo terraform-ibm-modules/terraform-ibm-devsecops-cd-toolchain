@@ -28,6 +28,8 @@ sm_name                         = "sm-prod-dal"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
 sm_resource_group               = "Default"
+#pipeline_ibmcloud_api_key_secret_name  = "ibmcloud_api_key"
+#cos_api_key_secret_name        = ""
 
 /*****************************************************/
 /* Variables for Module "Integrations"               */

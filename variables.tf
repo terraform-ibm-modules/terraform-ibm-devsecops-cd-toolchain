@@ -9,6 +9,12 @@ variable "ibm_cloud_api_key" {
   description = "IBM Cloud API KEY to fetch cloud resources"
 }
 
+variable "pipeline_ibmcloud_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud api key secret in the secret provider."
+  default     = "ibmcloud-api-key"
+}
+
 variable "ibm_cloud_api" {
   type        = string
   description = "IBM Cloud API Endpoint"
@@ -159,7 +165,7 @@ variable "scc_scope" {
   default     = "compliance-scope"
 }
 
-variable "cos_api_key" {
+variable "cos_api_key_secret_name" {
   type        = string
   description = "cos api key"
   default     = " "

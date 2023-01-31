@@ -30,6 +30,9 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
+variable "pipeline_ibmcloud_api_key_secret_name" {
+}
+
 variable "deployment_repo" {
 }
 
@@ -72,7 +75,7 @@ variable "ibm_cloud_api" {
   default     = "https://cloud.ibm.com"
 }
 
-variable "cos_api_key" {
+variable "cos_api_key_secret_name" {
 }
 
 variable "cos_bucket_name" {
