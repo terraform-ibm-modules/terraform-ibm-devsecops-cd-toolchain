@@ -56,6 +56,7 @@ module "pipeline-cd" {
   registry_region                       = var.registry_region
   change_management_repo                = module.repositories.change_management_repo_url
   deployment_repo                       = module.repositories.deployment_repo_url
+  deployment_repo_branch                = module.repositories.deployment_repo_branch
   pipeline_repo_url                     = module.repositories.pipeline_repo_url
   evidence_repo                         = module.repositories.evidence_repo_url
   inventory_repo                        = module.repositories.inventory_repo_url

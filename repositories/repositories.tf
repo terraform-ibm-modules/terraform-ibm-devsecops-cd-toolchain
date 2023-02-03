@@ -191,6 +191,11 @@ output "deployment_repo_url" {
   description = "The deployment repository instance url containing an application that can be built and deployed with the reference DevSecOps toolchain templates."
 }
 
+output "deployment_repo_branch" {
+  value = local.deployment_repo_branch
+  description = "The deployment repository branch."
+}
+
 output "change_management_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.change_management_repo.parameters[0].repo_url
 }

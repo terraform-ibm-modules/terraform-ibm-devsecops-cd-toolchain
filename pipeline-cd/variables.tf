@@ -36,6 +36,9 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
 variable "deployment_repo" {
 }
 
+variable "deployment_repo_branch" {
+}
+
 variable "change_management_repo" {
 }
 

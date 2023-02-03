@@ -71,7 +71,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_branch" {
   name           = "pipeline-config-branch"
   type           = "text"
-  value          = "master"
+  value          = var.deployment_repo_branch
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id  
 }
 
