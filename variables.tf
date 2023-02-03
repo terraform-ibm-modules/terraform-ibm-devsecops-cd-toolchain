@@ -168,19 +168,19 @@ variable "scc_scope" {
 variable "cos_api_key_secret_name" {
   type        = string
   description = "cos api key"
-  default     = " "
+  default     = ""
 }
 
 variable "cos_endpoint" {
   type        = string
   description = "cos endpoint name"
-  default     = " "
+  default     = ""
 }
 
 variable "cos_bucket_name" {
   type        = string
   description = "cos bucket name"
-  default     = " "
+  default     = ""
 }
 
 variable "sm_secret_group" {
