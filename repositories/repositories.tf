@@ -145,7 +145,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "inventory_repo" {
   name         = "inventory-repo"
   initialization {
     type         = "link"
-    repo_url     = var.inventory_repo
+    repo_url     = var.inventory_repo_url
     private_repo = true
   }
   parameters {
@@ -159,7 +159,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "evidence_repo" {
   name         = "evidence-repo"
   initialization {
     type         = "link"
-    repo_url     = var.evidence_repo
+    repo_url     = var.evidence_repo_url
     private_repo = true
   }
   parameters {
@@ -173,7 +173,7 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
   name         = "issues-repo"
   initialization {
     type         = "link"
-    repo_url     = var.issues_repo
+    repo_url     = var.issues_repo_url
     private_repo = true
   }
   parameters {
@@ -215,6 +215,18 @@ output "evidence_repo_url" {
 
 output "issues_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.issues_repo.parameters[0].repo_url
+}
+
+output "inventory_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.inventory_repo
+}
+
+output "evidence_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.evidence_repo
+}
+
+output "issues_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.issues_repo
 }
 
  #output "test_output" {

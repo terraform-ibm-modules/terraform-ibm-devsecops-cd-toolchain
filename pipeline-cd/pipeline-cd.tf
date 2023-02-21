@@ -54,7 +54,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
   source {
     type = "git"
     properties {
-      url     = var.inventory_repo
+      url     = var.inventory_repo_url
       branch  = "prod"
     }
   }

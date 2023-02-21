@@ -45,13 +45,22 @@ variable "change_management_repo" {
 variable "pipeline_repo_url" {
 }
 
+variable "inventory_repo_url" {
+}
+
+variable "evidence_repo_url" {
+}
+
+variable "issues_repo_url" {    
+}
+
 variable "inventory_repo" {
 }
 
 variable "evidence_repo" {
 }
 
-variable "issues_repo" {    
+variable "issues_repo" {
 }
 
 variable "pipeline_branch" {

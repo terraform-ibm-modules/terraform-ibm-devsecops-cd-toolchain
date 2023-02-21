@@ -84,22 +84,25 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_evidence_repo" {
   name           = "evidence-repo"
-  type           = "text"
-  value          = var.evidence_repo
+  type           = "integration"
+  value          = var.evidence_repo.tool_id
+  path           = "parameters.repo_url"
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id  
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_inventory_repo" {
   name           = "inventory-repo"
-  type           = "text"
-  value          = var.inventory_repo
+  type           = "integration"
+  value          = var.inventory_repo.tool_id
+  path           = "parameters.repo_url"
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id     
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
   name           = "incident-repo"
-  type           = "text"
-  value          = var.issues_repo
+  type           = "integration"
+  value          = var.issues_repo.tool_id
+  path           = "parameters.repo_url"
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
