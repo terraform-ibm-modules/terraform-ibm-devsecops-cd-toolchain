@@ -19,6 +19,30 @@ variable "sm_name" {
 variable "sm_secret_group" {
 }
 
+variable "kp_resource_group" {
+}
+
+variable "kp_location" {
+}
+
+variable "kp_name" {
+}
+
+variable "enable_key_protect" {
+  type        = bool
+  default     = false
+}
+
+variable "enable_secrets_manager" {
+  type        = bool
+  default     = true
+}
+
+variable "kp_instance_guid" {
+  type        = string
+  description = "GUID of the KeyProtect service instance in IBM Cloud"
+}
+
 variable "sm_instance_guid" {
   type        = string
   description = "GUID of the Secrets Manager service instance in IBM Cloud"

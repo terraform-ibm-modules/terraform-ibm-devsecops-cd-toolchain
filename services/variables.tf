@@ -13,6 +13,21 @@ variable "sm_location" {
   description = "Name of the Secrets Manager Toolchain resource group in IBM Cloud"
 }
 
+variable "kp_name" {
+}
+
+variable "kp_resource_group" {
+}
+
+variable "kp_location" {
+}
+
+variable "enable_key_protect" {
+}
+
+variable "enable_secrets_manager" {
+}
+
 variable "cluster_name" {
 }
 

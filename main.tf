@@ -15,7 +15,7 @@ module "repositories" {
   resource_group                        = data.ibm_resource_group.resource_group.id
   ibm_cloud_api_key                     = var.ibm_cloud_api_key
   toolchain_region                      = var.toolchain_region
-  deployment_repo                       = var.deployment_repo
+  deployment_repo_url                   = var.deployment_repo_url
   change_management_repo                = var.change_management_repo
   evidence_repo_url                     = var.evidence_repo_url
   inventory_repo_url                    = var.inventory_repo_url
@@ -29,6 +29,8 @@ module "repositories" {
   deployment_repo_clone_to_git_id       = var.deployment_repo_clone_to_git_id
   deployment_repo_existing_url          = var.deployment_repo_existing_url
   deployment_repo_existing_branch       = var.deployment_repo_existing_branch
+  pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
+  pipeline_config_repo_branch           = var.pipeline_config_repo_branch
   repositories_prefix                   = var.repositories_prefix
   deployment_group                      = var.deployment_group
   change_management_group               = var.change_management_group
@@ -55,8 +57,12 @@ module "pipeline-cd" {
   registry_namespace                    = var.registry_namespace
   registry_region                       = var.registry_region
   change_management_repo                = module.repositories.change_management_repo_url
-  deployment_repo                       = module.repositories.deployment_repo_url
+  deployment_repo                       = module.repositories.deployment_repo
   deployment_repo_branch                = module.repositories.deployment_repo_branch
+  pipeline_config_repo                  = module.repositories.pipeline_config_repo
+  pipeline_config_path                  = var.pipeline_config_path
+  pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
+  pipeline_config_repo_branch           = var.pipeline_config_repo_branch
   pipeline_repo_url                     = module.repositories.pipeline_repo_url
   evidence_repo_url                     = module.repositories.evidence_repo_url
   inventory_repo_url                    = module.repositories.inventory_repo_url
@@ -92,6 +98,12 @@ module "integrations" {
   sm_resource_group             = var.sm_resource_group
   sm_secret_group               = var.sm_secret_group
   sm_instance_guid              = module.services.sm_instance_guid
+  kp_location                   = var.kp_location
+  kp_resource_group             = var.kp_resource_group
+  kp_name                       = var.kp_name
+  kp_instance_guid              = module.services.kp_instance_guid
+  enable_secrets_manager        = var.enable_secrets_manager
+  enable_key_protect            = var.enable_key_protect
   authorization_policy_creation = var.authorization_policy_creation
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
@@ -99,8 +111,7 @@ module "integrations" {
 
 module "services" {
   source             = "./services"
-  sm_name            = var.sm_name
-  sm_location        = var.sm_location
+  
   region             = var.toolchain_region
   ibm_cloud_api      = var.ibm_cloud_api
   cluster_name       = var.cluster_name
@@ -108,7 +119,14 @@ module "services" {
   cluster_region     = var.cluster_region
   registry_namespace = var.registry_namespace
   registry_region    = var.registry_region
+  sm_name            = var.sm_name
+  sm_location        = var.sm_location
   sm_resource_group  = var.sm_resource_group
+  kp_name            = var.kp_name
+  kp_location        = var.kp_location
+  kp_resource_group  = var.kp_resource_group
+  enable_secrets_manager  = var.enable_secrets_manager
+  enable_key_protect      = var.enable_key_protect
 }
 
 output "toolchain_id" {
@@ -121,6 +139,10 @@ output "secret_tool" {
 
 output "secrets_manager_instance_id" {
   value = module.services.sm_instance_guid
+}
+
+output "key_protect_instance_id" {
+  value = module.services.kp_instance_guid
 }
 
 output "deployment_repo_url" {

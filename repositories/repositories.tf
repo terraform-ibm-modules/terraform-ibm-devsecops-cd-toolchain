@@ -140,6 +140,21 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_repo" {
   }
 }
 
+resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_existing_hostedgit" {
+  count = (var.pipeline_config_repo_existing_url == "") ? 0 : 1 
+  toolchain_id = var.toolchain_id
+  name         = "pipeline-config-repo"
+  initialization {
+    type = "link"
+    repo_url = var.pipeline_config_repo_existing_url
+    git_id = ""
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+  }
+}
+
 resource "ibm_cd_toolchain_tool_hostedgit" "inventory_repo" {
   toolchain_id = var.toolchain_id
   name         = "inventory-repo"
@@ -191,6 +206,15 @@ output "deployment_repo_url" {
   description = "The deployment repository instance url containing an application that can be built and deployed with the reference DevSecOps toolchain templates."
 }
 
+output "deployment_repo" {
+  value = (((local.deployment_repo_git_provider == "hostedgit") && (local.deployment_repo_mode == "byo_deployment")) 
+          ? ibm_cd_toolchain_tool_hostedgit.deployment_repo_existing_hostedgit
+          : ((local.deployment_repo_git_provider == "hostedgit") && (local.deployment_repo_mode != "byo_deployment")) 
+          ? ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit
+          : file("[Error] internal error in computing local values"))
+  description = "The deployment repository containing an application that can be built and deployed with the reference DevSecOps toolchain templates."
+}
+
 output "deployment_repo_branch" {
   value = local.deployment_repo_branch
   description = "The deployment repository branch."
@@ -203,6 +227,10 @@ output "change_management_repo_url" {
 output "pipeline_repo_url" {
   value = ibm_cd_toolchain_tool_hostedgit.pipeline_repo.parameters[0].repo_url
   description = "This repository url contains the tekton definitions for compliance pipelines"
+}
+
+output "pipeline_config_repo" {
+  value = ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit
 }
 
 output "inventory_repo_url" {
