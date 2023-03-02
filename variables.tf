@@ -295,13 +295,25 @@ variable "pipeline_config_repo_existing_url" {
   default     = ""
 }
 
-variable "pipeline_config_repo" {
+variable "pipeline_config_repo_existing_branch" {
   type        = string
   description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
   default     = ""
 }
 
-variable "pipeline_config_repo_branch" {
+variable "pipeline_config_repo_clone_from_url" {
+  type        = string
+  description = "(Optional). Specify a repository to clone that contains a custom pipeline-config.yaml file"
+  default     = ""
+}
+
+variable "pipeline_config_repo_clone_from_branch" {
+  type        = string
+  description = "(Optional). Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file"
+  default     = ""
+}
+
+variable "pipeline_config_repo" {
   type        = string
   description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
   default     = ""
@@ -322,6 +334,12 @@ variable "compliance_base_image" {
 variable "deployment_group" {
   type        = string
   description = "Specify group for deployment"
+  default     = ""
+}
+
+variable "config_group" {
+  type        = string
+  description = "Specify group for config"
   default     = ""
 }
 

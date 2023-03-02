@@ -74,11 +74,21 @@ variable "deployment_repo_existing_branch" {
 
 variable "deployment_group" {
 }
+
+variable "config_group" {
+}
+
 variable "change_management_group" {
 }
 
 variable "pipeline_config_repo_existing_url" {
 }
 
-variable "pipeline_config_repo_branch" {
+variable "pipeline_config_repo_existing_branch" {
+}
+
+variable "pipeline_config_repo_clone_from_url" {
+}
+
+variable "pipeline_config_repo_clone_from_branch" {
 }
