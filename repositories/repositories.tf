@@ -70,9 +70,9 @@ locals {
   )
 
   pipeline_config_repo_branch = (
-    (var.pipeline_config_repo_existing_branch != "") ? 
-    var.pipeline_config_repo_existing_branch : (var.pipeline_config_repo_clone_from_branch != "") ? 
-    var.pipeline_config_repo_clone_from_branch : local.deployment_repo_branch
+    (var.pipeline_config_repo_branch != "") ? 
+    var.pipeline_config_repo_branch : (var.pipeline_config_repo_branch != "") ? 
+    var.pipeline_config_repo_branch : local.deployment_repo_branch
   )
 }
 
@@ -96,6 +96,8 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_clone_from_hostedgit
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    api_token                = ((var.deployment_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -107,13 +109,17 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_existing_hostedgit" 
   toolchain_id = var.toolchain_id
   name         = "deployment-repo"
   initialization {
-    type = "link"
+    type     = "link"
     repo_url = var.deployment_repo_existing_url
-    git_id = local.deployment_repo_git_id
+    git_id   = local.deployment_repo_git_id
+    owner_id = var.deployment_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.deployment_repo_auth_type
+    api_token                = ((var.deployment_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -121,15 +127,18 @@ resource "ibm_cd_toolchain_tool_hostedgit" "change_management_repo" {
   toolchain_id = var.toolchain_id
   name         = "change-management-repo"
   initialization {
-    type = "clone_if_not_exists"
+    type            = "clone_if_not_exists"
     source_repo_url = local.change_management_repo_source
-    private_repo = true
-    repo_name    = join("-", [ var.repositories_prefix, "change-repo" ])
-    owner_id = var.change_management_group
+    private_repo    = true
+    repo_name       = join("-", [ var.repositories_prefix, "change-repo" ])
+    owner_id        = var.change_management_group
   }  
   parameters {
-    toolchain_issues_enabled          = true
-    enable_traceability = false
+    toolchain_issues_enabled = true
+    enable_traceability      = false
+    auth_type                = var.change_management_repo_auth_type
+    api_token                = ((var.change_management_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -139,10 +148,15 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_repo" {
   initialization {
     type = "link"
     repo_url = format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
+    owner_id = var.compliance_pipeline_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.compliance_pipeline_repo_auth_type
+    api_token                = ((var.compliance_pipeline_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", var.secret_tool) : "")
+    
   }
 }
 
@@ -151,13 +165,17 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_existing_hosted
   toolchain_id = var.toolchain_id
   name         = "pipeline-config-repo"
   initialization {
-    type = "link"
+    type     = "link"
     repo_url = var.pipeline_config_repo_existing_url
-    git_id = ""
+    git_id   = ""
+    owner_id = var.pipeline_config_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.pipeline_config_repo_auth_type
+    api_token                = ((var.pipeline_config_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -167,16 +185,19 @@ resource "ibm_cd_toolchain_tool_hostedgit" "pipeline_config_repo_clone_from_host
   toolchain_id = var.toolchain_id
   name         = "pipeline-config-repo"
   initialization {
-    type = "clone_if_not_exists"
+    type            = "clone_if_not_exists"
     source_repo_url = var.pipeline_config_repo_clone_from_url
-    private_repo = true
-    repo_name = join("-", [ var.repositories_prefix, "pipeline-config-repo" ])
-    git_id = ""    
-    owner_id                 = var.config_group
+    private_repo    = true
+    repo_name       = join("-", [ var.repositories_prefix, "pipeline-config-repo" ])
+    git_id          = ""    
+    owner_id        = var.pipeline_config_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.pipeline_config_repo_auth_type
+    api_token                = ((var.pipeline_config_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -187,10 +208,14 @@ resource "ibm_cd_toolchain_tool_hostedgit" "inventory_repo" {
     type         = "link"
     repo_url     = var.inventory_repo_url
     private_repo = true
+    owner_id     = var.inventory_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.inventory_repo_auth_type
+    api_token                = ((var.inventory_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -201,10 +226,14 @@ resource "ibm_cd_toolchain_tool_hostedgit" "evidence_repo" {
     type         = "link"
     repo_url     = var.evidence_repo_url
     private_repo = true
+    owner_id     = var.evidence_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.evidence_repo_auth_type
+    api_token                = ((var.evidence_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 
@@ -215,10 +244,14 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
     type         = "link"
     repo_url     = var.issues_repo_url
     private_repo = true
+    owner_id     = var.issues_group
   }
   parameters {
     toolchain_issues_enabled = true
     enable_traceability      = false
+    auth_type                = var.issues_repo_auth_type
+    api_token                = ((var.issues_repo_auth_type == "pat") ?
+    format("{vault::%s.${var.issues_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
 }
 

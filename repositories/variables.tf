@@ -75,20 +75,76 @@ variable "deployment_repo_existing_branch" {
 variable "deployment_group" {
 }
 
-variable "config_group" {
-}
-
 variable "change_management_group" {
 }
 
 variable "pipeline_config_repo_existing_url" {
 }
 
-variable "pipeline_config_repo_existing_branch" {
-}
-
 variable "pipeline_config_repo_clone_from_url" {
 }
 
-variable "pipeline_config_repo_clone_from_branch" {
+variable "pipeline_config_repo_branch" {
+}
+
+variable "inventory_repo_auth_type" {
+}
+
+variable "issues_repo_auth_type" {
+}
+
+variable "evidence_repo_auth_type" {
+}
+
+variable "pipeline_config_repo_auth_type"{
+}
+
+variable "deployment_repo_auth_type"{
+}
+
+variable "compliance_pipeline_repo_auth_type"{
+}
+
+variable "change_management_repo_auth_type" {
+}
+
+variable "inventory_repo_git_token_secret_name" {
+}
+
+variable "issues_repo_git_token_secret_name" {
+}
+
+variable "evidence_repo_git_token_secret_name" {
+}
+
+variable "pipeline_config_repo_git_token_secret_name" {
+}
+
+variable "deployment_repo_git_token_secret_name" {
+}
+
+variable "compliance_pipeline_repo_git_token_secret_name" {
+}
+
+variable "change_management_repo_git_token_secret_name" {
+}
+
+variable "issues_group" {
+}
+
+variable "inventory_group" {
+}
+
+variable "evidence_group" {
+}
+
+variable "pipeline_config_group" {
+}
+
+variable "compliance_pipeline_group" {
+}
+
+variable "secret_tool" {
+  type        = string
+  description = "Used as part of secret references to point to the secret store tool integration"
 }

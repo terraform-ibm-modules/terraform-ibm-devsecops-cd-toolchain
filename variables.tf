@@ -153,13 +153,37 @@ variable "slack_user_name" {
 variable "scc_profile" {
   type        = string
   description = "Security and Compliance Profile"
-  default     = "compliance-profile"
+  default     = "IBM Cloud for Financial Services v0.4.0"
 }
 
 variable "scc_scope" {
   type        = string
   description = "Security and Compliance Scope"
   default     = "compliance-scope"
+}
+
+variable "scc_integration_name" {
+  type        = string
+  description = "The name of the SCC integration name"
+  default     = "Devsecops Scope"
+}
+
+variable "scc_enable_scc" {
+  type        = bool
+  description = "Enable the SCC integration"
+  default     = false
+}
+
+variable "scc_evidence_namespace" {
+  type        = string
+  description = "The kind of evidence to be displayed, cc or cd"
+  default     = "cd"
+}
+
+variable "scc_trigger_scan" {
+  type        = string
+  description = "Default:  disabled. Can be set to 'enabled'. Note each scan may incur a charge."
+  default     = "disabled"
 }
 
 variable "cos_api_key_secret_name" {
@@ -295,7 +319,7 @@ variable "pipeline_config_repo_existing_url" {
   default     = ""
 }
 
-variable "pipeline_config_repo_existing_branch" {
+variable "pipeline_config_repo_branch" {
   type        = string
   description = "(Optional). Specify the branch containing the custom pipeline-config.yaml file"
   default     = ""
@@ -304,12 +328,6 @@ variable "pipeline_config_repo_existing_branch" {
 variable "pipeline_config_repo_clone_from_url" {
   type        = string
   description = "(Optional). Specify a repository to clone that contains a custom pipeline-config.yaml file"
-  default     = ""
-}
-
-variable "pipeline_config_repo_clone_from_branch" {
-  type        = string
-  description = "(Optional). Specify a branch of a repository to clone that contains a custom pipeline-config.yaml file"
   default     = ""
 }
 
@@ -328,18 +346,6 @@ variable "pipeline_config_path" {
 variable "compliance_base_image" {
   type        = string
   description = "Pipeline baseimage to run most of the built-in pipeline code"
-  default     = ""
-}
-
-variable "deployment_group" {
-  type        = string
-  description = "Specify group for deployment"
-  default     = ""
-}
-
-variable "config_group" {
-  type        = string
-  description = "Specify group for config"
   default     = ""
 }
 
@@ -371,4 +377,130 @@ variable "doi_toolchain_id" {
   type = string
   description = "DevOpsInsights Toolchain ID to link to"
   default = ""  
+}
+
+variable "pipeline_config_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "inventory_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "issues_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "evidence_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "deployment_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "compliance_pipeline_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "change_management_repo_auth_type" {
+  type        = string
+  description = "(Optional) Default 'oauth': Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  default     = "oauth"
+}
+
+variable "scc_ibmcloud_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud api key secret in the secret provider."
+  default     = "ibmcloud-api-key"
+}
+
+variable "pipeline_config_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "inventory_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "issues_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "evidence_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "deployment_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "compliance_pipeline_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "change_management_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider."
+  default     = "git-token"
+}
+
+variable "issues_group" {
+  type        = string
+  description = "Specify user/group for issues repo"
+  default     = ""
+}
+
+variable "inventory_group" {
+  type        = string
+  description = "Specify user/group for inventory repo"
+  default     = ""
+}
+
+variable "evidence_group" {
+  type        = string
+  description = "Specify user/group for evidence repo"
+  default     = ""
+}
+
+variable "pipeline_config_group" {
+  type        = string
+  description = "Specify user/group for pipeline config repo"
+  default     = ""
+}
+
+variable "deployment_group" {
+  type        = string
+  description = "Specify user/group for deployment repo"
+  default     = ""
+}
+
+variable "compliance_pipeline_group" {
+  type        = string
+  description = "Specify user/group for compliance pipline repo"
+  default     = ""
 }
