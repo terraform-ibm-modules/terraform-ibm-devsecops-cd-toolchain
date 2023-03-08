@@ -125,3 +125,12 @@ variable "compliance_base_image" {
   description = "Pipeline baseimage to run most of the built-in pipeline code"
   default     = ""
 }
+
+variable "target_environment_detail" {
+}
+
+variable "customer_impact" {
+}
+
+variable "target_environment_purpose" {
+}

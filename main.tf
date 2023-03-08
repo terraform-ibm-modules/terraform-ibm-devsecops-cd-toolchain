@@ -101,6 +101,9 @@ module "pipeline-cd" {
   doi_toolchain_id                       = var.doi_toolchain_id
   doi_environment                        = var.doi_environment
   pipeline_ibmcloud_api_key_secret_name  = var.pipeline_ibmcloud_api_key_secret_name
+  target_environment_detail              = var.target_environment_detail
+  customer_impact                        = var.customer_impact
+  target_environment_purpose             = var.target_environment_purpose
 }
 
 module "integrations" {

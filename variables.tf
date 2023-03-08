@@ -504,3 +504,18 @@ variable "compliance_pipeline_group" {
   description = "Specify user/group for compliance pipline repo"
   default     = ""
 }
+
+variable "target_environment_detail" {
+  type        = string
+  default     = ""
+}
+
+variable "customer_impact" {
+  type        = string
+  default     = "no_impact"
+}
+
+variable "target_environment_purpose" {
+  type        = string
+  default     = "pre_prod"
+}
