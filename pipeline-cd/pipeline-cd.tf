@@ -1,7 +1,7 @@
 resource "ibm_cd_tekton_pipeline" "cd_pipeline_instance" {
   pipeline_id = var.pipeline_id
   worker {
-    id = "public"
+    id = var.worker_id
   }
 }
 

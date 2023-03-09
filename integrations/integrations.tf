@@ -8,8 +8,10 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
 }
 
 locals {
-  sm_integration_name = "sm-compliance-secrets"
-  kp_integration_name = "kp-compliance-secrets"
+  sm_integration_name   = "sm-compliance-secrets"
+  kp_integration_name   = "kp-compliance-secrets"
+  slack_integration_name = "slack-compliance"
+  private_worker_name    = "compliance-private-worker"
 }
 
 resource "ibm_iam_authorization_policy" "toolchain_keyprotect_auth_policy" {
@@ -43,6 +45,31 @@ resource "ibm_cd_toolchain_tool_keyprotect" "keyprotect" {
    }
  }
 
+resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
+  count = var.enable_slack ? 1 : 0
+   toolchain_id = var.toolchain_id
+   name         = local.slack_integration_name
+   parameters {
+     webhook = format("{vault::%s.${var.slack_webhook_secret_name}}", var.secret_tool)
+     channel_name = var.slack_channel_name
+     team_name = var.slack_team_name
+     pipeline_fail = var.slack_pipeline_fail
+     pipeline_start  = var.slack_pipeline_start
+     pipeline_success = var.slack_pipeline_success
+     toolchain_bind   = var.slack_toolchain_bind
+     toolchain_unbind = var.slack_toolchain_unbind
+   }
+ }
+ 
+ resource "ibm_cd_toolchain_tool_privateworker" "cd_toolchain_tool_private_worker" {
+  count = (var.enable_private_worker) ? 0: 0
+  toolchain_id =  var.toolchain_id
+  parameters {
+        name = local.private_worker_name
+        worker_queue_credentials = format("{vault::%s.${var.private_worker_api_key_secret_name}}", var.secret_tool)
+  }
+}
+
 resource "ibm_cd_toolchain_tool_devopsinsights" "insights_tool" {
   count = var.link_to_doi_toolchain ? 0 : 1
   toolchain_id = var.toolchain_id
@@ -61,20 +88,6 @@ resource "ibm_cd_toolchain_tool_custom" "link_to_insights" {
       description = "The toolchain that contains the Devops Insights instance CC interacts with."
   }
 }
-
-#resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
-#  toolchain_id = var.toolchain_id
-#  parameters {
-#    api_token = var.slack_api_token
-#    channel_name = var.slack_channel_name
-#    team_url = var.slack_user_name
-#    pipeline_start = true
-#    pipeline_success = true
-#    pipeline_fail = true
-#    toolchain_bind = true
-#    toolchain_unbind = true
-#  }
-#}
 
 resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
   toolchain_id = var.toolchain_id
@@ -118,4 +131,9 @@ output "secret_tool" {
     ibm_cd_toolchain_tool_keyprotect.keyprotect
   ]
   description = "Used as part of secret references to point to the secret store tool integration"
+}
+
+output "worker_id" {
+  value       = ((var.enable_private_worker) ? 
+  ibm_cd_toolchain_tool_privateworker.cd_toolchain_tool_private_worker[0].tool_id: "public")
 }

@@ -30,6 +30,11 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
+variable "worker_id" {
+  type        = string
+  description = "The Private Worker Id or public"
+}
+
 variable "pipeline_ibmcloud_api_key_secret_name" {
 }
 
@@ -133,4 +138,34 @@ variable "customer_impact" {
 }
 
 variable "target_environment_purpose" {
+}
+
+variable "change_request_id" {
+}
+
+variable "satellite_cluster_group" {
+}
+
+variable "source_environment" {
+}
+
+variable "target_environment" {
+}
+
+variable "merge_cra_sbom" {
+}
+
+variable "opt_out_v1_evidence" {
+}
+
+variable "emergency_label" {
+}
+
+variable "app_version" {
+}
+
+variable "slack_notifications" {
+}
+
+variable "pipeline_debug" {
 }

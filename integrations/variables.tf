@@ -60,22 +60,38 @@ variable "secrets_manager_service_auth" {
   default     = "[\"Viewer\", \"SecretReader\"]"
 }
 
-variable "slack_api_token" {
-  type        = string
-  description = "API Token for Slack Channel"
-  default     = ""
+variable "enable_slack" {
+}
+
+variable "slack_webhook_secret_name" {
 }
 
 variable "slack_channel_name" {
-  type        = string
-  description = "Name of Slack Channel"
-  default     = ""
 }
 
-variable "slack_user_name" {
-  type        = string
-  description = "Name of Slack User"
-  default     = ""
+variable "slack_team_name" {
+}
+
+variable "slack_pipeline_fail" {
+}
+
+variable "slack_pipeline_start" {
+}
+
+variable "slack_pipeline_success" {
+}
+
+variable "slack_toolchain_bind" {
+}
+
+variable "slack_toolchain_unbind" {
+}
+
+variable "enable_private_worker" {
+  type        = bool
+  description = "Create a private worker integration"
+  default     = false
+  
 }
 
 variable "scc_evidence_repo" {
@@ -108,6 +124,12 @@ variable "secret_tool" {
 }
 
 variable "scc_ibmcloud_api_key_secret_name" {
+}
+
+variable "private_worker_api_key_secret_name" {
+  type        = string
+  description = "Name of Private Worker service api key in the secret provider"
+  default     = "private-worker"
 }
 
 variable "authorization_policy_creation" {

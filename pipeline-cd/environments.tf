@@ -1,63 +1,63 @@
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_change_request_id" {
   name           = "change-request-id"
   type           = "text"
-  value          = "notAvailable"
+  value          = var.change_request_id
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id      
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   name           = "region"
   type           = "text"
-  value          = ""
+  value          = var.region
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id      
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
   name           = "satellite-cluster-group"
   type           = "text"
-  value          = ""
+  value          = var.satellite_cluster_group
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_source_environment" {
   name           = "source-environment"
   type           = "text"
-  value          = "master"
+  value          = var.source_environment
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id      
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment" {
   name           = "target-environment"
   type           = "text"
-  value          = "prod"
+  value          = var.target_environment
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_merge-cra-sbom" {
   name           = "merge-cra-sbom"
   type           = "text"
-  value          = "1"
+  value          = var.merge_cra_sbom
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_opt-out-v1-evidence" {
   name           = "opt-out-v1-evidence"
   type           = "text"
-  value          = "1"
+  value          = var.opt_out_v1_evidence
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id      
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_emergency_label" {
   name           = "emergency-label"
   type           = "text"
-  value          = "EMERGENCY"
+  value          = var.emergency_label
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id       
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
   name           = "version"
   type           = "text"
-  value          = "v1"
+  value          = var.app_version
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id     
 }
 
