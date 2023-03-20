@@ -4,18 +4,12 @@ variable "deployment_repo_url" {
 }
 
 variable "change_management_repo" {
-    type        = string
-    description = "This repository holds the change management requests created for the deployments."
 }
 
 variable "inventory_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
 }
 
 variable "evidence_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
 }
 
 variable "issues_repo_url" {
@@ -32,7 +26,7 @@ variable "resource_group" {
 variable "toolchain_region" {
 }
 
-variable "ibm_cloud_api_key" {
+variable "ibmcloud_api_key" {
 }
 
 variable "toolchain_crn" {
@@ -41,10 +35,8 @@ variable "toolchain_crn" {
 }
 
 variable "deployment_repo_clone_from_url" {
-    type        = string
-    description = "(Optional) Override the default deployment app by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
 }
+
 variable "deployment_repo_clone_from_branch" {
     type        = string
     description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."

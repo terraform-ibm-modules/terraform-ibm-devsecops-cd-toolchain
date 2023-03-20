@@ -14,7 +14,7 @@ module "repositories" {
   toolchain_id                                   = ibm_cd_toolchain.toolchain_instance.id
   toolchain_crn                                  = ibm_cd_toolchain.toolchain_instance.crn
   resource_group                                 = data.ibm_resource_group.resource_group.id
-  ibm_cloud_api_key                              = var.ibm_cloud_api_key
+  ibmcloud_api_key                              = var.ibmcloud_api_key
   toolchain_region                               = var.toolchain_region
   deployment_repo_url                            = var.deployment_repo_url
   change_management_repo                         = var.change_management_repo
@@ -68,8 +68,8 @@ resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
 module "pipeline-cd" {
   source                                 = "./pipeline-cd"
   depends_on                             = [module.repositories, module.integrations, module.services]
-  ibm_cloud_api                          = var.ibm_cloud_api
-  ibm_cloud_api_key                      = var.ibm_cloud_api_key
+  ibmcloud_api                          = var.ibmcloud_api
+  ibmcloud_api_key                      = var.ibmcloud_api_key
   region                                 = var.toolchain_region
   pipeline_id                            = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group                         = var.toolchain_resource_group
@@ -121,7 +121,7 @@ module "integrations" {
   source                             = "./integrations"
   depends_on                         = [module.services]
   region                             = var.toolchain_region
-  ibm_cloud_api_key                  = var.ibm_cloud_api_key
+  ibmcloud_api_key                  = var.ibmcloud_api_key
   toolchain_id                       = ibm_cd_toolchain.toolchain_instance.id
   resource_group                     = var.toolchain_resource_group
   enable_slack                       = var.enable_slack
@@ -164,7 +164,7 @@ module "services" {
   source             = "./services"
   
   region                 = var.toolchain_region
-  ibm_cloud_api          = var.ibm_cloud_api
+  ibmcloud_api          = var.ibmcloud_api
   cluster_name           = var.cluster_name
   cluster_namespace      = var.cluster_namespace
   cluster_region         = var.cluster_region

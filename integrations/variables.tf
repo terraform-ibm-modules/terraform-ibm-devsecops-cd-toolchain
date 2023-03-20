@@ -29,13 +29,9 @@ variable "kp_name" {
 }
 
 variable "enable_key_protect" {
-  type        = bool
-  default     = false
 }
 
 variable "enable_secrets_manager" {
-  type        = bool
-  default     = true
 }
 
 variable "kp_instance_guid" {
@@ -115,7 +111,7 @@ variable "scc_trigger_scan" {
 variable "scc_integration_name" {
 }
 
-variable "ibm_cloud_api_key" {
+variable "ibmcloud_api_key" {
 }
 
 variable "secret_tool" {
@@ -133,9 +129,6 @@ variable "private_worker_api_key_secret_name" {
 }
 
 variable "authorization_policy_creation" {
-   type        = string
-   description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation"
-   default     = ""
  }
 
 variable "link_to_doi_toolchain" {

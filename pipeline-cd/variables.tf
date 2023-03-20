@@ -22,7 +22,7 @@ variable "registry_region" {
 variable "region" {
 }
 
-variable "ibm_cloud_api_key" {
+variable "ibmcloud_api_key" {
 }
 
 variable "secret_tool" {
@@ -101,7 +101,7 @@ variable "cd_pipeline_max_concurrent_runs" {
   default     = 1
 }
 
-variable "ibm_cloud_api" {
+variable "ibmcloud_api" {
   type        = string
   description = "IBM Cloud API Endpoint"
   default     = "https://cloud.ibm.com"
@@ -117,18 +117,12 @@ variable "cos_endpoint" {
 }
 
 variable "doi_environment" {
-  type = string
-  default = ""
 }
 
 variable "doi_toolchain_id" {
-  default = ""  
 }
 
 variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code"
-  default     = ""
 }
 
 variable "target_environment_detail" {

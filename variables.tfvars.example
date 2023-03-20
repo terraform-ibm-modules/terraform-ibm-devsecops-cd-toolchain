@@ -9,21 +9,21 @@ toolchain_description           = "CD Toolchain created with Template for DevSec
 /*****************************************************/
 /* Variables for Module "Repositories"               */
 /*****************************************************/
-ibm_cloud_api_key               = ""
+ibmcloud_api_key               = ""
 app_repo                        = "https://mon01.git.cloud.ibm.com/open-toolchain/hello-compliance-app.git"
 evidence_repo_url                   = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
 inventory_repo_url                  = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
 issues_repo_url                     = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
-ibm_cloud_api                   = "https://test.cloud.ibm.com"
+ibmcloud_api                   = "https://test.cloud.ibm.com"
 
 /*****************************************************/
 /* Variables for Module "Services"                   */
 /*****************************************************/
 cluster_name                    = "my-iks-cluster"
 cluster_namespace               = "dev-ns"
-cluster_region                  = "ibm:ys1:us-south"
+cluster_region                  = "ibm:yp:us-south"
 registry_namespace              = "my-icr-ns"
-registry_region                 = "ibm:ys1:us-south"
+registry_region                 = "ibm:yp:us-south"
 sm_name                         = "sm-prod-dal"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"

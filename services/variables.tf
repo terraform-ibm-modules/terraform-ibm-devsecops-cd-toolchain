@@ -1,16 +1,10 @@
 variable "sm_name" {
-  type        = string
-  description = "Name of the Secrets Manager Toolchain Service Instance in IBM Cloud"
 }
 
 variable "sm_resource_group" {
-  type        = string
-  description = "Name of the Secrets Manager Toolchain resource group in IBM Cloud"
 }
 
 variable "sm_location" {
-  type        = string
-  description = "Name of the Secrets Manager Toolchain resource group in IBM Cloud"
 }
 
 variable "kp_name" {
@@ -46,5 +40,5 @@ variable "registry_region" {
 variable "region" {
 }
 
-variable "ibm_cloud_api" {
+variable "ibmcloud_api" {
 }
