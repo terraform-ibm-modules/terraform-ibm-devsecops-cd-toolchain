@@ -10,11 +10,11 @@ toolchain_description           = "CD Toolchain created with Template for DevSec
 /* Variables for Module "Repositories"               */
 /*****************************************************/
 ibmcloud_api_key               = ""
-app_repo                        = "https://mon01.git.cloud.ibm.com/open-toolchain/hello-compliance-app.git"
-evidence_repo_url                   = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
-inventory_repo_url                  = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
-issues_repo_url                     = "https://mon01.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
-ibmcloud_api                   = "https://test.cloud.ibm.com"
+app_repo                       = "https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-app.git"
+evidence_repo_url              = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
+inventory_repo_url             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
+issues_repo_url                = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
+ibmcloud_api                   = "https://cloud.ibm.com"
 
 /*****************************************************/
 /* Variables for Module "Services"                   */
@@ -28,6 +28,11 @@ sm_name                         = "sm-prod-dal"
 sm_location                     = "us-south"
 sm_secret_group                 = "Default"
 sm_resource_group               = "Default"
+#enable_secrets_manager         = false
+#enable_key_protect             = true
+#kp_name                        = "kp-prod-dal"
+#kp_location                    = "us-south"
+#kp_secret_group                = "Default"
 #pipeline_ibmcloud_api_key_secret_name  = "ibmcloud_api_key"
 #cos_api_key_secret_name        = ""
 
@@ -37,6 +42,6 @@ sm_resource_group               = "Default"
 #doi_toolchain_id               = toolchain Id of the toolchain owning the DevopsInsights integration
 #link_to_doi_toolchain          = false|true (Default: false)
 #authorization_policy_creation  = "disabled"
-slack_channel_name              = "slack-channel"
-slack_api_token                 = "slack-token"
-slack_user_name                 = "slack-user"
+#slack_channel_name              = "slack-channel"
+#slack_api_token                 = "slack-token"
+#slack_user_name                 = "slack-user"
