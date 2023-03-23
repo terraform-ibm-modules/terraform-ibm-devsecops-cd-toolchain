@@ -31,12 +31,6 @@ variable "cluster_namespace" {
 variable "cluster_region" {
 }
 
-variable "registry_namespace" {
-}
-
-variable "registry_region" {
-}
-
 variable "region" {
 }
 

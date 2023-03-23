@@ -76,8 +76,6 @@ module "pipeline-cd" {
   cluster_name                           = var.cluster_name
   cluster_namespace                      = var.cluster_namespace
   cluster_region                         = var.cluster_region
-  registry_namespace                     = var.registry_namespace
-  registry_region                        = var.registry_region
   change_management_repo                 = module.repositories.change_management_repo_url
   deployment_repo                        = module.repositories.deployment_repo
   deployment_repo_branch                 = module.repositories.deployment_repo_branch
@@ -168,8 +166,6 @@ module "services" {
   cluster_name           = var.cluster_name
   cluster_namespace      = var.cluster_namespace
   cluster_region         = var.cluster_region
-  registry_namespace     = var.registry_namespace
-  registry_region        = var.registry_region
   sm_name                = var.sm_name
   sm_location            = var.sm_location
   sm_resource_group      = var.sm_resource_group

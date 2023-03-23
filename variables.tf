@@ -57,18 +57,6 @@ variable "cluster_region" {
   default     = "ibm:yp:us-south"
 }
 
-variable "registry_namespace" {
-  type        = string
-  description = "Namespace within the IBM Cloud Container Registry where application image need to be stored."
-  default     = "alpha-cd-namespace"
-}
-
-variable "registry_region" {
-  type        = string
-  description = "IBM Cloud Region where the IBM Cloud Container Registry is to be created."
-  default     = "ibm:yp:us-south"
-}
-
 variable "deployment_repo_url" {
     type        = string
     description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
