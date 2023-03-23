@@ -58,66 +58,66 @@ variable "cluster_region" {
 }
 
 variable "deployment_repo_url" {
-    type        = string
-    description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-    default     = ""
+  type        = string
+  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "deployment_repo" {
-    type        = string
-    description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-    default     = ""
+  type        = string
+  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "deployment_repo_type" {
-    type        = string
-    description = "The repository type for deployment repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"    
+  type        = string
+  description = "The repository type for deployment repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "change_management_repo" {
-    type        = string
-    description = "This repository holds the change management requests created for the deployments."
-    default     = ""
+  type        = string
+  description = "This repository holds the change management requests created for the deployments."
+  default     = ""
 }
 
 variable "change_management_repo_type" {
-    type        = string
-    description = "The repository type for change management repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"    
+  type        = string
+  description = "The repository type for change management repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "inventory_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates."
 }
 
 variable "inventory_repo_type" {
-    type        = string
-    description = "The repository type for inventory repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for inventory repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "evidence_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
 }
 
 variable "evidence_repo_type" {
-    type        = string
-    description = "The repository type for evidence repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for evidence repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "issues_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
 }
 
 variable "issues_repo_type" {
-    type        = string
-    description = "The repository type for issues repo. One of [clone, link, hostedgit]"
-    default     = "hostedgit"
+  type        = string
+  description = "The repository type for issues repo. One of [clone, link, hostedgit]"
+  default     = "hostedgit"
 }
 
 variable "slack_webhook_secret_name" {
@@ -128,7 +128,7 @@ variable "slack_webhook_secret_name" {
 
 variable "enable_slack" {
   type        = bool
-  description  = "Set to true to create the integration"
+  description = "Set to true to create the integration"
   default     = false
 }
 
@@ -289,15 +289,15 @@ variable "enable_secrets_manager" {
 }
 
 variable "change_repo_clone_from_url" {
-    type        = string
-    description = "Override the default management repo , which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
+  type        = string
+  description = "Override the default management repo , which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  default     = ""
 }
 
 variable "repositories_prefix" {
-    type        = string
-    description = "Prefix name for the cloned compliance repos."
-    default     = "compliance-tf"
+  type        = string
+  description = "Prefix name for the cloned compliance repos."
+  default     = "compliance-tf"
 }
 
 variable "deployment_repo_existing_git_provider" {
@@ -324,25 +324,25 @@ variable "deployment_repo_clone_to_git_id" {
   default     = ""
 }
 variable "deployment_repo_clone_from_url" {
-    type        = string
-    description = "Override the default sample app by providing your own sample deployment url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
+  type        = string
+  description = "Override the default sample app by providing your own sample deployment url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  default     = ""
 }
 
 variable "deployment_repo_clone_from_branch" {
-    type        = string
-    description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
-    default     = ""
+  type        = string
+  description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
+  default     = ""
 }
 variable "deployment_repo_existing_url" {
-    type        = string
-    description = "Override to bring your own existing deployment repository URL, which will be used directly instead of cloning the default deployment sample."
-    default     = ""
+  type        = string
+  description = "Override to bring your own existing deployment repository URL, which will be used directly instead of cloning the default deployment sample."
+  default     = ""
 }
 variable "deployment_repo_existing_branch" {
-    type        = string
-    description = "Used when deployment_repo_existing_url is provided, the default branch that will be used by the CD build, usually either main or master."
-    default     = ""
+  type        = string
+  description = "Used when deployment_repo_existing_url is provided, the default branch that will be used by the CD build, usually either main or master."
+  default     = ""
 }
 
 variable "pipeline_config_repo_existing_url" {
@@ -388,15 +388,15 @@ variable "change_management_group" {
 }
 
 variable "authorization_policy_creation" {
-   type        = string
-   description = "Set to disabled if you do not want this policy auto created"
-   default     = ""
- }
+  type        = string
+  description = "Set to disabled if you do not want this policy auto created"
+  default     = ""
+}
 
- variable "doi_environment" {
-  type = string
+variable "doi_environment" {
+  type        = string
   description = "DevOpsInsights environment for DevSecOps CD deployment"
-  default = ""
+  default     = ""
 }
 
 variable "link_to_doi_toolchain" {
@@ -406,9 +406,9 @@ variable "link_to_doi_toolchain" {
 }
 
 variable "doi_toolchain_id" {
-  type = string
+  type        = string
   description = "DevOpsInsights Toolchain ID to link to"
-  default = ""  
+  default     = ""
 }
 
 variable "pipeline_config_repo_auth_type" {
@@ -610,19 +610,19 @@ variable "app_version" {
 }
 
 variable "slack_notifications" {
-  type       = string
+  type        = string
   description = "The switch that turns the Slack integration on or off"
-  default    = "0"
+  default     = "0"
 }
 
 variable "pipeline_debug" {
   type        = string
   description = "Set to '1' to enable debug logging"
-  default = "0"
+  default     = "0"
 }
 
 variable "region" {
   type        = string
   description = "The target region where the app is deployed."
-  default = ""
+  default     = ""
 }
