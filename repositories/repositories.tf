@@ -255,6 +255,25 @@ resource "ibm_cd_toolchain_tool_hostedgit" "issues_repo" {
   }
 }
 
+resource "ibm_cd_toolchain_tool_hostedgit" "external_properties_repo" {
+  count        = var.enable_external_properties ? 1 : 0
+  toolchain_id = var.toolchain_id
+  name         = "external-properties-repo"
+  initialization {
+    type            = "clone_if_not_exists"
+    source_repo_url = var.external_properties_repo_url
+    repo_name       = "compliance-pipeline-properties"
+    owner_id        = var.pipeline_config_group
+  }
+  parameters {
+    toolchain_issues_enabled = false
+    enable_traceability      = false
+    auth_type                = var.external_properties_repo_auth_type
+    api_token                = ((var.external_properties_repo_auth_type == "pat") ? 
+    format("{vault::%s.${var.external_properties_repo_git_token_secret_name}}", var.secret_tool) : "")
+  }
+}
+
 output "deployment_repo_url" {
   value = (((local.deployment_repo_git_provider == "hostedgit") && (local.deployment_repo_mode == "byo_deployment")) 
           ? ibm_cd_toolchain_tool_hostedgit.deployment_repo_existing_hostedgit[0].parameters[0].repo_url
@@ -294,6 +313,10 @@ output "pipeline_config_repo" {
 output "pipeline_config_repo_branch" {
   value = local.pipeline_config_repo_branch
   description = "The config or app repo branch containing the .pipeline-config.yaml file; usually main or master."
+}
+
+output "external_properties_repo_url" {
+  value = ibm_cd_toolchain_tool_hostedgit.external_properties_repo[0].parameters[0].repo_url
 }
 
 output "inventory_repo_url" {
