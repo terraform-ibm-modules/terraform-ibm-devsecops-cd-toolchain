@@ -140,3 +140,15 @@ variable "secret_tool" {
   type        = string
   description = "Used as part of secret references to point to the secret store tool integration"
 }
+
+variable "enable_external_properties" {
+}
+
+variable "external_properties_repo_url" {
+}
+
+variable "external_properties_repo_auth_type" {
+}
+
+variable "external_properties_repo_git_token_secret_name" {
+}
