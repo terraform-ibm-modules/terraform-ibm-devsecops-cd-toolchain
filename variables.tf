@@ -1,59 +1,59 @@
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group within which the toolchain will be created."
+  description = "The resource group within which the toolchain is created."
   default     = "Default"
 }
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "IBM Cloud API KEY to fetch cloud resources"
+  description = "API key used to create the toolchains."
 }
 
 variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
-  description = "Name of the Cloud api key secret in the secret provider."
+  description = "Name of the Cloud API key secret in the secret provider."
   default     = "ibmcloud-api-key"
 }
 
 variable "ibmcloud_api" {
   type        = string
-  description = "IBM Cloud API Endpoint"
+  description = "IBM Cloud API Endpoint."
   default     = "https://cloud.ibm.com"
 }
 
 variable "toolchain_region" {
   type        = string
-  description = "IBM Cloud Region for the toolchain"
+  description = "IBM Cloud Region for the toolchain."
   default     = "us-south"
 }
 
 variable "toolchain_name" {
   type        = string
-  description = "Name of the Toolchain."
+  description = "Name of CD the Toolchain."
   default     = "DevSecOps CD Toolchain - Terraform"
 }
 
 variable "toolchain_description" {
   type        = string
-  description = "Description for the Toolchain."
+  description = "Description for the CD oolchain."
   default     = "Toolchain created with Terraform template for DevSecOps CD Best Practices"
 }
 
 variable "cluster_name" {
   type        = string
-  description = "Name of the Kubernetes cluster where the application will be deployed."
+  description = "Name of the Kubernetes cluster where the application is deployed."
   default     = "mycluster-free"
 }
 
 variable "cluster_namespace" {
   type        = string
-  description = "Namespace of the Kubernetes cluster where the application will be deployed."
+  description = "Namespace of the Kubernetes cluster where the application is deployed."
   default     = "default"
 }
 
 variable "cluster_region" {
   type        = string
-  description = "Region of the Kubernetes cluster where the application will be deployed."
+  description = "Region of the Kubernetes cluster where the application is deployed."
   default     = "ibm:yp:us-south"
 }
 
@@ -63,28 +63,10 @@ variable "deployment_repo_url" {
   default     = ""
 }
 
-variable "deployment_repo" {
-  type        = string
-  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-  default     = ""
-}
-
-variable "deployment_repo_type" {
-  type        = string
-  description = "The repository type for deployment repo. One of [clone, link, hostedgit]"
-  default     = "hostedgit"
-}
-
 variable "change_management_repo" {
   type        = string
   description = "This repository holds the change management requests created for the deployments."
   default     = ""
-}
-
-variable "change_management_repo_type" {
-  type        = string
-  description = "The repository type for change management repo. One of [clone, link, hostedgit]"
-  default     = "hostedgit"
 }
 
 variable "inventory_repo_url" {
@@ -92,32 +74,14 @@ variable "inventory_repo_url" {
   description = "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates."
 }
 
-variable "inventory_repo_type" {
-  type        = string
-  description = "The repository type for inventory repo. One of [clone, link, hostedgit]"
-  default     = "hostedgit"
-}
-
 variable "evidence_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
 }
 
-variable "evidence_repo_type" {
-  type        = string
-  description = "The repository type for evidence repo. One of [clone, link, hostedgit]"
-  default     = "hostedgit"
-}
-
 variable "issues_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
-}
-
-variable "issues_repo_type" {
-  type        = string
-  description = "The repository type for issues repo. One of [clone, link, hostedgit]"
-  default     = "hostedgit"
 }
 
 variable "slack_webhook_secret_name" {
@@ -128,7 +92,7 @@ variable "slack_webhook_secret_name" {
 
 variable "enable_slack" {
   type        = bool
-  description = "Set to true to create the integration"
+  description = "Set to true to create the integration."
   default     = false
 }
 
@@ -182,31 +146,31 @@ variable "slack_toolchain_unbind" {
 
 variable "scc_profile" {
   type        = string
-  description = "Security and Compliance Profile"
+  description = "Security and Compliance Profile."
   default     = "IBM Cloud for Financial Services v0.4.0"
 }
 
 variable "scc_scope" {
   type        = string
-  description = "Security and Compliance Scope"
+  description = "Security and Compliance Scope."
   default     = "compliance-scope"
 }
 
 variable "scc_integration_name" {
   type        = string
-  description = "The name of the SCC integration name"
+  description = "The name of the SCC integration name."
   default     = "Devsecops Scope"
 }
 
 variable "scc_enable_scc" {
   type        = bool
-  description = "Enable the SCC integration"
+  description = "Enable the SCC integration."
   default     = false
 }
 
 variable "scc_evidence_namespace" {
   type        = string
-  description = "The kind of evidence to be displayed, cc or cd"
+  description = "The kind of evidence to be displayed, cc or cd."
   default     = "cd"
 }
 
@@ -224,25 +188,25 @@ variable "cos_api_key_secret_name" {
 
 variable "cos_endpoint" {
   type        = string
-  description = "cos endpoint name"
+  description = "COS endpoint name."
   default     = ""
 }
 
 variable "cos_bucket_name" {
   type        = string
-  description = "cos bucket name"
+  description = "COS bucket name."
   default     = ""
 }
 
 variable "sm_secret_group" {
   type        = string
-  description = "The Secrets Manager secret group containing your secrets. "
+  description = "Group in Secrets Manager for organizing/grouping secrets."
   default     = "Default"
 }
 
 variable "sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance. "
+  description = "The resource group containing the Secrets Manager instance."
   default     = "default"
 }
 
@@ -297,7 +261,7 @@ variable "change_repo_clone_from_url" {
 variable "repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
-  default     = "compliance-tf"
+  default     = "compliance"
 }
 
 variable "deployment_repo_existing_git_provider" {
@@ -347,109 +311,103 @@ variable "deployment_repo_existing_branch" {
 
 variable "pipeline_config_repo_existing_url" {
   type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file"
+  description = "Specify a repository containing a custom pipeline-config.yaml file."
   default     = ""
 }
 
 variable "pipeline_config_repo_branch" {
   type        = string
-  description = "Specify the branch containing the custom pipeline-config.yaml file"
+  description = "Specify the branch containing the custom pipeline-config.yaml file."
   default     = ""
 }
 
 variable "pipeline_config_repo_clone_from_url" {
   type        = string
-  description = "Specify a repository to clone that contains a custom pipeline-config.yaml file"
-  default     = ""
-}
-
-variable "pipeline_config_repo" {
-  type        = string
-  description = "Specify the branch containing the custom pipeline-config.yaml file"
+  description = "Specify a repository to clone that contains a custom pipeline-config.yaml file."
   default     = ""
 }
 
 variable "pipeline_config_path" {
   type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo"
+  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
   default     = ".pipeline-config.yaml"
 }
 
 variable "compliance_base_image" {
   type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code"
+  description = "Pipeline baseimage to run most of the built-in pipeline code."
   default     = ""
 }
 
 variable "change_management_group" {
   type        = string
-  description = "Specify GitLab user/group for change management repo"
+  description = "Specify Git user/group for change management repo."
   default     = ""
 }
 
 variable "authorization_policy_creation" {
   type        = string
-  description = "Set to disabled if you do not want this policy auto created"
+  description = "Set to disabled if you do not want this policy auto created."
   default     = ""
 }
 
 variable "doi_environment" {
   type        = string
-  description = "DevOpsInsights environment for DevSecOps CD deployment"
+  description = "DevOpsInsights environment for DevSecOps CD deployment."
   default     = ""
 }
 
 variable "link_to_doi_toolchain" {
-  description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false"
+  description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false."
   type        = bool
   default     = false
 }
 
 variable "doi_toolchain_id" {
   type        = string
-  description = "DevOpsInsights Toolchain ID to link to"
+  description = "DevOps Insights Toolchain ID to link to."
   default     = ""
 }
 
 variable "pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat."
   default     = "oauth"
 }
 
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -509,55 +467,55 @@ variable "change_management_repo_git_token_secret_name" {
 
 variable "issues_group" {
   type        = string
-  description = "Specify GitLab user/group for issues repo"
+  description = "Specify Git user/group for issues repo."
   default     = ""
 }
 
 variable "inventory_group" {
   type        = string
-  description = "Specify GitLab user/group for inventory repo"
+  description = "Specify Git user/group for inventory repo."
   default     = ""
 }
 
 variable "evidence_group" {
   type        = string
-  description = "Specify GitLab user/group for evidence repo"
+  description = "Specify Git user/group for evidence repo."
   default     = ""
 }
 
 variable "pipeline_config_group" {
   type        = string
-  description = "Specify GitLab user/group for pipeline config repo"
+  description = "Specify Git user/group for pipeline config repo."
   default     = ""
 }
 
 variable "deployment_group" {
   type        = string
-  description = "Specify GitLab user/group for deployment repo"
+  description = "Specify Git user/group for deployment repo."
   default     = ""
 }
 
 variable "compliance_pipeline_group" {
   type        = string
-  description = "Specify GitLab user/group for compliance pipeline repo"
+  description = "Specify Git user/group for compliance pipeline repo."
   default     = ""
 }
 
 variable "target_environment_detail" {
   type        = string
-  description = "Details of the environment being updated"
+  description = "Details of the environment being updated."
   default     = ""
 }
 
 variable "customer_impact" {
   type        = string
-  description = "Custom impact of the change request"
+  description = "Custom impact of the change request."
   default     = "no_impact"
 }
 
 variable "target_environment_purpose" {
   type        = string
-  description = "Purpose of the environment being updated"
+  description = "Purpose of the environment being updated."
   default     = "production"
 }
 
@@ -569,7 +527,7 @@ variable "change_request_id" {
 
 variable "satellite_cluster_group" {
   type        = string
-  description = "The Satellite cluster group"
+  description = "The Satellite cluster group."
   default     = ""
 }
 
@@ -587,13 +545,13 @@ variable "target_environment" {
 
 variable "merge_cra_sbom" {
   type        = string
-  description = "Merge the SBOM"
+  description = "Merge the SBOM."
   default     = "1"
 }
 
 variable "opt_out_v1_evidence" {
   type        = string
-  description = "Opt out of evidence v1"
+  description = "Opt out of evidence v1."
   default     = "1"
 }
 
@@ -611,18 +569,12 @@ variable "app_version" {
 
 variable "slack_notifications" {
   type        = string
-  description = "The switch that turns the Slack integration on or off"
+  description = "The switch that turns the Slack integration on or off."
   default     = "0"
 }
 
 variable "pipeline_debug" {
   type        = string
-  description = "Set to '1' to enable debug logging"
+  description = "Set to '1' to enable debug logging."
   default     = "0"
-}
-
-variable "region" {
-  type        = string
-  description = "The target region where the app is deployed."
-  default     = ""
 }
