@@ -87,7 +87,7 @@ variable "enable_private_worker" {
   type        = bool
   description = "Create a private worker integration"
   default     = false
-  
+
 }
 
 variable "scc_evidence_repo" {
@@ -114,7 +114,7 @@ variable "private_worker_api_key_secret_name" {
 }
 
 variable "authorization_policy_creation" {
- }
+}
 
 variable "link_to_doi_toolchain" {
   description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false"
@@ -122,5 +122,5 @@ variable "link_to_doi_toolchain" {
   default     = false
 }
 
-variable "doi_toolchain_id" {  
+variable "doi_toolchain_id" {
 }

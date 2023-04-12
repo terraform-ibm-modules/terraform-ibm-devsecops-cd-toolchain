@@ -1,6 +1,6 @@
 variable "deployment_repo_url" {
-    type        = string
-    description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
+  type        = string
+  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
 }
 
 variable "change_management_repo" {
@@ -13,8 +13,8 @@ variable "evidence_repo_url" {
 }
 
 variable "issues_repo_url" {
-    type        = string
-    description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  type        = string
+  description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
 }
 
 variable "toolchain_id" {
@@ -30,25 +30,25 @@ variable "ibmcloud_api_key" {
 }
 
 variable "toolchain_crn" {
-    type        = string
-    description = "The CRN of the created toolchain"
+  type        = string
+  description = "The CRN of the created toolchain"
 }
 
 variable "deployment_repo_clone_from_url" {
 }
 
 variable "deployment_repo_clone_from_branch" {
-    type        = string
-    description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
-    default     = ""
+  type        = string
+  description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
+  default     = ""
 }
 variable "change_repo_clone_from_url" {
-    type        = string
-    description = "(Optional) Override the default change management repo by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-    default     = ""
+  type        = string
+  description = "(Optional) Override the default change management repo by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  default     = ""
 }
 
-variable "repositories_prefix" { 
+variable "repositories_prefix" {
 }
 
 variable "deployment_repo_existing_git_provider" {
@@ -88,13 +88,13 @@ variable "issues_repo_auth_type" {
 variable "evidence_repo_auth_type" {
 }
 
-variable "pipeline_config_repo_auth_type"{
+variable "pipeline_config_repo_auth_type" {
 }
 
-variable "deployment_repo_auth_type"{
+variable "deployment_repo_auth_type" {
 }
 
-variable "compliance_pipeline_repo_auth_type"{
+variable "compliance_pipeline_repo_auth_type" {
 }
 
 variable "change_management_repo_auth_type" {

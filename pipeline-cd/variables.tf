@@ -50,7 +50,7 @@ variable "inventory_repo_url" {
 variable "evidence_repo_url" {
 }
 
-variable "issues_repo_url" {    
+variable "issues_repo_url" {
 }
 
 variable "inventory_repo" {

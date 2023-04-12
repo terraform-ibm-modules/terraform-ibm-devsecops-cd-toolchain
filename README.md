@@ -78,7 +78,7 @@ For additional platforms please see https://developer.hashicorp.com/terraform/tu
 Before beginning see the [Prerequisites](#prerequisites) and [Required IAM access policies](#iamaccess) sections
 
 ### Setup
-The following steps create the out of the box setup for the CC Toolchains. Read through the example .tfvars file for a quick set up and see the [inputs](#inputs) for all modifiable settings. 
+The following steps create the out of the box setup for the CC Toolchains. Read through the example .tfvars file for a quick set up and see the [inputs](#inputs) for all modifiable settings.
 
 - Clone this [repo](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm) to a local directory
 - `cd` into the cloned directory
@@ -114,7 +114,7 @@ sm_resource_group         = "Default"
 
 Set up an [IBM Cloud account](https://cloud.ibm.com/registration). Depending on your IBM Cloud account type, access to certain resources might be limited. Depending on your account plan limits, certain capabilities that are required by some DevSecOps toolchains might not be available. For more information, see [Setting up your IBM Cloud account](https://cloud.ibm.com/docs/account?topic=account-account-getting-started) and [Upgrading your account](https://cloud.ibm.com/docs/account?topic=account-upgrading-account).
 
-#### Continuous Delivery Service. 
+#### Continuous Delivery Service.
 
 This is the service underpinning the repositories and pipelines in the toolchain. While the toolchains can be created without this service, they are highly restricted. See [Continuous Delivery](https://cloud.ibm.com/catalog/services/continuous-delivery)
 
