@@ -233,12 +233,7 @@ Create an [IBM Cloud Object Storage instance and bucket](https://cloud.ibm.com/d
 | <a name="input_repositories_prefix"></a> [repositories\_prefix](#input\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_satellite_cluster_group"></a> [satellite\_cluster\_group](#input\_satellite\_cluster\_group) | The Satellite cluster group. | `string` | `""` | no |
 | <a name="input_scc_enable_scc"></a> [scc\_enable\_scc](#input\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `false` | no |
-| <a name="input_scc_evidence_namespace"></a> [scc\_evidence\_namespace](#input\_scc\_evidence\_namespace) | The kind of evidence to be displayed, cc or cd. | `string` | `"cd"` | no |
-| <a name="input_scc_ibmcloud_api_key_secret_name"></a> [scc\_ibmcloud\_api\_key\_secret\_name](#input\_scc\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud api key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_scc_integration_name"></a> [scc\_integration\_name](#input\_scc\_integration\_name) | The name of the SCC integration name. | `string` | `"Devsecops Scope"` | no |
-| <a name="input_scc_profile"></a> [scc\_profile](#input\_scc\_profile) | Security and Compliance Profile. | `string` | `"IBM Cloud for Financial Services v0.4.0"` | no |
-| <a name="input_scc_scope"></a> [scc\_scope](#input\_scc\_scope) | Security and Compliance Scope. | `string` | `"compliance-scope"` | no |
-| <a name="input_scc_trigger_scan"></a> [scc\_trigger\_scan](#input\_scc\_trigger\_scan) | Can be set to 'enabled'. Note each scan may incur a charge. | `string` | `"disabled"` | no |
 | <a name="input_slack_channel_name"></a> [slack\_channel\_name](#input\_slack\_channel\_name) | The Slack channel that notifications will be posted to. | `string` | `"my-channel"` | no |
 | <a name="input_slack_notifications"></a> [slack\_notifications](#input\_slack\_notifications) | The switch that turns the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_slack_pipeline_fail"></a> [slack\_pipeline\_fail](#input\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
@@ -254,7 +249,7 @@ Create an [IBM Cloud Object Storage instance and bucket](https://cloud.ibm.com/d
 | <a name="input_sm_secret_group"></a> [sm\_secret\_group](#input\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. | `string` | `"Default"` | no |
 | <a name="input_source_environment"></a> [source\_environment](#input\_source\_environment) | The source environment that the app is promoted from. | `string` | `"master"` | no |
 | <a name="input_target_environment"></a> [target\_environment](#input\_target\_environment) | The target environment that the app is deployed to. | `string` | `"prod"` | no |
-| <a name="input_target_environment_detail"></a> [target\_environment\_detail](#input\_target\_environment\_detail) | Details of the environment being updated. | `string` | `""` | no |
+| <a name="input_target_environment_detail"></a> [target\_environment\_detail](#input\_target\_environment\_detail) | Details of the environment being updated. | `string` | `"Production target environment"` | no |
 | <a name="input_target_environment_purpose"></a> [target\_environment\_purpose](#input\_target\_environment\_purpose) | Purpose of the environment being updated. | `string` | `"production"` | no |
 | <a name="input_toolchain_description"></a> [toolchain\_description](#input\_toolchain\_description) | Description for the CD oolchain. | `string` | `"Toolchain created with Terraform template for DevSecOps CD Best Practices"` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Name of CD the Toolchain. | `string` | `"DevSecOps CD Toolchain - Terraform"` | no |

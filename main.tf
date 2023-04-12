@@ -132,12 +132,8 @@ module "integrations" {
   slack_toolchain_bind             = var.slack_toolchain_bind
   slack_toolchain_unbind           = var.slack_toolchain_unbind
   scc_evidence_repo                = var.evidence_repo_url
-  scc_profile                      = var.scc_profile
-  scc_scope                        = var.scc_scope
   scc_enable_scc                   = var.scc_enable_scc
   scc_integration_name             = var.scc_integration_name
-  scc_trigger_scan                 = var.scc_trigger_scan
-  scc_evidence_namespace           = var.scc_evidence_namespace
   sm_name                          = var.sm_name
   sm_location                      = var.sm_location
   sm_resource_group                = var.sm_resource_group
@@ -152,7 +148,6 @@ module "integrations" {
   authorization_policy_creation    = var.authorization_policy_creation
   link_to_doi_toolchain            = var.link_to_doi_toolchain
   doi_toolchain_id                 = var.doi_toolchain_id
-  scc_ibmcloud_api_key_secret_name = var.scc_ibmcloud_api_key_secret_name
   #enable_private_worker              = var.enable_private_worker
   #private_worker_api_key_secret_name = var.private_worker_api_key_secret_name
   secret_tool = module.integrations.secret_tool
