@@ -15,6 +15,18 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
+variable "code_signing_cert_secret_name" {
+  type        = string
+  description = "Name of the code signing certificate secret in the secret provider."
+  default     = "code-signing-cert"
+}
+
+variable "enable_signing_validation" {
+  type        = bool
+  description = "Enable for signing validation."
+  default     = false
+}
+
 variable "ibmcloud_api" {
   type        = string
   description = "IBM Cloud API Endpoint."

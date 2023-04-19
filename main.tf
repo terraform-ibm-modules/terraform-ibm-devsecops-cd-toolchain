@@ -113,6 +113,9 @@ module "pipeline_cd" {
   app_version                           = var.app_version
   slack_notifications                   = var.slack_notifications
   pipeline_debug                        = var.pipeline_debug
+  code_signing_cert_secret_name         = var.code_signing_cert_secret_name
+  enable_signing_validation             = var.enable_signing_validation
+
 }
 
 module "integrations" {

@@ -32,6 +32,12 @@ variable "worker_id" {
 variable "pipeline_ibmcloud_api_key_secret_name" {
 }
 
+variable "code_signing_cert_secret_name" {
+}
+
+variable "enable_signing_validation" {
+}
+
 variable "deployment_repo" {
 }
 

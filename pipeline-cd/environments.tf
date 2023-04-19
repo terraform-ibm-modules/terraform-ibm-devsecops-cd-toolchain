@@ -235,3 +235,11 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_customer_impact" {
   type        = "single_select"
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_dockerjson_config" {
+  count       = (var.enable_signing_validation) ? 1 : 0
+  name        = "code-signing-certificate"
+  type        = "secure"
+  value       = format("{vault::%s.${var.code_signing_cert_secret_name}}", var.secret_tool)
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
