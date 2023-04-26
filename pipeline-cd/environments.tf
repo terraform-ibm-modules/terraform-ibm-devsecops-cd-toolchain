@@ -109,7 +109,8 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
   name        = "pipeline-debug"
-  type        = "text"
+  enum        = ["0", "1"]
+  type        = "single_select"
   value       = "0"
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
@@ -242,4 +243,13 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_dockerjson_config" {
   type        = "secure"
   value       = format("{vault::%s.${var.code_signing_cert_secret_name}}", var.secret_tool)
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_artifactory-dockerconfigjson" {
+  name        = "artifactory-dockerconfigjson"
+  count       = var.enable_artifactory ? 1 : 0
+  type        = "integration"
+  value       = var.tool_artifactory
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  path        = "parameters.docker_config_json"
 }

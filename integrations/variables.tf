@@ -124,3 +124,19 @@ variable "link_to_doi_toolchain" {
 
 variable "doi_toolchain_id" {
 }
+
+variable "enable_artifactory" {
+}
+
+variable "artifactory_dashboard_url" {
+}
+
+variable "artifactory_user" {
+}
+
+variable "artifactory_repo_name" {
+}
+variable "artifactory_repo_url" {
+}
+variable "toolchain_artifactory_token" {
+}

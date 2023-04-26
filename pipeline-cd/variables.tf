@@ -163,3 +163,9 @@ variable "slack_notifications" {
 
 variable "pipeline_debug" {
 }
+
+variable "enable_artifactory" {
+}
+
+variable "tool_artifactory" {
+}
