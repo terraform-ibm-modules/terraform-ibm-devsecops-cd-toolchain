@@ -328,7 +328,7 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "pipeline_repo" {
 }
 
 resource "ibm_cd_toolchain_tool_githubconsolidated" "pipeline_config_repo_existing_githubconsolidated" {
-  count        = var.pipeline_config_repo_existing_url == "githubconsolidated" ? ((var.pipeline_config_repo_existing_url == "") ? 0 : 1) : 0
+  count        = var.pipeline_config_repo_git_provider == "githubconsolidated" ? ((var.pipeline_config_repo_existing_url == "") ? 0 : 1) : 0
   toolchain_id = var.toolchain_id
   name         = "pipeline-config-repo"
   initialization {
@@ -347,7 +347,7 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "pipeline_config_repo_existi
 }
 
 resource "ibm_cd_toolchain_tool_githubconsolidated" "pipeline_config_repo_clone_from_githubconsolidated" {
-  count        = var.pipeline_config_repo_clone_from_url == "githubconsolidated" ? ((var.pipeline_config_repo_clone_from_url == "") ? 0 : 1) : 0
+  count        = var.pipeline_config_repo_git_provider == "githubconsolidated" ? ((var.pipeline_config_repo_clone_from_url == "") ? 0 : 1) : 0
   toolchain_id = var.toolchain_id
   name         = "pipeline-config-repo"
   initialization {
