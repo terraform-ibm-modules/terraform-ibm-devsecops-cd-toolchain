@@ -124,7 +124,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
   name        = "slack-notifications"
   type        = "text"
-  value       = "0"
+  value       = var.slack_notifications
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
