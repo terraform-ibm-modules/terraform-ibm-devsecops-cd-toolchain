@@ -345,6 +345,12 @@ variable "pipeline_config_path" {
   default     = ".pipeline-config.yaml"
 }
 
+variable "pipeline_branch" {
+  type        = string
+  description = "The branch within pipeline definitions repository for Compliance CI Toolchain."
+  default     = "open-v9"
+}
+
 variable "compliance_base_image" {
   type        = string
   description = "Pipeline baseimage to run most of the built-in pipeline code."

@@ -87,6 +87,7 @@ module "pipeline_cd" {
   deployment_repo                       = module.repositories.deployment_repo
   deployment_repo_branch                = module.repositories.deployment_repo_branch
   pipeline_config_repo                  = module.repositories.pipeline_config_repo
+  pipeline_branch                       = var.pipeline_branch
   pipeline_config_path                  = var.pipeline_config_path
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
