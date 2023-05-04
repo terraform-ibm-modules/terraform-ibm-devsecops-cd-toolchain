@@ -5,3 +5,5 @@
 /*.tfstate.backup
 *.terraform.lock.hcl
 /.history
+*.tfvars
+provider.tf
