@@ -138,5 +138,5 @@ variable "artifactory_repo_name" {
 }
 variable "artifactory_repo_url" {
 }
-variable "toolchain_artifactory_token" {
+variable "artifactory_token_secret_name" {
 }

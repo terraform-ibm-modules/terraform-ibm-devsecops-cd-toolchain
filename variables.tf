@@ -347,7 +347,7 @@ variable "pipeline_config_path" {
 
 variable "pipeline_branch" {
   type        = string
-  description = "The branch within pipeline definitions repository for Compliance CI Toolchain."
+  description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
   default     = "open-v9"
 }
 
@@ -658,9 +658,9 @@ variable "artifactory_repo_url" {
   description = "Type the URL for your Artifactory release repository."
 }
 
-variable "toolchain_artifactory_token" {
+variable "artifactory_token_secret_name" {
   type        = string
-  default     = "artifacotry-token"
+  default     = "artifactory-token"
   description = "Name of the artifactory token secret in the secret provider."
 }
 
@@ -670,8 +670,8 @@ variable "artifactory_repo_name" {
   description = "Type the name of your Artifactory repository where your docker images are located."
 }
 
-variable "toolchain_privateworker_credentials" {
-  type        = string
-  default     = "private-worker-service-api"
-  description = "Name of the privateworker secret in the secret provider."
-}
+# variable "privateworker_credentials_secret_name" {
+#   type        = string
+#   default     = "private-worker-service-api"
+#   description = "Name of the privateworker secret in the secret provider."
+# }

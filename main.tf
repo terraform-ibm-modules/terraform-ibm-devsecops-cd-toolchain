@@ -162,13 +162,13 @@ module "integrations" {
   doi_toolchain_id              = var.doi_toolchain_id
   #enable_private_worker              = var.enable_private_worker
   #private_worker_api_key_secret_name = var.private_worker_api_key_secret_name
-  enable_artifactory          = var.enable_artifactory
-  artifactory_repo_name       = var.artifactory_repo_name
-  artifactory_dashboard_url   = var.artifactory_dashboard_url
-  artifactory_user            = var.artifactory_user
-  artifactory_repo_url        = var.artifactory_repo_url
-  toolchain_artifactory_token = var.toolchain_artifactory_token
-  secret_tool                 = module.integrations.secret_tool
+  enable_artifactory            = var.enable_artifactory
+  artifactory_repo_name         = var.artifactory_repo_name
+  artifactory_dashboard_url     = var.artifactory_dashboard_url
+  artifactory_user              = var.artifactory_user
+  artifactory_repo_url          = var.artifactory_repo_url
+  artifactory_token_secret_name = var.artifactory_token_secret_name
+  secret_tool                   = module.integrations.secret_tool
 }
 
 module "services" {
