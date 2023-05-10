@@ -74,6 +74,11 @@ variable "cluster_region" {
   default     = "ibm:yp:us-south"
 }
 
+variable "deployment_source_repo_url" {
+  type        = string
+  description = "Url of deployment repo template"
+  default     = ""
+}
 variable "deployment_repo_url" {
   type        = string
   description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."

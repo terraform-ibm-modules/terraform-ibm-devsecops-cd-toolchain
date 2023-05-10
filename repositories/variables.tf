@@ -72,6 +72,8 @@ variable "deployment_repo_existing_git_id" {
 }
 variable "deployment_repo_clone_to_git_provider" {
 }
+variable "deployment_source_repo_url" {
+}
 variable "deployment_repo_clone_to_git_id" {
 }
 variable "deployment_repo_existing_url" {

@@ -34,7 +34,7 @@ locals {
     (local.deployment_repo_mode == "byo_deployment") ? ""
     : (local.deployment_repo_mode == "byo_sample") ? var.deployment_repo_clone_from_url
     : var.default_git_provider != "githubconsolidated" ? format("%s/open-toolchain/hello-compliance-deployment.git", local.clone_from_git_server)
-    : "https://github.ibm.com/one-pipeline/hello-compliance-deployment"
+    : var.deployment_source_repo_url
   )
   deployment_repo_git_provider = (
     (local.deployment_repo_mode == "byo_deployment") ?
@@ -269,7 +269,7 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "deployment_repo_clone_from_
   name         = "deployment-repo"
   initialization {
     type            = "clone_if_not_exists"
-    source_repo_url = var.deployment_repo_clone_from_url
+    source_repo_url = local.deployment_repo_clone_from
     repo_name       = join("-", [var.repositories_prefix, "deploy-repo"])
     git_id          = "integrated"
     owner_id        = var.deployment_group

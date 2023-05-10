@@ -28,6 +28,7 @@ module "repositories" {
   issues_repo_url                                = var.issues_repo_url
   change_repo_clone_from_url                     = var.change_repo_clone_from_url
   deployment_repo_clone_from_url                 = var.deployment_repo_clone_from_url
+  deployment_source_repo_url                     = var.deployment_source_repo_url
   deployment_repo_clone_from_branch              = var.deployment_repo_clone_from_branch
   deployment_repo_existing_git_provider          = var.deployment_repo_existing_git_provider
   deployment_repo_existing_git_id                = var.deployment_repo_existing_git_id
