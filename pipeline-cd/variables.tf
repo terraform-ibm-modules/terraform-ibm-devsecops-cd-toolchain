@@ -84,9 +84,6 @@ variable "pipeline_config_repo" {
 }
 
 variable "pipeline_branch" {
-  type        = string
-  description = "The branch within pipeline definitions repository for Compliance CI Toolchain."
-  default     = "open-v9"
 }
 
 variable "pipeline_path" {
@@ -162,4 +159,10 @@ variable "slack_notifications" {
 }
 
 variable "pipeline_debug" {
+}
+
+variable "enable_artifactory" {
+}
+
+variable "tool_artifactory" {
 }

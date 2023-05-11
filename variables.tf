@@ -26,6 +26,11 @@ variable "enable_signing_validation" {
   description = "Enable for signing validation."
   default     = false
 }
+variable "enable_artifactory" {
+  type        = bool
+  default     = false
+  description = "Set true to enable artifacory for devsecops."
+}
 
 variable "ibmcloud_api" {
   type        = string
@@ -69,6 +74,11 @@ variable "cluster_region" {
   default     = "ibm:yp:us-south"
 }
 
+variable "deployment_source_repo_url" {
+  type        = string
+  description = "Url of deployment repo template"
+  default     = ""
+}
 variable "deployment_repo_url" {
   type        = string
   description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
@@ -251,6 +261,25 @@ variable "repositories_prefix" {
   description = "Prefix name for the cloned compliance repos."
   default     = "compliance"
 }
+variable "default_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Choose the default git provider for app repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.default_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
+  }
+}
+
+variable "change_management_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Choose the default git provider for change management repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.change_management_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
+  }
+}
 
 variable "deployment_repo_existing_git_provider" {
   type        = string
@@ -321,6 +350,12 @@ variable "pipeline_config_path" {
   default     = ".pipeline-config.yaml"
 }
 
+variable "pipeline_branch" {
+  type        = string
+  description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
+  default     = "open-v9"
+}
+
 variable "compliance_base_image" {
   type        = string
   description = "Pipeline baseimage to run most of the built-in pipeline code."
@@ -355,6 +390,55 @@ variable "doi_toolchain_id" {
   type        = string
   description = "DevOps Insights Toolchain ID to link to."
   default     = ""
+}
+
+variable "pipeline_config_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for pipeline repo config"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.pipeline_config_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline config repo."
+  }
+}
+variable "compliance_pipeline_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Choose the default git provider for change management repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
+  }
+}
+
+variable "inventory_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for inventory repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repo."
+  }
+}
+
+variable "issues_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for issue repo "
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repo."
+  }
+}
+
+variable "evidence_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for evidence repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
+  }
 }
 
 variable "pipeline_config_repo_auth_type" {
@@ -560,3 +644,39 @@ variable "pipeline_debug" {
   description = "Set to '1' to enable debug logging."
   default     = "0"
 }
+
+variable "artifactory_user" {
+  type        = string
+  description = "Type the User ID or email for your Artifactory repository."
+  default     = ""
+}
+
+variable "artifactory_dashboard_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL that you want to navigate to when you click the Artifactory integration tile."
+}
+
+variable "artifactory_repo_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL for your Artifactory release repository."
+}
+
+variable "artifactory_token_secret_name" {
+  type        = string
+  default     = "artifactory-token"
+  description = "Name of the artifactory token secret in the secret provider."
+}
+
+variable "artifactory_repo_name" {
+  type        = string
+  default     = "wcp-compliance-automation-team-docker-local"
+  description = "Type the name of your Artifactory repository where your docker images are located."
+}
+
+# variable "privateworker_credentials_secret_name" {
+#   type        = string
+#   default     = "private-worker-service-api"
+#   description = "Name of the privateworker secret in the secret provider."
+# }

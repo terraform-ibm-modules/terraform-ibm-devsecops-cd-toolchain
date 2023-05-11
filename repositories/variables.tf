@@ -51,11 +51,28 @@ variable "change_repo_clone_from_url" {
 variable "repositories_prefix" {
 }
 
+variable "default_git_provider" {
+}
+variable "change_management_repo_git_provider" {
+}
 variable "deployment_repo_existing_git_provider" {
+}
+
+variable "pipeline_config_repo_git_provider" {
+}
+variable "inventory_repo_git_provider" {
+}
+variable "evidence_repo_git_provider" {
+}
+variable "issues_repo_git_provider" {
+}
+variable "compliance_pipeline_repo_git_provider" {
 }
 variable "deployment_repo_existing_git_id" {
 }
 variable "deployment_repo_clone_to_git_provider" {
+}
+variable "deployment_source_repo_url" {
 }
 variable "deployment_repo_clone_to_git_id" {
 }

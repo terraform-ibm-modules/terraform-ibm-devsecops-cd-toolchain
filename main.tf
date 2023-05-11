@@ -16,13 +16,19 @@ module "repositories" {
   resource_group                                 = data.ibm_resource_group.resource_group.id
   ibmcloud_api_key                               = var.ibmcloud_api_key
   toolchain_region                               = var.toolchain_region
+  default_git_provider                           = var.default_git_provider
   deployment_repo_url                            = var.deployment_repo_url
   change_management_repo                         = var.change_management_repo
+  change_management_repo_git_provider            = var.change_management_repo_git_provider
+  evidence_repo_git_provider                     = var.evidence_repo_git_provider
   evidence_repo_url                              = var.evidence_repo_url
+  inventory_repo_git_provider                    = var.inventory_repo_git_provider
   inventory_repo_url                             = var.inventory_repo_url
+  issues_repo_git_provider                       = var.issues_repo_git_provider
   issues_repo_url                                = var.issues_repo_url
   change_repo_clone_from_url                     = var.change_repo_clone_from_url
   deployment_repo_clone_from_url                 = var.deployment_repo_clone_from_url
+  deployment_source_repo_url                     = var.deployment_source_repo_url
   deployment_repo_clone_from_branch              = var.deployment_repo_clone_from_branch
   deployment_repo_existing_git_provider          = var.deployment_repo_existing_git_provider
   deployment_repo_existing_git_id                = var.deployment_repo_existing_git_id
@@ -31,6 +37,7 @@ module "repositories" {
   deployment_repo_existing_url                   = var.deployment_repo_existing_url
   deployment_repo_existing_branch                = var.deployment_repo_existing_branch
   pipeline_config_repo_existing_url              = var.pipeline_config_repo_existing_url
+  pipeline_config_repo_git_provider              = var.pipeline_config_repo_git_provider
   pipeline_config_repo_branch                    = var.pipeline_config_repo_branch
   pipeline_config_repo_clone_from_url            = var.pipeline_config_repo_clone_from_url
   repositories_prefix                            = var.repositories_prefix
@@ -44,6 +51,7 @@ module "repositories" {
   inventory_repo_git_token_secret_name           = var.inventory_repo_git_token_secret_name
   deployment_repo_auth_type                      = var.deployment_repo_auth_type
   deployment_repo_git_token_secret_name          = var.deployment_repo_git_token_secret_name
+  compliance_pipeline_repo_git_provider          = var.compliance_pipeline_repo_git_provider
   compliance_pipeline_repo_auth_type             = var.compliance_pipeline_repo_auth_type
   compliance_pipeline_repo_git_token_secret_name = var.compliance_pipeline_repo_git_token_secret_name
   change_management_repo_auth_type               = var.change_management_repo_auth_type
@@ -80,6 +88,7 @@ module "pipeline_cd" {
   deployment_repo                       = module.repositories.deployment_repo
   deployment_repo_branch                = module.repositories.deployment_repo_branch
   pipeline_config_repo                  = module.repositories.pipeline_config_repo
+  pipeline_branch                       = var.pipeline_branch
   pipeline_config_path                  = var.pipeline_config_path
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
@@ -115,7 +124,8 @@ module "pipeline_cd" {
   pipeline_debug                        = var.pipeline_debug
   code_signing_cert_secret_name         = var.code_signing_cert_secret_name
   enable_signing_validation             = var.enable_signing_validation
-
+  tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
+  enable_artifactory                    = var.enable_artifactory
 }
 
 module "integrations" {
@@ -153,7 +163,13 @@ module "integrations" {
   doi_toolchain_id              = var.doi_toolchain_id
   #enable_private_worker              = var.enable_private_worker
   #private_worker_api_key_secret_name = var.private_worker_api_key_secret_name
-  secret_tool = module.integrations.secret_tool
+  enable_artifactory            = var.enable_artifactory
+  artifactory_repo_name         = var.artifactory_repo_name
+  artifactory_dashboard_url     = var.artifactory_dashboard_url
+  artifactory_user              = var.artifactory_user
+  artifactory_repo_url          = var.artifactory_repo_url
+  artifactory_token_secret_name = var.artifactory_token_secret_name
+  secret_tool                   = module.integrations.secret_tool
 }
 
 module "services" {
