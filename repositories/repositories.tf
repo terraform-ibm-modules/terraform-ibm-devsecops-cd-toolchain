@@ -90,13 +90,14 @@ resource "ibm_cd_toolchain_tool_hostedgit" "deployment_repo_clone_from_hostedgit
     type            = "clone_if_not_exists"
     source_repo_url = local.deployment_repo_clone_from
     private_repo    = true
-    repo_name       = join("-", [var.repositories_prefix, "config-repo"])
+    repo_name       = join("-", [var.repositories_prefix, "deployment-repo"])
     git_id          = local.deployment_repo_git_id
     owner_id        = var.deployment_group
   }
   parameters {
     toolchain_issues_enabled = false
     enable_traceability      = false
+    auth_type                = var.deployment_repo_auth_type
     api_token = ((var.deployment_repo_auth_type == "pat") ?
     format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", var.secret_tool) : "")
   }
