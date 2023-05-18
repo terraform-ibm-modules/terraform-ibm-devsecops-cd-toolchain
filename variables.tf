@@ -238,6 +238,12 @@ variable "kp_location" {
   default     = "us-south"
 }
 
+variable "region" {
+  type        = string
+  description = "IBM Cloud region used to prefix the `prod_latest` inventory repo branch."
+  default     = ""
+}
+
 variable "enable_key_protect" {
   type        = bool
   description = "Set to enable Key Protect Integration."

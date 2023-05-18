@@ -22,17 +22,5 @@ variable "enable_key_protect" {
 variable "enable_secrets_manager" {
 }
 
-variable "cluster_name" {
-}
-
-variable "cluster_namespace" {
-}
-
-variable "cluster_region" {
-}
-
-variable "region" {
-}
-
 variable "ibmcloud_api" {
 }

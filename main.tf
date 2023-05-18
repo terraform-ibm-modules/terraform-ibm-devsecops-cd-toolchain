@@ -78,7 +78,7 @@ module "pipeline_cd" {
   depends_on                            = [module.repositories, module.integrations, module.services]
   ibmcloud_api                          = var.ibmcloud_api
   ibmcloud_api_key                      = var.ibmcloud_api_key
-  region                                = var.toolchain_region
+  region                                = var.region
   pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group                        = var.toolchain_resource_group
   cluster_name                          = var.cluster_name
@@ -161,8 +161,6 @@ module "integrations" {
   authorization_policy_creation = var.authorization_policy_creation
   link_to_doi_toolchain         = var.link_to_doi_toolchain
   doi_toolchain_id              = var.doi_toolchain_id
-  #enable_private_worker              = var.enable_private_worker
-  #private_worker_api_key_secret_name = var.private_worker_api_key_secret_name
   enable_artifactory            = var.enable_artifactory
   artifactory_repo_name         = var.artifactory_repo_name
   artifactory_dashboard_url     = var.artifactory_dashboard_url
@@ -175,11 +173,7 @@ module "integrations" {
 module "services" {
   source = "./services"
 
-  region                 = var.toolchain_region
   ibmcloud_api           = var.ibmcloud_api
-  cluster_name           = var.cluster_name
-  cluster_namespace      = var.cluster_namespace
-  cluster_region         = var.cluster_region
   sm_name                = var.sm_name
   sm_location            = var.sm_location
   sm_resource_group      = var.sm_resource_group
