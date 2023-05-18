@@ -403,7 +403,7 @@ resource "ibm_cd_toolchain_tool_githubconsolidated" "evidence_repo" {
     enable_traceability = false
     auth_type           = var.evidence_repo_auth_type
     api_token = ((var.evidence_repo_auth_type == "pat") ?
-    format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", var.secret_tool) : "")
+    format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", var.secret_tool) : "")
     toolchain_issues_enabled = false
   }
 }
