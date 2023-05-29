@@ -108,11 +108,10 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
-  name        = "pipeline-debug"
-  enum        = ["0", "1"]
-  type        = "single_select"
-  value       = "0"
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+   name        = "pipeline-debug"
+   type        = "text"
+   value       = var.pipeline_debug
+   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 # resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_dockerconfigjson" {
