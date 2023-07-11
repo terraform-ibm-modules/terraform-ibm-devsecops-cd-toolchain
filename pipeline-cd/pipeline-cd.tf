@@ -20,34 +20,34 @@ resource "ibm_cd_tekton_pipeline_definition" "cd_pipeline_definition" {
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_manual_trigger" {
   pipeline_id         = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   type                = "manual"
-  name                = "Manual CD Trigger"
+  name                = var.trigger_manual_name
   event_listener      = "cd-listener"
-  enabled             = "true"
+  enabled             = var.trigger_manual_enable
   max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_promotion_trigger" {
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   type           = "manual"
-  name           = "Manual Promotion Trigger"
+  name           = var.trigger_manual_promotion_name
   event_listener = "promotion-listener"
-  enabled        = "true"
+  enabled        = var.trigger_manual_promotion_enable
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_timed_trigger" {
   pipeline_id         = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   type                = "timer"
-  name                = "Git CD Timed Trigger"
+  name                = var.trigger_timed_name
   event_listener      = "cd-listener"
-  enabled             = "false"
-  cron                = "0 4 * * *"
+  enabled             = var.trigger_timed_enable
+  cron                = var.trigger_timed_cron_schedule
   timezone            = "UTC"
   max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-  name           = "Git CD Trigger"
+  name           = var.trigger_git_name
   type           = "scm"
   event_listener = "cd-listener"
   events         = ["push"]
@@ -58,7 +58,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
       branch = "prod"
     }
   }
-  enabled             = "false"
+  enabled             = var.trigger_git_enable
   max_concurrent_runs = var.cd_pipeline_max_concurrent_runs
 }
 
