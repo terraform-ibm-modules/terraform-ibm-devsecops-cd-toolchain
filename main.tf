@@ -299,6 +299,7 @@ module "pipeline_cd" {
   trigger_manual_enable                 = var.trigger_manual_enable
   trigger_manual_promotion_name         = var.trigger_manual_promotion_name
   trigger_manual_promotion_enable       = var.trigger_manual_promotion_enable
+  enable_pipeline_notifications         = (var.event_notifications_crn != ""  || var.enable_slack) ? true : false
 }
 
 module "integrations" {
@@ -341,6 +342,11 @@ module "integrations" {
   artifactory_repo_url          = var.artifactory_repo_url
   artifactory_token_secret_name = var.artifactory_token_secret_name
   secret_tool                   = module.integrations.secret_tool
+  sm_integration_name           = var.sm_integration_name
+  kp_integration_name           = var.kp_integration_name
+  slack_integration_name        = var.slack_integration_name
+  event_notifications_tool_name = var.event_notifications_tool_name
+  event_notifications_crn       = var.event_notifications_crn
 }
 
 module "services" {

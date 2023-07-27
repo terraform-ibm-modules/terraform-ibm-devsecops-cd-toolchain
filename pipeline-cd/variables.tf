@@ -188,3 +188,16 @@ variable "trigger_manual_promotion_name" {
 }
 variable "trigger_manual_promotion_enable" {
 }
+
+variable "trigger_manual_pruner_name" {
+}
+variable "trigger_manual_pruner_enable" {
+}
+
+variable "trigger_timed_pruner_name" {
+}
+variable "trigger_timed_pruner_enable" {
+}
+
+variable "enable_pipeline_notifications" {
+}
