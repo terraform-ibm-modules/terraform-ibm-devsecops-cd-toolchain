@@ -299,6 +299,10 @@ module "pipeline_cd" {
   trigger_manual_enable                 = var.trigger_manual_enable
   trigger_manual_promotion_name         = var.trigger_manual_promotion_name
   trigger_manual_promotion_enable       = var.trigger_manual_promotion_enable
+  trigger_manual_pruner_name            = var.trigger_manual_pruner_name
+  trigger_manual_pruner_enable          = var.trigger_manual_pruner_enable
+  trigger_timed_pruner_name             = var.trigger_timed_pruner_name
+  trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
   enable_pipeline_notifications         = (var.event_notifications_crn != ""  || var.enable_slack) ? true : false
 }
 
