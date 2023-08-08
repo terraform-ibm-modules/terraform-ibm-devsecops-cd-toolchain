@@ -891,12 +891,6 @@ variable "merge_cra_sbom" {
   default     = "1"
 }
 
-variable "opt_out_v1_evidence" {
-  type        = string
-  description = "Opt out of evidence v1."
-  default     = "1"
-}
-
 variable "emergency_label" {
   type        = string
   description = "Identifies the pull request as an emergency."

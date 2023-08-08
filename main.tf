@@ -281,7 +281,6 @@ module "pipeline_cd" {
   source_environment                    = var.source_environment
   target_environment                    = var.target_environment
   merge_cra_sbom                        = var.merge_cra_sbom
-  opt_out_v1_evidence                   = var.opt_out_v1_evidence
   emergency_label                       = var.emergency_label
   app_version                           = var.app_version
   slack_notifications                   = var.slack_notifications
@@ -303,7 +302,7 @@ module "pipeline_cd" {
   trigger_manual_pruner_enable          = var.trigger_manual_pruner_enable
   trigger_timed_pruner_name             = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
-  enable_pipeline_notifications         = (var.event_notifications_crn != ""  || var.enable_slack) ? true : false
+  enable_pipeline_notifications         = (var.event_notifications_crn != "" || var.enable_slack) ? true : false
 }
 
 module "integrations" {

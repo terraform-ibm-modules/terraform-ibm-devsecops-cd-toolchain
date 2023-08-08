@@ -146,9 +146,6 @@ variable "target_environment" {
 variable "merge_cra_sbom" {
 }
 
-variable "opt_out_v1_evidence" {
-}
-
 variable "emergency_label" {
 }
 
