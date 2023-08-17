@@ -40,13 +40,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_merge-cra-sbom" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_opt-out-v1-evidence" {
-  name        = "opt-out-v1-evidence"
-  type        = "text"
-  value       = var.opt_out_v1_evidence
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_emergency_label" {
   name        = "emergency-label"
   type        = "text"
@@ -78,7 +71,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_branch" 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
   name        = "pipeline-config-repo"
   type        = "integration"
-  value       = try(var.pipeline_config_repo[0].tool_id, var.deployment_repo[0].tool_id)
+  value       = try(var.pipeline_config_repo.tool_id, var.deployment_repo.tool_id)
   path        = "parameters.repo_url"
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
@@ -159,6 +152,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
+  count       = (var.cos_bucket_name != "") ? 1 : 0
   name        = "cos-api-key"
   type        = "secure"
   value       = format("{vault::%s.${var.cos_api_key_secret_name}}", var.secret_tool)

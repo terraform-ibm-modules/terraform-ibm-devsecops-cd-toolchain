@@ -23,13 +23,8 @@ output "key_protect_instance_id" {
 }
 
 output "deployment_repo_url" {
-  value       = module.repositories.deployment_repo_url
+  value       = module.deployment_repo.repository_url
   description = "The deployment repo URL."
-}
-
-output "change_management_repo_url" {
-  value       = module.repositories.change_management_repo_url
-  description = "The change management repo URL."
 }
 
 output "cd_pipeline_id" {
@@ -37,10 +32,50 @@ output "cd_pipeline_id" {
   description = "The CD pipeline ID."
 }
 
+output "inventory_repo_url" {
+  value       = module.inventory_repo.repository_url
+  description = "The inventory repository instance URL, with details of which artifact has been built and will be deployed."
+}
+
+output "evidence_repo_url" {
+  value       = module.evidence_repo.repository_url
+  description = "The evidence repository instance URL, where evidence of the builds and scans are stored, ready for any compliance audit."
+}
+
+output "issues_repo_url" {
+  value       = module.issues_repo.repository_url
+  description = "The incident issues repository instance URL, where issues are created when vulnerabilities and CVEs are detected."
+}
+
+output "inventory_repo" {
+  value       = module.inventory_repo.repository
+  description = "The Inventory repo."
+  sensitive   = true
+}
+
+output "evidence_repo" {
+  value       = module.evidence_repo.repository
+  description = "The Evidence repo."
+  sensitive   = true
+}
+
+output "issues_repo" {
+  value       = module.issues_repo.repository
+  description = "The Issues repo."
+  sensitive   = true
+}
+
+output "change_management_repo_url" {
+  value       = module.change_management_repo.repository_url
+  description = "The change management repository instance URL."
+}
+
+
 output "pipeline_repo_url" {
-  value       = module.repositories.pipeline_repo_url
+  value       = module.compliance_pipelines_repo.repository_url
   description = "This repository URL contains the tekton definitions for compliance pipelines."
 }
+
 
 
 ##############################################################################

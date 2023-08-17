@@ -146,9 +146,6 @@ variable "target_environment" {
 variable "merge_cra_sbom" {
 }
 
-variable "opt_out_v1_evidence" {
-}
-
 variable "emergency_label" {
 }
 
@@ -165,4 +162,39 @@ variable "enable_artifactory" {
 }
 
 variable "tool_artifactory" {
+}
+
+variable "trigger_git_name" {
+}
+variable "trigger_git_enable" {
+}
+
+variable "trigger_timed_name" {
+}
+variable "trigger_timed_enable" {
+}
+variable "trigger_timed_cron_schedule" {
+}
+
+variable "trigger_manual_name" {
+}
+variable "trigger_manual_enable" {
+}
+
+variable "trigger_manual_promotion_name" {
+}
+variable "trigger_manual_promotion_enable" {
+}
+
+variable "trigger_manual_pruner_name" {
+}
+variable "trigger_manual_pruner_enable" {
+}
+
+variable "trigger_timed_pruner_name" {
+}
+variable "trigger_timed_pruner_enable" {
+}
+
+variable "enable_pipeline_notifications" {
 }
