@@ -144,13 +144,13 @@ module "inventory_repo" {
 module "change_management_repo" {
   source                = "./repos"
   depends_on            = [module.integrations]
-  tool_name             = "change_management-repo"
+  tool_name             = "change-management-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.change_management_repo_git_provider
   initilization_type    = var.change_management_repo_initilization_type
   repository_url        = ""
   source_repository_url = var.change_repo_clone_from_url
-  repository_name       = (var.change_management_repo_name != "") ? var.change_management_repo_name : join("-", [var.repositories_prefix, "change_management-repo"])
+  repository_name       = (var.change_management_repo_name != "") ? var.change_management_repo_name : join("-", [var.repositories_prefix, "change-repo"])
   is_private_repo       = var.change_management_repo_is_private_repo
   owner_id              = var.change_management_group
   issues_enabled        = var.change_management_repo_issues_enabled
@@ -217,7 +217,7 @@ module "deployment_repo" {
   initilization_type    = var.deployment_repo_initilization_type
   repository_url        = var.deployment_repo_existing_url
   source_repository_url = local.deployment_repo_clone_from
-  repository_name       = (var.deployment_repo_name != "") ? var.deployment_repo_name : join("-", [var.repositories_prefix, "deployment-repo"])
+  repository_name       = (var.deployment_repo_name != "") ? var.deployment_repo_name : join("-", [var.repositories_prefix, "deploy-repo"])
   is_private_repo       = var.deployment_repo_is_private_repo
   owner_id              = var.deployment_group
   issues_enabled        = var.deployment_repo_issues_enabled
