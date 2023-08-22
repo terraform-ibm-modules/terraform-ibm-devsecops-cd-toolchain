@@ -60,7 +60,7 @@ locals {
   )
   change_management_repo_source = (
     (length(var.change_repo_clone_from_url) > 0) ? var.change_repo_clone_from_url
-    : format("%s/open-toolchain/compliance-change_management.git", local.compliance_pipelines_git_server)
+    : format("%s/open-toolchain/compliance-change-management.git", local.compliance_pipelines_git_server)
   )
   compliance_repo_url = (var.compliance_pipeline_repo_url != "") ? var.compliance_pipeline_repo_url : format("%s/open-toolchain/compliance-pipelines.git", local.compliance_pipelines_git_server)
 }
