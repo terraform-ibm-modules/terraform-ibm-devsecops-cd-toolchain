@@ -149,7 +149,7 @@ module "change_management_repo" {
   git_provider          = var.change_management_repo_git_provider
   initilization_type    = var.change_management_repo_initilization_type
   repository_url        = ""
-  source_repository_url = var.change_repo_clone_from_url
+  source_repository_url = local.change_management_repo_source
   repository_name       = (var.change_management_repo_name != "") ? var.change_management_repo_name : join("-", [var.repositories_prefix, "change-repo"])
   is_private_repo       = var.change_management_repo_is_private_repo
   owner_id              = var.change_management_group
