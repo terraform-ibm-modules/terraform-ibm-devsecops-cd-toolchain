@@ -582,7 +582,7 @@ variable "compliance_pipeline_repo_url" {
 variable "change_management_repo_issues_enabled" {
   type        = bool
   description = "Set to `true` to enable issues."
-  default     = false
+  default     = true
 }
 
 variable "change_management_repo_git_id" {
