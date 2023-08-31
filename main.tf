@@ -173,7 +173,7 @@ module "pipeline_config_repo" {
   initilization_type    = var.pipeline_config_repo_initilization_type
   repository_url        = var.pipeline_config_repo_existing_url
   source_repository_url = var.pipeline_config_repo_clone_from_url
-  repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline_config-repo"])
+  repository_name       = (var.pipeline_config_repo_name != "") ? var.pipeline_config_repo_name : join("-", [var.repositories_prefix, "pipeline-config-repo"])
   is_private_repo       = var.pipeline_config_repo_is_private_repo
   owner_id              = var.pipeline_config_group
   issues_enabled        = var.pipeline_config_repo_issues_enabled
@@ -217,7 +217,7 @@ module "deployment_repo" {
   initilization_type    = var.deployment_repo_initilization_type
   repository_url        = var.deployment_repo_existing_url
   source_repository_url = local.deployment_repo_clone_from
-  repository_name       = (var.deployment_repo_name != "") ? var.deployment_repo_name : join("-", [var.repositories_prefix, "deploy-repo"])
+  repository_name       = (var.deployment_repo_name != "") ? var.deployment_repo_name : join("-", [var.repositories_prefix, "deployment-repo"])
   is_private_repo       = var.deployment_repo_is_private_repo
   owner_id              = var.deployment_group
   issues_enabled        = var.deployment_repo_issues_enabled
