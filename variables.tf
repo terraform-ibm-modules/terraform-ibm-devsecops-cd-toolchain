@@ -576,7 +576,7 @@ variable "compliance_pipeline_repo_issues_enabled" {
 variable "compliance_pipeline_repo_url" {
   type        = string
   default     = ""
-  description = "Url of pipeline repo template to be cloned"
+  description = "URL of pipeline repo template to be cloned."
 }
 
 variable "change_management_repo_issues_enabled" {
@@ -1006,7 +1006,7 @@ variable "trigger_timed_enable" {
 }
 variable "trigger_timed_cron_schedule" {
   type        = string
-  description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
+  description = "Only needed for timed triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
   default     = "0 4 * * *"
 }
 
