@@ -29,13 +29,10 @@ variable "worker_id" {
   description = "The Private Worker Id or public"
 }
 
-variable "pipeline_ibmcloud_api_key_secret_name" {
+variable "pipeline_ibmcloud_api_key_secret_ref" {
 }
 
-variable "code_signing_cert_secret_name" {
-}
-
-variable "enable_signing_validation" {
+variable "code_signing_cert" {
 }
 
 variable "deployment_repo" {
@@ -104,7 +101,7 @@ variable "ibmcloud_api" {
   default     = "https://cloud.ibm.com"
 }
 
-variable "cos_api_key_secret_name" {
+variable "cos_api_key_secret_ref" {
 }
 
 variable "cos_bucket_name" {

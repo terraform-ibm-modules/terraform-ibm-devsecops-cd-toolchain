@@ -64,7 +64,7 @@ resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
   toolchain_id = var.toolchain_id
   name         = local.slack_integration_name
   parameters {
-    webhook          = format("{vault::%s.${var.slack_webhook_secret_name}}", var.secret_tool)
+    webhook          = var.slack_webhook_secret_ref
     channel_name     = var.slack_channel_name
     team_name        = var.slack_team_name
     pipeline_fail    = var.slack_pipeline_fail
@@ -80,7 +80,7 @@ resource "ibm_cd_toolchain_tool_privateworker" "cd_toolchain_tool_private_worker
   toolchain_id = var.toolchain_id
   parameters {
     name                     = local.private_worker_name
-    worker_queue_credentials = format("{vault::%s.${var.private_worker_api_key_secret_name}}", var.secret_tool)
+    worker_queue_credentials = var.privateworker_credentials_secret_ref
   }
 }
 
@@ -133,7 +133,7 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
     dashboard_url   = var.artifactory_dashboard_url
     type            = "docker"
     user_id         = var.artifactory_user
-    token           = format("{vault::%s.${var.artifactory_token_secret_name}}", var.secret_tool)
+    token           = var.artifactory_token_secret_ref
     repository_name = var.artifactory_repo_name
     repository_url  = var.artifactory_repo_url
   }
@@ -156,7 +156,7 @@ output "ibm_cd_toolchain_tool_artifactory" {
 
 
 output "secret_tool" {
-  value = (var.enable_key_protect) ? local.kp_integration_name : format("%s.%s", local.sm_integration_name, var.sm_secret_group)
+  value = (var.enable_key_protect) ? local.kp_integration_name : local.sm_integration_name
   # Before returning this tool integration name
   # used to construct {vault:: secret references,
   # the authorization_policy must have been successfully created,

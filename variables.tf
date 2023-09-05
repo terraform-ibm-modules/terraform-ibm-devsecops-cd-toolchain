@@ -15,17 +15,12 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
-variable "code_signing_cert_secret_name" {
+variable "code_signing_cert" {
   type        = string
-  description = "Name of the code signing certificate secret in the secret provider."
-  default     = "code-signing-cert"
+  description = "The base64 encoded GPG public key."
+  default     = ""
 }
 
-variable "enable_signing_validation" {
-  type        = bool
-  description = "Enable for signing validation."
-  default     = false
-}
 variable "enable_artifactory" {
   type        = bool
   default     = false
@@ -159,12 +154,6 @@ variable "slack_toolchain_unbind" {
   description = "Generate tool removed from toolchain notifications."
   default     = true
 }
-
-#variable "enable_private_worker" {
-#  type        = bool
-#  description = "Create a private worker integration"
-#  default     = false
-#}
 
 variable "scc_integration_name" {
   type        = string
@@ -759,12 +748,6 @@ variable "change_management_repo_auth_type" {
   default     = "oauth"
 }
 
-#variable "private_worker_api_key_secret_name" {
-#  type        = string
-#  description = "Name of Private Worker service api key in the secret provider"
-#  default     = "private-worker"
-#}
-
 variable "pipeline_config_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -805,6 +788,12 @@ variable "change_management_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = "git-token"
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = "private-worker-service-api"
+  description = "Name of the privateworker secret in the secret provider."
 }
 
 variable "issues_group" {
@@ -945,12 +934,6 @@ variable "artifactory_repo_name" {
   description = "Type the name of your Artifactory repository where your docker images are located."
 }
 
-# variable "privateworker_credentials_secret_name" {
-#   type        = string
-#   default     = "private-worker-service-api"
-#   description = "Name of the privateworker secret in the secret provider."
-# }
-
 variable "sm_integration_name" {
   type        = string
   description = "The name of the Secrets Manager integration."
@@ -967,6 +950,78 @@ variable "slack_integration_name" {
   type        = string
   description = "The name of the Slack integration."
   default     = "slack-compliance"
+}
+
+variable "slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "change_management_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "deployment_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "issues_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "artifactory_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Artifactory token secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used for `Secrets Manager`."
+  default     = ""
 }
 
 ####### Event Notifications #################
