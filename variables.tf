@@ -451,7 +451,7 @@ variable "inventory_repo_is_private_repo" {
   default     = true
 }
 
-variable "inventory_repo_initilization_type" {
+variable "inventory_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
@@ -497,7 +497,7 @@ variable "issues_repo_is_private_repo" {
   default     = true
 }
 
-variable "issues_repo_initilization_type" {
+variable "issues_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
@@ -543,7 +543,7 @@ variable "evidence_repo_is_private_repo" {
   default     = true
 }
 
-variable "evidence_repo_initilization_type" {
+variable "evidence_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
@@ -603,7 +603,7 @@ variable "change_management_repo_is_private_repo" {
   default     = true
 }
 
-variable "change_management_repo_initilization_type" {
+variable "change_management_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
@@ -645,7 +645,7 @@ variable "pipeline_config_repo_is_private_repo" {
   default     = true
 }
 
-variable "pipeline_config_repo_initilization_type" {
+variable "pipeline_config_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
@@ -729,7 +729,7 @@ variable "deployment_repo_is_private_repo" {
   default     = true
 }
 
-variable "deployment_repo_initilization_type" {
+variable "deployment_repo_initialization_type" {
   type        = string
   description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
   default     = ""
