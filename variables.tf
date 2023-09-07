@@ -1024,6 +1024,12 @@ variable "pipeline_ibmcloud_api_key_secret_group" {
   default     = ""
 }
 
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `1` to enable peer review."
+  default     = ""
+}
+
 ####### Event Notifications #################
 variable "event_notifications_tool_name" {
   type        = string

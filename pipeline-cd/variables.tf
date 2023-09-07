@@ -158,6 +158,9 @@ variable "pipeline_debug" {
 variable "enable_artifactory" {
 }
 
+variable "peer_review_compliance" {
+}
+
 variable "tool_artifactory" {
 }
 

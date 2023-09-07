@@ -238,6 +238,14 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = var.peer_review_compliance
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
 resource "ibm_cd_tekton_pipeline_property" "cd_artifactory-dockerconfigjson" {
   name        = "artifactory-dockerconfigjson"
   count       = var.enable_artifactory ? 1 : 0
