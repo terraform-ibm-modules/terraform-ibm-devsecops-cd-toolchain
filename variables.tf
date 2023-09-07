@@ -74,17 +74,6 @@ variable "deployment_source_repo_url" {
   description = "Url of deployment repo template"
   default     = ""
 }
-variable "deployment_repo_url" {
-  type        = string
-  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-  default     = ""
-}
-
-variable "change_management_repo" {
-  type        = string
-  description = "This repository holds the change management requests created for the deployments."
-  default     = ""
-}
 
 variable "inventory_repo_url" {
   type        = string
