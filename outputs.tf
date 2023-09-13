@@ -76,6 +76,9 @@ output "pipeline_repo_url" {
   description = "This repository URL contains the tekton definitions for compliance pipelines."
 }
 
-
+output "toolchain_url" {
+  value       = ibm_cd_toolchain.toolchain_instance.ui_href
+  description = "The CD toolchain URL."
+}
 
 ##############################################################################

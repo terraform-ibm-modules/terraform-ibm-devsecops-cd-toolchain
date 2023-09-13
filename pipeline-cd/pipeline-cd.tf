@@ -165,7 +165,3 @@ resource "ibm_cd_tekton_pipeline_trigger_property" "cd_pipeline_timed_pruner_tri
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   trigger_id  = ibm_cd_tekton_pipeline_trigger.cd_pipeline_timed_pruner_trigger.trigger_id
 }
-
-output "pipeline_id" {
-  value = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
