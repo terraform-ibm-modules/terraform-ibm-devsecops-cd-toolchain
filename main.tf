@@ -111,6 +111,12 @@ locals {
     (var.scc_scc_api_key_secret_group == "") ? format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
+
+  pipeline_git_token_secret_ref = (
+    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
+  )
 }
 
 data "ibm_resource_group" "resource_group" {
@@ -313,6 +319,7 @@ module "pipeline_cd" {
   doi_toolchain_id                     = var.doi_toolchain_id
   doi_environment                      = var.doi_environment
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
+  pipeline_git_token_secret_ref        = local.pipeline_git_token_secret_ref
   worker_id                            = module.integrations.worker_id
   target_environment_detail            = var.target_environment_detail
   customer_impact                      = var.customer_impact
@@ -329,6 +336,7 @@ module "pipeline_cd" {
   code_signing_cert                    = var.code_signing_cert
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
+  enable_pipeline_git_token            = var.enable_pipeline_git_token
   peer_review_compliance               = var.peer_review_compliance
   trigger_git_name                     = var.trigger_git_name
   trigger_git_enable                   = var.trigger_git_enable
@@ -369,7 +377,7 @@ module "integrations" {
   scc_instance_crn                     = var.scc_instance_crn
   scc_profile_name                     = var.scc_profile_name
   scc_profile_version                  = var.scc_profile_version
-  scc_scc_api_key_secret_ref               = local.scc_scc_api_key_secret_ref
+  scc_scc_api_key_secret_ref           = local.scc_scc_api_key_secret_ref
   scc_use_profile_attachment           = var.scc_use_profile_attachment
   sm_name                              = var.sm_name
   sm_location                          = var.sm_location

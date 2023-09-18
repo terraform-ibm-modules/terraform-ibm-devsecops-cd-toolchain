@@ -174,9 +174,10 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_git_token_environment" {
+  count       = (var.enable_pipeline_git_token) ? 1 : 0
   name        = "git-token"
   type        = "secure"
-  value       = ""
+  value       = var.pipeline_git_token_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

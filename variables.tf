@@ -27,6 +27,12 @@ variable "enable_artifactory" {
   description = "Set true to enable artifacory for devsecops."
 }
 
+variable "enable_pipeline_git_token" {
+  type        = bool
+  description = "Enable to add `git-token` to the pipeline properties."
+  default     = false
+}
+
 variable "ibmcloud_api" {
   type        = string
   description = "IBM Cloud API Endpoint."
@@ -196,6 +202,12 @@ variable "cos_api_key_secret_name" {
   type        = string
   description = "Name of the IBM Cloud Storage api-key secret in the secret provider."
   default     = "cos-api-key"
+}
+
+variable "pipeline_git_token_secret_name" {
+  type        = string
+  description = "Name of the pipeline Git token secret in the secret provider."
+  default     = "pipeline-git-token"
 }
 
 variable "cos_endpoint" {
@@ -1052,6 +1064,12 @@ variable "cos_api_key_secret_group" {
 variable "pipeline_ibmcloud_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_git_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
