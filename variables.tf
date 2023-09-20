@@ -21,6 +21,13 @@ variable "code_signing_cert" {
   default     = ""
 }
 
+#USE `code_signing_cert`instead
+variable "enable_signing_validation" {
+  type        = bool
+  description = "Enable for signing validation."
+  default     = false
+}
+
 variable "enable_artifactory" {
   type        = bool
   default     = false
@@ -795,6 +802,12 @@ variable "inventory_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = "git-token"
+}
+
+variable "code_signing_cert_secret_name" {
+  type        = string
+  description = "Use `code_signing_cert` instead as aligns more with DevSecOps docs. Public signing key does not need to be stored in a secrets provider.( Name of the public signing key secret in the secret provider)."
+  default     = "code-signing-cert"
 }
 
 variable "issues_repo_git_token_secret_name" {

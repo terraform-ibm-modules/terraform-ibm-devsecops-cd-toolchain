@@ -41,81 +41,86 @@ locals {
 
   #SECRETS
 
-  deployment_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  deployment_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.deployment_repo_secret_group == "") ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.deployment_repo_secret_group))
   )
 
-  change_management_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  change_management_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", module.integrations.secret_tool)  :
     (var.change_management_repo_secret_group == "") ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.change_management_repo_secret_group))
   )
 
-  issues_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  issues_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.issues_repo_secret_group == "") ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.issues_repo_secret_group))
   )
 
-  evidence_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  evidence_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.evidence_repo_secret_group == "") ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.evidence_repo_secret_group))
   )
 
-  inventory_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  inventory_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.inventory_repo_secret_group == "") ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.inventory_repo_secret_group))
   )
 
-  compliance_pipeline_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  compliance_pipeline_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.compliance_pipeline_repo_secret_group == "") ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.compliance_pipeline_repo_secret_group))
   )
 
-  pipeline_config_repo_secret_ref = ((var.enable_key_protect) ? module.integrations.secret_tool :
+  pipeline_config_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_config_repo_secret_group == "") ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_config_repo_secret_group))
   )
 
   cos_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.cos_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.cos_api_key_secret_group == "") ? format("{vault::%s.${var.cos_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.cos_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.cos_api_key_secret_group))
   )
 
   pipeline_apikey_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_ibmcloud_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_ibmcloud_api_key_secret_group))
   )
 
   slack_webhook_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.slack_webhook_secret_name}}", module.integrations.secret_tool) :
     (var.slack_webhook_secret_group == "") ? format("{vault::%s.${var.slack_webhook_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.slack_webhook_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.slack_webhook_secret_group))
   )
 
   privateworker_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", module.integrations.secret_tool) :
     (var.privateworker_credentials_secret_group == "") ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.privateworker_credentials_secret_group))
   )
 
   artifactory_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.artifactory_token_secret_name}}", module.integrations.secret_tool) :
     (var.artifactory_token_secret_group == "") ? format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.artifactory_token_secret_group))
   )
 
   scc_scc_api_key_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.scc_scc_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.scc_scc_api_key_secret_group == "") ? format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 
   pipeline_git_token_secret_ref = (
-    (var.enable_key_protect) ? module.integrations.secret_tool :
+    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
+  )
+
+  code_signing_cert_secret_ref = (
+    (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
+    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group))
   )
 }
 
@@ -320,6 +325,7 @@ module "pipeline_cd" {
   doi_environment                      = var.doi_environment
   pipeline_ibmcloud_api_key_secret_ref = local.pipeline_apikey_secret_ref
   pipeline_git_token_secret_ref        = local.pipeline_git_token_secret_ref
+  code_signing_cert_secret_ref         = local.code_signing_cert_secret_ref
   worker_id                            = module.integrations.worker_id
   target_environment_detail            = var.target_environment_detail
   customer_impact                      = var.customer_impact
@@ -334,6 +340,7 @@ module "pipeline_cd" {
   slack_notifications                  = var.slack_notifications
   pipeline_debug                       = var.pipeline_debug
   code_signing_cert                    = var.code_signing_cert
+  enable_signing_validation            = var.enable_signing_validation
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token
