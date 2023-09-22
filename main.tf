@@ -46,7 +46,7 @@ locals {
     format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.deployment_repo_secret_group))
   )
 
-  change_management_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", module.integrations.secret_tool)  :
+  change_management_repo_secret_ref = ((var.enable_key_protect) ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.change_management_repo_secret_group == "") ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.change_management_repo_secret_group))
   )
