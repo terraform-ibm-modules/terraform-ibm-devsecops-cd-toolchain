@@ -59,7 +59,7 @@ variable "secrets_manager_service_auth" {
 variable "enable_slack" {
 }
 
-variable "slack_webhook_secret_name" {
+variable "slack_webhook_secret_ref" {
 }
 
 variable "slack_channel_name" {
@@ -99,6 +99,24 @@ variable "scc_enable_scc" {
 variable "scc_integration_name" {
 }
 
+variable "scc_attachment_id" {
+}
+
+variable "scc_instance_crn" {
+}
+
+variable "scc_profile_name" {
+}
+
+variable "scc_profile_version" {
+}
+
+variable "scc_scc_api_key_secret_ref" {
+}
+
+variable "scc_use_profile_attachment" {
+}
+
 variable "ibmcloud_api_key" {
 }
 
@@ -107,10 +125,7 @@ variable "secret_tool" {
   description = "Used as part of secret references to point to the secret store tool integration"
 }
 
-variable "private_worker_api_key_secret_name" {
-  type        = string
-  description = "Name of Private Worker service api key in the secret provider"
-  default     = "private-worker"
+variable "privateworker_credentials_secret_ref" {
 }
 
 variable "authorization_policy_creation" {
@@ -138,7 +153,7 @@ variable "artifactory_repo_name" {
 }
 variable "artifactory_repo_url" {
 }
-variable "artifactory_token_secret_name" {
+variable "artifactory_token_secret_ref" {
 }
 
 variable "sm_integration_name" {

@@ -64,7 +64,7 @@ resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
   toolchain_id = var.toolchain_id
   name         = local.slack_integration_name
   parameters {
-    webhook          = format("{vault::%s.${var.slack_webhook_secret_name}}", var.secret_tool)
+    webhook          = var.slack_webhook_secret_ref
     channel_name     = var.slack_channel_name
     team_name        = var.slack_team_name
     pipeline_fail    = var.slack_pipeline_fail
@@ -80,7 +80,7 @@ resource "ibm_cd_toolchain_tool_privateworker" "cd_toolchain_tool_private_worker
   toolchain_id = var.toolchain_id
   parameters {
     name                     = local.private_worker_name
-    worker_queue_credentials = format("{vault::%s.${var.private_worker_api_key_secret_name}}", var.secret_tool)
+    worker_queue_credentials = var.privateworker_credentials_secret_ref
   }
 }
 
@@ -120,9 +120,15 @@ resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
   count        = (var.scc_enable_scc) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
-    name               = var.scc_integration_name
-    evidence_namespace = "cd"
-    evidence_repo_url  = var.scc_evidence_repo
+    name                   = var.scc_integration_name
+    evidence_namespace     = "cd"
+    evidence_repo_url      = var.scc_evidence_repo
+    attachment_id          = var.scc_attachment_id
+    instance_crn           = var.scc_instance_crn
+    profile_name           = var.scc_profile_name
+    profile_version        = var.scc_profile_version
+    scc_api_key            = (var.scc_use_profile_attachment == "enabled") ? var.scc_scc_api_key_secret_ref : ""
+    use_profile_attachment = var.scc_use_profile_attachment
   }
 }
 
@@ -133,7 +139,7 @@ resource "ibm_cd_toolchain_tool_artifactory" "cd_toolchain_tool_artifactory_inst
     dashboard_url   = var.artifactory_dashboard_url
     type            = "docker"
     user_id         = var.artifactory_user
-    token           = format("{vault::%s.${var.artifactory_token_secret_name}}", var.secret_tool)
+    token           = var.artifactory_token_secret_ref
     repository_name = var.artifactory_repo_name
     repository_url  = var.artifactory_repo_url
   }
@@ -148,31 +154,4 @@ resource "ibm_cd_toolchain_tool_eventnotifications" "cd_toolchain_tool_eventnoti
     instance_crn = var.event_notifications_crn
   }
   toolchain_id = var.toolchain_id
-}
-
-output "ibm_cd_toolchain_tool_artifactory" {
-  value = (var.enable_artifactory) ? ibm_cd_toolchain_tool_artifactory.cd_toolchain_tool_artifactory_instance[0].tool_id : null
-}
-
-
-output "secret_tool" {
-  value = (var.enable_key_protect) ? local.kp_integration_name : format("%s.%s", local.sm_integration_name, var.sm_secret_group)
-  # Before returning this tool integration name
-  # used to construct {vault:: secret references,
-  # the authorization_policy must have been successfully created,
-  # and the tool integration must have been created,
-  # otherwise the secret references would not resolve and
-  # other tools using secret references could give errors during tool integration creation
-  depends_on = [
-    ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy,
-    ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy,
-    ibm_cd_toolchain_tool_secretsmanager.secretsmanager,
-    ibm_cd_toolchain_tool_keyprotect.keyprotect
-  ]
-  description = "Used as part of secret references to point to the secret store tool integration"
-}
-
-output "worker_id" {
-  value = ((var.enable_private_worker) ?
-  ibm_cd_toolchain_tool_privateworker.cd_toolchain_tool_private_worker[0].tool_id : "public")
 }

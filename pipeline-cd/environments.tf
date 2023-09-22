@@ -124,7 +124,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
   name        = "ibmcloud-api-key"
   type        = "secure"
-  value       = format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", var.secret_tool)
+  value       = var.pipeline_ibmcloud_api_key_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
@@ -155,7 +155,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_api_key" {
   count       = (var.cos_bucket_name != "") ? 1 : 0
   name        = "cos-api-key"
   type        = "secure"
-  value       = format("{vault::%s.${var.cos_api_key_secret_name}}", var.secret_tool)
+  value       = var.cos_api_key_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
@@ -174,9 +174,10 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_git_token_environment" {
+  count       = (var.enable_pipeline_git_token) ? 1 : 0
   name        = "git-token"
   type        = "secure"
-  value       = ""
+  value       = var.pipeline_git_token_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
@@ -230,11 +231,28 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_customer_impact" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_dockerjson_config" {
-  count       = (var.enable_signing_validation) ? 1 : 0
+#Legacy use. Use `code_signing_cert` for setting public signing key validation
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation_alt" {
+  count       = (var.enable_signing_validation && var.code_signing_cert != "") ? 1 : 0
   name        = "code-signing-certificate"
   type        = "secure"
-  value       = format("{vault::%s.${var.code_signing_cert_secret_name}}", var.secret_tool)
+  value       = var.code_signing_cert_secret_ref
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation" {
+  count       = (var.code_signing_cert != "") ? 1 : 0
+  name        = "code-signing-certificate"
+  type        = "text"
+  value       = var.code_signing_cert
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = var.peer_review_compliance
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

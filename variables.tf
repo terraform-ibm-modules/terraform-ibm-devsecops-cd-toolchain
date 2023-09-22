@@ -15,21 +15,29 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
-variable "code_signing_cert_secret_name" {
+variable "code_signing_cert" {
   type        = string
-  description = "Name of the code signing certificate secret in the secret provider."
-  default     = "code-signing-cert"
+  description = "The base64 encoded GPG public key."
+  default     = ""
 }
 
+#USE `code_signing_cert`instead
 variable "enable_signing_validation" {
   type        = bool
   description = "Enable for signing validation."
   default     = false
 }
+
 variable "enable_artifactory" {
   type        = bool
   default     = false
   description = "Set true to enable artifacory for devsecops."
+}
+
+variable "enable_pipeline_git_token" {
+  type        = bool
+  description = "Enable to add `git-token` to the pipeline properties."
+  default     = false
 }
 
 variable "ibmcloud_api" {
@@ -77,17 +85,6 @@ variable "cluster_region" {
 variable "deployment_source_repo_url" {
   type        = string
   description = "Url of deployment repo template"
-  default     = ""
-}
-variable "deployment_repo_url" {
-  type        = string
-  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-  default     = ""
-}
-
-variable "change_management_repo" {
-  type        = string
-  description = "This repository holds the change management requests created for the deployments."
   default     = ""
 }
 
@@ -160,12 +157,6 @@ variable "slack_toolchain_unbind" {
   default     = true
 }
 
-#variable "enable_private_worker" {
-#  type        = bool
-#  description = "Create a private worker integration"
-#  default     = false
-#}
-
 variable "scc_integration_name" {
   type        = string
   description = "The name of the SCC integration name."
@@ -178,10 +169,52 @@ variable "scc_enable_scc" {
   default     = true
 }
 
+variable "scc_attachment_id" {
+  type        = string
+  description = "An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_instance_crn" {
+  type        = string
+  description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression."
+  default     = ""
+}
+
+variable "scc_profile_name" {
+  type        = string
+  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_profile_version" {
+  type        = string
+  description = "The version of a Security and Compliance Center profile, in SemVer format, like `0.0.0`. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_use_profile_attachment" {
+  type        = string
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  default     = "disabled"
+}
+
+variable "scc_scc_api_key_secret_name" {
+  type        = string
+  description = "The Security and Compliance Center api-key secret in the secret provider."
+  default     = "scc-api-key"
+}
+
 variable "cos_api_key_secret_name" {
   type        = string
   description = "Name of the IBM Cloud Storage api-key secret in the secret provider."
   default     = "cos-api-key"
+}
+
+variable "pipeline_git_token_secret_name" {
+  type        = string
+  description = "Name of the pipeline Git token secret in the secret provider."
+  default     = "pipeline-git-token"
 }
 
 variable "cos_endpoint" {
@@ -759,12 +792,6 @@ variable "change_management_repo_auth_type" {
   default     = "oauth"
 }
 
-#variable "private_worker_api_key_secret_name" {
-#  type        = string
-#  description = "Name of Private Worker service api key in the secret provider"
-#  default     = "private-worker"
-#}
-
 variable "pipeline_config_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -775,6 +802,12 @@ variable "inventory_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = "git-token"
+}
+
+variable "code_signing_cert_secret_name" {
+  type        = string
+  description = "Use `code_signing_cert` instead as aligns more with DevSecOps docs. Public signing key does not need to be stored in a secrets provider.( Name of the public signing key secret in the secret provider)."
+  default     = "code-signing-cert"
 }
 
 variable "issues_repo_git_token_secret_name" {
@@ -805,6 +838,12 @@ variable "change_management_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = "git-token"
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = "private-worker-service-api"
+  description = "Name of the privateworker secret in the secret provider."
 }
 
 variable "issues_group" {
@@ -945,12 +984,6 @@ variable "artifactory_repo_name" {
   description = "Type the name of your Artifactory repository where your docker images are located."
 }
 
-# variable "privateworker_credentials_secret_name" {
-#   type        = string
-#   default     = "private-worker-service-api"
-#   description = "Name of the privateworker secret in the secret provider."
-# }
-
 variable "sm_integration_name" {
   type        = string
   description = "The name of the Secrets Manager integration."
@@ -967,6 +1000,96 @@ variable "slack_integration_name" {
   type        = string
   description = "The name of the Slack integration."
   default     = "slack-compliance"
+}
+
+variable "slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "change_management_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "deployment_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "issues_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "scc_scc_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Security and Compliance tool secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "artifactory_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Artifactory token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_git_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `1` to enable peer review."
+  default     = ""
 }
 
 ####### Event Notifications #################
