@@ -32,6 +32,12 @@ variable "worker_id" {
 variable "pipeline_ibmcloud_api_key_secret_ref" {
 }
 
+variable "pipeline_doi_api_key_secret_ref" {
+}
+
+variable "link_to_doi_toolchain" {
+}
+
 variable "pipeline_git_token_secret_ref" {
 }
 
