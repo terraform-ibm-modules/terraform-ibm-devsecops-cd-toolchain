@@ -165,3 +165,20 @@ resource "ibm_cd_tekton_pipeline_trigger_property" "cd_pipeline_timed_pruner_tri
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   trigger_id  = ibm_cd_tekton_pipeline_trigger.cd_pipeline_timed_pruner_trigger.trigger_id
 }
+
+# git promotion validation listener
+resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_git_promotion_validation" {
+  pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+  type           = "scm"
+  name           = "git promotion validation listener"
+  event_listener = var.trigger_git_promotion_listener
+  enabled        = var.trigger_git_promotion_enable
+  source {
+    type = "git"
+    properties {
+      url    = var.inventory_repo_url
+      branch = var.trigger_git_promotion_branch
+    }
+  }
+  events = ["pull_request"]
+}

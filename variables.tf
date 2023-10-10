@@ -1189,3 +1189,21 @@ variable "trigger_timed_pruner_enable" {
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
+
+variable "trigger_git_promotion_enable" {
+  type        = bool
+  description = "Enable Git promotion for Git promotion listener."
+  default     = false
+}
+
+variable "trigger_git_promotion_listener" {
+  type        = string
+  description = "Select a Tekton EventListener to use when Git promotion listener trigger is fired."
+  default     = "promotion-validation-listener-gitlab"
+}
+
+variable "trigger_git_promotion_branch" {
+  type        = string
+  description = "Branch for Git promotion listener."
+  default     = "prod"
+}
