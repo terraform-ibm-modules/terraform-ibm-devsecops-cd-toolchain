@@ -66,7 +66,7 @@ output "issues_repo" {
 }
 
 output "change_management_repo_url" {
-  value       = module.change_management_repo.repository_url
+  value       = try(module.change_management_repo[0].repository_url, "")
   description = "The change management repository instance URL."
 }
 

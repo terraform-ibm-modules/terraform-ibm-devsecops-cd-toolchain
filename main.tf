@@ -204,6 +204,7 @@ module "inventory_repo" {
 }
 
 module "change_management_repo" {
+  count                 = (var.enable_change_management_repo) ? 1 : 0
   source                = "./repos"
   depends_on            = [module.integrations]
   tool_name             = "change-management-repo"
@@ -306,7 +307,7 @@ module "pipeline_cd" {
   cluster_name                         = var.cluster_name
   cluster_namespace                    = var.cluster_namespace
   cluster_region                       = var.cluster_region
-  change_management_repo               = module.change_management_repo.repository_url
+  change_management_repo               = try(module.change_management_repo[0].repository_url, "")
   deployment_repo                      = module.deployment_repo.repository
   deployment_repo_branch               = local.deployment_repo_branch
   pipeline_config_repo                 = try(module.pipeline_config_repo[0].repository, "")

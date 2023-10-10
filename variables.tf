@@ -660,6 +660,12 @@ variable "change_management_repo_integration_owner" {
   default     = ""
 }
 
+variable "enable_change_management_repo" {
+  type        = string
+  description = "Set to `true` to enable the Change Management Repo integration."
+  default     = true
+}
+
 variable "pipeline_config_repo_issues_enabled" {
   type        = bool
   description = "Set to `true` to enable issues."
