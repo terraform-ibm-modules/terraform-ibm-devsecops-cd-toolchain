@@ -371,6 +371,28 @@ module "pipeline_cd" {
   trigger_git_promotion_listener       = var.trigger_git_promotion_listener
   trigger_git_promotion_enable         = var.trigger_git_promotion_enable
   trigger_git_promotion_branch         = var.trigger_git_promotion_branch
+  deployment_target                    = var.deployment_target
+  code_engine_project                  = var.code_engine_project
+  code_engine_region                   = var.code_engine_region
+  code_engine_resource_group           = var.code_engine_resource_group
+  code_engine_binding_resource_group   = var.code_engine_binding_resource_group
+  code_engine_deployment_type          = var.code_engine_deployment_type
+  code_engine_cpu                      = var.code_engine_cpu
+  code_engine_memory                   = var.code_engine_memory
+  code_engine_ephemeral_storage        = var.code_engine_ephemeral_storage
+  code_engine_job_maxexecutiontime     = var.code_engine_job_maxexecutiontime
+  code_engine_job_retrylimit           = var.code_engine_job_retrylimit
+  code_engine_job_instances            = var.code_engine_job_instances
+  code_engine_app_port                 = var.code_engine_app_port
+  code_engine_app_min_scale            = var.code_engine_app_min_scale
+  code_engine_app_max_scale            = var.code_engine_app_max_scale
+  code_engine_app_deployment_timeout   = var.code_engine_app_deployment_timeout
+  code_engine_app_concurrency          = var.code_engine_app_concurrency
+  code_engine_app_visibility           = var.code_engine_app_visibility
+  code_engine_env_from_configmaps      = var.code_engine_env_from_configmaps
+  code_engine_env_from_secrets         = var.code_engine_env_from_secrets
+  code_engine_remove_refs              = var.code_engine_remove_refs
+  code_engine_service_bindings         = var.code_engine_service_bindings
 }
 
 module "integrations" {
