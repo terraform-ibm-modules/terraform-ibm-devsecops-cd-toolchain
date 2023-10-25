@@ -13,6 +13,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "satellite-cluster-group"
   type        = "text"
   value       = var.satellite_cluster_group
@@ -131,6 +132,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
 // Limitation with issues repository url: How to fetch issues repository url
 // as it is created internally while creating application repository resource
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster"
   type        = "text"
   value       = var.cluster_name
@@ -138,6 +140,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster-namespace"
   type        = "text"
   value       = var.cluster_namespace
@@ -145,6 +148,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster-region"
   type        = "text"
   value       = var.cluster_region
