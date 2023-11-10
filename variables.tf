@@ -1124,6 +1124,12 @@ variable "event_notifications_crn" {
 }
 
 ####### Trigger properties ###################
+variable "create_triggers" {
+  type        = bool
+  description = "Set to `true` to create all the default triggers."
+  default     = true
+}
+
 variable "trigger_git_name" {
   type        = string
   description = "The name of the CD pipeline GIT trigger."
