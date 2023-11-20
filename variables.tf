@@ -392,7 +392,7 @@ variable "pipeline_config_path" {
 variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
-  default     = "open-v9"
+  default     = "open-v10"
 }
 
 variable "compliance_base_image" {
@@ -1107,7 +1107,7 @@ variable "pipeline_doi_api_key_secret_group" {
 variable "peer_review_compliance" {
   type        = string
   description = "Set to `1` to enable peer review."
-  default     = ""
+  default     = "1"
 }
 
 ####### Event Notifications #################
