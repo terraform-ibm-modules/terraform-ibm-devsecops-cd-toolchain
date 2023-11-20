@@ -13,6 +13,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "satellite-cluster-group"
   type        = "text"
   value       = var.satellite_cluster_group
@@ -131,6 +132,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
 // Limitation with issues repository url: How to fetch issues repository url
 // as it is created internally while creating application repository resource
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster"
   type        = "text"
   value       = var.cluster_name
@@ -138,6 +140,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_name" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster-namespace"
   type        = "text"
   value       = var.cluster_namespace
@@ -145,6 +148,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
+  count       = (var.deployment_target != "code-engine") ? 1 : 0
   name        = "cluster-region"
   type        = "text"
   value       = var.cluster_region
@@ -271,4 +275,173 @@ resource "ibm_cd_tekton_pipeline_property" "cd_artifactory-dockerconfigjson" {
   value       = var.tool_artifactory
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   path        = "parameters.docker_config_json"
+}
+
+######## Code Engine Vars #####################
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_project" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "code-engine-project"
+  type        = "text"
+  value       = var.code_engine_project
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_region" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "code-engine-region"
+  type        = "text"
+  value       = var.code_engine_region
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_resource_group" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "code-engine-resource-group"
+  type        = "text"
+  value       = var.code_engine_resource_group
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_binding_rg" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "ode-engine-binding-resource-group"
+  type        = "text"
+  value       = var.code_engine_binding_resource_group
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_deployment_type" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "code-engine-deployment-type"
+  type        = "text"
+  value       = var.code_engine_deployment_type
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_cpu" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "cpu"
+  type        = "text"
+  value       = var.code_engine_cpu
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_memory" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "memory"
+  type        = "text"
+  value       = var.code_engine_memory
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_ephemeral_storage" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "ephemeral-storage"
+  type        = "text"
+  value       = var.code_engine_ephemeral_storage
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_execution_time" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "job-maxexecutiontime"
+  type        = "text"
+  value       = var.code_engine_job_maxexecutiontime
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_retry_limit" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "job-retrylimit"
+  type        = "text"
+  value       = var.code_engine_job_retrylimit
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_job_instances" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "job-instances"
+  type        = "text"
+  value       = var.code_engine_job_instances
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_port" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-port"
+  type        = "text"
+  value       = var.code_engine_app_port
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_min_scale" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-min-scale"
+  type        = "text"
+  value       = var.code_engine_app_min_scale
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_max_scale" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-max-scale"
+  type        = "text"
+  value       = var.code_engine_app_max_scale
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_deployment_timeout" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-deployment-timeout"
+  type        = "text"
+  value       = var.code_engine_app_deployment_timeout
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_concurrency" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-concurrency"
+  type        = "text"
+  value       = var.code_engine_app_concurrency
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_app_visibility" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "app-visibility"
+  type        = "text"
+  value       = var.code_engine_app_visibility
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_configmaps" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "env-from-configmaps"
+  type        = "text"
+  value       = var.code_engine_env_from_configmaps
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_env_secrets" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "env-from-secrets"
+  type        = "text"
+  value       = var.code_engine_env_from_secrets
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_remove_refs" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "remove-unspecified-references-to-configuration-resources"
+  type        = "text"
+  value       = var.code_engine_remove_refs
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_service_bindings" {
+  count       = (var.deployment_target == "code-engine") ? 1 : 0
+  name        = "service-bindings"
+  type        = "text"
+  value       = var.code_engine_service_bindings
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
