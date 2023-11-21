@@ -261,7 +261,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
-  count       = (var.peer_review_compliance == "") ? 0 : 1
   name        = "peer-review-compliance"
   type        = "text"
   value       = var.peer_review_compliance
