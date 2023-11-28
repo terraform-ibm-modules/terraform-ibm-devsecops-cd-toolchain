@@ -303,7 +303,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_resource_gro
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_binding_rg" {
   count       = (var.deployment_target == "code-engine") ? 1 : 0
-  name        = "ode-engine-binding-resource-group"
+  name        = "code-engine-binding-resource-group"
   type        = "text"
   value       = var.code_engine_binding_resource_group
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
