@@ -229,6 +229,12 @@ variable "cos_bucket_name" {
   default     = ""
 }
 
+variable "cos_dashboard_url" {
+  type        = string
+  description = "The dashboard URL for the COS toolcard."
+  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+}
+
 variable "sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -393,6 +399,12 @@ variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
   default     = "open-v10"
+}
+
+variable "pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for Compliance CD Toolchain."
+  default     = ""
 }
 
 variable "compliance_base_image" {
