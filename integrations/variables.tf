@@ -131,6 +131,8 @@ variable "privateworker_credentials_secret_ref" {
 variable "authorization_policy_creation" {
 }
 
+variable "enable_insights" {
+}
 variable "link_to_doi_toolchain" {
   description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false"
   type        = bool

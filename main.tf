@@ -433,6 +433,7 @@ module "integrations" {
   enable_secrets_manager               = var.enable_secrets_manager
   enable_key_protect                   = var.enable_key_protect
   authorization_policy_creation        = var.authorization_policy_creation
+  enable_insights                      = var.enable_insights
   link_to_doi_toolchain                = var.link_to_doi_toolchain
   doi_toolchain_id                     = var.doi_toolchain_id
   enable_artifactory                   = var.enable_artifactory

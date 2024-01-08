@@ -419,6 +419,11 @@ variable "doi_environment" {
   default     = ""
 }
 
+variable "enable_insights" {
+  type        = bool
+  description = "Set to `true` to enable the DevOps Insights integration."
+  default     = true
+}
 variable "link_to_doi_toolchain" {
   description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false."
   type        = bool
