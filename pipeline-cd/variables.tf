@@ -98,6 +98,9 @@ variable "pipeline_config_repo" {
 variable "pipeline_branch" {
 }
 
+variable "pipeline_git_tag" {
+}
+
 variable "pipeline_path" {
   type        = string
   description = "The relative folder path within pipeline definitions repository containing tekton definitions for pipelines."
@@ -177,6 +180,12 @@ variable "enable_pipeline_git_token" {
 }
 
 variable "peer_review_compliance" {
+}
+
+variable "peer_review_collection" {
+}
+
+variable "artifact_signature_verification" {
 }
 
 variable "tool_artifactory" {

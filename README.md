@@ -16,8 +16,8 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.59.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.6.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.60.0 |
 
 ### Modules
 
@@ -38,15 +38,16 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 
 | Name | Type |
 |------|------|
-| [ibm_cd_toolchain.toolchain_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain) | resource |
-| [ibm_cd_toolchain_tool_pipeline.cd_pipeline](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain_tool_pipeline) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
+| [ibm_cd_toolchain.toolchain_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/resources/cd_toolchain) | resource |
+| [ibm_cd_toolchain_tool_pipeline.cd_pipeline](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/resources/cd_toolchain_tool_pipeline) | resource |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_app_version"></a> [app\_version](#input\_app\_version) | The version of the app to deploy. | `string` | `"v1"` | no |
+| <a name="input_artifact_signature_verification"></a> [artifact\_signature\_verification](#input\_artifact\_signature\_verification) | Set to `1` to enable artifact signature verification. | `string` | `"1"` | no |
 | <a name="input_artifactory_dashboard_url"></a> [artifactory\_dashboard\_url](#input\_artifactory\_dashboard\_url) | Type the URL that you want to navigate to when you click the Artifactory integration tile. | `string` | `""` | no |
 | <a name="input_artifactory_repo_name"></a> [artifactory\_repo\_name](#input\_artifactory\_repo\_name) | Type the name of your Artifactory repository where your docker images are located. | `string` | `"wcp-compliance-automation-team-docker-local"` | no |
 | <a name="input_artifactory_repo_url"></a> [artifactory\_repo\_url](#input\_artifactory\_repo\_url) | Type the URL for your Artifactory release repository. | `string` | `""` | no |
@@ -107,7 +108,9 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_cos_api_key_secret_group"></a> [cos\_api\_key\_secret\_group](#input\_cos\_api\_key\_secret\_group) | Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | Name of the IBM Cloud Storage api-key secret in the secret provider. | `string` | `"cos-api-key"` | no |
 | <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | COS bucket name. | `string` | `""` | no |
+| <a name="input_cos_dashboard_url"></a> [cos\_dashboard\_url](#input\_cos\_dashboard\_url) | The dashboard URL for the COS toolcard. | `string` | `"https://cloud.ibm.com/catalog/services/cloud-object-storage"` | no |
 | <a name="input_cos_endpoint"></a> [cos\_endpoint](#input\_cos\_endpoint) | COS endpoint name. | `string` | `""` | no |
+| <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create all the default triggers. | `bool` | `true` | no |
 | <a name="input_customer_impact"></a> [customer\_impact](#input\_customer\_impact) | Custom impact of the change request. | `string` | `"no_impact"` | no |
 | <a name="input_default_git_provider"></a> [default\_git\_provider](#input\_default\_git\_provider) | Choose the default git provider for app repo | `string` | `"hostedgit"` | no |
 | <a name="input_deployment_group"></a> [deployment\_group](#input\_deployment\_group) | Specify Git user/group for deployment repo. | `string` | `""` | no |
@@ -190,7 +193,8 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_kp_resource_group"></a> [kp\_resource\_group](#input\_kp\_resource\_group) | The resource group containing the Key Protect instance. | `string` | `"Default"` | no |
 | <a name="input_link_to_doi_toolchain"></a> [link\_to\_doi\_toolchain](#input\_link\_to\_doi\_toolchain) | Enable a link to a DevOpsInsights instance in another toolchain, true or false. | `bool` | `false` | no |
 | <a name="input_merge_cra_sbom"></a> [merge\_cra\_sbom](#input\_merge\_cra\_sbom) | Merge the SBOM. | `string` | `"1"` | no |
-| <a name="input_peer_review_compliance"></a> [peer\_review\_compliance](#input\_peer\_review\_compliance) | Set to `1` to enable peer review. | `string` | `"1"` | no |
+| <a name="input_peer_review_collection"></a> [peer\_review\_collection](#input\_peer\_review\_collection) | Set to `1` to enable peer review collection. | `string` | `"1"` | no |
+| <a name="input_peer_review_compliance"></a> [peer\_review\_compliance](#input\_peer\_review\_compliance) | Set to `1` to enable peer review compliance validation. | `string` | `"1"` | no |
 | <a name="input_pipeline_branch"></a> [pipeline\_branch](#input\_pipeline\_branch) | The branch within pipeline definitions repository for Compliance CD Toolchain. | `string` | `"open-v10"` | no |
 | <a name="input_pipeline_config_group"></a> [pipeline\_config\_group](#input\_pipeline\_config\_group) | Specify Git user/group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_pipeline_config_path"></a> [pipeline\_config\_path](#input\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
@@ -211,6 +215,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_pipeline_debug"></a> [pipeline\_debug](#input\_pipeline\_debug) | Set to '1' to enable debug logging. | `string` | `"0"` | no |
 | <a name="input_pipeline_doi_api_key_secret_group"></a> [pipeline\_doi\_api\_key\_secret\_group](#input\_pipeline\_doi\_api\_key\_secret\_group) | Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_pipeline_doi_api_key_secret_name"></a> [pipeline\_doi\_api\_key\_secret\_name](#input\_pipeline\_doi\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. | `string` | `""` | no |
+| <a name="input_pipeline_git_tag"></a> [pipeline\_git\_tag](#input\_pipeline\_git\_tag) | The GIT tag within the pipeline definitions repository for Compliance CD Toolchain. | `string` | `""` | no |
 | <a name="input_pipeline_git_token_secret_group"></a> [pipeline\_git\_token\_secret\_group](#input\_pipeline\_git\_token\_secret\_group) | Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_pipeline_git_token_secret_name"></a> [pipeline\_git\_token\_secret\_name](#input\_pipeline\_git\_token\_secret\_name) | Name of the pipeline Git token secret in the secret provider. | `string` | `"pipeline-git-token"` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_group"></a> [pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |

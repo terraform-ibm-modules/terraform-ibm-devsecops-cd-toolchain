@@ -158,6 +158,9 @@ variable "artifactory_repo_url" {
 variable "artifactory_token_secret_ref" {
 }
 
+variable "cos_dashboard_url" {
+}
+
 variable "sm_integration_name" {
 }
 

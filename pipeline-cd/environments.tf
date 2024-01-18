@@ -267,6 +267,20 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" 
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_collection" {
+  name        = "peer-review-collection"
+  type        = "text"
+  value       = var.peer_review_collection
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_artifact_signature_verification" {
+  name        = "artifact-signature-verification"
+  type        = "text"
+  value       = var.artifact_signature_verification
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
 resource "ibm_cd_tekton_pipeline_property" "cd_artifactory-dockerconfigjson" {
   name        = "artifactory-dockerconfigjson"
   count       = var.enable_artifactory ? 1 : 0

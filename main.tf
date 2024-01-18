@@ -312,6 +312,7 @@ module "pipeline_cd" {
   deployment_repo_branch               = local.deployment_repo_branch
   pipeline_config_repo                 = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                      = var.pipeline_branch
+  pipeline_git_tag                     = var.pipeline_git_tag
   pipeline_config_path                 = var.pipeline_config_path
   pipeline_config_repo_existing_url    = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url  = var.pipeline_config_repo_clone_from_url
@@ -352,6 +353,8 @@ module "pipeline_cd" {
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token
   peer_review_compliance               = var.peer_review_compliance
+  peer_review_collection               = var.peer_review_collection
+  artifact_signature_verification      = var.artifact_signature_verification
   create_triggers                      = var.create_triggers
   trigger_git_name                     = var.trigger_git_name
   trigger_git_enable                   = var.trigger_git_enable
@@ -442,6 +445,7 @@ module "integrations" {
   artifactory_user                     = var.artifactory_user
   artifactory_repo_url                 = var.artifactory_repo_url
   artifactory_token_secret_ref         = local.artifactory_secret_ref
+  cos_dashboard_url                    = var.cos_dashboard_url
   privateworker_credentials_secret_ref = local.privateworker_secret_ref
   secret_tool                          = module.integrations.secret_tool
   sm_integration_name                  = var.sm_integration_name

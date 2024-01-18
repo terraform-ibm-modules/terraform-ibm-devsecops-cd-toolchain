@@ -229,6 +229,12 @@ variable "cos_bucket_name" {
   default     = ""
 }
 
+variable "cos_dashboard_url" {
+  type        = string
+  description = "The dashboard URL for the COS toolcard."
+  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+}
+
 variable "sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -393,6 +399,12 @@ variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
   default     = "open-v10"
+}
+
+variable "pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for Compliance CD Toolchain."
+  default     = ""
 }
 
 variable "compliance_base_image" {
@@ -1111,7 +1123,19 @@ variable "pipeline_doi_api_key_secret_group" {
 
 variable "peer_review_compliance" {
   type        = string
-  description = "Set to `1` to enable peer review."
+  description = "Set to `1` to enable peer review compliance validation."
+  default     = "1"
+}
+
+variable "peer_review_collection" {
+  type        = string
+  description = "Set to `1` to enable peer review collection."
+  default     = "1"
+}
+
+variable "artifact_signature_verification" {
+  type        = string
+  description = "Set to `1` to enable artifact signature verification."
   default     = "1"
 }
 
