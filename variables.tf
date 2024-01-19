@@ -1130,13 +1130,13 @@ variable "peer_review_compliance" {
 variable "peer_review_collection" {
   type        = string
   description = "Set to `1` to enable peer review collection."
-  default     = "1"
+  default     = ""
 }
 
 variable "artifact_signature_verification" {
   type        = string
   description = "Set to `1` to enable artifact signature verification."
-  default     = "1"
+  default     = ""
 }
 
 ####### Event Notifications #################
