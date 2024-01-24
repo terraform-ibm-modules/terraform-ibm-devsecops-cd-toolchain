@@ -49,7 +49,7 @@ resource "ibm_cd_toolchain_tool_keyprotect" "keyprotect" {
 }
 
 resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
-  count        = var.enable_secrets_manager ? 1 : 0
+  count        = (var.enable_secrets_manager == true && var.sm_instance_crn == "") ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     name                = local.sm_integration_name
@@ -57,6 +57,16 @@ resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
     resource_group_name = var.sm_resource_group
     instance_name       = var.sm_name
   }
+}
+
+resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager_crn" {
+  count        = (var.enable_secrets_manager == true && var.sm_instance_crn != "") ? 1 : 0
+  parameters {
+        name = local.sm_integration_name
+        instance_id_type = "instance-crn"
+        instance_crn = var.sm_instance_crn
+  }
+  toolchain_id = var.toolchain_id
 }
 
 resource "ibm_cd_toolchain_tool_slack" "slack_tool" {

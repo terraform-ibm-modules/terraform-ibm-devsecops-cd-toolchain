@@ -875,6 +875,156 @@ variable "privateworker_credentials_secret_name" {
   description = "Name of the privateworker secret in the secret provider."
 }
 
+variable "deployment_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Deployment repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.deployment_repo_secret_crn, "crn:") || var.deployment_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "change_management_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Change Managemenrt repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.change_management_repo_secret_crn, "crn:") || var.change_management_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "issues_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Issues repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.issues_repo_secret_crn, "crn:") || var.issues_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "evidence_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Evidence repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.evidence_repo_secret_crn, "crn:") || var.evidence_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "inventory_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Inventory repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.inventory_repo_secret_crn, "crn:") || var.inventory_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "compliance_pipeline_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Compliance Pipeline repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.compliance_pipeline_repo_secret_crn, "crn:") || var.compliance_pipeline_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_config_repo_secret_crn" {
+  type        = string
+  description = "The CRN for the Config repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_config_repo_secret_crn, "crn:") || var.pipeline_config_repo_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cos_secret_crn" {
+  type        = string
+  description = "The CRN for the Cloud Object Storage apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_secret_crn, "crn:") || var.cos_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_apikey_secret_crn" {
+  type        = string
+  description = "The CRN for the pipeline apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_apikey_secret_crn, "crn:") || var.pipeline_apikey_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "slack_webhook_secret_crn" {
+  type        = string
+  description = "The CRN for the Slack webhook secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.slack_webhook_secret_crn, "crn:") || var.slack_webhook_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "privateworker_secret_crn" {
+  type        = string
+  description = "The CRN for the Private Worker apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.privateworker_secret_crn, "crn:") || var.privateworker_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "artifactory_secret_crn" {
+  type        = string
+  description = "The CRN for the Artifactory secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.artifactory_secret_crn, "crn:") || var.artifactory_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "scc_scc_api_key_secret_crn" {
+  type        = string
+  description = "The CRN for the SCC apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.scc_scc_api_key_secret_crn, "crn:") || var.scc_scc_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_git_token_secret_crn" {
+  type        = string
+  description = "The CRN for the Git Token secret in the pipeline properties."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_git_token_secret_crn, "crn:") || var.pipeline_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_doi_api_key_secret_crn" {
+  type        = string
+  description = "The CRN for the DOI apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_doi_api_key_secret_crn, "crn:") || var.pipeline_doi_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "issues_group" {
   type        = string
   description = "Specify Git user/group for issues repo."
@@ -1017,6 +1167,12 @@ variable "sm_integration_name" {
   type        = string
   description = "The name of the Secrets Manager integration."
   default     = "sm-compliance-secrets"
+}
+
+variable "sm_instance_crn" {
+  type        = string
+  description = "The CRN of the Secrets Manager instance."
+  default     = ""
 }
 
 variable "kp_integration_name" {
