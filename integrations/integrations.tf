@@ -1,8 +1,13 @@
 locals {
   #event notifications crn has the form "crn:v1:bluemix:public:event-notifications:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::"
   #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the event notifications id
-  forward_slash_split    = try(split("/", var.event_notifications_crn)[1], "")
-  event_notifications_id = try(split(":", local.forward_slash_split)[1], "")
+  forward_slash_split_en    = try(split("/", var.event_notifications_crn)[1], "")
+  event_notifications_id = try(split(":", local.forward_slash_split_en)[1], "")
+
+  #Secrets Manager crn has the form "crn:v1:bluemix:public:secrets-manager:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::
+  #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the Secrets Manager instance id
+  forward_slash_split_sm    = try(split("/", var.sm_instance_crn)[1], "")
+  secrets_manager_id     = try(split(":", local.forward_slash_split_sm)[1], "")
 
   sm_integration_name    = "sm-compliance-secrets"
   kp_integration_name    = "kp-compliance-secrets"
@@ -15,7 +20,7 @@ resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
   source_service_name         = "toolchain"
   source_resource_instance_id = var.toolchain_id
   target_service_name         = "secrets-manager"
-  target_resource_instance_id = var.sm_instance_guid
+  target_resource_instance_id = (var.sm_instance_crn == "") ? var.sm_instance_guid : local.secrets_manager_id
   roles                       = ["Viewer", "SecretsReader"]
 }
 

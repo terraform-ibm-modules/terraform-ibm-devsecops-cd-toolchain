@@ -485,6 +485,7 @@ module "services" {
   sm_name                = var.sm_name
   sm_location            = var.sm_location
   sm_resource_group      = var.sm_resource_group
+  sm_instance_crn        = var.sm_instance_crn
   kp_name                = var.kp_name
   kp_location            = var.kp_location
   kp_resource_group      = var.kp_resource_group
