@@ -243,19 +243,19 @@ variable "sm_secret_group" {
 
 variable "sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance."
+  description = "The resource group containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance."
   default     = "default"
 }
 
 variable "sm_name" {
   type        = string
-  description = "Name of the Secrets Manager instance where the secrets are stored."
+  description = "Name of the Secrets Manager instance where the secrets are stored. "
   default     = "sm-compliance-secrets"
 }
 
 variable "sm_location" {
   type        = string
-  description = "IBM Cloud location/region containing the Secrets Manager instance."
+  description = "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance."
   default     = "us-south"
 }
 

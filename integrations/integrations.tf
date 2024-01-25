@@ -1,12 +1,12 @@
 locals {
   #event notifications crn has the form "crn:v1:bluemix:public:event-notifications:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::"
   #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the event notifications id
-  forward_slash_split_en    = try(split("/", var.event_notifications_crn)[1], "")
+  forward_slash_split_en = try(split("/", var.event_notifications_crn)[1], "")
   event_notifications_id = try(split(":", local.forward_slash_split_en)[1], "")
 
   #Secrets Manager crn has the form "crn:v1:bluemix:public:secrets-manager:us-south:a/7f5b4015add74dc49d02eb2e41050aaa:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX::
   #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the Secrets Manager instance id
-  forward_slash_split_sm    = try(split("/", var.sm_instance_crn)[1], "")
+  forward_slash_split_sm = try(split("/", var.sm_instance_crn)[1], "")
   secrets_manager_id     = try(split(":", local.forward_slash_split_sm)[1], "")
 
   sm_integration_name    = "sm-compliance-secrets"
@@ -65,11 +65,11 @@ resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager" {
 }
 
 resource "ibm_cd_toolchain_tool_secretsmanager" "secretsmanager_crn" {
-  count        = (var.enable_secrets_manager == true && var.sm_instance_crn != "") ? 1 : 0
+  count = (var.enable_secrets_manager == true && var.sm_instance_crn != "") ? 1 : 0
   parameters {
-        name = local.sm_integration_name
-        instance_id_type = "instance-crn"
-        instance_crn = var.sm_instance_crn
+    name             = local.sm_integration_name
+    instance_id_type = "instance-crn"
+    instance_crn     = var.sm_instance_crn
   }
   toolchain_id = var.toolchain_id
 }

@@ -145,7 +145,7 @@ locals {
   )
 
   pipeline_doi_api_key_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn : 
+    (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_doi_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
