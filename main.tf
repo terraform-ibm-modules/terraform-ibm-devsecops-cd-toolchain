@@ -42,63 +42,63 @@ locals {
   #SECRETS
 
   deployment_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.deployment_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.deployment_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.deployment_repo_secret_group == "") ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.deployment_repo_secret_group))
   )
 
   change_management_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.change_management_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.change_management_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.change_management_repo_secret_group == "") ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.change_management_repo_secret_group))
   )
 
   issues_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.issues_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.issues_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.issues_repo_secret_group == "") ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.issues_repo_secret_group))
   )
 
   evidence_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.evidence_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.evidence_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.evidence_repo_secret_group == "") ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.evidence_repo_secret_group))
   )
 
   inventory_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.inventory_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.inventory_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.inventory_repo_secret_group == "") ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.inventory_repo_secret_group))
   )
 
   compliance_pipeline_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.compliance_pipeline_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.compliance_pipeline_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.compliance_pipeline_repo_secret_group == "") ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.compliance_pipeline_repo_secret_group))
   )
 
   pipeline_config_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_config_repo_secret_crn :
+    (var.sm_instance_crn != "") ? var.pipeline_config_repo_git_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_config_repo_secret_group == "") ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_config_repo_secret_group))
   )
 
   cos_secret_ref = (
-    (var.sm_instance_crn != "") ? var.cos_secret_crn :
+    (var.sm_instance_crn != "") ? var.cos_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.cos_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.cos_api_key_secret_group == "") ? format("{vault::%s.${var.cos_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.cos_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.cos_api_key_secret_group))
   )
 
   pipeline_apikey_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_apikey_secret_crn :
+    (var.sm_instance_crn != "") ? var.pipeline_ibmcloud_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", module.integrations.secret_tool) :
     (var.pipeline_ibmcloud_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.pipeline_ibmcloud_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_ibmcloud_api_key_secret_group))
@@ -112,14 +112,14 @@ locals {
   )
 
   privateworker_secret_ref = (
-    (var.sm_instance_crn != "") ? var.privateworker_secret_crn :
+    (var.sm_instance_crn != "") ? var.privateworker_credentials_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", module.integrations.secret_tool) :
     (var.privateworker_credentials_secret_group == "") ? format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.privateworker_credentials_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.privateworker_credentials_secret_group))
   )
 
   artifactory_secret_ref = (
-    (var.sm_instance_crn != "") ? var.artifactory_secret_crn :
+    (var.sm_instance_crn != "") ? var.artifactory_token_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.artifactory_token_secret_name}}", module.integrations.secret_tool) :
     (var.artifactory_token_secret_group == "") ? format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.artifactory_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.artifactory_token_secret_group))
