@@ -17,14 +17,14 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
 
 variable "code_signing_cert" {
   type        = string
-  description = "The base64 encoded GPG public key."
+  sensitive   = true
+  description = "The base64 encoded GPG public key. Setting this will add the public signing cert to the pipeline properties. Alternatively see `enable_signing_validation` to store the cert in a Secrets provider ."
   default     = ""
 }
 
-#USE `code_signing_cert`instead
 variable "enable_signing_validation" {
   type        = bool
-  description = "Enable for signing validation."
+  description = "Enable for signing validation. Enabling this will expect the public signing cert to be in a Secrets Provider under a key called `code-signing-cert`.  "
   default     = false
 }
 
@@ -1029,6 +1029,17 @@ variable "pipeline_git_token_secret_crn" {
   }
 }
 
+variable "code_signing_cert_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the public signing key cert in the secrets provider."
+  default     = ""
+  validation {
+    condition     = startswith(var.code_signing_cert_secret_crn, "crn:") || var.code_signing_cert_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "pipeline_doi_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -1283,6 +1294,12 @@ variable "pipeline_ibmcloud_api_key_secret_group" {
 variable "pipeline_git_token_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "code_signing_cert_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 

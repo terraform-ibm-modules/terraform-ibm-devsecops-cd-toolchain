@@ -243,9 +243,9 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_customer_impact" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-#Legacy use. Use `code_signing_cert` for setting public signing key validation
+#Use this for leveraging a secrets provider
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation_alt" {
-  count       = (var.enable_signing_validation && var.code_signing_cert != "") ? 1 : 0
+  count       = (var.enable_signing_validation) ? 1 : 0
   name        = "code-signing-certificate"
   type        = "secure"
   value       = var.code_signing_cert_secret_ref
@@ -255,7 +255,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation_alt" 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation" {
   count       = (var.code_signing_cert != "") ? 1 : 0
   name        = "code-signing-certificate"
-  type        = "text"
+  type        = "secure"
   value       = var.code_signing_cert
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }

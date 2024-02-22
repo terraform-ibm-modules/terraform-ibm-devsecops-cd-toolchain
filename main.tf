@@ -140,8 +140,10 @@ locals {
   )
 
   code_signing_cert_secret_ref = (
+    (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
-    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group))
+    (var.code_signing_cert_secret_group == "") ? format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.code_signing_cert_secret_group))
   )
 
   pipeline_doi_api_key_secret_ref = (
