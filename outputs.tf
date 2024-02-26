@@ -75,6 +75,10 @@ output "change_management_repo_url" {
   description = "The change management repository instance URL."
 }
 
+output "change_management_repo" {
+  value       = try(module.change_management_repo[0].repository, "")
+  description = "The Change Management repository"
+}
 
 output "pipeline_repo_url" {
   value       = module.compliance_pipelines_repo.repository_url
