@@ -166,6 +166,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_evidence_repo_secret_group"></a> [evidence\_repo\_secret\_group](#input\_evidence\_repo\_secret\_group) | Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_evidence_repo_traceability_enabled"></a> [evidence\_repo\_traceability\_enabled](#input\_evidence\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_evidence_repo_url"></a> [evidence\_repo\_url](#input\_evidence\_repo\_url) | This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates. | `string` | n/a | yes |
+| <a name="input_force_redeploy"></a> [force\_redeploy](#input\_force\_redeploy) | Forces the deployment or redeployment of the app even if the last deployment does not contain a delta in the inventory. Set this parameter to `true` to force a deployment of the app as if it is the first deployment on the specified target environment. By default, this parameter is set to `false`. | `string` | `"false"` | no |
 | <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | IBM Cloud API Endpoint. | `string` | `"https://cloud.ibm.com"` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | API key used to create the toolchains. | `string` | n/a | yes |
 | <a name="input_inventory_group"></a> [inventory\_group](#input\_inventory\_group) | Specify Git user/group for inventory repo. | `string` | `""` | no |
@@ -297,6 +298,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | Name | Description |
 |------|-------------|
 | <a name="output_cd_pipeline_id"></a> [cd\_pipeline\_id](#output\_cd\_pipeline\_id) | The CD pipeline ID. |
+| <a name="output_change_management_repo"></a> [change\_management\_repo](#output\_change\_management\_repo) | The Change Management repository. |
 | <a name="output_change_management_repo_url"></a> [change\_management\_repo\_url](#output\_change\_management\_repo\_url) | The change management repository instance URL. |
 | <a name="output_deployment_repo_url"></a> [deployment\_repo\_url](#output\_deployment\_repo\_url) | The deployment repo URL. |
 | <a name="output_evidence_repo"></a> [evidence\_repo](#output\_evidence\_repo) | The Evidence repo. |

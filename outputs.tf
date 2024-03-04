@@ -77,7 +77,8 @@ output "change_management_repo_url" {
 
 output "change_management_repo" {
   value       = try(module.change_management_repo[0].repository, "")
-  description = "The Change Management repository"
+  description = "The Change Management repository."
+  sensitive   = true
 }
 
 output "pipeline_repo_url" {

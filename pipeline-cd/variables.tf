@@ -143,6 +143,9 @@ variable "target_environment_detail" {
 variable "customer_impact" {
 }
 
+variable "force_redeploy" {
+}
+
 variable "target_environment_purpose" {
 }
 
