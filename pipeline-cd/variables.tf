@@ -41,10 +41,10 @@ variable "link_to_doi_toolchain" {
 variable "pipeline_git_token_secret_ref" {
 }
 
-variable "enable_signing_validation" {
+variable "code_signing_cert_secret_ref" {
 }
 
-variable "code_signing_cert_secret_ref" {
+variable "code_signing_cert_secret_name" {
 }
 
 variable "code_signing_cert" {

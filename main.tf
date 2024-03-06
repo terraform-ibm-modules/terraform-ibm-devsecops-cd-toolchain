@@ -373,7 +373,7 @@ module "pipeline_cd" {
   slack_notifications                  = var.slack_notifications
   pipeline_debug                       = var.pipeline_debug
   code_signing_cert                    = var.code_signing_cert
-  enable_signing_validation            = var.enable_signing_validation
+  code_signing_cert_secret_name        = var.code_signing_cert_secret_name
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token
