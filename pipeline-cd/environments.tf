@@ -274,6 +274,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_collection" 
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_artifact_signature_verification" {
+  count       = (var.artifact_signature_verification != "") ? 1 : 0
   name        = "artifact-signature-verification"
   type        = "text"
   value       = var.artifact_signature_verification
