@@ -1213,6 +1213,12 @@ variable "slack_integration_name" {
   default     = "slack-compliance"
 }
 
+variable "worker_id" {
+  type        = string
+  default     = "public"
+  description = "The identifier for the Managed Pipeline worker."
+}
+
 variable "slack_webhook_secret_group" {
   type        = string
   description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."

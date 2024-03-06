@@ -90,6 +90,9 @@ variable "enable_private_worker" {
 
 }
 
+variable "worker_id" {
+}
+
 variable "scc_evidence_repo" {
 }
 
