@@ -22,12 +22,6 @@ variable "code_signing_cert" {
   default     = ""
 }
 
-variable "enable_signing_validation" {
-  type        = bool
-  description = "Enable for signing validation. Enabling this will expect the public signing cert to be in a Secrets Provider under a key called `code-signing-cert`.  "
-  default     = false
-}
-
 variable "enable_artifactory" {
   type        = bool
   default     = false
@@ -835,8 +829,8 @@ variable "inventory_repo_git_token_secret_name" {
 
 variable "code_signing_cert_secret_name" {
   type        = string
-  description = "Use `code_signing_cert` instead as aligns more with DevSecOps docs. Public signing key does not need to be stored in a secrets provider.( Name of the public signing key secret in the secret provider)."
-  default     = "code-signing-cert"
+  description = "This is the optional alternative to using `code_signing_cert` for storing the GPG public signing key. Set this variable with the name of the secret containing the GPG public key from the Secrets Provider."
+  default     = ""
 }
 
 variable "issues_repo_git_token_secret_name" {

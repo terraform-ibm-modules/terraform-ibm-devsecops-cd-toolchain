@@ -141,6 +141,7 @@ locals {
 
   code_signing_cert_secret_ref = (
     (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
+    (var.code_signing_cert_secret_name == "") ? "" :
     (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
     (var.code_signing_cert_secret_group == "") ? format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
     format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.code_signing_cert_secret_group))
@@ -373,7 +374,6 @@ module "pipeline_cd" {
   slack_notifications                  = var.slack_notifications
   pipeline_debug                       = var.pipeline_debug
   code_signing_cert                    = var.code_signing_cert
-  enable_signing_validation            = var.enable_signing_validation
   tool_artifactory                     = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                   = var.enable_artifactory
   enable_pipeline_git_token            = var.enable_pipeline_git_token
