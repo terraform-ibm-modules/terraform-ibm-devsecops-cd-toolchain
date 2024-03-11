@@ -9,8 +9,8 @@ locals {
   forward_slash_split_sm = try(split("/", var.sm_instance_crn)[1], "")
   secrets_manager_id     = try(split(":", local.forward_slash_split_sm)[1], "")
 
-  sm_integration_name    = "sm-compliance-secrets"
-  kp_integration_name    = "kp-compliance-secrets"
+  sm_integration_name    = var.sm_integration_name
+  kp_integration_name    = var.kp_integration_name
   slack_integration_name = "slack-compliance"
   private_worker_name    = "compliance-private-worker"
 }
