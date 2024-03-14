@@ -229,6 +229,24 @@ variable "cos_dashboard_url" {
   default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
 }
 
+variable "cos_documentation_url" {
+  type        = string
+  description = "The documentation URL that appears on the tool card."
+  default     = "https://cloud.ibm.com/catalog/services/cloud-object-storage"
+}
+
+variable "cos_description" {
+  type        = string
+  description = "The COS description on the tool card."
+  default     = "Cloud Object Storage to store evidences within DevSecOps Pipelines"
+}
+
+variable "cos_integration_name" {
+  type        = string
+  description = "The name of the COS integration."
+  default     = "Evidence Store"
+}
+
 variable "sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -1151,6 +1169,12 @@ variable "pipeline_debug" {
   type        = string
   description = "Set to '1' to enable debug logging."
   default     = "0"
+}
+
+variable "artifactory_integration_name" {
+  type        = string
+  default     = "artifactory-dockerconfigjson"
+  description = "The name of the Artifactory tool integration."
 }
 
 variable "artifactory_user" {

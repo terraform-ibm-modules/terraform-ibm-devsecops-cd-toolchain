@@ -468,10 +468,14 @@ module "integrations" {
   enable_artifactory                   = var.enable_artifactory
   artifactory_repo_name                = var.artifactory_repo_name
   artifactory_dashboard_url            = var.artifactory_dashboard_url
+  artifactory_integration_name         = var.artifactory_integration_name
   artifactory_user                     = var.artifactory_user
   artifactory_repo_url                 = var.artifactory_repo_url
   artifactory_token_secret_ref         = local.artifactory_secret_ref
   cos_dashboard_url                    = var.cos_dashboard_url
+  cos_description                      = var.cos_description
+  cos_documentation_url                = var.cos_documentation_url
+  cos_integration_name                 = var.cos_integration_name
   privateworker_credentials_secret_ref = local.privateworker_secret_ref
   worker_id                            = var.worker_id
   secret_tool                          = module.integrations.secret_tool
