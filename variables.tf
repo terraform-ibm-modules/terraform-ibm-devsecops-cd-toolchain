@@ -85,16 +85,19 @@ variable "deployment_source_repo_url" {
 variable "inventory_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "evidence_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "issues_repo_url" {
   type        = string
   description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  default     = ""
 }
 
 variable "slack_webhook_secret_name" {
@@ -1455,19 +1458,25 @@ variable "trigger_timed_pruner_enable" {
 
 variable "trigger_git_promotion_enable" {
   type        = bool
-  description = "Enable Git promotion for Git promotion listener."
+  description = "Enable Git promotion validation for Git promotion listener."
   default     = false
 }
 
 variable "trigger_git_promotion_listener" {
   type        = string
-  description = "Select a Tekton EventListener to use when Git promotion listener trigger is fired."
+  description = "Select a Tekton EventListener to use when Git promotion validation listener trigger is fired."
   default     = "promotion-validation-listener-gitlab"
+}
+
+variable "trigger_git_promotion_validation_name" {
+  type        = string
+  description = "Name of Git Promotion Validation Trigger"
+  default     = "Git Promotion Validation Trigger"
 }
 
 variable "trigger_git_promotion_branch" {
   type        = string
-  description = "Branch for Git promotion listener."
+  description = "Branch for Git promotion validation listener."
   default     = "prod"
 }
 

@@ -238,6 +238,9 @@ variable "trigger_git_promotion_enable" {
 variable "trigger_git_promotion_branch" {
 }
 
+variable "trigger_git_promotion_validation_name" {
+}
+
 ##### EVENT NOTIFICATIONS ################
 
 ######## Code Engine Vars #####################

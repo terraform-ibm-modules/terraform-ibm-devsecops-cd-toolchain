@@ -284,6 +284,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_trigger_git_promotion_branch"></a> [trigger\_git\_promotion\_branch](#input\_trigger\_git\_promotion\_branch) | Branch for Git promotion listener. | `string` | `"prod"` | no |
 | <a name="input_trigger_git_promotion_enable"></a> [trigger\_git\_promotion\_enable](#input\_trigger\_git\_promotion\_enable) | Enable Git promotion for Git promotion listener. | `bool` | `false` | no |
 | <a name="input_trigger_git_promotion_listener"></a> [trigger\_git\_promotion\_listener](#input\_trigger\_git\_promotion\_listener) | Select a Tekton EventListener to use when Git promotion listener trigger is fired. | `string` | `"promotion-validation-listener-gitlab"` | no |
+| <a name="input_trigger_git_promotion_name"></a> [trigger\_git\_promotion\_name](#input\_trigger\_git\_promotion\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
 | <a name="input_trigger_manual_enable"></a> [trigger\_manual\_enable](#input\_trigger\_manual\_enable) | Set to `true` to enable the CD pipeline Manual trigger. | `bool` | `true` | no |
 | <a name="input_trigger_manual_name"></a> [trigger\_manual\_name](#input\_trigger\_manual\_name) | The name of the CI pipeline Manual trigger. | `string` | `"Manual CD Trigger"` | no |
 | <a name="input_trigger_manual_promotion_enable"></a> [trigger\_manual\_promotion\_enable](#input\_trigger\_manual\_promotion\_enable) | Set to `true` to enable the CD pipeline Manual Promotion trigger. | `bool` | `true` | no |

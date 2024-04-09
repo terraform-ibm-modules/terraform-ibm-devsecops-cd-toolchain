@@ -201,7 +201,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_git_promotion_validation"
   count          = (var.create_triggers) ? 1 : 0
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   type           = "scm"
-  name           = "git promotion validation listener"
+  name           = var.trigger_git_promotion_validation_name
   event_listener = var.trigger_git_promotion_listener
   enabled        = var.trigger_git_promotion_enable
   source {
