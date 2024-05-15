@@ -228,6 +228,9 @@ variable "trigger_timed_pruner_enable" {
 
 variable "enable_pipeline_notifications" {
 }
+variable "event_notifications" {
+
+}
 
 variable "trigger_git_promotion_listener" {
 }

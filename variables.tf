@@ -1377,6 +1377,23 @@ variable "event_notifications_crn" {
   default     = ""
 }
 
+variable "enable_pipeline_notifications" {
+  type        = bool
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = false
+
+}
+
+variable "event_notifications" {
+  type = string
+  description = "To enable event notification, set event_notifications to 1 "
+  default = "0"
+  validation {
+    condition     = contains(["0", "1"], var.event_notifications)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 ####### Trigger properties ###################
 variable "create_triggers" {
   type        = bool

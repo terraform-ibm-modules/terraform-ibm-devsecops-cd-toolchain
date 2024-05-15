@@ -151,8 +151,10 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_enable_insights"></a> [enable\_insights](#input\_enable\_insights) | Set to `true` to enable the DevOps Insights integration. | `bool` | `true` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `false` | no |
 | <a name="input_enable_pipeline_git_token"></a> [enable\_pipeline\_git\_token](#input\_enable\_pipeline\_git\_token) | Enable to add `git-token` to the pipeline properties. | `bool` | `false` | no |
+| <a name="input_enable_pipeline_notifications"></a> [enable\_pipeline\_notifications](#input\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `bool` | `false` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `true` | no |
 | <a name="input_enable_slack"></a> [enable\_slack](#input\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
+| <a name="input_event_notifications"></a> [event\_notifications](#input\_event\_notifications) | To enable event notification, set event\_notifications to 1 | `string` | `"0"` | no |
 | <a name="input_event_notifications_crn"></a> [event\_notifications\_crn](#input\_event\_notifications\_crn) | The CRN for the Event Notifications instance. | `string` | `""` | no |
 | <a name="input_event_notifications_tool_name"></a> [event\_notifications\_tool\_name](#input\_event\_notifications\_tool\_name) | The name of the Event Notifications integration. | `string` | `"Event Notifications"` | no |
 | <a name="input_evidence_group"></a> [evidence\_group](#input\_evidence\_group) | Specify Git user/group for evidence repo. | `string` | `""` | no |
@@ -281,10 +283,10 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group within which the toolchain is created. | `string` | `"Default"` | no |
 | <a name="input_trigger_git_enable"></a> [trigger\_git\_enable](#input\_trigger\_git\_enable) | Set to `true` to enable the CD pipeline Git trigger. | `bool` | `false` | no |
 | <a name="input_trigger_git_name"></a> [trigger\_git\_name](#input\_trigger\_git\_name) | The name of the CD pipeline GIT trigger. | `string` | `"Git CD Trigger"` | no |
-| <a name="input_trigger_git_promotion_branch"></a> [trigger\_git\_promotion\_branch](#input\_trigger\_git\_promotion\_branch) | Branch for Git promotion listener. | `string` | `"prod"` | no |
-| <a name="input_trigger_git_promotion_enable"></a> [trigger\_git\_promotion\_enable](#input\_trigger\_git\_promotion\_enable) | Enable Git promotion for Git promotion listener. | `bool` | `false` | no |
-| <a name="input_trigger_git_promotion_listener"></a> [trigger\_git\_promotion\_listener](#input\_trigger\_git\_promotion\_listener) | Select a Tekton EventListener to use when Git promotion listener trigger is fired. | `string` | `"promotion-validation-listener-gitlab"` | no |
-| <a name="input_trigger_git_promotion_name"></a> [trigger\_git\_promotion\_name](#input\_trigger\_git\_promotion\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
+| <a name="input_trigger_git_promotion_branch"></a> [trigger\_git\_promotion\_branch](#input\_trigger\_git\_promotion\_branch) | Branch for Git promotion validation listener. | `string` | `"prod"` | no |
+| <a name="input_trigger_git_promotion_enable"></a> [trigger\_git\_promotion\_enable](#input\_trigger\_git\_promotion\_enable) | Enable Git promotion validation for Git promotion listener. | `bool` | `false` | no |
+| <a name="input_trigger_git_promotion_listener"></a> [trigger\_git\_promotion\_listener](#input\_trigger\_git\_promotion\_listener) | Select a Tekton EventListener to use when Git promotion validation listener trigger is fired. | `string` | `"promotion-validation-listener-gitlab"` | no |
+| <a name="input_trigger_git_promotion_validation_name"></a> [trigger\_git\_promotion\_validation\_name](#input\_trigger\_git\_promotion\_validation\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
 | <a name="input_trigger_manual_enable"></a> [trigger\_manual\_enable](#input\_trigger\_manual\_enable) | Set to `true` to enable the CD pipeline Manual trigger. | `bool` | `true` | no |
 | <a name="input_trigger_manual_name"></a> [trigger\_manual\_name](#input\_trigger\_manual\_name) | The name of the CI pipeline Manual trigger. | `string` | `"Manual CD Trigger"` | no |
 | <a name="input_trigger_manual_promotion_enable"></a> [trigger\_manual\_promotion\_enable](#input\_trigger\_manual\_promotion\_enable) | Set to `true` to enable the CD pipeline Manual Promotion trigger. | `bool` | `true` | no |

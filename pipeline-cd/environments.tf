@@ -458,3 +458,11 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_service_bind
   value       = var.code_engine_service_bindings
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
+  type        = "text"
+  name        = "event-notifications"
+  value       = var.event_notifications
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}
+
