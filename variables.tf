@@ -1634,6 +1634,16 @@ variable "code_engine_remove_refs" {
 
 variable "code_engine_service_bindings" {
   type        = string
-  description = "JSON array including service name(s) (as a simple JSON string."
+  description = "JSON array including service name(s) (as a simple JSON string)."
   default     = ""
+}
+
+variable "pre_prod_evidence_collection" {
+  type        = string
+  description = "Set this flag to collect the pre-prod evidences and the change requests in the production deployment (target-environment-purpose set to production). Default value is 0."
+  default     = "0"
+  validation {
+    condition     = contains(["0", "1"], var.pre_prod_evidence_collection)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
 }

@@ -466,3 +466,10 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pre_prod_evidence_collection" {
+  name        = "pre-prod-evidence-collection"
+  type        = "single_select"
+  enum        = ["0", "1"]
+  value       = var.pre_prod_evidence_collection
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
+}

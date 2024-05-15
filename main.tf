@@ -424,6 +424,7 @@ module "pipeline_cd" {
   code_engine_env_from_secrets          = var.code_engine_env_from_secrets
   code_engine_remove_refs               = var.code_engine_remove_refs
   code_engine_service_bindings          = var.code_engine_service_bindings
+  pre_prod_evidence_collection          = var.pre_prod_evidence_collection
 }
 
 module "integrations" {

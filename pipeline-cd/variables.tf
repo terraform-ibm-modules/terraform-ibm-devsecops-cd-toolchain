@@ -312,3 +312,5 @@ variable "code_engine_remove_refs" {
 
 variable "code_engine_service_bindings" {
 }
+variable "pre_prod_evidence_collection" {
+}
