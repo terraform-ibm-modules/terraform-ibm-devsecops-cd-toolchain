@@ -1620,3 +1620,95 @@ variable "code_engine_service_bindings" {
   description = "JSON array including service name(s) (as a simple JSON string."
   default     = ""
 }
+
+######## ZOS Vars #####################
+variable "zos_hostip" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_host_name" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_ssh_port" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_bastion_host_name" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_bastion_ssh_port" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_bastion_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_bastion_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_url" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_hlq" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_user" {
+  type        = string
+  description = ""
+  default     = ""
+}
+
+variable "zos_dbb_secret_name" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_secret_info" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_dbb_secret_name" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+
+variable "zos_secret_key_name" {
+  type        = string
+  description = "API key used to create the toolchains."
+  sensitive   = true
+}
+######## End ZOS Vars #####################

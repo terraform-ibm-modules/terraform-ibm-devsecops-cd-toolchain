@@ -423,6 +423,19 @@ module "pipeline_cd" {
   code_engine_env_from_secrets          = var.code_engine_env_from_secrets
   code_engine_remove_refs               = var.code_engine_remove_refs
   code_engine_service_bindings          = var.code_engine_service_bindings
+  zos_hostip                            = var.zos_hostip
+  zos_secret_key_name                   = var.zos_secret_key_name     
+  zos_dbb_secret_name                   = var.zos_dbb_secret_name
+  zos_secret_info                       = var.zos_secret_info
+  zos_dbb_user                          = var.zos_dbb_hlq
+  zos_dbb_hlq                           = var.zos_dbb_hlq
+  zos_dbb_url                           = var.zos_dbb_url
+  zos_bastion_user                      = var.zos_bastion_user
+  zos_bastion_ssh_port                  = var.zos_bastion_ssh_port
+  zos_bastion_host_name                 = var.zos_bastion_host_name
+  zos_user                              = var.zos_user
+  zos_ssh_port                          = var.zos_ssh_port
+  zos_host_name                         = var.zos_host_name
 }
 
 module "integrations" {
