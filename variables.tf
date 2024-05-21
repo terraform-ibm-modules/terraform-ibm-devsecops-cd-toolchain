@@ -1664,12 +1664,6 @@ variable "zos_bastion_user" {
   default     = ""
 }
 
-variable "zos_bastion_user" {
-  type        = string
-  description = ""
-  default     = ""
-}
-
 variable "zos_dbb_url" {
   type        = string
   description = ""
@@ -1686,12 +1680,6 @@ variable "zos_dbb_user" {
   type        = string
   description = ""
   default     = ""
-}
-
-variable "zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
 }
 
 variable "zos_secret_info" {
