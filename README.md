@@ -297,6 +297,19 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_trigger_timed_pruner_enable"></a> [trigger\_timed\_pruner\_enable](#input\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_trigger_timed_pruner_name"></a> [trigger\_timed\_pruner\_name](#input\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_worker_id"></a> [worker\_id](#input\_worker\_id) | The identifier for the Managed Pipeline worker. | `string` | `"public"` | no |
+| <a name="input_zos_hostip"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_host_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_ssh_port"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_bastion_host_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_bastion_ssh_port"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_bastion_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_dbb_url"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_dbb_hlq"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_dbb_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_dbb_secret_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_secret_info"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_secret_key_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
 
 ### Outputs
 
