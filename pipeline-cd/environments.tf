@@ -464,7 +464,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_hostip" {
   name        = "zos-hostip"
   type        = "text"
   value       = var.zos_hostip
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_host_name" {
@@ -472,7 +472,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_host_name" {
   name        = "zos-hostname"
   type        = "text"
   value       = var.zos_host_name
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_ssh_port" {
@@ -480,7 +480,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_ssh_port" {
   name        = "zos-ssh-port"
   type        = "text"
   value       = var.zos_ssh_port
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_user" {
@@ -488,7 +488,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_user" {
   name        = "zos-user"
   type        = "text"
   value       = var.zos_user
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
@@ -496,7 +496,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
   name        = "bastion-hostname"
   type        = "text"
   value       = var.zos_bastion_host_name
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
@@ -504,7 +504,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
   name        = "bastion-ssh-port"
   type        = "text"
   value       = var.zos_bastion_ssh_port
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_user" {
@@ -512,7 +512,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_user" {
   name        = "bastion-user"
   type        = "text"
   value       = var.zos_bastion_user
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_url" {
@@ -520,7 +520,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_url" {
   name        = "dbb-url"
   type        = "text"
   value       = var.zos_dbb_url
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_hlq" {
@@ -528,7 +528,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_hlq" {
   name        = "dbb-hlq"
   type        = "text"
   value       = var.zos_dbb_hlq
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_user" {
@@ -536,7 +536,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_user" {
   name        = "dbb-user"
   type        = "text"
   value       = var.zos_dbb_user
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_secret_name" {
@@ -544,7 +544,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_dbb_secret_name" {
   name        = "dbb-secret-name"
   type        = "text"
   value       = var.zos_secret_key_name
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_secret_info" {
@@ -552,7 +552,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_secret_info" {
   name        = "secret-info"
   type        = "secure"
   value       = var.zos_secret_info
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_secret_key_name" {
@@ -560,5 +560,5 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_secret_key_name" {
   name        = "zos-secret-key-name"
   type        = "secure"
   value       = var.zos_secret_key_name
-  pipeline_id = ibm_cd_tekton_pipeline.ci_pipeline_instance.pipeline_id
+  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }

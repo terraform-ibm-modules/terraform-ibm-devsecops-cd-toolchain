@@ -1484,7 +1484,7 @@ variable "trigger_git_promotion_branch" {
 
 variable "deployment_target" {
   type        = string
-  description = "The deployment target, 'cluster' or 'code-engine'."
+  description = "The deployment target, 'cluster', 'code-engine' or `zos`."
   default     = "cluster"
 }
 
