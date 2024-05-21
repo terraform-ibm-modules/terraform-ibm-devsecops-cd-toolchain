@@ -499,7 +499,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_host_name" {
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_zos_bastion_ssh_port" {
   count       = (var.deployment_target == "zos") ? 1 : 0
   name        = "bastion-ssh-port"
   type        = "text"
