@@ -37,9 +37,9 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 
 | Name | Type |
 |------|------|
-| [ibm_cd_toolchain.toolchain_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/resources/cd_toolchain) | resource |
-| [ibm_cd_toolchain_tool_pipeline.cd_pipeline](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/resources/cd_toolchain_tool_pipeline) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.60.0/docs/data-sources/resource_group) | data source |
+| [ibm_cd_toolchain.toolchain_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain) | resource |
+| [ibm_cd_toolchain_tool_pipeline.cd_pipeline](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_toolchain_tool_pipeline) | resource |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
@@ -142,7 +142,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_deployment_repo_secret_group"></a> [deployment\_repo\_secret\_group](#input\_deployment\_repo\_secret\_group) | Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_deployment_repo_traceability_enabled"></a> [deployment\_repo\_traceability\_enabled](#input\_deployment\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_deployment_source_repo_url"></a> [deployment\_source\_repo\_url](#input\_deployment\_source\_repo\_url) | Url of deployment repo template | `string` | `""` | no |
-| <a name="input_deployment_target"></a> [deployment\_target](#input\_deployment\_target) | The deployment target, 'cluster' or 'code-engine'. | `string` | `"cluster"` | no |
+| <a name="input_deployment_target"></a> [deployment\_target](#input\_deployment\_target) | The deployment target, 'cluster', 'code-engine' or `zos`. | `string` | `"cluster"` | no |
 | <a name="input_doi_environment"></a> [doi\_environment](#input\_doi\_environment) | DevOpsInsights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_doi_toolchain_id"></a> [doi\_toolchain\_id](#input\_doi\_toolchain\_id) | DevOps Insights Toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_emergency_label"></a> [emergency\_label](#input\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
@@ -168,7 +168,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_evidence_repo_name"></a> [evidence\_repo\_name](#input\_evidence\_repo\_name) | The repository name. | `string` | `""` | no |
 | <a name="input_evidence_repo_secret_group"></a> [evidence\_repo\_secret\_group](#input\_evidence\_repo\_secret\_group) | Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_evidence_repo_traceability_enabled"></a> [evidence\_repo\_traceability\_enabled](#input\_evidence\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
-| <a name="input_evidence_repo_url"></a> [evidence\_repo\_url](#input\_evidence\_repo\_url) | This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates. | `string` | n/a | yes |
+| <a name="input_evidence_repo_url"></a> [evidence\_repo\_url](#input\_evidence\_repo\_url) | This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_force_redeploy"></a> [force\_redeploy](#input\_force\_redeploy) | Forces the deployment or redeployment of the app even if the last deployment does not contain a delta in the inventory. Set this parameter to `true` to force a deployment of the app as if it is the first deployment on the specified target environment. By default, this parameter is set to `false`. | `string` | `"false"` | no |
 | <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | IBM Cloud API Endpoint. | `string` | `"https://cloud.ibm.com"` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | API key used to create the toolchains. | `string` | n/a | yes |
@@ -185,7 +185,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_inventory_repo_name"></a> [inventory\_repo\_name](#input\_inventory\_repo\_name) | The repository name. | `string` | `""` | no |
 | <a name="input_inventory_repo_secret_group"></a> [inventory\_repo\_secret\_group](#input\_inventory\_repo\_secret\_group) | Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_inventory_repo_traceability_enabled"></a> [inventory\_repo\_traceability\_enabled](#input\_inventory\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
-| <a name="input_inventory_repo_url"></a> [inventory\_repo\_url](#input\_inventory\_repo\_url) | This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates. | `string` | n/a | yes |
+| <a name="input_inventory_repo_url"></a> [inventory\_repo\_url](#input\_inventory\_repo\_url) | This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_issues_group"></a> [issues\_group](#input\_issues\_group) | Specify Git user/group for issues repo. | `string` | `""` | no |
 | <a name="input_issues_repo_auth_type"></a> [issues\_repo\_auth\_type](#input\_issues\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_issues_repo_git_id"></a> [issues\_repo\_git\_id](#input\_issues\_repo\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
@@ -199,7 +199,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_issues_repo_name"></a> [issues\_repo\_name](#input\_issues\_repo\_name) | The repository name. | `string` | `""` | no |
 | <a name="input_issues_repo_secret_group"></a> [issues\_repo\_secret\_group](#input\_issues\_repo\_secret\_group) | Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_issues_repo_traceability_enabled"></a> [issues\_repo\_traceability\_enabled](#input\_issues\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
-| <a name="input_issues_repo_url"></a> [issues\_repo\_url](#input\_issues\_repo\_url) | This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates. | `string` | n/a | yes |
+| <a name="input_issues_repo_url"></a> [issues\_repo\_url](#input\_issues\_repo\_url) | This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_kp_integration_name"></a> [kp\_integration\_name](#input\_kp\_integration\_name) | The name of the Key Protect integration. | `string` | `"kp-compliance-secrets"` | no |
 | <a name="input_kp_location"></a> [kp\_location](#input\_kp\_location) | IBM Cloud location/region containing the Key Protect instance. | `string` | `"us-south"` | no |
 | <a name="input_kp_name"></a> [kp\_name](#input\_kp\_name) | Name of the Key Protect instance where the secrets are stored. | `string` | `"kp-compliance-secrets"` | no |
@@ -281,10 +281,10 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group within which the toolchain is created. | `string` | `"Default"` | no |
 | <a name="input_trigger_git_enable"></a> [trigger\_git\_enable](#input\_trigger\_git\_enable) | Set to `true` to enable the CD pipeline Git trigger. | `bool` | `false` | no |
 | <a name="input_trigger_git_name"></a> [trigger\_git\_name](#input\_trigger\_git\_name) | The name of the CD pipeline GIT trigger. | `string` | `"Git CD Trigger"` | no |
-| <a name="input_trigger_git_promotion_branch"></a> [trigger\_git\_promotion\_branch](#input\_trigger\_git\_promotion\_branch) | Branch for Git promotion listener. | `string` | `"prod"` | no |
-| <a name="input_trigger_git_promotion_enable"></a> [trigger\_git\_promotion\_enable](#input\_trigger\_git\_promotion\_enable) | Enable Git promotion for Git promotion listener. | `bool` | `false` | no |
-| <a name="input_trigger_git_promotion_listener"></a> [trigger\_git\_promotion\_listener](#input\_trigger\_git\_promotion\_listener) | Select a Tekton EventListener to use when Git promotion listener trigger is fired. | `string` | `"promotion-validation-listener-gitlab"` | no |
-| <a name="input_trigger_git_promotion_name"></a> [trigger\_git\_promotion\_name](#input\_trigger\_git\_promotion\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
+| <a name="input_trigger_git_promotion_branch"></a> [trigger\_git\_promotion\_branch](#input\_trigger\_git\_promotion\_branch) | Branch for Git promotion validation listener. | `string` | `"prod"` | no |
+| <a name="input_trigger_git_promotion_enable"></a> [trigger\_git\_promotion\_enable](#input\_trigger\_git\_promotion\_enable) | Enable Git promotion validation for Git promotion listener. | `bool` | `false` | no |
+| <a name="input_trigger_git_promotion_listener"></a> [trigger\_git\_promotion\_listener](#input\_trigger\_git\_promotion\_listener) | Select a Tekton EventListener to use when Git promotion validation listener trigger is fired. | `string` | `"promotion-validation-listener-gitlab"` | no |
+| <a name="input_trigger_git_promotion_validation_name"></a> [trigger\_git\_promotion\_validation\_name](#input\_trigger\_git\_promotion\_validation\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
 | <a name="input_trigger_manual_enable"></a> [trigger\_manual\_enable](#input\_trigger\_manual\_enable) | Set to `true` to enable the CD pipeline Manual trigger. | `bool` | `true` | no |
 | <a name="input_trigger_manual_name"></a> [trigger\_manual\_name](#input\_trigger\_manual\_name) | The name of the CI pipeline Manual trigger. | `string` | `"Manual CD Trigger"` | no |
 | <a name="input_trigger_manual_promotion_enable"></a> [trigger\_manual\_promotion\_enable](#input\_trigger\_manual\_promotion\_enable) | Set to `true` to enable the CD pipeline Manual Promotion trigger. | `bool` | `true` | no |
@@ -297,19 +297,12 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_trigger_timed_pruner_enable"></a> [trigger\_timed\_pruner\_enable](#input\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_trigger_timed_pruner_name"></a> [trigger\_timed\_pruner\_name](#input\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_worker_id"></a> [worker\_id](#input\_worker\_id) | The identifier for the Managed Pipeline worker. | `string` | `"public"` | no |
-| <a name="input_zos_hostip"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_host_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_ssh_port"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_bastion_host_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_bastion_ssh_port"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_bastion_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_dbb_url"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_dbb_hlq"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_dbb_user"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_dbb_secret_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_secret_info"></a> [zos](#input\_zos) |  | `string` | `""` | no |
-| <a name="input_zos_secret_key_name"></a> [zos](#input\_zos) |  | `string` | `""` | no |
+| <a name="input_zos_dbb_hlq"></a> [zos\_dbb\_hlq](#input\_zos\_dbb\_hlq) | z/OS Dependency Based Build (DBB) engine High-Level Qualifier. | `string` | `"IBMUSER.PIPELINE"` | no |
+| <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | z/OS Dependency Based Build (DBB) engine userid. | `string` | `""` | no |
+| <a name="input_zos_host_name"></a> [zos\_host\_name](#input\_zos\_host\_name) | z/OS hotname or IP address. | `string` | `""` | no |
+| <a name="input_zos_secret_key_name"></a> [zos\_secret\_key\_name](#input\_zos\_secret\_key\_name) | z/OS SSH key name. | `string` | `"ssh-auth"` | no |
+| <a name="input_zos_ssh_port"></a> [zos\_ssh\_port](#input\_zos\_ssh\_port) | z/OS SSH port. | `string` | `"22"` | no |
+| <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | z/OS userid | `string` | `"ibmuser"` | no |
 
 ### Outputs
 
