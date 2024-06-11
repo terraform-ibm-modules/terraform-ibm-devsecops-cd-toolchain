@@ -1385,9 +1385,9 @@ variable "enable_pipeline_notifications" {
 }
 
 variable "event_notifications" {
-  type = string
+  type        = string
   description = "To enable event notification, set event_notifications to 1 "
-  default = "0"
+  default     = "0"
   validation {
     condition     = contains(["0", "1"], var.event_notifications)
     error_message = "Must be either \"0\" or \"1\" ."
