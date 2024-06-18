@@ -198,7 +198,7 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 }
 
 module "issues_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "issues-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -219,7 +219,7 @@ module "issues_repo" {
 }
 
 module "evidence_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "evidence-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -240,7 +240,7 @@ module "evidence_repo" {
 }
 
 module "inventory_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "inventory-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -262,7 +262,7 @@ module "inventory_repo" {
 
 module "change_management_repo" {
   count                 = (var.enable_change_management_repo) ? 1 : 0
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "change-management-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -284,7 +284,7 @@ module "change_management_repo" {
 
 module "pipeline_config_repo" {
   count                 = ((var.pipeline_config_repo_existing_url == "") && (var.pipeline_config_repo_clone_from_url == "")) ? 0 : 1
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "pipeline-config-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -305,7 +305,7 @@ module "pipeline_config_repo" {
 }
 
 module "compliance_pipelines_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -326,7 +326,7 @@ module "compliance_pipelines_repo" {
 }
 
 module "deployment_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "deployment-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id

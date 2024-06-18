@@ -23,15 +23,15 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_change_management_repo"></a> [change\_management\_repo](#module\_change\_management\_repo) | ./repos | n/a |
-| <a name="module_compliance_pipelines_repo"></a> [compliance\_pipelines\_repo](#module\_compliance\_pipelines\_repo) | ./repos | n/a |
-| <a name="module_deployment_repo"></a> [deployment\_repo](#module\_deployment\_repo) | ./repos | n/a |
-| <a name="module_evidence_repo"></a> [evidence\_repo](#module\_evidence\_repo) | ./repos | n/a |
+| <a name="module_change_management_repo"></a> [change\_management\_repo](#module\_change\_management\_repo) | ./customizations/repositories | n/a |
+| <a name="module_compliance_pipelines_repo"></a> [compliance\_pipelines\_repo](#module\_compliance\_pipelines\_repo) | ./customizations/repositories | n/a |
+| <a name="module_deployment_repo"></a> [deployment\_repo](#module\_deployment\_repo) | ./customizations/repositories | n/a |
+| <a name="module_evidence_repo"></a> [evidence\_repo](#module\_evidence\_repo) | ./customizations/repositories | n/a |
 | <a name="module_integrations"></a> [integrations](#module\_integrations) | ./integrations | n/a |
-| <a name="module_inventory_repo"></a> [inventory\_repo](#module\_inventory\_repo) | ./repos | n/a |
-| <a name="module_issues_repo"></a> [issues\_repo](#module\_issues\_repo) | ./repos | n/a |
+| <a name="module_inventory_repo"></a> [inventory\_repo](#module\_inventory\_repo) | ./customizations/repositories | n/a |
+| <a name="module_issues_repo"></a> [issues\_repo](#module\_issues\_repo) | ./customizations/repositories | n/a |
 | <a name="module_pipeline_cd"></a> [pipeline\_cd](#module\_pipeline\_cd) | ./pipeline-cd | n/a |
-| <a name="module_pipeline_config_repo"></a> [pipeline\_config\_repo](#module\_pipeline\_config\_repo) | ./repos | n/a |
+| <a name="module_pipeline_config_repo"></a> [pipeline\_config\_repo](#module\_pipeline\_config\_repo) | ./customizations/repositories | n/a |
 | <a name="module_pipeline_properties"></a> [pipeline\_properties](#module\_pipeline\_properties) | ./customizations/pipeline-property-adder | n/a |
 | <a name="module_repository_properties"></a> [repository\_properties](#module\_repository\_properties) | ./customizations/repository-adder | n/a |
 | <a name="module_services"></a> [services](#module\_services) | ./services | n/a |
