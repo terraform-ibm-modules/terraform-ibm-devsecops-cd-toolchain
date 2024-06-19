@@ -154,7 +154,7 @@ locals {
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
   )
 
-  properties_file_input = try(file("${path.root}/properties.json"), "[]")
+  properties_file_input = (var.pipeline_properties_filepath == "") ? try(file("${path.root}/properties.json"), "[]") : try(file(var.pipeline_properties_filepath), "[]")
   properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
   properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
   pre_process_prop_data = flatten([for pipeline in jsondecode(local.properties_input) : {
@@ -164,15 +164,15 @@ locals {
   ])
 
   config_data = {
-    "secrets_integration_name" = "${var.sm_integration_name}",
-    "secrets_group"            = "${var.sm_secret_group}",
+    "secrets_integration_name" = var.sm_integration_name,
+    "secrets_group"            = var.sm_secret_group,
     "secrets_provider_type" = (
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     )
   }
 
-  repos_file_input = try(file("${path.root}/repositories.json"), "[]")
+  repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
   repos_file_data  = (local.repos_file_input == "") ? "[]" : local.repos_file_input
   repos_input      = (var.repository_properties == "") ? local.repos_file_data : var.repository_properties
   pre_process_repo_data = flatten([for pipeline in jsondecode(local.repos_input) : {
@@ -198,7 +198,7 @@ resource "ibm_cd_toolchain" "toolchain_instance" {
 }
 
 module "issues_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "issues-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -219,7 +219,7 @@ module "issues_repo" {
 }
 
 module "evidence_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "evidence-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -240,7 +240,7 @@ module "evidence_repo" {
 }
 
 module "inventory_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "inventory-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -262,7 +262,7 @@ module "inventory_repo" {
 
 module "change_management_repo" {
   count                 = (var.enable_change_management_repo) ? 1 : 0
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "change-management-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -284,7 +284,7 @@ module "change_management_repo" {
 
 module "pipeline_config_repo" {
   count                 = ((var.pipeline_config_repo_existing_url == "") && (var.pipeline_config_repo_clone_from_url == "")) ? 0 : 1
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "pipeline-config-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -305,7 +305,7 @@ module "pipeline_config_repo" {
 }
 
 module "compliance_pipelines_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -326,7 +326,7 @@ module "compliance_pipelines_repo" {
 }
 
 module "deployment_repo" {
-  source                = "./repos"
+  source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "deployment-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
@@ -547,7 +547,7 @@ module "pipeline_properties" {
   source = "./customizations/pipeline-property-adder"
   #preprossing the data ensures that a pipeline_id is variable is present
   for_each = tomap({
-    for t in local.pre_process_prop_data : "${t.pipeline_id}" => t
+    for t in local.pre_process_prop_data : t.pipeline_id => t
   })
   property_data = each.value
   # resolve the shorthand to an actual pipeline id
@@ -571,7 +571,7 @@ module "repository_properties" {
   source = "./customizations/repository-adder"
   #preprossing the data ensures that a pipeline_id is variable is present
   for_each = tomap({
-    for t in local.pre_process_repo_data : "${t.pipeline_id}" => t
+    for t in local.pre_process_repo_data : t.pipeline_id => t
   })
   toolchain_id       = ibm_cd_toolchain.toolchain_instance.id
   pipeline_repo_data = each.value
