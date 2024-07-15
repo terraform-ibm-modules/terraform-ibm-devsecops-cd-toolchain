@@ -38,9 +38,6 @@ variable "pipeline_doi_api_key_secret_ref" {
 variable "link_to_doi_toolchain" {
 }
 
-variable "pipeline_git_token_secret_ref" {
-}
-
 variable "code_signing_cert_secret_ref" {
 }
 
@@ -153,9 +150,6 @@ variable "source_environment" {
 }
 
 variable "target_environment" {
-}
-
-variable "merge_cra_sbom" {
 }
 
 variable "app_version" {

@@ -132,13 +132,6 @@ locals {
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 
-  pipeline_git_token_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
-  )
-
   code_signing_cert_secret_ref = (
     (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
     (var.code_signing_cert_secret_name == "") ? "" :
@@ -389,7 +382,6 @@ module "pipeline_cd" {
   doi_toolchain_id                      = var.doi_toolchain_id
   doi_environment                       = var.doi_environment
   pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
-  pipeline_git_token_secret_ref         = local.pipeline_git_token_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
   target_environment_detail             = var.target_environment_detail
@@ -399,7 +391,6 @@ module "pipeline_cd" {
   satellite_cluster_group               = var.satellite_cluster_group
   source_environment                    = var.source_environment
   target_environment                    = var.target_environment
-  merge_cra_sbom                        = var.merge_cra_sbom
   app_version                           = var.app_version
   slack_notifications                   = var.slack_notifications
   pipeline_debug                        = var.pipeline_debug

@@ -208,12 +208,6 @@ variable "cos_api_key_secret_name" {
   default     = "cos-api-key"
 }
 
-variable "pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
-}
-
 variable "cos_endpoint" {
   type        = string
   description = "COS endpoint name."
@@ -1033,17 +1027,6 @@ variable "scc_scc_api_key_secret_crn" {
   }
 }
 
-variable "pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Git Token secret in the pipeline properties."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_git_token_secret_crn, "crn:") || var.pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "code_signing_cert_secret_crn" {
   type        = string
   sensitive   = true
@@ -1142,12 +1125,6 @@ variable "target_environment" {
   type        = string
   description = "The target environment that the app is deployed to."
   default     = "prod"
-}
-
-variable "merge_cra_sbom" {
-  type        = string
-  description = "Merge the SBOM."
-  default     = "1"
 }
 
 variable "app_version" {
@@ -1309,12 +1286,6 @@ variable "cos_api_key_secret_group" {
 variable "pipeline_ibmcloud_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 

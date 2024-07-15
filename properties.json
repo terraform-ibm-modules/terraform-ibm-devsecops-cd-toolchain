@@ -14,10 +14,14 @@
             "enum": "[false,true]"
         },
         {
-          "name": "custom-param2",
+          "name": "git-token",
           "type": "secure",
-          "value": "grit-token",
-          "locked": "true"
+          "value": ""
+        },
+        {
+            "name": "merge-cra-sbom",
+            "type": "text",
+            "value": "1"
         }
        
       ]

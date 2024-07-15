@@ -34,13 +34,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_merge-cra-sbom" {
-  name        = "merge-cra-sbom"
-  type        = "text"
-  value       = var.merge_cra_sbom
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
   name        = "version"
   type        = "text"
@@ -166,14 +159,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cos_endpoint" {
   name        = "cos-endpoint"
   type        = "text"
   value       = var.cos_endpoint
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_git_token_environment" {
-  count       = (var.enable_pipeline_git_token) ? 1 : 0
-  name        = "git-token"
-  type        = "secure"
-  value       = var.pipeline_git_token_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
