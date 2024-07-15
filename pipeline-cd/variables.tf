@@ -143,9 +143,6 @@ variable "target_environment_purpose" {
 variable "change_request_id" {
 }
 
-variable "target_environment" {
-}
-
 variable "app_version" {
 }
 

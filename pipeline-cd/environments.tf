@@ -12,13 +12,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment" {
-  name        = "target-environment"
-  type        = "text"
-  value       = var.target_environment
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
   name        = "version"
   type        = "text"

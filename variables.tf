@@ -1109,12 +1109,6 @@ variable "change_request_id" {
   default     = "notAvailable"
 }
 
-variable "target_environment" {
-  type        = string
-  description = "The target environment that the app is deployed to."
-  default     = "prod"
-}
-
 variable "app_version" {
   type        = string
   description = "The version of the app to deploy."

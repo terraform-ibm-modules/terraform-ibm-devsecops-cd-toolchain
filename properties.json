@@ -48,6 +48,11 @@
             "name": "source-environment",
             "type": "text",
             "value": "master"
+        },
+        {
+            "name": "target-environment",
+            "type": "text",
+            "value": "pro"
         }
       ]
     }
