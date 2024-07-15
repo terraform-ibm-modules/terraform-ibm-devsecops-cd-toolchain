@@ -12,13 +12,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_source_environment" {
-  name        = "source-environment"
-  type        = "text"
-  value       = var.source_environment
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment" {
   name        = "target-environment"
   type        = "text"
@@ -76,20 +69,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
   type        = "integration"
   value       = var.issues_repo.tool_id
   path        = "parameters.repo_url"
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-# resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_dockerconfigjson" {
-#   name           = "pipeline-dockerconfigjson"
-#   type           = "secure"
-#   value          = ""
-#   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-# }
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_slack_notifications" {
-  name        = "slack-notifications"
-  type        = "text"
-  value       = var.slack_notifications
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

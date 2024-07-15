@@ -1109,12 +1109,6 @@ variable "change_request_id" {
   default     = "notAvailable"
 }
 
-variable "source_environment" {
-  type        = string
-  description = "The source environment that the app is promoted from."
-  default     = "master"
-}
-
 variable "target_environment" {
   type        = string
   description = "The target environment that the app is deployed to."
@@ -1125,12 +1119,6 @@ variable "app_version" {
   type        = string
   description = "The version of the app to deploy."
   default     = "v1"
-}
-
-variable "slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack integration on or off."
-  default     = "0"
 }
 
 variable "artifactory_integration_name" {

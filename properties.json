@@ -38,6 +38,16 @@
             "name": "satellite-cluster-group",
             "type": "text",
             "value": ""
+        },
+        {
+            "name": "slack-notifications",
+            "type": "text",
+            "value": "0"
+        },
+        {
+            "name": "source-environment",
+            "type": "text",
+            "value": "master"
         }
       ]
     }

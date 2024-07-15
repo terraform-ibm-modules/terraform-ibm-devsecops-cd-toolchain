@@ -143,16 +143,10 @@ variable "target_environment_purpose" {
 variable "change_request_id" {
 }
 
-variable "source_environment" {
-}
-
 variable "target_environment" {
 }
 
 variable "app_version" {
-}
-
-variable "slack_notifications" {
 }
 
 variable "enable_artifactory" {
