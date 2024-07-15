@@ -131,9 +131,6 @@ variable "doi_toolchain_id" {
 variable "compliance_base_image" {
 }
 
-variable "target_environment_detail" {
-}
-
 variable "customer_impact" {
 }
 

@@ -1085,12 +1085,6 @@ variable "compliance_pipeline_group" {
   default     = ""
 }
 
-variable "target_environment_detail" {
-  type        = string
-  description = "Details of the environment being updated."
-  default     = "Production target environment"
-}
-
 variable "customer_impact" {
   type        = string
   description = "Custom impact of the change request."

@@ -163,12 +163,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment_purpo
   type        = "single_select"
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment_detail" {
-  name        = "target-environment-detail"
-  type        = "text"
-  value       = var.target_environment_detail
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
+
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_customer_impact" {
   name        = "customer-impact"
   enum        = ["critical", "high", "moderate", "low", "no_impact"]

@@ -53,6 +53,11 @@
             "name": "target-environment",
             "type": "text",
             "value": "pro"
+        },
+        {
+            "name": "target-environment-detail",
+            "type": "text",
+            "value": "Production target environment"
         }
       ]
     }

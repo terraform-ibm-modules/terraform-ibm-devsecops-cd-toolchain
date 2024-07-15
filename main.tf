@@ -384,7 +384,6 @@ module "pipeline_cd" {
   pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
-  target_environment_detail             = var.target_environment_detail
   customer_impact                       = var.customer_impact
   target_environment_purpose            = var.target_environment_purpose
   change_request_id                     = var.change_request_id
