@@ -1301,12 +1301,6 @@ variable "pipeline_doi_api_key_secret_group" {
   default     = ""
 }
 
-variable "peer_review_compliance" {
-  type        = string
-  description = "Set to `1` to enable peer review compliance validation."
-  default     = "1"
-}
-
 variable "peer_review_collection" {
   type        = string
   description = "Set to `1` to enable peer review collection."

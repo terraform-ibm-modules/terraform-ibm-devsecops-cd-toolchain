@@ -228,13 +228,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_signing_validation" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
-  name        = "peer-review-compliance"
-  type        = "text"
-  value       = var.peer_review_compliance
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_collection" {
   name        = "peer-review-collection"
   type        = "text"

@@ -398,7 +398,6 @@ module "pipeline_cd" {
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
-  peer_review_compliance                = var.peer_review_compliance
   peer_review_collection                = var.peer_review_collection
   artifact_signature_verification       = var.artifact_signature_verification
   create_triggers                       = var.create_triggers

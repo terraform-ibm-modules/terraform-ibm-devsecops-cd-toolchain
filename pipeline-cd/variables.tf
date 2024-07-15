@@ -167,9 +167,6 @@ variable "enable_artifactory" {
 variable "enable_pipeline_git_token" {
 }
 
-variable "peer_review_compliance" {
-}
-
 variable "peer_review_collection" {
 }
 

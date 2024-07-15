@@ -22,6 +22,11 @@
             "name": "merge-cra-sbom",
             "type": "text",
             "value": "1"
+        },
+        {
+            "name": "peer-review-compliance",
+            "type": "text",
+            "value": "1"
         }
        
       ]
