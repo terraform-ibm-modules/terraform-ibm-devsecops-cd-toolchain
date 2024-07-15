@@ -409,8 +409,6 @@ module "pipeline_cd" {
   deployment_target                     = var.deployment_target
   code_engine_project                   = var.code_engine_project
   code_engine_region                    = var.code_engine_region
-  code_engine_remove_refs               = var.code_engine_remove_refs
-  code_engine_service_bindings          = var.code_engine_service_bindings
 }
 
 module "integrations" {

@@ -1371,18 +1371,6 @@ variable "code_engine_region" {
   default     = ""
 }
 
-variable "code_engine_remove_refs" {
-  type        = string
-  description = "Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD)."
-  default     = "false"
-}
-
-variable "code_engine_service_bindings" {
-  type        = string
-  description = "JSON array including service name(s) (as a simple JSON string)."
-  default     = ""
-}
-
 variable "pipeline_properties" {
   type        = string
   description = "Stringified JSON containing the properties. This takes precedence over the properties JSON."
