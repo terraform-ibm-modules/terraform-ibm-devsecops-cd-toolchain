@@ -400,7 +400,6 @@ module "pipeline_cd" {
   source_environment                    = var.source_environment
   target_environment                    = var.target_environment
   merge_cra_sbom                        = var.merge_cra_sbom
-  force_redeploy                        = var.force_redeploy
   app_version                           = var.app_version
   slack_notifications                   = var.slack_notifications
   pipeline_debug                        = var.pipeline_debug

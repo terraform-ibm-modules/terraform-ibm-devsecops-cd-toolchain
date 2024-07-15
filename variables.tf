@@ -1324,16 +1324,6 @@ variable "code_signing_cert_secret_group" {
   default     = ""
 }
 
-variable "force_redeploy" {
-  type        = string
-  description = "Forces the deployment or redeployment of the app even if the last deployment does not contain a delta in the inventory. Set this parameter to `true` to force a deployment of the app as if it is the first deployment on the specified target environment. By default, this parameter is set to `false`."
-  default     = "false"
-  validation {
-    condition     = var.force_redeploy == "true" || var.force_redeploy == "false"
-    error_message = "Must be a `true` or `false`."
-  }
-}
-
 variable "pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."

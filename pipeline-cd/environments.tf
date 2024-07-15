@@ -101,14 +101,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_force_redeploy" {
-  name        = "force-redeploy"
-  type        = "single_select"
-  enum        = ["false", "true"]
-  value       = var.force_redeploy
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 # resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_dockerconfigjson" {
 #   name           = "pipeline-dockerconfigjson"
 #   type           = "secure"
