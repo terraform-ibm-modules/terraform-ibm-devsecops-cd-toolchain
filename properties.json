@@ -27,9 +27,18 @@
             "name": "peer-review-compliance",
             "type": "text",
             "value": "1"
+        },
+        {
+            "name": "pipeline-debug",
+            "type": "single_select",
+            "value": "0",
+            "enum": "[0,1]"
+        },
+        {
+            "name": "satellite-cluster-group",
+            "type": "text",
+            "value": ""
         }
-       
       ]
     }
   ]
-  

@@ -12,14 +12,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_satellite_cluster_group" {
-  count       = (var.deployment_target != "code-engine") ? 1 : 0
-  name        = "satellite-cluster-group"
-  type        = "text"
-  value       = var.satellite_cluster_group
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_source_environment" {
   name        = "source-environment"
   type        = "text"
@@ -84,13 +76,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
   type        = "integration"
   value       = var.issues_repo.tool_id
   path        = "parameters.repo_url"
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_debug" {
-  name        = "pipeline-debug"
-  type        = "text"
-  value       = var.pipeline_debug
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

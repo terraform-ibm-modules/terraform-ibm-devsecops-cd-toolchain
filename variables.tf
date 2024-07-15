@@ -1109,12 +1109,6 @@ variable "change_request_id" {
   default     = "notAvailable"
 }
 
-variable "satellite_cluster_group" {
-  type        = string
-  description = "The Satellite cluster group."
-  default     = ""
-}
-
 variable "source_environment" {
   type        = string
   description = "The source environment that the app is promoted from."
@@ -1136,12 +1130,6 @@ variable "app_version" {
 variable "slack_notifications" {
   type        = string
   description = "The switch that turns the Slack integration on or off."
-  default     = "0"
-}
-
-variable "pipeline_debug" {
-  type        = string
-  description = "Set to '1' to enable debug logging."
   default     = "0"
 }
 

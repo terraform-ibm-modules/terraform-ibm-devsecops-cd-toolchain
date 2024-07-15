@@ -143,9 +143,6 @@ variable "target_environment_purpose" {
 variable "change_request_id" {
 }
 
-variable "satellite_cluster_group" {
-}
-
 variable "source_environment" {
 }
 
@@ -156,9 +153,6 @@ variable "app_version" {
 }
 
 variable "slack_notifications" {
-}
-
-variable "pipeline_debug" {
 }
 
 variable "enable_artifactory" {

@@ -388,12 +388,10 @@ module "pipeline_cd" {
   customer_impact                       = var.customer_impact
   target_environment_purpose            = var.target_environment_purpose
   change_request_id                     = var.change_request_id
-  satellite_cluster_group               = var.satellite_cluster_group
   source_environment                    = var.source_environment
   target_environment                    = var.target_environment
   app_version                           = var.app_version
   slack_notifications                   = var.slack_notifications
-  pipeline_debug                        = var.pipeline_debug
   code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
