@@ -385,9 +385,7 @@ module "pipeline_cd" {
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
   customer_impact                       = var.customer_impact
-  target_environment_purpose            = var.target_environment_purpose
   change_request_id                     = var.change_request_id
-  app_version                           = var.app_version
   code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory

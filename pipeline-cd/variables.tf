@@ -134,13 +134,7 @@ variable "compliance_base_image" {
 variable "customer_impact" {
 }
 
-variable "target_environment_purpose" {
-}
-
 variable "change_request_id" {
-}
-
-variable "app_version" {
 }
 
 variable "enable_artifactory" {

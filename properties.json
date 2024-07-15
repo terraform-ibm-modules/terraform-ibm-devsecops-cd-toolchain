@@ -58,6 +58,16 @@
             "name": "target-environment-detail",
             "type": "text",
             "value": "Production target environment"
+        },
+        {
+            "name": "target-environment-purpose",
+            "type": "text",
+            "value": "production"
+        },
+        {
+            "name": "version",
+            "type": "text",
+            "value": "v1"
         }
       ]
     }

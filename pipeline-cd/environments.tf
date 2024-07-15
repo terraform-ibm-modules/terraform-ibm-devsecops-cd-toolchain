@@ -12,13 +12,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
-  name        = "version"
-  type        = "text"
-  value       = var.app_version
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config" {
   name        = "pipeline-config"
   type        = "text"
@@ -153,14 +146,6 @@ resource "ibm_cd_tekton_pipeline_property" "compliance_base_image" {
   name        = "compliance-baseimage"
   type        = "text"
   value       = var.compliance_base_image
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_target_environment_purpose" {
-  name        = "target-environment-purpose"
-  enum        = ["pre_prod", "production"]
-  value       = var.target_environment_purpose
-  type        = "single_select"
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 

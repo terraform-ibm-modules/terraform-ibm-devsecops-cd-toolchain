@@ -1091,22 +1091,10 @@ variable "customer_impact" {
   default     = "no_impact"
 }
 
-variable "target_environment_purpose" {
-  type        = string
-  description = "Purpose of the environment being updated."
-  default     = "production"
-}
-
 variable "change_request_id" {
   type        = string
   description = "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
   default     = "notAvailable"
-}
-
-variable "app_version" {
-  type        = string
-  description = "The version of the app to deploy."
-  default     = "v1"
 }
 
 variable "artifactory_integration_name" {
