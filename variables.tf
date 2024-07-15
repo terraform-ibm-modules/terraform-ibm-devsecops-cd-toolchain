@@ -1150,12 +1150,6 @@ variable "merge_cra_sbom" {
   default     = "1"
 }
 
-variable "emergency_label" {
-  type        = string
-  description = "Identifies the pull request as an emergency."
-  default     = "EMERGENCY"
-}
-
 variable "app_version" {
   type        = string
   description = "The version of the app to deploy."

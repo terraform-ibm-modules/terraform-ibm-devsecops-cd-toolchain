@@ -161,9 +161,6 @@ variable "target_environment" {
 variable "merge_cra_sbom" {
 }
 
-variable "emergency_label" {
-}
-
 variable "app_version" {
 }
 

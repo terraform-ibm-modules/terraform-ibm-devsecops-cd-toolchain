@@ -41,13 +41,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_merge-cra-sbom" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_emergency_label" {
-  name        = "emergency-label"
-  type        = "text"
-  value       = var.emergency_label
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_version" {
   name        = "version"
   type        = "text"
