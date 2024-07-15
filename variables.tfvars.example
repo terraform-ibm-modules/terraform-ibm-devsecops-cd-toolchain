@@ -14,12 +14,10 @@ app_repo                       = "https://us-south.git.cloud.ibm.com/open-toolch
 evidence_repo_url              = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-evidence-locker.git"
 inventory_repo_url             = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-inventory.git"
 issues_repo_url                = "https://us-south.git.cloud.ibm.com/open-toolchain/compliance-incident-issues.git"
-ibmcloud_api                   = "https://cloud.ibm.com"
 
 /*****************************************************/
 /* Variables for Module "Services"                   */
 /*****************************************************/
-cluster_name                    = "my-iks-cluster"
 cluster_namespace               = "dev-ns"
 cluster_region                  = "ibm:yp:us-south"
 sm_name                         = "sm-prod-dal"

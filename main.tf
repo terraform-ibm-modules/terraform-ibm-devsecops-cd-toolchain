@@ -349,12 +349,10 @@ resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
 module "pipeline_cd" {
   source                                = "./pipeline-cd"
   depends_on                            = [module.integrations, module.services]
-  ibmcloud_api                          = var.ibmcloud_api
   ibmcloud_api_key                      = var.ibmcloud_api_key
   region                                = var.region
   pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group                        = var.toolchain_resource_group
-  cluster_name                          = var.cluster_name
   cluster_namespace                     = var.cluster_namespace
   cluster_region                        = var.cluster_region
   change_management_repo                = try(module.change_management_repo[0].repository_url, "")
@@ -363,7 +361,6 @@ module "pipeline_cd" {
   pipeline_config_repo                  = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                       = var.pipeline_branch
   pipeline_git_tag                      = var.pipeline_git_tag
-  pipeline_config_path                  = var.pipeline_config_path
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch           = var.pipeline_config_repo_branch
@@ -378,19 +375,14 @@ module "pipeline_cd" {
   cos_bucket_name                       = var.cos_bucket_name
   cos_api_key_secret_ref                = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
   cos_endpoint                          = var.cos_endpoint
-  compliance_base_image                 = var.compliance_base_image
   doi_toolchain_id                      = var.doi_toolchain_id
-  doi_environment                       = var.doi_environment
   pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
-  customer_impact                       = var.customer_impact
-  change_request_id                     = var.change_request_id
   code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
-  peer_review_collection                = var.peer_review_collection
   artifact_signature_verification       = var.artifact_signature_verification
   create_triggers                       = var.create_triggers
   trigger_git_name                      = var.trigger_git_name
@@ -417,26 +409,8 @@ module "pipeline_cd" {
   deployment_target                     = var.deployment_target
   code_engine_project                   = var.code_engine_project
   code_engine_region                    = var.code_engine_region
-  code_engine_resource_group            = var.code_engine_resource_group
-  code_engine_binding_resource_group    = var.code_engine_binding_resource_group
-  code_engine_deployment_type           = var.code_engine_deployment_type
-  code_engine_cpu                       = var.code_engine_cpu
-  code_engine_memory                    = var.code_engine_memory
-  code_engine_ephemeral_storage         = var.code_engine_ephemeral_storage
-  code_engine_job_maxexecutiontime      = var.code_engine_job_maxexecutiontime
-  code_engine_job_retrylimit            = var.code_engine_job_retrylimit
-  code_engine_job_instances             = var.code_engine_job_instances
-  code_engine_app_port                  = var.code_engine_app_port
-  code_engine_app_min_scale             = var.code_engine_app_min_scale
-  code_engine_app_max_scale             = var.code_engine_app_max_scale
-  code_engine_app_deployment_timeout    = var.code_engine_app_deployment_timeout
-  code_engine_app_concurrency           = var.code_engine_app_concurrency
-  code_engine_app_visibility            = var.code_engine_app_visibility
-  code_engine_env_from_configmaps       = var.code_engine_env_from_configmaps
-  code_engine_env_from_secrets          = var.code_engine_env_from_secrets
   code_engine_remove_refs               = var.code_engine_remove_refs
   code_engine_service_bindings          = var.code_engine_service_bindings
-  pre_prod_evidence_collection          = var.pre_prod_evidence_collection
 }
 
 module "integrations" {
@@ -504,7 +478,6 @@ module "integrations" {
 module "services" {
   source = "./services"
 
-  ibmcloud_api           = var.ibmcloud_api
   sm_name                = var.sm_name
   sm_location            = var.sm_location
   sm_resource_group      = var.sm_resource_group

@@ -22,8 +22,5 @@ variable "enable_key_protect" {
 variable "enable_secrets_manager" {
 }
 
-variable "ibmcloud_api" {
-}
-
 variable "sm_instance_crn" {
 }

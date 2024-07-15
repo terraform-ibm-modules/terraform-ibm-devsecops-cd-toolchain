@@ -4,9 +4,6 @@ variable "pipeline_id" {
 variable "resource_group" {
 }
 
-variable "cluster_name" {
-}
-
 variable "cluster_namespace" {
 }
 
@@ -83,9 +80,6 @@ variable "pipeline_config_repo_clone_from_url" {
 variable "pipeline_config_repo_branch" {
 }
 
-variable "pipeline_config_path" {
-}
-
 variable "pipeline_config_repo" {
 }
 
@@ -107,12 +101,6 @@ variable "cd_pipeline_max_concurrent_runs" {
   default     = 1
 }
 
-variable "ibmcloud_api" {
-  type        = string
-  description = "IBM Cloud API Endpoint"
-  default     = "https://cloud.ibm.com"
-}
-
 variable "cos_api_key_secret_ref" {
 }
 
@@ -122,28 +110,13 @@ variable "cos_bucket_name" {
 variable "cos_endpoint" {
 }
 
-variable "doi_environment" {
-}
-
 variable "doi_toolchain_id" {
-}
-
-variable "compliance_base_image" {
-}
-
-variable "customer_impact" {
-}
-
-variable "change_request_id" {
 }
 
 variable "enable_artifactory" {
 }
 
 variable "enable_pipeline_git_token" {
-}
-
-variable "peer_review_collection" {
 }
 
 variable "artifact_signature_verification" {
@@ -215,63 +188,4 @@ variable "code_engine_project" {
 }
 
 variable "code_engine_region" {
-}
-
-variable "code_engine_resource_group" {
-}
-
-variable "code_engine_binding_resource_group" {
-}
-
-variable "code_engine_deployment_type" {
-}
-
-variable "code_engine_cpu" {
-}
-
-variable "code_engine_memory" {
-}
-
-variable "code_engine_ephemeral_storage" {
-}
-
-variable "code_engine_job_maxexecutiontime" {
-}
-
-variable "code_engine_job_retrylimit" {
-}
-
-variable "code_engine_job_instances" {
-}
-
-variable "code_engine_app_port" {
-}
-
-variable "code_engine_app_min_scale" {
-}
-
-variable "code_engine_app_max_scale" {
-}
-
-variable "code_engine_app_deployment_timeout" {
-}
-
-variable "code_engine_app_concurrency" {
-}
-
-variable "code_engine_app_visibility" {
-}
-
-variable "code_engine_env_from_configmaps" {
-}
-
-variable "code_engine_env_from_secrets" {
-}
-
-variable "code_engine_remove_refs" {
-}
-
-variable "code_engine_service_bindings" {
-}
-variable "pre_prod_evidence_collection" {
 }
