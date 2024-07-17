@@ -4,15 +4,6 @@ variable "pipeline_id" {
 variable "resource_group" {
 }
 
-variable "cluster_namespace" {
-}
-
-variable "cluster_region" {
-}
-
-variable "region" {
-}
-
 variable "ibmcloud_api_key" {
 }
 
@@ -26,12 +17,6 @@ variable "worker_id" {
   description = "The Private Worker Id or public"
 }
 
-variable "pipeline_ibmcloud_api_key_secret_ref" {
-}
-
-variable "pipeline_doi_api_key_secret_ref" {
-}
-
 variable "link_to_doi_toolchain" {
 }
 
@@ -42,9 +27,6 @@ variable "code_signing_cert" {
 }
 
 variable "deployment_repo" {
-}
-
-variable "deployment_repo_branch" {
 }
 
 variable "change_management_repo" {
@@ -75,9 +57,6 @@ variable "pipeline_config_repo_existing_url" {
 }
 
 variable "pipeline_config_repo_clone_from_url" {
-}
-
-variable "pipeline_config_repo_branch" {
 }
 
 variable "pipeline_config_repo" {
@@ -178,5 +157,3 @@ variable "deployment_target" {
 variable "code_engine_project" {
 }
 
-variable "code_engine_region" {
-}

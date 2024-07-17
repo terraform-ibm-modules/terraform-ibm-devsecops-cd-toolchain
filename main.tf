@@ -163,9 +163,15 @@ locals {
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     ),
-    "cos_api_key"     = local.cos_secret_ref,
-    "cos_bucket_name" = var.cos_bucket_name,
-    "cos_endpoint"    = var.cos_endpoint
+    "cos_api_key"            = local.cos_secret_ref,
+    "cos_bucket_name"        = var.cos_bucket_name,
+    "cos_endpoint"           = var.cos_endpoint,
+    "cluster_namespace"      = var.cluster_namespace,
+    "cluster_region"         = var.cluster_region,
+    "deployment_repo_branch" = local.deployment_repo_branch,
+    "doi_ibmcloud_api_key"   = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
+    "region"                 = var.region,
+    "code_engine_region"     = var.code_engine_region
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
@@ -353,20 +359,15 @@ module "pipeline_cd" {
   source                                = "./pipeline-cd"
   depends_on                            = [module.integrations, module.services]
   ibmcloud_api_key                      = var.ibmcloud_api_key
-  region                                = var.region
   pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group                        = var.toolchain_resource_group
-  cluster_namespace                     = var.cluster_namespace
-  cluster_region                        = var.cluster_region
   change_management_repo                = try(module.change_management_repo[0].repository_url, "")
   deployment_repo                       = module.deployment_repo.repository
-  deployment_repo_branch                = local.deployment_repo_branch
   pipeline_config_repo                  = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                       = var.pipeline_branch
   pipeline_git_tag                      = var.pipeline_git_tag
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch           = var.pipeline_config_repo_branch
   pipeline_repo_url                     = module.compliance_pipelines_repo.repository_url
   evidence_repo_url                     = module.evidence_repo.repository_url
   inventory_repo_url                    = module.inventory_repo.repository_url
@@ -376,7 +377,6 @@ module "pipeline_cd" {
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
   doi_toolchain_id                      = var.doi_toolchain_id
-  pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
   code_signing_cert                     = var.code_signing_cert
@@ -400,7 +400,6 @@ module "pipeline_cd" {
   trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
   enable_pipeline_notifications         = var.enable_pipeline_notifications
   event_notifications                   = var.event_notifications
-  pipeline_doi_api_key_secret_ref       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
   link_to_doi_toolchain                 = var.link_to_doi_toolchain
   trigger_git_promotion_listener        = var.trigger_git_promotion_listener
   trigger_git_promotion_enable          = var.trigger_git_promotion_enable
@@ -408,13 +407,11 @@ module "pipeline_cd" {
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
   deployment_target                     = var.deployment_target
   code_engine_project                   = var.code_engine_project
-  code_engine_region                    = var.code_engine_region
 }
 
 module "integrations" {
   source                               = "./integrations"
   depends_on                           = [module.services]
-  region                               = var.toolchain_region
   ibmcloud_api_key                     = var.ibmcloud_api_key
   toolchain_id                         = ibm_cd_toolchain.toolchain_instance.id
   resource_group                       = var.toolchain_resource_group

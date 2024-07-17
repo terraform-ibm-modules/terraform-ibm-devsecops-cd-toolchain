@@ -4,20 +4,6 @@
 #
 ####################################################################################
 
-// Limitation with datasource: Cannot fetch clusters for a specific region. Only query with cluster name.
-// Can only fetch clusters in the region targeted for the provider.
-
-####################################################################################
-#
-# IBM Container Registry Services Details
-#
-####################################################################################
-
-// Limitation with datasource: Cannot fetch registry namespaces for a specific region.
-// Can only fetch registries in the region targeted for the provider.
-# data "ibm_cr_namespaces" "registry_namespace" {}
-
-
 ####################################################################################
 #
 # IBM Key Protect Services Details

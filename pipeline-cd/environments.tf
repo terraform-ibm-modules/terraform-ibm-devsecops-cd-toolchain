@@ -1,17 +1,3 @@
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_region" {
-  name        = "region"
-  type        = "text"
-  value       = var.region
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_branch" {
-  name        = "pipeline-config-branch"
-  type        = "text"
-  value       = (var.pipeline_config_repo_branch == "") ? var.deployment_repo_branch : var.pipeline_config_repo_branch
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
   name        = "pipeline-config-repo"
   type        = "integration"
@@ -41,37 +27,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_incident_repo" {
   type        = "integration"
   value       = var.issues_repo.tool_id
   path        = "parameters.repo_url"
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api_key" {
-  name        = "ibmcloud-api-key"
-  type        = "secure"
-  value       = var.pipeline_ibmcloud_api_key_secret_ref
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_namespace" {
-  count       = (var.deployment_target != "code-engine") ? 1 : 0
-  name        = "cluster-namespace"
-  type        = "text"
-  value       = var.cluster_namespace
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_cluster_region" {
-  count       = (var.deployment_target != "code-engine") ? 1 : 0
-  name        = "cluster-region"
-  type        = "text"
-  value       = var.cluster_region
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_doi_api_key" {
-  count       = var.link_to_doi_toolchain ? 1 : 0
-  name        = "doi-ibmcloud-api-key"
-  type        = "secure"
-  value       = var.pipeline_doi_api_key_secret_ref
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
@@ -106,14 +61,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_project" {
   name        = "code-engine-project"
   type        = "text"
   value       = var.code_engine_project
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_region" {
-  count       = (var.deployment_target == "code-engine") ? 1 : 0
-  name        = "code-engine-region"
-  type        = "text"
-  value       = var.code_engine_region
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
 }
 
