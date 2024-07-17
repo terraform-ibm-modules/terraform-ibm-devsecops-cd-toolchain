@@ -162,7 +162,10 @@ locals {
     "secrets_provider_type" = (
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
-    )
+    ),
+    "cos_api_key"     = local.cos_secret_ref,
+    "cos_bucket_name" = var.cos_bucket_name,
+    "cos_endpoint"    = var.cos_endpoint
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
@@ -372,9 +375,6 @@ module "pipeline_cd" {
   inventory_repo                        = module.inventory_repo.repository
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
-  cos_bucket_name                       = var.cos_bucket_name
-  cos_api_key_secret_ref                = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
-  cos_endpoint                          = var.cos_endpoint
   doi_toolchain_id                      = var.doi_toolchain_id
   pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref

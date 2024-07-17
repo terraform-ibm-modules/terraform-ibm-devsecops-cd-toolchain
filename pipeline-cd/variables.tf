@@ -101,15 +101,6 @@ variable "cd_pipeline_max_concurrent_runs" {
   default     = 1
 }
 
-variable "cos_api_key_secret_ref" {
-}
-
-variable "cos_bucket_name" {
-}
-
-variable "cos_endpoint" {
-}
-
 variable "doi_toolchain_id" {
 }
 
