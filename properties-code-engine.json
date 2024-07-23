@@ -144,6 +144,12 @@
             "locker" : "true"
         },
         {
+            "name": "event-notifications",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
             "name": "force-redeploy",
             "type": "single_select",
             "value": "false",
