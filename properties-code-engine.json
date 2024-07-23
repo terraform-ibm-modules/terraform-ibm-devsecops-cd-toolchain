@@ -3,26 +3,74 @@
       "pipeline_id": "cd",
       "properties": [
         {
+            "name": "app-concurrency",
+            "type": "text",
+            "value": "100",
+            "locker" : "true"
+        },
+        {
+            "name": "app-deployment-timeout",
+            "type": "text",
+            "value": "300",
+            "locker" : "true"
+        },
+        {
+            "name": "app-max-scale",
+            "type": "text",
+            "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "app-min-scale",
+            "type": "text",
+            "value": "0",
+            "locker" : "true"
+        },
+        {
+            "name": "app-port",
+            "type": "text",
+            "value": "8080",
+            "locker" : "true"
+        },
+        {
+            "name": "app-visibility",
+            "type": "text",
+            "value": "public",
+            "locker" : "true"
+        },
+        {
             "name": "change-request-id",
             "type": "text",
             "value": "notAvailable"
         },
         {
-            "name": "cluster",
+            "name": "code-engine-binding-resource-group",
             "type": "text",
             "value": "",
             "locker" : "true"
         },
         {
-            "name": "cluster-namespace",
+            "name": "code-engine-deployment-type",
+            "type": "text",
+            "value": "application"
+        },
+        {
+            "name": "code-engine-project",
             "type": "text",
             "value": "",
             "locker" : "true"
         },
         {
-            "name": "cluster_region",
+            "name": "code-engine-region",
             "type": "text",
-            "value": ""
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "code-engine-resource-group",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
         },
         {
             "name": "code-signing-certificate",
@@ -49,6 +97,12 @@
             "locker" : "true"
         },
         {
+            "name": "cpu",
+            "type": "text",
+            "value": "0.25",
+            "locker" : "true"
+        },
+        {
             "name": "doi-environment",
             "type": "text",
             "value": "",
@@ -72,9 +126,21 @@
           "value": "EMERGENCY"
         },
         {
-            "name": "event-notifications",
+            "name": "env-from-configmaps",
             "type": "text",
             "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "env-from-secrets",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "ephemeral-storage",
+            "type": "text",
+            "value": "0.4G",
             "locker" : "true"
         },
         {
@@ -96,9 +162,39 @@
             "locker" : "true"
         },
         {
+            "name": "job-instances",
+            "type": "text",
+            "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "job-maxexecutiontime",
+            "type": "text",
+            "value": "7200",
+            "locker" : "true"
+        },
+        {
+            "name": "job-retrylimit",
+            "type": "text",
+            "value": "3",
+            "locker" : "true"
+        },
+        {
+            "name": "memory",
+            "type": "text",
+            "value": "0.5G",
+            "locker" : "true"
+        },
+        {
             "name": "merge-cra-sbom",
             "type": "text",
             "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "peer-review-collection",
+            "type": "text",
+            "value": "",
             "locker" : "true"
         },
         {
@@ -128,7 +224,7 @@
         {
             "name": "pre-prod-evidence-collection",
             "type": "text",
-            "value": "1",
+            "value": "0",
             "locker" : "true"
         },
         {
@@ -138,7 +234,13 @@
             "locker" : "true"
         },
         {
-            "name": "satellite-cluster-group",
+            "name": "remove-unspecified-references-to-configuration-resources",
+            "type": "text",
+            "value": "false",
+            "locker" : "true"
+        },
+        {
+            "name": "service-bindings",
             "type": "text",
             "value": "",
             "locker" : "true"

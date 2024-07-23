@@ -54,19 +54,3 @@ resource "ibm_cd_tekton_pipeline_property" "cd_artifactory-dockerconfigjson" {
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   path        = "parameters.docker_config_json"
 }
-
-######## Code Engine Vars #####################
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_code_engine_project" {
-  count       = (var.deployment_target == "code-engine") ? 1 : 0
-  name        = "code-engine-project"
-  type        = "text"
-  value       = var.code_engine_project
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_event_notifications" {
-  type        = "text"
-  name        = "event-notifications"
-  value       = var.event_notifications
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-}

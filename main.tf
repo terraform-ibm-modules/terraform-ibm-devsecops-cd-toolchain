@@ -163,15 +163,18 @@ locals {
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
     ),
-    "cos_api_key"            = local.cos_secret_ref,
-    "cos_bucket_name"        = var.cos_bucket_name,
-    "cos_endpoint"           = var.cos_endpoint,
-    "cluster_namespace"      = var.cluster_namespace,
-    "cluster_region"         = var.cluster_region,
-    "deployment_repo_branch" = local.deployment_repo_branch,
-    "doi_ibmcloud_api_key"   = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
-    "region"                 = var.region,
-    "code_engine_region"     = var.code_engine_region
+    "cluster"                    = var.cluster_name,
+    "cluster_namespace"          = var.cluster_namespace,
+    "cluster_region"             = var.cluster_region,
+    "code-engine-project"        = var.code_engine_project,
+    "code-engine-region"         = var.code_engine_region,
+    "code-engine-resource-group" = var.code_engine_resource_group,
+    "cos-api-key"                = local.cos_secret_ref,
+    "cos-bucket-name"            = var.cos_bucket_name,
+    "cos-endpoint"               = var.cos_endpoint,
+    "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
+    "pipeline-config-branch"     = local.deployment_repo_branch,
+    "region"                     = var.region
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
@@ -399,7 +402,6 @@ module "pipeline_cd" {
   trigger_timed_pruner_name             = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
   enable_pipeline_notifications         = var.enable_pipeline_notifications
-  event_notifications                   = var.event_notifications
   link_to_doi_toolchain                 = var.link_to_doi_toolchain
   trigger_git_promotion_listener        = var.trigger_git_promotion_listener
   trigger_git_promotion_enable          = var.trigger_git_promotion_enable

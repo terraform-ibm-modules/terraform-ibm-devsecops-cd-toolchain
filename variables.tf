@@ -52,6 +52,12 @@ variable "toolchain_description" {
   default     = "Toolchain created with Terraform template for DevSecOps CD Best Practices"
 }
 
+variable "cluster_name" {
+  type        = string
+  description = "Name of the Kubernetes cluster where the application is deployed."
+  default     = ""
+}
+
 variable "cluster_namespace" {
   type        = string
   description = "Namespace of the Kubernetes cluster where the application is deployed."
@@ -1237,16 +1243,6 @@ variable "enable_pipeline_notifications" {
 
 }
 
-variable "event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
 ####### Trigger properties ###################
 variable "create_triggers" {
   type        = bool
@@ -1362,6 +1358,12 @@ variable "deployment_target" {
 variable "code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use. Created if it does not exist."
+  default     = ""
+}
+
+variable "code_engine_resource_group" {
+  type        = string
+  description = "The resource group of the Code Engine project."
   default     = ""
 }
 
