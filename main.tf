@@ -160,7 +160,7 @@ locals {
     properties  = try(pipeline.properties, {})
     }
   ])
-pipeline_config_repo_branch
+
   config_data = {
     "secrets_integration_name" = var.sm_integration_name,
     "secrets_group"            = var.sm_secret_group,
@@ -178,7 +178,7 @@ pipeline_config_repo_branch
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
     "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
-    "pipeline-config-branch"     = (var.pipeline_config_repo_branch !="") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
+    "pipeline-config-branch"     = (var.pipeline_config_repo_branch != "") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
     "region"                     = var.region
   }
 
