@@ -148,8 +148,6 @@ variable "trigger_git_promotion_validation_name" {
 ##### EVENT NOTIFICATIONS ################
 
 ######## Code Engine Vars #####################
-variable "deployment_target" {
-}
 
 variable "code_engine_project" {
 }

@@ -1346,12 +1346,12 @@ variable "trigger_git_promotion_branch" {
   default     = "prod"
 }
 
-######## Deployment Strategy ##################
+######## DevSecOps Flavor ##################
 
-variable "deployment_target" {
+variable "devsecops_flavor" {
   type        = string
-  description = "The deployment target, 'cluster' or 'code-engine'."
-  default     = "cluster"
+  description = "The deployment target, 'kube', 'code-engine' or 'zos'."
+  default     = "kube"
 }
 
 ######## Code Engine Vars #####################

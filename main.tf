@@ -147,7 +147,12 @@ locals {
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
   )
 
-  properties_file_input = (var.pipeline_properties_filepath == "") ? try(file("${path.root}/properties.json"), "[]") : try(file(var.pipeline_properties_filepath), "[]")
+  properties_flavor = ((var.devsecops_flavor == "kube") ? "${path.root}/properties-kube.json" :
+    (var.devsecops_flavor == "code-engine") ? "${path.root}/properties-code-engine.json" :
+    (var.devsecops_flavor == "zos") ? "${path.root}/properties-zos.json" : "${path.root}/properties-kube.json"
+  )
+
+  properties_file_input = (var.pipeline_properties_filepath == "") ? try(file(local.properties_flavor), "[]") : try(file(var.pipeline_properties_filepath), "[]")
   properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
   properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
   pre_process_prop_data = flatten([for pipeline in jsondecode(local.properties_input) : {
@@ -155,7 +160,7 @@ locals {
     properties  = try(pipeline.properties, {})
     }
   ])
-
+pipeline_config_repo_branch
   config_data = {
     "secrets_integration_name" = var.sm_integration_name,
     "secrets_group"            = var.sm_secret_group,
@@ -173,7 +178,7 @@ locals {
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
     "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
-    "pipeline-config-branch"     = local.deployment_repo_branch,
+    "pipeline-config-branch"     = (var.pipeline_config_repo_branch !="") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
     "region"                     = var.region
   }
 
@@ -407,7 +412,6 @@ module "pipeline_cd" {
   trigger_git_promotion_enable          = var.trigger_git_promotion_enable
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
-  deployment_target                     = var.deployment_target
   code_engine_project                   = var.code_engine_project
 }
 
