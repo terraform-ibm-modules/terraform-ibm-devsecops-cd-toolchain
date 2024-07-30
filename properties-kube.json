@@ -10,19 +10,19 @@
         {
             "name": "cluster",
             "type": "text",
-            "value": "",
+            "value": "mycluster",
             "locker" : "true"
         },
         {
             "name": "cluster-namespace",
             "type": "text",
-            "value": "",
+            "value": "prod",
             "locker" : "true"
         },
         {
             "name": "cluster_region",
             "type": "text",
-            "value": ""
+            "value": "us-south"
         },
         {
             "name": "code-signing-certificate",
@@ -57,7 +57,7 @@
         {
             "name": "doi-ibmcloud-api-key",
             "type": "secure",
-            "value": "",
+            "value": "ibmcloud-api-key",
             "locker" : "true"
         },
         {
@@ -92,20 +92,8 @@
         {
             "name": "ibmcloud-api-key",
             "type": "secure",
-            "value": "",
+            "value": "ibmcloud-api-key",
             "locker" : "true"
-        },
-        {
-            "name": "inventory-exclude",
-            "type": "text",
-            "value": "",
-            "locked": "false"
-        },
-        {
-            "name": "inventory-include",
-            "type": "text",
-            "value": "",
-            "locked": "false"
         },
         {
             "name": "merge-cra-sbom",
@@ -146,7 +134,7 @@
         {
             "name": "region",
             "type": "text",
-            "value": "",
+            "value": "us-south",
             "locker" : "true"
         },
         {
