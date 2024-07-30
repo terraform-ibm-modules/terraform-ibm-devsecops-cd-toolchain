@@ -168,6 +168,18 @@
             "locker" : "true"
         },
         {
+            "name": "inventory-exclude",
+            "type": "text",
+            "value": "",
+            "locked": "false"
+        },
+        {
+            "name": "inventory-include",
+            "type": "text",
+            "value": "",
+            "locked": "false"
+        },
+        {
             "name": "job-instances",
             "type": "text",
             "value": "1",
