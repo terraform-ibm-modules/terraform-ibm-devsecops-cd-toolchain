@@ -3,6 +3,10 @@
 <!-- Update the title to match the module name and add a description -->
 ## Terraform IBM DevSecOps CD Toolchain
 <!-- UPDATE BADGE: Update the link for the following badge-->
+![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain/releases/latest)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A Terraform module for provisioning the DevSecOps CD toolchain.
 
@@ -17,7 +21,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.65.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.67.0, < 2.0.0 |
 
 ### Modules
 
@@ -48,7 +52,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_version"></a> [app\_version](#input\_app\_version) | The version of the app to deploy. | `string` | `"v1"` | no |
 | <a name="input_artifact_signature_verification"></a> [artifact\_signature\_verification](#input\_artifact\_signature\_verification) | Set to `1` to enable artifact signature verification. | `string` | `""` | no |
 | <a name="input_artifactory_dashboard_url"></a> [artifactory\_dashboard\_url](#input\_artifactory\_dashboard\_url) | Type the URL that you want to navigate to when you click the Artifactory integration tile. | `string` | `""` | no |
 | <a name="input_artifactory_integration_name"></a> [artifactory\_integration\_name](#input\_artifactory\_integration\_name) | The name of the Artifactory tool integration. | `string` | `"artifactory-dockerconfigjson"` | no |
@@ -73,36 +76,16 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_change_management_repo_secret_group"></a> [change\_management\_repo\_secret\_group](#input\_change\_management\_repo\_secret\_group) | Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_change_management_repo_traceability_enabled"></a> [change\_management\_repo\_traceability\_enabled](#input\_change\_management\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_change_repo_clone_from_url"></a> [change\_repo\_clone\_from\_url](#input\_change\_repo\_clone\_from\_url) | Override the default management repo , which will be cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
-| <a name="input_change_request_id"></a> [change\_request\_id](#input\_change\_request\_id) | The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline. | `string` | `"notAvailable"` | no |
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `"mycluster-free"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `""` | no |
 | <a name="input_cluster_namespace"></a> [cluster\_namespace](#input\_cluster\_namespace) | Namespace of the Kubernetes cluster where the application is deployed. | `string` | `"default"` | no |
 | <a name="input_cluster_region"></a> [cluster\_region](#input\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. | `string` | `"ibm:yp:us-south"` | no |
-| <a name="input_code_engine_app_concurrency"></a> [code\_engine\_app\_concurrency](#input\_code\_engine\_app\_concurrency) | The maximum number of requests that can be processed concurrently per instance. | `string` | `"100"` | no |
-| <a name="input_code_engine_app_deployment_timeout"></a> [code\_engine\_app\_deployment\_timeout](#input\_code\_engine\_app\_deployment\_timeout) | The maximum timeout for the application deployment. | `string` | `"300"` | no |
-| <a name="input_code_engine_app_max_scale"></a> [code\_engine\_app\_max\_scale](#input\_code\_engine\_app\_max\_scale) | The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application. | `string` | `"1"` | no |
-| <a name="input_code_engine_app_min_scale"></a> [code\_engine\_app\_min\_scale](#input\_code\_engine\_app\_min\_scale) | The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed. | `string` | `"0"` | no |
-| <a name="input_code_engine_app_port"></a> [code\_engine\_app\_port](#input\_code\_engine\_app\_port) | The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`. | `string` | `"8080"` | no |
-| <a name="input_code_engine_app_visibility"></a> [code\_engine\_app\_visibility](#input\_code\_engine\_app\_visibility) | The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project. | `string` | `"public"` | no |
-| <a name="input_code_engine_binding_resource_group"></a> [code\_engine\_binding\_resource\_group](#input\_code\_engine\_binding\_resource\_group) | The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. | `string` | `""` | no |
-| <a name="input_code_engine_cpu"></a> [code\_engine\_cpu](#input\_code\_engine\_cpu) | The amount of CPU set for the instance of the application or job. | `string` | `"0.25"` | no |
-| <a name="input_code_engine_deployment_type"></a> [code\_engine\_deployment\_type](#input\_code\_engine\_deployment\_type) | type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`. | `string` | `"application"` | no |
-| <a name="input_code_engine_env_from_configmaps"></a> [code\_engine\_env\_from\_configmaps](#input\_code\_engine\_env\_from\_configmaps) | Semi-colon separated list of configmaps to set environment variables. | `string` | `""` | no |
-| <a name="input_code_engine_env_from_secrets"></a> [code\_engine\_env\_from\_secrets](#input\_code\_engine\_env\_from\_secrets) | Semi-colon separated list of secrets to set environment variables. | `string` | `""` | no |
-| <a name="input_code_engine_ephemeral_storage"></a> [code\_engine\_ephemeral\_storage](#input\_code\_engine\_ephemeral\_storage) | The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes. | `string` | `"0.4G"` | no |
-| <a name="input_code_engine_job_instances"></a> [code\_engine\_job\_instances](#input\_code\_engine\_job\_instances) | Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1. | `string` | `"1"` | no |
-| <a name="input_code_engine_job_maxexecutiontime"></a> [code\_engine\_job\_maxexecutiontime](#input\_code\_engine\_job\_maxexecutiontime) | The maximum execution time in seconds for runs of the job. | `string` | `"7200"` | no |
-| <a name="input_code_engine_job_retrylimit"></a> [code\_engine\_job\_retrylimit](#input\_code\_engine\_job\_retrylimit) | The number of times to rerun an instance of the job before the job is marked as failed. | `string` | `"3"` | no |
-| <a name="input_code_engine_memory"></a> [code\_engine\_memory](#input\_code\_engine\_memory) | The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes. | `string` | `"0.5G"` | no |
 | <a name="input_code_engine_project"></a> [code\_engine\_project](#input\_code\_engine\_project) | The name of the Code Engine project to use. Created if it does not exist. | `string` | `""` | no |
 | <a name="input_code_engine_region"></a> [code\_engine\_region](#input\_code\_engine\_region) | The region to create/lookup for the Code Engine project. | `string` | `""` | no |
-| <a name="input_code_engine_remove_refs"></a> [code\_engine\_remove\_refs](#input\_code\_engine\_remove\_refs) | Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD). | `string` | `"false"` | no |
 | <a name="input_code_engine_resource_group"></a> [code\_engine\_resource\_group](#input\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `""` | no |
-| <a name="input_code_engine_service_bindings"></a> [code\_engine\_service\_bindings](#input\_code\_engine\_service\_bindings) | JSON array including service name(s) (as a simple JSON string). | `string` | `""` | no |
 | <a name="input_code_signing_cert"></a> [code\_signing\_cert](#input\_code\_signing\_cert) | The base64 encoded GPG public key. Setting this will add the public signing cert to the pipeline properties. Alternatively see `enable_signing_validation` to store the cert in a Secrets provider . | `string` | `""` | no |
 | <a name="input_code_signing_cert_secret_crn"></a> [code\_signing\_cert\_secret\_crn](#input\_code\_signing\_cert\_secret\_crn) | The CRN for the public signing key cert in the secrets provider. | `string` | `""` | no |
 | <a name="input_code_signing_cert_secret_group"></a> [code\_signing\_cert\_secret\_group](#input\_code\_signing\_cert\_secret\_group) | Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_code_signing_cert_secret_name"></a> [code\_signing\_cert\_secret\_name](#input\_code\_signing\_cert\_secret\_name) | This is the optional alternative to using `code_signing_cert` for storing the GPG public signing key. Set this variable with the name of the secret containing the GPG public key from the Secrets Provider. | `string` | `""` | no |
-| <a name="input_compliance_base_image"></a> [compliance\_base\_image](#input\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_group"></a> [compliance\_pipeline\_group](#input\_compliance\_pipeline\_group) | Specify Git user/group for compliance pipeline repo. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_auth_type"></a> [compliance\_pipeline\_repo\_auth\_type](#input\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_compliance_pipeline_repo_git_provider"></a> [compliance\_pipeline\_repo\_git\_provider](#input\_compliance\_pipeline\_repo\_git\_provider) | Choose the default git provider for change management repo | `string` | `"hostedgit"` | no |
@@ -123,7 +106,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_cos_endpoint"></a> [cos\_endpoint](#input\_cos\_endpoint) | COS endpoint name. | `string` | `""` | no |
 | <a name="input_cos_integration_name"></a> [cos\_integration\_name](#input\_cos\_integration\_name) | The name of the COS integration. | `string` | `"Evidence Store"` | no |
 | <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create all the default triggers. | `bool` | `true` | no |
-| <a name="input_customer_impact"></a> [customer\_impact](#input\_customer\_impact) | Custom impact of the change request. | `string` | `"no_impact"` | no |
 | <a name="input_default_git_provider"></a> [default\_git\_provider](#input\_default\_git\_provider) | Choose the default git provider for app repo | `string` | `"hostedgit"` | no |
 | <a name="input_deployment_group"></a> [deployment\_group](#input\_deployment\_group) | Specify Git user/group for deployment repo. | `string` | `""` | no |
 | <a name="input_deployment_repo_auth_type"></a> [deployment\_repo\_auth\_type](#input\_deployment\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat. | `string` | `"oauth"` | no |
@@ -145,10 +127,8 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_deployment_repo_secret_group"></a> [deployment\_repo\_secret\_group](#input\_deployment\_repo\_secret\_group) | Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_deployment_repo_traceability_enabled"></a> [deployment\_repo\_traceability\_enabled](#input\_deployment\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_deployment_source_repo_url"></a> [deployment\_source\_repo\_url](#input\_deployment\_source\_repo\_url) | Url of deployment repo template | `string` | `""` | no |
-| <a name="input_deployment_target"></a> [deployment\_target](#input\_deployment\_target) | The deployment target, 'cluster' or 'code-engine'. | `string` | `"cluster"` | no |
-| <a name="input_doi_environment"></a> [doi\_environment](#input\_doi\_environment) | DevOpsInsights environment for DevSecOps CD deployment. | `string` | `""` | no |
+| <a name="input_devsecops_flavor"></a> [devsecops\_flavor](#input\_devsecops\_flavor) | The deployment target, 'kube', 'code-engine' or 'zos'. | `string` | `"kube"` | no |
 | <a name="input_doi_toolchain_id"></a> [doi\_toolchain\_id](#input\_doi\_toolchain\_id) | DevOps Insights Toolchain ID to link to. | `string` | `""` | no |
-| <a name="input_emergency_label"></a> [emergency\_label](#input\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_enable_artifactory"></a> [enable\_artifactory](#input\_enable\_artifactory) | Set true to enable artifacory for devsecops. | `bool` | `false` | no |
 | <a name="input_enable_change_management_repo"></a> [enable\_change\_management\_repo](#input\_enable\_change\_management\_repo) | Set to `true` to enable the Change Management Repo integration. | `string` | `true` | no |
 | <a name="input_enable_insights"></a> [enable\_insights](#input\_enable\_insights) | Set to `true` to enable the DevOps Insights integration. | `bool` | `true` | no |
@@ -157,7 +137,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_enable_pipeline_notifications"></a> [enable\_pipeline\_notifications](#input\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `bool` | `false` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `true` | no |
 | <a name="input_enable_slack"></a> [enable\_slack](#input\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
-| <a name="input_event_notifications"></a> [event\_notifications](#input\_event\_notifications) | To enable event notification, set event\_notifications to 1 | `string` | `"0"` | no |
 | <a name="input_event_notifications_crn"></a> [event\_notifications\_crn](#input\_event\_notifications\_crn) | The CRN for the Event Notifications instance. | `string` | `""` | no |
 | <a name="input_event_notifications_tool_name"></a> [event\_notifications\_tool\_name](#input\_event\_notifications\_tool\_name) | The name of the Event Notifications integration. | `string` | `"Event Notifications"` | no |
 | <a name="input_evidence_group"></a> [evidence\_group](#input\_evidence\_group) | Specify Git user/group for evidence repo. | `string` | `""` | no |
@@ -174,8 +153,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_evidence_repo_secret_group"></a> [evidence\_repo\_secret\_group](#input\_evidence\_repo\_secret\_group) | Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_evidence_repo_traceability_enabled"></a> [evidence\_repo\_traceability\_enabled](#input\_evidence\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
 | <a name="input_evidence_repo_url"></a> [evidence\_repo\_url](#input\_evidence\_repo\_url) | This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates. | `string` | `""` | no |
-| <a name="input_force_redeploy"></a> [force\_redeploy](#input\_force\_redeploy) | Forces the deployment or redeployment of the app even if the last deployment does not contain a delta in the inventory. Set this parameter to `true` to force a deployment of the app as if it is the first deployment on the specified target environment. By default, this parameter is set to `false`. | `string` | `"false"` | no |
-| <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | IBM Cloud API Endpoint. | `string` | `"https://cloud.ibm.com"` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | API key used to create the toolchains. | `string` | n/a | yes |
 | <a name="input_inventory_group"></a> [inventory\_group](#input\_inventory\_group) | Specify Git user/group for inventory repo. | `string` | `""` | no |
 | <a name="input_inventory_repo_auth_type"></a> [inventory\_repo\_auth\_type](#input\_inventory\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
@@ -210,14 +187,9 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_kp_name"></a> [kp\_name](#input\_kp\_name) | Name of the Key Protect instance where the secrets are stored. | `string` | `"kp-compliance-secrets"` | no |
 | <a name="input_kp_resource_group"></a> [kp\_resource\_group](#input\_kp\_resource\_group) | The resource group containing the Key Protect instance. | `string` | `"Default"` | no |
 | <a name="input_link_to_doi_toolchain"></a> [link\_to\_doi\_toolchain](#input\_link\_to\_doi\_toolchain) | Enable a link to a DevOpsInsights instance in another toolchain, true or false. | `bool` | `false` | no |
-| <a name="input_merge_cra_sbom"></a> [merge\_cra\_sbom](#input\_merge\_cra\_sbom) | Merge the SBOM. | `string` | `"1"` | no |
-| <a name="input_peer_review_collection"></a> [peer\_review\_collection](#input\_peer\_review\_collection) | Set to `1` to enable peer review collection. | `string` | `""` | no |
-| <a name="input_peer_review_compliance"></a> [peer\_review\_compliance](#input\_peer\_review\_compliance) | Set to `1` to enable peer review compliance validation. | `string` | `"1"` | no |
 | <a name="input_pipeline_branch"></a> [pipeline\_branch](#input\_pipeline\_branch) | The branch within pipeline definitions repository for Compliance CD Toolchain. | `string` | `"open-v10"` | no |
 | <a name="input_pipeline_config_group"></a> [pipeline\_config\_group](#input\_pipeline\_config\_group) | Specify Git user/group for pipeline config repo. | `string` | `""` | no |
-| <a name="input_pipeline_config_path"></a> [pipeline\_config\_path](#input\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
 | <a name="input_pipeline_config_repo_auth_type"></a> [pipeline\_config\_repo\_auth\_type](#input\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
-| <a name="input_pipeline_config_repo_branch"></a> [pipeline\_config\_repo\_branch](#input\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_clone_from_url"></a> [pipeline\_config\_repo\_clone\_from\_url](#input\_pipeline\_config\_repo\_clone\_from\_url) | Specify a repository to clone that contains a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_existing_url"></a> [pipeline\_config\_repo\_existing\_url](#input\_pipeline\_config\_repo\_existing\_url) | Specify a repository containing a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_git_id"></a> [pipeline\_config\_repo\_git\_id](#input\_pipeline\_config\_repo\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
@@ -231,20 +203,15 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_pipeline_config_repo_name"></a> [pipeline\_config\_repo\_name](#input\_pipeline\_config\_repo\_name) | The repository name. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_secret_group"></a> [pipeline\_config\_repo\_secret\_group](#input\_pipeline\_config\_repo\_secret\_group) | Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_pipeline_config_repo_traceability_enabled"></a> [pipeline\_config\_repo\_traceability\_enabled](#input\_pipeline\_config\_repo\_traceability\_enabled) | Set to `true` to enable traceability. | `bool` | `false` | no |
-| <a name="input_pipeline_debug"></a> [pipeline\_debug](#input\_pipeline\_debug) | Set to '1' to enable debug logging. | `string` | `"0"` | no |
 | <a name="input_pipeline_doi_api_key_secret_crn"></a> [pipeline\_doi\_api\_key\_secret\_crn](#input\_pipeline\_doi\_api\_key\_secret\_crn) | The CRN for the DOI apikey. | `string` | `""` | no |
 | <a name="input_pipeline_doi_api_key_secret_group"></a> [pipeline\_doi\_api\_key\_secret\_group](#input\_pipeline\_doi\_api\_key\_secret\_group) | Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_pipeline_doi_api_key_secret_name"></a> [pipeline\_doi\_api\_key\_secret\_name](#input\_pipeline\_doi\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. | `string` | `""` | no |
 | <a name="input_pipeline_git_tag"></a> [pipeline\_git\_tag](#input\_pipeline\_git\_tag) | The GIT tag within the pipeline definitions repository for Compliance CD Toolchain. | `string` | `""` | no |
-| <a name="input_pipeline_git_token_secret_crn"></a> [pipeline\_git\_token\_secret\_crn](#input\_pipeline\_git\_token\_secret\_crn) | The CRN for the Git Token secret in the pipeline properties. | `string` | `""` | no |
-| <a name="input_pipeline_git_token_secret_group"></a> [pipeline\_git\_token\_secret\_group](#input\_pipeline\_git\_token\_secret\_group) | Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_pipeline_git_token_secret_name"></a> [pipeline\_git\_token\_secret\_name](#input\_pipeline\_git\_token\_secret\_name) | Name of the pipeline Git token secret in the secret provider. | `string` | `"pipeline-git-token"` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_crn"></a> [pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the pipeline apikey. | `string` | `""` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_group"></a> [pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_name"></a> [pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_pipeline_properties"></a> [pipeline\_properties](#input\_pipeline\_properties) | Stringified JSON containing the properties. This takes precedence over the properties JSON. | `string` | `""` | no |
 | <a name="input_pipeline_properties_filepath"></a> [pipeline\_properties\_filepath](#input\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `""` | no |
-| <a name="input_pre_prod_evidence_collection"></a> [pre\_prod\_evidence\_collection](#input\_pre\_prod\_evidence\_collection) | Set this flag to collect the pre-prod evidences and the change requests in the production deployment (target-environment-purpose set to production). Default value is 0. | `string` | `"0"` | no |
 | <a name="input_privateworker_credentials_secret_crn"></a> [privateworker\_credentials\_secret\_crn](#input\_privateworker\_credentials\_secret\_crn) | The CRN for the Private Worker apikey. | `string` | `""` | no |
 | <a name="input_privateworker_credentials_secret_group"></a> [privateworker\_credentials\_secret\_group](#input\_privateworker\_credentials\_secret\_group) | Secret group prefix for the Private Worker secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_privateworker_credentials_secret_name"></a> [privateworker\_credentials\_secret\_name](#input\_privateworker\_credentials\_secret\_name) | Name of the privateworker secret in the secret provider. | `string` | `"private-worker-service-api"` | no |
@@ -252,7 +219,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_repositories_prefix"></a> [repositories\_prefix](#input\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_repository_properties"></a> [repository\_properties](#input\_repository\_properties) | Stringified JSON containing the repositories and triggers. This takes precedence over the repositories JSON. | `string` | `""` | no |
 | <a name="input_repository_properties_filepath"></a> [repository\_properties\_filepath](#input\_repository\_properties\_filepath) | The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module. | `string` | `""` | no |
-| <a name="input_satellite_cluster_group"></a> [satellite\_cluster\_group](#input\_satellite\_cluster\_group) | The Satellite cluster group. | `string` | `""` | no |
 | <a name="input_scc_attachment_id"></a> [scc\_attachment\_id](#input\_scc\_attachment\_id) | An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
 | <a name="input_scc_enable_scc"></a> [scc\_enable\_scc](#input\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `true` | no |
 | <a name="input_scc_instance_crn"></a> [scc\_instance\_crn](#input\_scc\_instance\_crn) | The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression. | `string` | `""` | no |
@@ -265,7 +231,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_scc_use_profile_attachment"></a> [scc\_use\_profile\_attachment](#input\_scc\_use\_profile\_attachment) | Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. | `string` | `"disabled"` | no |
 | <a name="input_slack_channel_name"></a> [slack\_channel\_name](#input\_slack\_channel\_name) | The Slack channel that notifications will be posted to. | `string` | `"my-channel"` | no |
 | <a name="input_slack_integration_name"></a> [slack\_integration\_name](#input\_slack\_integration\_name) | The name of the Slack integration. | `string` | `"slack-compliance"` | no |
-| <a name="input_slack_notifications"></a> [slack\_notifications](#input\_slack\_notifications) | The switch that turns the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_slack_pipeline_fail"></a> [slack\_pipeline\_fail](#input\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
 | <a name="input_slack_pipeline_start"></a> [slack\_pipeline\_start](#input\_slack\_pipeline\_start) | Generate pipeline start notifications. | `bool` | `true` | no |
 | <a name="input_slack_pipeline_success"></a> [slack\_pipeline\_success](#input\_slack\_pipeline\_success) | Generate pipeline succeeded notifications. | `bool` | `true` | no |
@@ -281,10 +246,6 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="input_sm_name"></a> [sm\_name](#input\_sm\_name) | Name of the Secrets Manager instance where the secrets are stored. | `string` | `"sm-compliance-secrets"` | no |
 | <a name="input_sm_resource_group"></a> [sm\_resource\_group](#input\_sm\_resource\_group) | The resource group containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance. | `string` | `"default"` | no |
 | <a name="input_sm_secret_group"></a> [sm\_secret\_group](#input\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. | `string` | `"Default"` | no |
-| <a name="input_source_environment"></a> [source\_environment](#input\_source\_environment) | The source environment that the app is promoted from. | `string` | `"master"` | no |
-| <a name="input_target_environment"></a> [target\_environment](#input\_target\_environment) | The target environment that the app is deployed to. | `string` | `"prod"` | no |
-| <a name="input_target_environment_detail"></a> [target\_environment\_detail](#input\_target\_environment\_detail) | Details of the environment being updated. | `string` | `"Production target environment"` | no |
-| <a name="input_target_environment_purpose"></a> [target\_environment\_purpose](#input\_target\_environment\_purpose) | Purpose of the environment being updated. | `string` | `"production"` | no |
 | <a name="input_toolchain_description"></a> [toolchain\_description](#input\_toolchain\_description) | Description for the CD oolchain. | `string` | `"Toolchain created with Terraform template for DevSecOps CD Best Practices"` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Name of CD the Toolchain. | `string` | `"DevSecOps CD Toolchain - Terraform"` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | IBM Cloud Region for the toolchain. | `string` | `"us-south"` | no |
@@ -333,5 +294,10 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 <!-- BEGIN CONTRIBUTING HOOK -->
 
 <!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
+## Contributing
+
+You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
+
+To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
 <!-- Source for this readme file: https://github.com/terraform-ibm-modules/common-dev-assets/tree/main/module-assets/ci/module-template-automation -->
 <!-- END CONTRIBUTING HOOK -->

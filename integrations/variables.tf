@@ -4,9 +4,6 @@ variable "toolchain_id" {
 variable "resource_group" {
 }
 
-variable "region" {
-}
-
 variable "sm_resource_group" {
 }
 

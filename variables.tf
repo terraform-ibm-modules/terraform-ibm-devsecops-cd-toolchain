@@ -34,12 +34,6 @@ variable "enable_pipeline_git_token" {
   default     = false
 }
 
-variable "ibmcloud_api" {
-  type        = string
-  description = "IBM Cloud API Endpoint."
-  default     = "https://cloud.ibm.com"
-}
-
 variable "toolchain_region" {
   type        = string
   description = "IBM Cloud Region for the toolchain."
@@ -61,7 +55,7 @@ variable "toolchain_description" {
 variable "cluster_name" {
   type        = string
   description = "Name of the Kubernetes cluster where the application is deployed."
-  default     = "mycluster-free"
+  default     = ""
 }
 
 variable "cluster_namespace" {
@@ -206,12 +200,6 @@ variable "cos_api_key_secret_name" {
   type        = string
   description = "Name of the IBM Cloud Storage api-key secret in the secret provider."
   default     = "cos-api-key"
-}
-
-variable "pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
 }
 
 variable "cos_endpoint" {
@@ -404,12 +392,6 @@ variable "pipeline_config_repo_clone_from_url" {
   default     = ""
 }
 
-variable "pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
-}
-
 variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
@@ -422,12 +404,6 @@ variable "pipeline_git_tag" {
   default     = ""
 }
 
-variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "change_management_group" {
   type        = string
   description = "Specify Git user/group for change management repo."
@@ -437,12 +413,6 @@ variable "change_management_group" {
 variable "authorization_policy_creation" {
   type        = string
   description = "Set to disabled if you do not want this policy auto created."
-  default     = ""
-}
-
-variable "doi_environment" {
-  type        = string
-  description = "DevOpsInsights environment for DevSecOps CD deployment."
   default     = ""
 }
 
@@ -1033,17 +1003,6 @@ variable "scc_scc_api_key_secret_crn" {
   }
 }
 
-variable "pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Git Token secret in the pipeline properties."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_git_token_secret_crn, "crn:") || var.pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "code_signing_cert_secret_crn" {
   type        = string
   sensitive   = true
@@ -1100,78 +1059,6 @@ variable "compliance_pipeline_group" {
   type        = string
   description = "Specify Git user/group for compliance pipeline repo."
   default     = ""
-}
-
-variable "target_environment_detail" {
-  type        = string
-  description = "Details of the environment being updated."
-  default     = "Production target environment"
-}
-
-variable "customer_impact" {
-  type        = string
-  description = "Custom impact of the change request."
-  default     = "no_impact"
-}
-
-variable "target_environment_purpose" {
-  type        = string
-  description = "Purpose of the environment being updated."
-  default     = "production"
-}
-
-variable "change_request_id" {
-  type        = string
-  description = "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
-  default     = "notAvailable"
-}
-
-variable "satellite_cluster_group" {
-  type        = string
-  description = "The Satellite cluster group."
-  default     = ""
-}
-
-variable "source_environment" {
-  type        = string
-  description = "The source environment that the app is promoted from."
-  default     = "master"
-}
-
-variable "target_environment" {
-  type        = string
-  description = "The target environment that the app is deployed to."
-  default     = "prod"
-}
-
-variable "merge_cra_sbom" {
-  type        = string
-  description = "Merge the SBOM."
-  default     = "1"
-}
-
-variable "emergency_label" {
-  type        = string
-  description = "Identifies the pull request as an emergency."
-  default     = "EMERGENCY"
-}
-
-variable "app_version" {
-  type        = string
-  description = "The version of the app to deploy."
-  default     = "v1"
-}
-
-variable "slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack integration on or off."
-  default     = "0"
-}
-
-variable "pipeline_debug" {
-  type        = string
-  description = "Set to '1' to enable debug logging."
-  default     = "0"
 }
 
 variable "artifactory_integration_name" {
@@ -1318,43 +1205,15 @@ variable "pipeline_ibmcloud_api_key_secret_group" {
   default     = ""
 }
 
-variable "pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "code_signing_cert_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
-variable "force_redeploy" {
-  type        = string
-  description = "Forces the deployment or redeployment of the app even if the last deployment does not contain a delta in the inventory. Set this parameter to `true` to force a deployment of the app as if it is the first deployment on the specified target environment. By default, this parameter is set to `false`."
-  default     = "false"
-  validation {
-    condition     = var.force_redeploy == "true" || var.force_redeploy == "false"
-    error_message = "Must be a `true` or `false`."
-  }
-}
-
 variable "pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "peer_review_compliance" {
-  type        = string
-  description = "Set to `1` to enable peer review compliance validation."
-  default     = "1"
-}
-
-variable "peer_review_collection" {
-  type        = string
-  description = "Set to `1` to enable peer review collection."
   default     = ""
 }
 
@@ -1382,16 +1241,6 @@ variable "enable_pipeline_notifications" {
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = false
 
-}
-
-variable "event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 ####### Trigger properties ###################
@@ -1497,12 +1346,12 @@ variable "trigger_git_promotion_branch" {
   default     = "prod"
 }
 
-######## Deployment Strategy ##################
+######## DevSecOps Flavor ##################
 
-variable "deployment_target" {
+variable "devsecops_flavor" {
   type        = string
-  description = "The deployment target, 'cluster' or 'code-engine'."
-  default     = "cluster"
+  description = "The deployment target, 'kube', 'code-engine' or 'zos'."
+  default     = "kube"
 }
 
 ######## Code Engine Vars #####################
@@ -1512,140 +1361,16 @@ variable "code_engine_project" {
   default     = ""
 }
 
-variable "code_engine_region" {
-  type        = string
-  description = "The region to create/lookup for the Code Engine project."
-  default     = ""
-}
-
 variable "code_engine_resource_group" {
   type        = string
   description = "The resource group of the Code Engine project."
   default     = ""
 }
 
-variable "code_engine_binding_resource_group" {
+variable "code_engine_region" {
   type        = string
-  description = "The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. "
+  description = "The region to create/lookup for the Code Engine project."
   default     = ""
-}
-
-variable "code_engine_deployment_type" {
-  type        = string
-  description = "type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`."
-  default     = "application"
-}
-
-variable "code_engine_cpu" {
-  type        = string
-  description = "The amount of CPU set for the instance of the application or job. "
-  default     = "0.25"
-}
-
-variable "code_engine_memory" {
-  type        = string
-  description = "The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes."
-  default     = "0.5G"
-}
-
-variable "code_engine_ephemeral_storage" {
-  type        = string
-  description = "The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes."
-  default     = "0.4G"
-}
-
-variable "code_engine_job_maxexecutiontime" {
-  type        = string
-  description = "The maximum execution time in seconds for runs of the job."
-  default     = "7200"
-}
-
-variable "code_engine_job_retrylimit" {
-  type        = string
-  description = "The number of times to rerun an instance of the job before the job is marked as failed."
-  default     = "3"
-}
-
-variable "code_engine_job_instances" {
-  type        = string
-  description = "Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1."
-  default     = "1"
-}
-
-variable "code_engine_app_port" {
-  type        = string
-  description = "The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`."
-  default     = "8080"
-}
-
-variable "code_engine_app_min_scale" {
-  type        = string
-  description = "The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed."
-  default     = "0"
-}
-
-variable "code_engine_app_max_scale" {
-  type        = string
-  description = "The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application."
-  default     = "1"
-}
-
-variable "code_engine_app_deployment_timeout" {
-  type        = string
-  description = "The maximum timeout for the application deployment."
-  default     = "300"
-}
-
-variable "code_engine_app_concurrency" {
-  type        = string
-  description = "The maximum number of requests that can be processed concurrently per instance."
-  default     = "100"
-}
-
-variable "code_engine_app_visibility" {
-  type        = string
-  description = "The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project."
-  default     = "public"
-}
-
-#variable "code_engine_CE_ENV_\<XXXX\>" {
-#  type        = string
-#  description = "Pipeline/trigger property (secured or not) to provide value for code engine environment variable <XXXX>."
-#  default     = ""
-#}
-
-variable "code_engine_env_from_configmaps" {
-  type        = string
-  description = "Semi-colon separated list of configmaps to set environment variables."
-  default     = ""
-}
-
-variable "code_engine_env_from_secrets" {
-  type        = string
-  description = "Semi-colon separated list of secrets to set environment variables."
-  default     = ""
-}
-
-variable "code_engine_remove_refs" {
-  type        = string
-  description = "Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD)."
-  default     = "false"
-}
-
-variable "code_engine_service_bindings" {
-  type        = string
-  description = "JSON array including service name(s) (as a simple JSON string)."
-  default     = ""
-}
-
-variable "pre_prod_evidence_collection" {
-  type        = string
-  description = "Set this flag to collect the pre-prod evidences and the change requests in the production deployment (target-environment-purpose set to production). Default value is 0."
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.pre_prod_evidence_collection)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "pipeline_properties" {

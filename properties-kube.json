@@ -1,0 +1,184 @@
+[
+    {
+      "pipeline_id": "cd",
+      "properties": [
+        {
+            "name": "change-request-id",
+            "type": "text",
+            "value": "notAvailable"
+        },
+        {
+            "name": "cluster",
+            "type": "text",
+            "value": "mycluster",
+            "locker" : "true"
+        },
+        {
+            "name": "cluster-namespace",
+            "type": "text",
+            "value": "prod",
+            "locker" : "true"
+        },
+        {
+            "name": "cluster_region",
+            "type": "text",
+            "value": "us-south"
+        },
+        {
+            "name": "code-signing-certificate",
+            "type": "secure",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "cos-api-key",
+            "type": "secure",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "cos-bucket-name",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "cos-endpoint",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "doi-environment",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "doi-ibmcloud-api-key",
+            "type": "secure",
+            "value": "ibmcloud-api-key",
+            "locker" : "true"
+        },
+        {
+            "name": "doi-toolchain-id",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+          "name": "emergency-label",
+          "type": "text",
+          "value": "EMERGENCY"
+        },
+        {
+            "name": "event-notifications",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "force-redeploy",
+            "type": "single_select",
+            "value": "false",
+            "enum": "[false,true]"
+        },
+        {
+          "name": "git-token",
+          "type": "secure",
+          "value": "",
+          "locker" : "true"
+        },
+        {
+            "name": "ibmcloud-api-key",
+            "type": "secure",
+            "value": "ibmcloud-api-key",
+            "locker" : "true"
+        },
+        {
+            "name": "merge-cra-sbom",
+            "type": "text",
+            "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "peer-review-compliance",
+            "type": "text",
+            "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "pipeline-config",
+            "type": "text",
+            "value": ".pipeline-config.yaml",
+            "locker" : "true"
+          },
+          {
+            "name": "pipeline-config-branch",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+          },
+        {
+            "name": "pipeline-debug",
+            "type": "single_select",
+            "value": "0",
+            "enum": "[0,1]"
+        },
+        {
+            "name": "pre-prod-evidence-collection",
+            "type": "text",
+            "value": "1",
+            "locker" : "true"
+        },
+        {
+            "name": "region",
+            "type": "text",
+            "value": "us-south",
+            "locker" : "true"
+        },
+        {
+            "name": "satellite-cluster-group",
+            "type": "text",
+            "value": "",
+            "locker" : "true"
+        },
+        {
+            "name": "slack-notifications",
+            "type": "text",
+            "value": "0",
+            "locker" : "true"
+        },
+        {
+            "name": "source-environment",
+            "type": "text",
+            "value": "master",
+            "locker" : "true"
+        },
+        {
+            "name": "target-environment",
+            "type": "text",
+            "value": "prod",
+            "locker" : "true"
+        },
+        {
+            "name": "target-environment-detail",
+            "type": "text",
+            "value": "Production target environment",
+            "locker" : "true"
+        },
+        {
+            "name": "target-environment-purpose",
+            "type": "text",
+            "value": "Production target environment",
+            "locker" : "true"
+        },
+        {
+            "name": "version",
+            "type": "text",
+            "value": "v1",
+            "locker" : "true"
+        }
+      ]
+    }
+  ]

@@ -132,13 +132,6 @@ locals {
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 
-  pipeline_git_token_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.pipeline_git_token_secret_group == "") ? format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.pipeline_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_git_token_secret_group))
-  )
-
   code_signing_cert_secret_ref = (
     (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
     (var.code_signing_cert_secret_name == "") ? "" :
@@ -154,7 +147,12 @@ locals {
     format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group))
   )
 
-  properties_file_input = (var.pipeline_properties_filepath == "") ? try(file("${path.root}/properties.json"), "[]") : try(file(var.pipeline_properties_filepath), "[]")
+  properties_flavor = ((var.devsecops_flavor == "kube") ? "${path.root}/properties-kube.json" :
+    (var.devsecops_flavor == "code-engine") ? "${path.root}/properties-code-engine.json" :
+    (var.devsecops_flavor == "zos") ? "${path.root}/properties-zos.json" : "${path.root}/properties-kube.json"
+  )
+
+  properties_file_input = (var.pipeline_properties_filepath == "") ? try(file(local.properties_flavor), "[]") : try(file(var.pipeline_properties_filepath), "[]")
   properties_file_data  = (local.properties_file_input == "") ? "[]" : local.properties_file_input
   properties_input      = (var.pipeline_properties == "") ? local.properties_file_data : var.pipeline_properties
   pre_process_prop_data = flatten([for pipeline in jsondecode(local.properties_input) : {
@@ -169,7 +167,19 @@ locals {
     "secrets_provider_type" = (
       (var.enable_key_protect) ? "kp" :
       (var.enable_secrets_manager) ? "sm" : ""
-    )
+    ),
+    "cluster"                    = var.cluster_name,
+    "cluster_namespace"          = var.cluster_namespace,
+    "cluster_region"             = var.cluster_region,
+    "code-engine-project"        = var.code_engine_project,
+    "code-engine-region"         = var.code_engine_region,
+    "code-engine-resource-group" = var.code_engine_resource_group,
+    "cos-api-key"                = local.cos_secret_ref,
+    "cos-bucket-name"            = var.cos_bucket_name,
+    "cos-endpoint"               = var.cos_endpoint,
+    "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
+    "pipeline-config-branch"     = (var.pipeline_config_repo_branch != "") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
+    "region"                     = var.region
   }
 
   repos_file_input = (var.repository_properties_filepath == "") ? try(file("${path.root}/repositories.json"), "[]") : try(file(var.repository_properties_filepath), "[]")
@@ -356,24 +366,16 @@ resource "ibm_cd_toolchain_tool_pipeline" "cd_pipeline" {
 module "pipeline_cd" {
   source                                = "./pipeline-cd"
   depends_on                            = [module.integrations, module.services]
-  ibmcloud_api                          = var.ibmcloud_api
   ibmcloud_api_key                      = var.ibmcloud_api_key
-  region                                = var.region
   pipeline_id                           = split("/", ibm_cd_toolchain_tool_pipeline.cd_pipeline.id)[1]
   resource_group                        = var.toolchain_resource_group
-  cluster_name                          = var.cluster_name
-  cluster_namespace                     = var.cluster_namespace
-  cluster_region                        = var.cluster_region
   change_management_repo                = try(module.change_management_repo[0].repository_url, "")
   deployment_repo                       = module.deployment_repo.repository
-  deployment_repo_branch                = local.deployment_repo_branch
   pipeline_config_repo                  = try(module.pipeline_config_repo[0].repository, "")
   pipeline_branch                       = var.pipeline_branch
   pipeline_git_tag                      = var.pipeline_git_tag
-  pipeline_config_path                  = var.pipeline_config_path
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch           = var.pipeline_config_repo_branch
   pipeline_repo_url                     = module.compliance_pipelines_repo.repository_url
   evidence_repo_url                     = module.evidence_repo.repository_url
   inventory_repo_url                    = module.inventory_repo.repository_url
@@ -382,35 +384,13 @@ module "pipeline_cd" {
   inventory_repo                        = module.inventory_repo.repository
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
-  cos_bucket_name                       = var.cos_bucket_name
-  cos_api_key_secret_ref                = (var.cos_bucket_name == "") ? "" : local.cos_secret_ref
-  cos_endpoint                          = var.cos_endpoint
-  compliance_base_image                 = var.compliance_base_image
   doi_toolchain_id                      = var.doi_toolchain_id
-  doi_environment                       = var.doi_environment
-  pipeline_ibmcloud_api_key_secret_ref  = local.pipeline_apikey_secret_ref
-  pipeline_git_token_secret_ref         = local.pipeline_git_token_secret_ref
   code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
-  target_environment_detail             = var.target_environment_detail
-  customer_impact                       = var.customer_impact
-  target_environment_purpose            = var.target_environment_purpose
-  change_request_id                     = var.change_request_id
-  satellite_cluster_group               = var.satellite_cluster_group
-  source_environment                    = var.source_environment
-  target_environment                    = var.target_environment
-  merge_cra_sbom                        = var.merge_cra_sbom
-  emergency_label                       = var.emergency_label
-  force_redeploy                        = var.force_redeploy
-  app_version                           = var.app_version
-  slack_notifications                   = var.slack_notifications
-  pipeline_debug                        = var.pipeline_debug
   code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
-  peer_review_compliance                = var.peer_review_compliance
-  peer_review_collection                = var.peer_review_collection
   artifact_signature_verification       = var.artifact_signature_verification
   create_triggers                       = var.create_triggers
   trigger_git_name                      = var.trigger_git_name
@@ -427,42 +407,17 @@ module "pipeline_cd" {
   trigger_timed_pruner_name             = var.trigger_timed_pruner_name
   trigger_timed_pruner_enable           = var.trigger_timed_pruner_enable
   enable_pipeline_notifications         = var.enable_pipeline_notifications
-  event_notifications                   = var.event_notifications
-  pipeline_doi_api_key_secret_ref       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref
   link_to_doi_toolchain                 = var.link_to_doi_toolchain
   trigger_git_promotion_listener        = var.trigger_git_promotion_listener
   trigger_git_promotion_enable          = var.trigger_git_promotion_enable
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
-  deployment_target                     = var.deployment_target
   code_engine_project                   = var.code_engine_project
-  code_engine_region                    = var.code_engine_region
-  code_engine_resource_group            = var.code_engine_resource_group
-  code_engine_binding_resource_group    = var.code_engine_binding_resource_group
-  code_engine_deployment_type           = var.code_engine_deployment_type
-  code_engine_cpu                       = var.code_engine_cpu
-  code_engine_memory                    = var.code_engine_memory
-  code_engine_ephemeral_storage         = var.code_engine_ephemeral_storage
-  code_engine_job_maxexecutiontime      = var.code_engine_job_maxexecutiontime
-  code_engine_job_retrylimit            = var.code_engine_job_retrylimit
-  code_engine_job_instances             = var.code_engine_job_instances
-  code_engine_app_port                  = var.code_engine_app_port
-  code_engine_app_min_scale             = var.code_engine_app_min_scale
-  code_engine_app_max_scale             = var.code_engine_app_max_scale
-  code_engine_app_deployment_timeout    = var.code_engine_app_deployment_timeout
-  code_engine_app_concurrency           = var.code_engine_app_concurrency
-  code_engine_app_visibility            = var.code_engine_app_visibility
-  code_engine_env_from_configmaps       = var.code_engine_env_from_configmaps
-  code_engine_env_from_secrets          = var.code_engine_env_from_secrets
-  code_engine_remove_refs               = var.code_engine_remove_refs
-  code_engine_service_bindings          = var.code_engine_service_bindings
-  pre_prod_evidence_collection          = var.pre_prod_evidence_collection
 }
 
 module "integrations" {
   source                               = "./integrations"
   depends_on                           = [module.services]
-  region                               = var.toolchain_region
   ibmcloud_api_key                     = var.ibmcloud_api_key
   toolchain_id                         = ibm_cd_toolchain.toolchain_instance.id
   resource_group                       = var.toolchain_resource_group
@@ -524,7 +479,6 @@ module "integrations" {
 module "services" {
   source = "./services"
 
-  ibmcloud_api           = var.ibmcloud_api
   sm_name                = var.sm_name
   sm_location            = var.sm_location
   sm_resource_group      = var.sm_resource_group
