@@ -162,6 +162,7 @@ locals {
   ])
 
   config_data = {
+    "default_locked_properties"  = var.default_locked_properties,
     "secrets_integration_name" = var.sm_integration_name,
     "secrets_group"            = var.sm_secret_group,
     "secrets_provider_type" = (
@@ -413,6 +414,7 @@ module "pipeline_cd" {
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
   code_engine_project                   = var.code_engine_project
+  default_locked_properties               = var.default_locked_properties
 }
 
 module "integrations" {

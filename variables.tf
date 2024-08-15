@@ -1396,3 +1396,9 @@ variable "repository_properties_filepath" {
   description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
   default     = ""
 }
+
+variable "default_locked_properties" {
+  type        = list(string)
+  description = "List of default locked properties"
+  default     = ["compliance-baseimage", "cra-deploy-analysis", "cra-vulnerability-scan", "cra-bom-generate", "pre-prod-evidence-collection", "event-notifications", "service-bindings", "remove-unspecified-references-to-configuration-resources", "env-from-secrets", "env-from-configmaps", "app-visibility", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "job-instances", "job-retrylimit", "job-maxexecutiontime", "ephemeral-storage", "memory", "cpu", "code-engine-deployment-type", "code-engine-binding-resource-group", "code-engine-resource-group", "code-engine-region", "code-engine-project", "artifact-signature-verification", "allow_test_servicenow", "change-management-repo", "cos-api-key", "doi-ibmcloud-api-key", "ibmcloud-api-key", "git-token", "pnp-ibmcloud-api-key", "servicenow-crn-mask", "evidence-repo", "incident-repo", "inventory-repo", "pipeline-config-repo", "pipeline-config", "pipeline-config-branch", "cos-bucket-name", "cos-endpoint", "doi-environment", "doi-toolchain-id", "ibmcloud-api", "pnp-ibmcloud-api", "servicenow-api-base-url", "cluster", "cluster-namespace", "cluster-region", "code-signing-certificate", "slack-notifications", "emergency-label", "version"]
+}

@@ -151,3 +151,6 @@ variable "trigger_git_promotion_validation_name" {
 
 variable "code_engine_project" {
 }
+
+variable "default_locked_properties" {
+}
