@@ -10,56 +10,47 @@
         {
             "name": "code-signing-certificate",
             "type": "secure",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "cos-api-key",
             "type": "secure",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "cos-bucket-name",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "cos-endpoint",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "dbb-hlq",
             "type": "text",
-            "value": "IBMUSER.PIPELINE",
-            "locked" : "true"
+            "value": "IBMUSER.PIPELINE"
           },
           {
             "name": "dbb-user",
             "type": "text",
-            "value": "",
-            "locked" : "true"
+            "value": ""
           },
         {
             "name": "doi-environment",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "doi-ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key",
-            "locker" : "true"
+            "value": "ibmcloud-api-key"
         },
         {
             "name": "doi-toolchain-id",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
           "name": "emergency-label",
@@ -69,8 +60,7 @@
         {
             "name": "event-notifications",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "force-redeploy",
@@ -81,38 +71,32 @@
         {
           "name": "git-token",
           "type": "secure",
-          "value": "",
-          "locker" : "true"
+          "value": ""
         },
         {
             "name": "ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key",
-            "locker" : "true"
+            "value": "ibmcloud-api-key"
         },
         {
             "name": "merge-cra-sbom",
             "type": "text",
-            "value": "1",
-            "locker" : "true"
+            "value": "1"
         },
         {
             "name": "peer-review-compliance",
             "type": "text",
-            "value": "1",
-            "locker" : "true"
+            "value": "1"
         },
         {
             "name": "pipeline-config",
             "type": "text",
-            "value": ".pipeline-config.yaml",
-            "locker" : "true"
+            "value": ".pipeline-config.yaml"
           },
           {
             "name": "pipeline-config-branch",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
           },
         {
             "name": "pipeline-debug",
@@ -123,80 +107,67 @@
         {
             "name": "pre-prod-evidence-collection",
             "type": "text",
-            "value": "1",
-            "locker" : "true"
+            "value": "1"
         },
         {
             "name": "region",
             "type": "text",
-            "value": "us-south",
-            "locker" : "true"
+            "value": "us-south"
         },
         {
             "name": "satellite-cluster-group",
             "type": "text",
-            "value": "",
-            "locker" : "true"
+            "value": ""
         },
         {
             "name": "slack-notifications",
             "type": "text",
-            "value": "0",
-            "locker" : "true"
+            "value": "0"
         },
         {
             "name": "source-environment",
             "type": "text",
-            "value": "master",
-            "locker" : "true"
+            "value": "master"
         },
         {
             "name": "target-environment",
             "type": "text",
-            "value": "prod",
-            "locker" : "true"
+            "value": "prod"
         },
         {
             "name": "target-environment-detail",
             "type": "text",
-            "value": "Production target environment",
-            "locker" : "true"
+            "value": "Production target environment"
         },
         {
             "name": "target-environment-purpose",
             "type": "text",
-            "value": "Production target environment",
-            "locker" : "true"
+            "value": "Production target environment"
         },
         {
             "name": "version",
             "type": "text",
-            "value": "v1",
-            "locker" : "true"
+            "value": "v1"
         },
         {
             "name": "zos-hostname",
             "type": "text",
-            "value": "",
-            "locked" : "true"
+            "value": ""
           },
           {
             "name": "zos-secret-key-name",
             "type": "text",
-            "value": "ssh-auth",
-            "locked" : "true"
+            "value": "ssh-auth"
           },
           {
             "name": "zos-ssh-port",
             "type": "text",
-            "value": "22",
-            "locked" : "true"
+            "value": "22"
           },
           {
             "name": "zos-user",
             "type": "text",
-            "value": "ibmuser",
-            "locked" : "true"
+            "value": "ibmuser"
           }
       ]
     }
