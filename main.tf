@@ -132,14 +132,6 @@ locals {
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 
-  code_signing_cert_secret_ref = (
-    (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
-    (var.code_signing_cert_secret_name == "") ? "" :
-    (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
-    (var.code_signing_cert_secret_group == "") ? format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.code_signing_cert_secret_group))
-  )
-
   pipeline_doi_api_key_secret_ref = (
     (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", module.integrations.secret_tool) :
@@ -388,13 +380,10 @@ module "pipeline_cd" {
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
   doi_toolchain_id                      = var.doi_toolchain_id
-  code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
-  code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
-  artifact_signature_verification       = var.artifact_signature_verification
   create_triggers                       = var.create_triggers
   trigger_git_name                      = var.trigger_git_name
   trigger_git_enable                    = var.trigger_git_enable

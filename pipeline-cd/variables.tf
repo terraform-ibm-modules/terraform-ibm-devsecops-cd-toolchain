@@ -20,12 +20,6 @@ variable "worker_id" {
 variable "link_to_doi_toolchain" {
 }
 
-variable "code_signing_cert_secret_ref" {
-}
-
-variable "code_signing_cert" {
-}
-
 variable "deployment_repo" {
 }
 
@@ -87,9 +81,6 @@ variable "enable_artifactory" {
 }
 
 variable "enable_pipeline_git_token" {
-}
-
-variable "artifact_signature_verification" {
 }
 
 variable "tool_artifactory" {
