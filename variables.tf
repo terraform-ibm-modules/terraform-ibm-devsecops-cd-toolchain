@@ -1097,6 +1097,12 @@ variable "slack_integration_name" {
   default     = "slack-compliance"
 }
 
+variable "private_worker_integration_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "compliance-private-worker"
+}
+
 variable "worker_id" {
   type        = string
   default     = "public"

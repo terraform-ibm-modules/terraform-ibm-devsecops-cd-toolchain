@@ -465,6 +465,7 @@ module "integrations" {
   sm_integration_name                  = var.sm_integration_name
   kp_integration_name                  = var.kp_integration_name
   slack_integration_name               = var.slack_integration_name
+  private_worker_integration_name      = var.private_worker_integration_name
   event_notifications_tool_name        = var.event_notifications_tool_name
   event_notifications_crn              = var.event_notifications_crn
 }
