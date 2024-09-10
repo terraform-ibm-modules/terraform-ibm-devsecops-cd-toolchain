@@ -162,8 +162,8 @@ locals {
       (var.enable_secrets_manager) ? "sm" : ""
     ),
     "cluster"                    = var.cluster_name,
-    "cluster_namespace"          = var.cluster_namespace,
-    "cluster_region"             = var.cluster_region,
+    "cluster-namespace"          = var.cluster_namespace,
+    "cluster-region"             = var.cluster_region,
     "code-engine-project"        = var.code_engine_project,
     "code-engine-region"         = var.code_engine_region,
     "code-engine-resource-group" = var.code_engine_resource_group,
