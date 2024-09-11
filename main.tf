@@ -167,6 +167,7 @@ locals {
     "code-engine-project"        = var.code_engine_project,
     "code-engine-region"         = var.code_engine_region,
     "code-engine-resource-group" = var.code_engine_resource_group,
+    "code-signing-certificate"   = var.code_signing_cert_secret_name,
     "cos-api-key"                = local.cos_secret_ref,
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,

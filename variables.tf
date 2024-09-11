@@ -811,6 +811,12 @@ variable "inventory_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
+variable "code_signing_cert_secret_name" {
+  type        = string
+  description = "Set this variable with the name of the secret containing the GPG public key from the Secrets Provider."
+  default     = ""
+}
+
 variable "issues_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
