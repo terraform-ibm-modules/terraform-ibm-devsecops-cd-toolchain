@@ -168,7 +168,7 @@ locals {
     "code-engine-region"         = var.code_engine_region,
     "code-engine-resource-group" = var.code_engine_resource_group,
     "code-signing-certificate"   = var.code_signing_cert_secret_name,
-    "cos-api-key"                = local.cos_secret_ref,
+    "cos-api-key"                = var.cos_api_key_secret_name,
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
     "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
