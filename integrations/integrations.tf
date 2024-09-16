@@ -11,8 +11,8 @@ locals {
 
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
-  slack_integration_name = "slack-compliance"
-  private_worker_name    = "compliance-private-worker"
+  slack_integration_name = var.slack_integration_name
+  private_worker_name    = var.private_worker_integration_name
 }
 
 resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {

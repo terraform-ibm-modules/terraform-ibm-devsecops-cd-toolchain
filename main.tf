@@ -132,14 +132,6 @@ locals {
     format("{vault::%s.${var.scc_scc_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.scc_scc_api_key_secret_group))
   )
 
-  code_signing_cert_secret_ref = (
-    (var.sm_instance_crn != "") ? var.code_signing_cert_secret_crn :
-    (var.code_signing_cert_secret_name == "") ? "" :
-    (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
-    (var.code_signing_cert_secret_group == "") ? format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.code_signing_cert_secret_group))
-  )
-
   pipeline_doi_api_key_secret_ref = (
     (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", module.integrations.secret_tool) :
@@ -170,15 +162,16 @@ locals {
       (var.enable_secrets_manager) ? "sm" : ""
     ),
     "cluster"                    = var.cluster_name,
-    "cluster_namespace"          = var.cluster_namespace,
-    "cluster_region"             = var.cluster_region,
+    "cluster-namespace"          = var.cluster_namespace,
+    "cluster-region"             = var.cluster_region,
     "code-engine-project"        = var.code_engine_project,
     "code-engine-region"         = var.code_engine_region,
     "code-engine-resource-group" = var.code_engine_resource_group,
-    "cos-api-key"                = local.cos_secret_ref,
+    "code-signing-certificate"   = var.code_signing_cert_secret_name,
+    "cos-api-key"                = var.cos_api_key_secret_name,
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
-    "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
+    "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.pipeline_doi_api_key_secret_name,
     "pipeline-config-branch"     = (var.pipeline_config_repo_branch != "") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
     "region"                     = var.region
   }
@@ -388,13 +381,10 @@ module "pipeline_cd" {
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
   doi_toolchain_id                      = var.doi_toolchain_id
-  code_signing_cert_secret_ref          = local.code_signing_cert_secret_ref
   worker_id                             = module.integrations.worker_id
-  code_signing_cert                     = var.code_signing_cert
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
-  artifact_signature_verification       = var.artifact_signature_verification
   create_triggers                       = var.create_triggers
   trigger_git_name                      = var.trigger_git_name
   trigger_git_enable                    = var.trigger_git_enable
@@ -476,6 +466,7 @@ module "integrations" {
   sm_integration_name                  = var.sm_integration_name
   kp_integration_name                  = var.kp_integration_name
   slack_integration_name               = var.slack_integration_name
+  private_worker_integration_name      = var.private_worker_integration_name
   event_notifications_tool_name        = var.event_notifications_tool_name
   event_notifications_crn              = var.event_notifications_crn
 }

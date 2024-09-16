@@ -15,13 +15,6 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
-variable "code_signing_cert" {
-  type        = string
-  sensitive   = true
-  description = "The base64 encoded GPG public key. Setting this will add the public signing cert to the pipeline properties. Alternatively see `enable_signing_validation` to store the cert in a Secrets provider ."
-  default     = ""
-}
-
 variable "enable_artifactory" {
   type        = bool
   default     = false
@@ -820,7 +813,7 @@ variable "inventory_repo_git_token_secret_name" {
 
 variable "code_signing_cert_secret_name" {
   type        = string
-  description = "This is the optional alternative to using `code_signing_cert` for storing the GPG public signing key. Set this variable with the name of the secret containing the GPG public key from the Secrets Provider."
+  description = "Set this variable with the name of the secret containing the GPG public key from the Secrets Provider."
   default     = ""
 }
 
@@ -1003,17 +996,6 @@ variable "scc_scc_api_key_secret_crn" {
   }
 }
 
-variable "code_signing_cert_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the public signing key cert in the secrets provider."
-  default     = ""
-  validation {
-    condition     = startswith(var.code_signing_cert_secret_crn, "crn:") || var.code_signing_cert_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "pipeline_doi_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -1121,6 +1103,12 @@ variable "slack_integration_name" {
   default     = "slack-compliance"
 }
 
+variable "private_worker_integration_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "compliance-private-worker"
+}
+
 variable "worker_id" {
   type        = string
   default     = "public"
@@ -1205,21 +1193,9 @@ variable "pipeline_ibmcloud_api_key_secret_group" {
   default     = ""
 }
 
-variable "code_signing_cert_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "artifact_signature_verification" {
-  type        = string
-  description = "Set to `1` to enable artifact signature verification."
   default     = ""
 }
 

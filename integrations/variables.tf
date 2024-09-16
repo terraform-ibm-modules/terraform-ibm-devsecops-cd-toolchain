@@ -185,6 +185,9 @@ variable "kp_integration_name" {
 variable "slack_integration_name" {
 }
 
+variable "private_worker_integration_name" {
+}
+
 variable "event_notifications_tool_name" {
 }
 
