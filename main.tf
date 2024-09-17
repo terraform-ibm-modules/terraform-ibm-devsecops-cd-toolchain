@@ -172,6 +172,7 @@ locals {
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
     "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.pipeline_doi_api_key_secret_name,
+    "doi-toolchain-id"           = var.doi_toolchain_id,
     "ibmcloud-api-key"           = var.pipeline_ibmcloud_api_key_secret_name,
     "pipeline-config-branch"     = (var.pipeline_config_repo_branch != "") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
     "region"                     = var.region
