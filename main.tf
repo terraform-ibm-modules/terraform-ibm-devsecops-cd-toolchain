@@ -223,6 +223,9 @@ module "issues_repo" {
   auth_type             = var.issues_repo_auth_type
   secret_ref            = local.issues_repo_secret_ref
   git_id                = var.issues_repo_git_id
+  blind_connection      = var.issues_repo_blind_connection
+  title                 = var.issues_repo_title
+  root_url              = var.issues_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -244,6 +247,9 @@ module "evidence_repo" {
   auth_type             = var.evidence_repo_auth_type
   secret_ref            = local.evidence_repo_secret_ref
   git_id                = var.evidence_repo_git_id
+  blind_connection      = var.evidence_repo_blind_connection
+  title                 = var.evidence_repo_title
+  root_url              = var.evidence_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -265,6 +271,9 @@ module "inventory_repo" {
   auth_type             = var.inventory_repo_auth_type
   secret_ref            = local.inventory_repo_secret_ref
   git_id                = var.inventory_repo_git_id
+  blind_connection      = var.inventory_repo_blind_connection
+  title                 = var.inventory_repo_title
+  root_url              = var.inventory_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -287,6 +296,9 @@ module "change_management_repo" {
   auth_type             = var.change_management_repo_auth_type
   secret_ref            = local.change_management_repo_secret_ref
   git_id                = var.change_management_repo_git_id
+  blind_connection      = var.change_management_repo_blind_connection
+  title                 = var.change_management_repo_title
+  root_url              = var.change_management_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -309,6 +321,9 @@ module "pipeline_config_repo" {
   auth_type             = var.pipeline_config_repo_auth_type
   secret_ref            = local.pipeline_config_repo_secret_ref
   git_id                = var.pipeline_config_repo_git_id
+  blind_connection      = var.pipeline_config_repo_blind_connection
+  title                 = var.pipeline_config_repo_title
+  root_url              = var.pipeline_config_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -330,6 +345,9 @@ module "compliance_pipelines_repo" {
   auth_type             = var.compliance_pipeline_repo_auth_type
   secret_ref            = local.compliance_pipeline_repo_secret_ref
   git_id                = var.compliance_pipelines_repo_git_id
+  blind_connection      = var.compliance_pipelines_repo_blind_connection
+  title                 = var.compliance_pipelines_repo_title
+  root_url              = var.compliance_pipelines_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -351,6 +369,9 @@ module "deployment_repo" {
   auth_type             = var.deployment_repo_auth_type
   secret_ref            = local.deployment_repo_secret_ref
   git_id                = (var.deployment_repo_existing_git_id != "") ? var.deployment_repo_existing_git_id : var.deployment_repo_clone_to_git_id
+  blind_connection      = var.deployment_repo_blind_connection
+  title                 = var.deployment_repo_title
+  root_url              = var.deployment_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
