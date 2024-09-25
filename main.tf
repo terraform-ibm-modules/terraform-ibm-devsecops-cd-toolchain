@@ -285,7 +285,7 @@ module "change_management_repo" {
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.change_management_repo_git_provider
   initialization_type   = var.change_management_repo_initialization_type
-  repository_url        = ""
+  repository_url        = var.change_management_existing_url
   source_repository_url = local.change_management_repo_source
   repository_name       = (var.change_management_repo_name != "") ? var.change_management_repo_name : join("-", [var.repositories_prefix, "change-repo"])
   is_private_repo       = var.change_management_repo_is_private_repo

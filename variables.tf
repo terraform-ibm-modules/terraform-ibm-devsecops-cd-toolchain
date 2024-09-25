@@ -297,6 +297,12 @@ variable "change_repo_clone_from_url" {
   default     = ""
 }
 
+variable "change_management_existing_url" {
+  type        = string
+  description = "The URL for an existing Change Management repository."
+  default     = ""
+}
+
 variable "repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
