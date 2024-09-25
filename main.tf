@@ -17,12 +17,10 @@ locals {
 
   deployment_repo_branch = (
     (local.deployment_repo_mode == "byo_deployment") ?
-    ((length(var.deployment_repo_existing_branch) > 0) ? var.deployment_repo_existing_branch
-      : file("[Error] var deployment_repo_existing_branch must be provided when using var deployment_repo_existing_url.")
+    ((length(var.deployment_repo_existing_branch) > 0) ? var.deployment_repo_existing_branch : "master"
     )
     : (local.deployment_repo_mode == "byo_sample") ?
-    ((length(var.deployment_repo_clone_from_branch) > 0) ? var.deployment_repo_clone_from_branch
-      : file("[Error] var deployment_repo_clone_from_branch must be provided when using var deployment_repo_clone_from_url.")
+    ((length(var.deployment_repo_clone_from_branch) > 0) ? var.deployment_repo_clone_from_branch : "master"
     )
     : "master" # hello-compliance-deployment has branch master
   )
