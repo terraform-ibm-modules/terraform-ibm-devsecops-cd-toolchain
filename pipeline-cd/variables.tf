@@ -145,3 +145,6 @@ variable "code_engine_project" {
 
 variable "default_locked_properties" {
 }
+
+variable "add_pipeline_definitions" {
+}

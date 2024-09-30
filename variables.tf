@@ -1518,6 +1518,12 @@ variable "code_engine_region" {
   default     = ""
 }
 
+variable "add_pipeline_definitions" {
+  type        = string
+  description = "Set to `true` to add pipeline definitions."
+  default     = "true"
+}
+
 variable "pipeline_properties" {
   type        = string
   description = "Stringified JSON containing the properties. This takes precedence over the properties JSON."

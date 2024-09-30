@@ -427,6 +427,7 @@ module "pipeline_cd" {
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
   code_engine_project                   = var.code_engine_project
+  add_pipeline_definitions              = var.add_pipeline_definitions
   default_locked_properties             = var.default_locked_properties
 }
 
