@@ -407,6 +407,7 @@ module "pipeline_cd" {
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
   create_triggers                       = var.create_triggers
+  create_git_triggers                   = var.create_git_triggers
   trigger_git_name                      = var.trigger_git_name
   trigger_git_enable                    = var.trigger_git_enable
   trigger_timed_name                    = var.trigger_timed_name
