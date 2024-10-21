@@ -7,7 +7,7 @@ resource "ibm_cd_tekton_pipeline" "cd_pipeline_instance" {
 }
 
 resource "ibm_cd_tekton_pipeline_definition" "cd_pipeline_definition" {
-  count       = (var.pipeline_git_tag == "") ? 1 : 0
+  count       = ((var.pipeline_git_tag == "") && (var.add_pipeline_definitions)) ? 1 : 0
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   source {
     type = "git"
@@ -20,7 +20,7 @@ resource "ibm_cd_tekton_pipeline_definition" "cd_pipeline_definition" {
 }
 
 resource "ibm_cd_tekton_pipeline_definition" "cd_tekton_definition_tag" {
-  count       = (var.pipeline_git_tag != "") ? 1 : 0
+  count       = ((var.pipeline_git_tag != "") && (var.add_pipeline_definitions)) ? 1 : 0
   pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   source {
     type = "git"
@@ -64,7 +64,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_timed_trigger" {
 }
 
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_scm_trigger" {
-  count          = (var.create_triggers) ? 1 : 0
+  count          = (var.create_git_triggers) ? 1 : 0
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   name           = var.trigger_git_name
   type           = "scm"
@@ -198,7 +198,7 @@ resource "ibm_cd_tekton_pipeline_trigger_property" "cd_pipeline_timed_pruner_tri
 
 # git promotion validation listener
 resource "ibm_cd_tekton_pipeline_trigger" "cd_pipeline_git_promotion_validation" {
-  count          = (var.create_triggers) ? 1 : 0
+  count          = (var.create_git_triggers) ? 1 : 0
   pipeline_id    = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
   type           = "scm"
   name           = var.trigger_git_promotion_validation_name

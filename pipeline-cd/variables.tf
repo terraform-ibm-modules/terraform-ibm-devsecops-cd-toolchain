@@ -89,6 +89,9 @@ variable "tool_artifactory" {
 variable "create_triggers" {
 }
 
+variable "create_git_triggers" {
+}
+
 variable "trigger_git_name" {
 }
 variable "trigger_git_enable" {
@@ -144,4 +147,7 @@ variable "code_engine_project" {
 }
 
 variable "default_locked_properties" {
+}
+
+variable "add_pipeline_definitions" {
 }

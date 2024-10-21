@@ -17,12 +17,10 @@ locals {
 
   deployment_repo_branch = (
     (local.deployment_repo_mode == "byo_deployment") ?
-    ((length(var.deployment_repo_existing_branch) > 0) ? var.deployment_repo_existing_branch
-      : file("[Error] var deployment_repo_existing_branch must be provided when using var deployment_repo_existing_url.")
+    ((length(var.deployment_repo_existing_branch) > 0) ? var.deployment_repo_existing_branch : "master"
     )
     : (local.deployment_repo_mode == "byo_sample") ?
-    ((length(var.deployment_repo_clone_from_branch) > 0) ? var.deployment_repo_clone_from_branch
-      : file("[Error] var deployment_repo_clone_from_branch must be provided when using var deployment_repo_clone_from_url.")
+    ((length(var.deployment_repo_clone_from_branch) > 0) ? var.deployment_repo_clone_from_branch : "master"
     )
     : "master" # hello-compliance-deployment has branch master
   )
@@ -223,6 +221,9 @@ module "issues_repo" {
   auth_type             = var.issues_repo_auth_type
   secret_ref            = local.issues_repo_secret_ref
   git_id                = var.issues_repo_git_id
+  blind_connection      = var.issues_repo_blind_connection
+  title                 = var.issues_repo_title
+  root_url              = var.issues_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -244,6 +245,9 @@ module "evidence_repo" {
   auth_type             = var.evidence_repo_auth_type
   secret_ref            = local.evidence_repo_secret_ref
   git_id                = var.evidence_repo_git_id
+  blind_connection      = var.evidence_repo_blind_connection
+  title                 = var.evidence_repo_title
+  root_url              = var.evidence_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -265,6 +269,9 @@ module "inventory_repo" {
   auth_type             = var.inventory_repo_auth_type
   secret_ref            = local.inventory_repo_secret_ref
   git_id                = var.inventory_repo_git_id
+  blind_connection      = var.inventory_repo_blind_connection
+  title                 = var.inventory_repo_title
+  root_url              = var.inventory_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -276,7 +283,7 @@ module "change_management_repo" {
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.change_management_repo_git_provider
   initialization_type   = var.change_management_repo_initialization_type
-  repository_url        = ""
+  repository_url        = var.change_management_existing_url
   source_repository_url = local.change_management_repo_source
   repository_name       = (var.change_management_repo_name != "") ? var.change_management_repo_name : join("-", [var.repositories_prefix, "change-repo"])
   is_private_repo       = var.change_management_repo_is_private_repo
@@ -287,6 +294,9 @@ module "change_management_repo" {
   auth_type             = var.change_management_repo_auth_type
   secret_ref            = local.change_management_repo_secret_ref
   git_id                = var.change_management_repo_git_id
+  blind_connection      = var.change_management_repo_blind_connection
+  title                 = var.change_management_repo_title
+  root_url              = var.change_management_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -309,6 +319,9 @@ module "pipeline_config_repo" {
   auth_type             = var.pipeline_config_repo_auth_type
   secret_ref            = local.pipeline_config_repo_secret_ref
   git_id                = var.pipeline_config_repo_git_id
+  blind_connection      = var.pipeline_config_repo_blind_connection
+  title                 = var.pipeline_config_repo_title
+  root_url              = var.pipeline_config_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -318,18 +331,21 @@ module "compliance_pipelines_repo" {
   tool_name             = "pipeline-repo"
   toolchain_id          = ibm_cd_toolchain.toolchain_instance.id
   git_provider          = var.compliance_pipeline_repo_git_provider
-  initialization_type   = "link"
-  repository_url        = local.compliance_repo_url
-  source_repository_url = ""
-  repository_name       = ""
-  is_private_repo       = false
+  initialization_type   = var.compliance_pipelines_repo_initialization_type
+  repository_url        = (var.compliance_pipeline_existing_repo_url == "") ? local.compliance_repo_url : var.compliance_pipeline_existing_repo_url
+  source_repository_url = var.compliance_pipeline_source_repo_url
+  repository_name       = var.compliance_pipelines_repo_name
+  is_private_repo       = var.compliance_pipelines_repo_is_private_repo
   owner_id              = var.compliance_pipeline_group
   issues_enabled        = var.compliance_pipeline_repo_issues_enabled
-  traceability_enabled  = false
+  traceability_enabled  = var.compliance_pipelines_repo_traceability_enabled
   integration_owner     = var.compliance_pipeline_repo_integration_owner
   auth_type             = var.compliance_pipeline_repo_auth_type
   secret_ref            = local.compliance_pipeline_repo_secret_ref
   git_id                = var.compliance_pipelines_repo_git_id
+  blind_connection      = var.compliance_pipelines_repo_blind_connection
+  title                 = var.compliance_pipelines_repo_title
+  root_url              = var.compliance_pipelines_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -351,6 +367,9 @@ module "deployment_repo" {
   auth_type             = var.deployment_repo_auth_type
   secret_ref            = local.deployment_repo_secret_ref
   git_id                = (var.deployment_repo_existing_git_id != "") ? var.deployment_repo_existing_git_id : var.deployment_repo_clone_to_git_id
+  blind_connection      = var.deployment_repo_blind_connection
+  title                 = var.deployment_repo_title
+  root_url              = var.deployment_repo_root_url
   default_git_provider  = var.default_git_provider
 }
 
@@ -388,6 +407,7 @@ module "pipeline_cd" {
   enable_artifactory                    = var.enable_artifactory
   enable_pipeline_git_token             = var.enable_pipeline_git_token
   create_triggers                       = var.create_triggers
+  create_git_triggers                   = var.create_git_triggers
   trigger_git_name                      = var.trigger_git_name
   trigger_git_enable                    = var.trigger_git_enable
   trigger_timed_name                    = var.trigger_timed_name
@@ -408,6 +428,7 @@ module "pipeline_cd" {
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
   trigger_git_promotion_validation_name = var.trigger_git_promotion_validation_name
   code_engine_project                   = var.code_engine_project
+  add_pipeline_definitions              = var.add_pipeline_definitions
   default_locked_properties             = var.default_locked_properties
 }
 
