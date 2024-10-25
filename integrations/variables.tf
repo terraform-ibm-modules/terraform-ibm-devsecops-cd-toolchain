@@ -161,6 +161,21 @@ variable "artifactory_repo_url" {
 variable "artifactory_token_secret_ref" {
 }
 
+variable "concert_dashboard_url" {
+}
+
+variable "concert_description" {
+}
+
+variable "concert_documentation_url" {
+}
+
+variable "concert_integration_name" {
+}
+
+variable "enable_concert" {
+}
+
 variable "cos_dashboard_url" {
 }
 
