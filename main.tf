@@ -470,6 +470,11 @@ module "integrations" {
   enable_key_protect                   = var.enable_key_protect
   authorization_policy_creation        = var.authorization_policy_creation
   enable_insights                      = var.enable_insights
+  enable_concert                       = var.enable_concert
+  concert_dashboard_url                = var.concert_dashboard_url
+  concert_description                  = var.concert_description
+  concert_documentation_url            = var.concert_documentation_url
+  concert_integration_name             = var.concert_integration_name
   link_to_doi_toolchain                = var.link_to_doi_toolchain
   doi_toolchain_id                     = var.doi_toolchain_id
   enable_artifactory                   = var.enable_artifactory
