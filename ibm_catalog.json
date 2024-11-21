@@ -29,8 +29,8 @@
                         {
                             "key": "toolchain_name",
                             "type": "string",
-                            "default_value": "DevSecOps CI Toolchain - Terraform",
-                            "description": "Name of the CI Toolchain.",
+                            "default_value": "DevSecOps CD Toolchain - Terraform",
+                            "description": "Name of the CD Toolchain.",
                             "required": true
                         },
                         {
@@ -1762,7 +1762,7 @@
                             "key": "trigger_manual_name",
                             "type": "string",
                             "default_value": "Manual CD Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
+                            "description": "The name of the CD pipeline Manual trigger.",
                             "required": false
                         },
                         {
@@ -1974,8 +1974,8 @@
                         {
                             "key": "toolchain_name",
                             "type": "string",
-                            "default_value": "DevSecOps CI Toolchain - Terraform",
-                            "description": "Name of the CI Toolchain.",
+                            "default_value": "DevSecOps CD Toolchain - Terraform",
+                            "description": "Name of the CD Toolchain.",
                             "required": true
                         },
                         {
@@ -3707,7 +3707,7 @@
                             "key": "trigger_manual_name",
                             "type": "string",
                             "default_value": "Manual CD Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
+                            "description": "The name of the CD pipeline Manual trigger.",
                             "required": false
                         },
                         {
