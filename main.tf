@@ -366,7 +366,7 @@ module "pipeline_config_repo" {
   issues_enabled        = var.pipeline_config_repo_issues_enabled
   traceability_enabled  = var.pipeline_config_repo_traceability_enabled
   integration_owner     = (var.pipeline_config_repo_integration_owner == "") ? var.repo_integration_owner : var.pipeline_config_repo_integration_owner
-  auth_type             = var.pipeline_config_repo_auth_type
+  auth_type             = local.pipeline_config_repo_auth_type
   secret_ref            = local.pipeline_config_repo_secret_ref
   git_id                = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
   blind_connection      = (var.pipeline_config_repo_blind_connection == "") ? var.repo_blind_connection : var.pipeline_config_repo_blind_connection
