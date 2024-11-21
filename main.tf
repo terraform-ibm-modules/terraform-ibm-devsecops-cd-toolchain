@@ -39,53 +39,67 @@ locals {
 
   #SECRETS
 
+  deployment_repo_secret_name = (var.deployment_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.deployment_repo_git_token_secret_name
+  deployment_repo_crn         = (var.deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.deployment_repo_git_token_secret_crn
   deployment_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.deployment_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.deployment_repo_secret_group == "") ? format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.deployment_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.deployment_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.deployment_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.deployment_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.deployment_repo_secret_group == "") ? format("{vault::%s.${local.deployment_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.deployment_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.deployment_repo_secret_group))
   )
 
+  change_management_repo_secret_name = (var.change_management_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.change_management_repo_git_token_secret_name
+  change_management_repo_crn         = (var.change_management_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.change_management_repo_git_token_secret_crn
   change_management_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.change_management_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.change_management_repo_secret_group == "") ? format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.change_management_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.change_management_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.change_management_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.change_management_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.change_management_repo_secret_group == "") ? format("{vault::%s.${local.change_management_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.change_management_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.change_management_repo_secret_group))
   )
 
+  issues_repo_secret_name = (var.issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.issues_repo_git_token_secret_name
+  issues_repo_crn         = (var.issues_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.issues_repo_git_token_secret_crn
   issues_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.issues_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.issues_repo_secret_group == "") ? format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.issues_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.issues_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.issues_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.issues_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.issues_repo_secret_group == "") ? format("{vault::%s.${local.issues_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.issues_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.issues_repo_secret_group))
   )
 
+  evidence_repo_secret_name = (var.evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.evidence_repo_git_token_secret_name
+  evidence_repo_crn         = (var.evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.evidence_repo_git_token_secret_crn
   evidence_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.evidence_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.evidence_repo_secret_group == "") ? format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.evidence_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.evidence_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.evidence_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.evidence_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.evidence_repo_secret_group == "") ? format("{vault::%s.${local.evidence_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.evidence_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.evidence_repo_secret_group))
   )
 
+  inventory_repo_secret_name = (var.inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.inventory_repo_git_token_secret_name
+  inventory_repo_crn         = (var.inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.inventory_repo_git_token_secret_crn
   inventory_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.inventory_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.inventory_repo_secret_group == "") ? format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.inventory_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.inventory_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.inventory_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.inventory_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.inventory_repo_secret_group == "") ? format("{vault::%s.${local.inventory_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.inventory_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.inventory_repo_secret_group))
   )
 
+  compliance_pipeline_repo_secret_name = (var.compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_crn         = (var.compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.compliance_pipeline_repo_git_token_secret_crn
   compliance_pipeline_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.compliance_pipeline_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.compliance_pipeline_repo_secret_group == "") ? format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.compliance_pipeline_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.compliance_pipeline_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.compliance_pipeline_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.compliance_pipeline_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.compliance_pipeline_repo_secret_group == "") ? format("{vault::%s.${local.compliance_pipeline_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.compliance_pipeline_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.compliance_pipeline_repo_secret_group))
   )
 
+  pipeline_config_repo_secret_name = (var.pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.pipeline_config_repo_git_token_secret_name
+  pipeline_config_repo_crn         = (var.pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_crn : var.pipeline_config_repo_git_token_secret_crn
   pipeline_config_repo_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_config_repo_git_token_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", module.integrations.secret_tool) :
-    (var.pipeline_config_repo_secret_group == "") ? format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    format("{vault::%s.${var.pipeline_config_repo_git_token_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_config_repo_secret_group))
+    (var.sm_instance_crn != "") ? local.pipeline_config_repo_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${local.pipeline_config_repo_secret_name}}", module.integrations.secret_tool) :
+    (var.pipeline_config_repo_secret_group == "") ? format("{vault::%s.${local.pipeline_config_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${local.pipeline_config_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_config_repo_secret_group))
   )
 
   cos_secret_ref = (
@@ -163,6 +177,11 @@ locals {
 
   inventory_repo_auth_type = (
     (var.inventory_repo_auth_type != "") ? var.inventory_repo_auth_type :
+    (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
+  )
+
+  deployment_repo_auth_type = (
+    (var.deployment_repo_auth_type != "") ? var.deployment_repo_auth_type :
     (var.repo_auth_type != "") ? var.repo_auth_type : "oauth"
   )
 
@@ -395,7 +414,7 @@ module "deployment_repo" {
   issues_enabled        = var.deployment_repo_issues_enabled
   traceability_enabled  = var.deployment_repo_traceability_enabled
   integration_owner     = var.deployment_repo_integration_owner
-  auth_type             = var.deployment_repo_auth_type
+  auth_type             = local.deployment_repo_auth_type
   secret_ref            = local.deployment_repo_secret_ref
   git_id                = (var.deployment_repo_existing_git_id != "") ? var.deployment_repo_existing_git_id : var.deployment_repo_clone_to_git_id
   blind_connection      = var.deployment_repo_blind_connection
