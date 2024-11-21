@@ -2,7 +2,7 @@
     "products": [
         {
             "label": "DevSecOps CD Toolchain",
-            "name": "devsecops-cd-toolchain",
+            "name": "deploy-arch-devsecops-cd-toolchain",
             "version": "1.0.1",
             "product_kind": "solution",
             "tags": [

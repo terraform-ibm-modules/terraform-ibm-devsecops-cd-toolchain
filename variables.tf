@@ -1460,7 +1460,7 @@ variable "trigger_timed_cron_schedule" {
 
 variable "trigger_manual_name" {
   type        = string
-  description = "The name of the CI pipeline Manual trigger."
+  description = "The name of the CD pipeline Manual trigger."
   default     = "Manual CD Trigger"
 }
 variable "trigger_manual_enable" {
