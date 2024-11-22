@@ -78,7 +78,7 @@ variable "change_management_group" {
 variable "change_management_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "change_management_repo_blind_connection" {
@@ -237,7 +237,7 @@ variable "compliance_pipeline_group" {
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "compliance_pipeline_repo_git_provider" {
@@ -441,7 +441,7 @@ variable "deployment_group" {
 variable "deployment_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "deployment_repo_blind_connection" {
@@ -656,7 +656,7 @@ variable "evidence_group" {
 variable "evidence_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "evidence_repo_blind_connection" {
@@ -772,7 +772,7 @@ variable "inventory_group" {
 variable "inventory_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "inventory_repo_blind_connection" {
@@ -883,7 +883,7 @@ variable "issues_group" {
 variable "issues_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "issues_repo_blind_connection" {
@@ -1030,7 +1030,7 @@ variable "pipeline_config_group" {
 variable "pipeline_config_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "pipeline_config_repo_blind_connection" {
