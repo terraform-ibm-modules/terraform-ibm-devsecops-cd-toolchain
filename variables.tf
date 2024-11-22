@@ -234,7 +234,7 @@ variable "enable_concert" {
 variable "cos_api_key_secret_name" {
   type        = string
   description = "Name of the IBM Cloud Storage api-key secret in the secret provider."
-  default     = "cos-api-key"
+  default     = ""
 }
 
 variable "cos_endpoint" {
@@ -905,25 +905,25 @@ variable "pipeline_config_repo_integration_owner" {
 variable "pipeline_config_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "inventory_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "issues_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "evidence_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "issues_repo_integration_owner" {
@@ -947,7 +947,7 @@ variable "inventory_repo_integration_owner" {
 variable "deployment_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "deployment_repo_integration_owner" {
@@ -989,13 +989,13 @@ variable "deployment_repo_name" {
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "change_management_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "pipeline_config_repo_git_token_secret_name" {
@@ -1460,7 +1460,7 @@ variable "trigger_timed_cron_schedule" {
 
 variable "trigger_manual_name" {
   type        = string
-  description = "The name of the CI pipeline Manual trigger."
+  description = "The name of the CD pipeline Manual trigger."
   default     = "Manual CD Trigger"
 }
 variable "trigger_manual_enable" {
@@ -1588,4 +1588,64 @@ variable "default_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
   default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
+}
+
+variable "repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "repo_git_id" {
+  type        = string
+  description = "The Git ID for the compliance repositories."
+  default     = ""
+}
+
+variable "repo_git_provider" {
+  type        = string
+  description = "The Git provider type."
+  default     = ""
+}
+
+variable "repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
+variable "repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
+  default     = ""
+}
+
+variable "repo_group" {
+  type        = string
+  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token)."
+  default     = ""
+}
+
+variable "repo_git_token_crn" {
+  type        = string
+  description = "The CRN of the  Git token secret in the secret provider. Specifying a CRN for the Git Token automatically sets the authentication type to `pat`."
+  default     = ""
+}
+
+variable "repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+  default     = ""
+}
+
+variable "repo_auth_type" {
+  type        = string
+  description = "The auth type for the repo `oauth` or 'pat` (personal access token). Applies to all the default compliance repositories but can be overriden by the repository specific variable."
+  default     = ""
+}
+
+variable "repo_integration_owner" {
+  type        = string
+  description = "The integration owner of the repository. Applies to all the default compliance repositories but can be overriden by the repository specific variable."
+  default     = ""
 }
