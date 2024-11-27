@@ -6,7 +6,7 @@ variable "toolchain_resource_group" {
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "API key used to create the toolchains."
+  description = "API key used to create the toolchain."
 }
 
 variable "pipeline_ibmcloud_api_key_secret_name" {

@@ -27,6 +27,12 @@
                     "architecture": {},
                     "configuration": [
                         {
+                            "key": "ibmcloud_api_key",
+                            "type": "password",
+                            "description": "API key used to create the toolchain.",
+                            "required": true
+                        },
+                        {
                             "key": "toolchain_name",
                             "type": "string",
                             "default_value": "DevSecOps CD Toolchain - Terraform",
@@ -72,12 +78,19 @@
                             }
                         },
                         {
+                            "key": "cluster_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Kubernetes cluster where the application is deployed.",
+                            "required": false
+                        },
+                        {
                             "key": "pipeline_properties",
                             "type": "string",
                             "default_value": "[\n    {\n      \"pipeline_id\": \"cd\",\n      \"properties\": [\n        {\n            \"name\": \"change-request-id\",\n            \"type\": \"text\",\n            \"value\": \"notAvailable\"\n        },\n        {\n            \"name\": \"cluster\",\n            \"type\": \"text\",\n            \"value\": \"mycluster\"\n        },\n        {\n            \"name\": \"cluster-namespace\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"cluster_region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"code-signing-certificate\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-bucket-name\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-endpoint\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"doi-toolchain-id\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"emergency-label\",\n          \"type\": \"text\",\n          \"value\": \"EMERGENCY\"\n        },\n        {\n            \"name\": \"event-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"force-redeploy\",\n            \"type\": \"single_select\",\n            \"value\": \"false\",\n            \"enum\": \"[false,true]\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"merge-cra-sbom\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"peer-review-compliance\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"pipeline-config\",\n            \"type\": \"text\",\n            \"value\": \".pipeline-config.yaml\"\n          },\n          {\n            \"name\": \"pipeline-config-branch\",\n            \"type\": \"text\",\n            \"value\": \"\"\n          },\n        {\n            \"name\": \"pipeline-debug\",\n            \"type\": \"single_select\",\n            \"value\": \"0\",\n            \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"pre-prod-evidence-collection\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"satellite-cluster-group\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"slack-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"source-environment\",\n            \"type\": \"text\",\n            \"value\": \"master\"\n        },\n        {\n            \"name\": \"target-environment\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"target-environment-detail\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"target-environment-purpose\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"version\",\n            \"type\": \"text\",\n            \"value\": \"v1\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties. This takes precedence over the properties JSON.",
                             "display_name": "JSON",
-                            "required": false,
+                            "required": true,
                             "custom_config": {
                                 "type": "json_editor",
                                 "grouping": "deployment",
@@ -89,50 +102,57 @@
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "inventory_repo_url",
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "issues_repo_url",
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
-                            "key": "ibmcloud_api_key",
-                            "type": "password",
-                            "description": "API key used to create the toolchains.",
+                            "key": "enable_secrets_manager",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set `true` to enable a Secrets Manager tool integration. If this is enabled then the Secrets Manager instance details are required. See the `sm_` prefixed variables in the optional section. This can be configured using a CRN or using a combination of the Secrets Manager name, region and resource group. An IBMcloud api key is required for running the pipelines. It is recommended that a secrets provider is used for storing the secrets. For a CRN configuration use `pipeline_ibmcloud_api_key_secret_crn` for setting the CRN for the apikey. Alternatively use `pipeline_ibmcloud_api_key_secret_name` for setting the name of the apikey as set in Secrets Manager. This applies to the non CRN configuration of the Secrets tool. ",
                             "required": true
+                        },
+                        {
+                            "key": "sm_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Secrets Manager instance. If the CRN is provided, it will take precendence over the subsequent `sm_` variables. Secrets using a CRN can be set with the variables ending in `secret_crn`",
+                            "required": false
                         },
                         {
                             "key": "sm_location",
                             "type": "string",
                             "default_value": "us-south",
                             "description": "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
-                            "display_name": "VPC region",
+                            "display_name": "Region",
                             "required": false,
                             "custom_config": {
-                                "type": "vpc_region",
+                                "type": "region",
                                 "grouping": "deployment",
                                 "original_grouping": "deployment",
                                 "config_constraints": {
-                                    "generationType": "2"
+                                    "filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+                                    "showKinds": [
+                                        "region",
+                                        "zone",
+                                        "dc",
+                                        "location"
+                                    ]
                                 }
                             }
-                        },
-                        {
-                            "key": "sm_instance_crn",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The CRN of the Secrets Manager instance.",
-                            "required": false
                         },
                         {
                             "key": "sm_name",
@@ -350,13 +370,6 @@
                             "required": false
                         },
                         {
-                            "key": "cluster_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Kubernetes cluster where the application is deployed.",
-                            "required": false
-                        },
-                        {
                             "key": "cluster_namespace",
                             "type": "string",
                             "default_value": "default",
@@ -368,27 +381,6 @@
                             "type": "string",
                             "default_value": "ibm:yp:us-south",
                             "description": "Region of the Kubernetes cluster where the application is deployed.",
-                            "required": false
-                        },
-                        {
-                            "key": "code_engine_project",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The name of the Code Engine project to use. Created if it does not exist.",
-                            "required": false
-                        },
-                        {
-                            "key": "code_engine_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region to create/lookup for the Code Engine project.",
-                            "required": false
-                        },
-                        {
-                            "key": "code_engine_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The resource group of the Code Engine project.",
                             "required": false
                         },
                         {
@@ -834,13 +826,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "enable_secrets_manager",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to enable Secrets Manager Integration.",
                             "required": false
                         },
                         {
@@ -1972,6 +1957,12 @@
                     "architecture": {},
                     "configuration": [
                         {
+                            "key": "ibmcloud_api_key",
+                            "type": "password",
+                            "description": "API key used to create the toolchain.",
+                            "required": true
+                        },
+                        {
                             "key": "toolchain_name",
                             "type": "string",
                             "default_value": "DevSecOps CD Toolchain - Terraform",
@@ -2017,12 +2008,19 @@
                             }
                         },
                         {
+                            "key": "code_engine_project",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The name of the Code Engine project to use. Created if it does not exist.",
+                            "required": true
+                        },
+                        {
                             "key": "pipeline_properties",
                             "type": "string",
                             "default_value": "[\n    {\n      \"pipeline_id\": \"cd\",\n      \"properties\": [\n        {\n            \"name\": \"app-concurrency\",\n            \"type\": \"text\",\n            \"value\": \"100\"\n        },\n        {\n            \"name\": \"app-deployment-timeout\",\n            \"type\": \"text\",\n            \"value\": \"300\"\n        },\n        {\n            \"name\": \"app-max-scale\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"app-min-scale\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"app-port\",\n            \"type\": \"text\",\n            \"value\": \"8080\"\n        },\n        {\n            \"name\": \"app-visibility\",\n            \"type\": \"text\",\n            \"value\": \"public\"\n        },\n        {\n            \"name\": \"change-request-id\",\n            \"type\": \"text\",\n            \"value\": \"notAvailable\"\n        },\n        {\n            \"name\": \"code-engine-binding-resource-group\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"code-engine-deployment-type\",\n            \"type\": \"text\",\n            \"value\": \"application\"\n        },\n        {\n            \"name\": \"code-engine-project\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"code-engine-region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"code-engine-resource-group\",\n            \"type\": \"text\",\n            \"value\": \"Default\"\n        },\n        {\n            \"name\": \"code-signing-certificate\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-bucket-name\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-endpoint\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cpu\",\n            \"type\": \"text\",\n            \"value\": \"0.25\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"doi-toolchain-id\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"emergency-label\",\n          \"type\": \"text\",\n          \"value\": \"EMERGENCY\"\n        },\n        {\n            \"name\": \"env-from-configmaps\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"env-from-secrets\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"ephemeral-storage\",\n            \"type\": \"text\",\n            \"value\": \"0.4G\"\n        },\n        {\n            \"name\": \"event-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"force-redeploy\",\n            \"type\": \"single_select\",\n            \"value\": \"false\",\n            \"enum\": \"[false,true]\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"job-instances\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"job-maxexecutiontime\",\n            \"type\": \"text\",\n            \"value\": \"7200\"\n        },\n        {\n            \"name\": \"job-retrylimit\",\n            \"type\": \"text\",\n            \"value\": \"3\"\n        },\n        {\n            \"name\": \"memory\",\n            \"type\": \"text\",\n            \"value\": \"0.5G\"\n        },\n        {\n            \"name\": \"merge-cra-sbom\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"peer-review-collection\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"peer-review-compliance\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"pipeline-config\",\n            \"type\": \"text\",\n            \"value\": \".pipeline-config.yaml\"\n          },\n          {\n            \"name\": \"pipeline-config-branch\",\n            \"type\": \"text\",\n            \"value\": \"\"\n          },\n        {\n            \"name\": \"pipeline-debug\",\n            \"type\": \"single_select\",\n            \"value\": \"0\",\n            \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"pre-prod-evidence-collection\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"remove-unspecified-references-to-configuration-resources\",\n            \"type\": \"text\",\n            \"value\": \"false\"\n        },\n        {\n            \"name\": \"service-bindings\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"slack-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"source-environment\",\n            \"type\": \"text\",\n            \"value\": \"master\"\n        },\n        {\n            \"name\": \"target-environment\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"target-environment-detail\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"target-environment-purpose\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"version\",\n            \"type\": \"text\",\n            \"value\": \"v1\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties. This takes precedence over the properties JSON.",
                             "display_name": "JSON",
-                            "required": false,
+                            "required": true,
                             "custom_config": {
                                 "type": "json_editor",
                                 "grouping": "deployment",
@@ -2034,50 +2032,57 @@
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "inventory_repo_url",
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-inventory-locker for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "issues_repo_url",
                             "type": "string",
                             "default_value": "",
                             "description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates.",
-                            "required": false
+                            "required": true
                         },
                         {
-                            "key": "ibmcloud_api_key",
-                            "type": "password",
-                            "description": "API key used to create the toolchains.",
+                            "key": "enable_secrets_manager",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set `true` to enable a Secrets Manager tool integration. If this is enabled then the Secrets Manager instance details are required. See the `sm_` prefixed variables in the optional section. This can be configured using a CRN or using a combination of the Secrets Manager name, region and resource group. An IBMcloud api key is required for running the pipelines. It is recommended that a secrets provider is used for storing the secrets. For a CRN configuration use `pipeline_ibmcloud_api_key_secret_crn` for setting the CRN for the apikey. Alternatively use `pipeline_ibmcloud_api_key_secret_name` for setting the name of the apikey as set in Secrets Manager. This applies to the non CRN configuration of the Secrets tool. ",
                             "required": true
+                        },
+                        {
+                            "key": "sm_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Secrets Manager instance. If the CRN is provided, it will take precendence over the subsequent `sm_` variables. Secrets using a CRN can be set with the variables ending in `secret_crn`",
+                            "required": false
                         },
                         {
                             "key": "sm_location",
                             "type": "string",
                             "default_value": "us-south",
                             "description": "IBM Cloud location/region containing the Secrets Manager instance. Not required if using a Secrets Manager CRN instance.",
-                            "display_name": "VPC region",
+                            "display_name": "Region",
                             "required": false,
                             "custom_config": {
-                                "type": "vpc_region",
+                                "type": "region",
                                 "grouping": "deployment",
                                 "original_grouping": "deployment",
                                 "config_constraints": {
-                                    "generationType": "2"
+                                    "filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+                                    "showKinds": [
+                                        "region",
+                                        "zone",
+                                        "dc",
+                                        "location"
+                                    ]
                                 }
                             }
-                        },
-                        {
-                            "key": "sm_instance_crn",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The CRN of the Secrets Manager instance.",
-                            "required": false
                         },
                         {
                             "key": "sm_name",
@@ -2313,13 +2318,6 @@
                             "type": "string",
                             "default_value": "ibm:yp:us-south",
                             "description": "Region of the Kubernetes cluster where the application is deployed.",
-                            "required": false
-                        },
-                        {
-                            "key": "code_engine_project",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The name of the Code Engine project to use. Created if it does not exist.",
                             "required": false
                         },
                         {
@@ -2779,13 +2777,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "enable_secrets_manager",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to enable Secrets Manager Integration.",
                             "required": false
                         },
                         {
