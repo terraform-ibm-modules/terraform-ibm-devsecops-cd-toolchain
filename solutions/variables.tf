@@ -623,6 +623,12 @@ variable "enable_pipeline_notifications" {
   default     = false
 }
 
+variable "enable_privateworker" {
+  type        = bool
+  default     = false
+  description = "Set true to enable private worker for the CD toolchain.|"
+}
+
 variable "enable_secrets_manager" {
   type        = bool
   description = "Set to enable Secrets Manager Integration."
@@ -1208,12 +1214,6 @@ variable "pipeline_properties" {
   default     = ""
 }
 
-variable "private_worker_integration_name" {
-  type        = string
-  description = "The name of the private worker integration."
-  default     = "compliance-private-worker"
-}
-
 variable "privateworker_credentials_secret_crn" {
   type        = string
   sensitive   = true
@@ -1235,6 +1235,12 @@ variable "privateworker_credentials_secret_name" {
   type        = string
   default     = "private-worker-service-api"
   description = "Name of the privateworker secret in the secret provider."
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "private-worker-tool-01"
 }
 
 variable "region" {

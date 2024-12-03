@@ -12,7 +12,7 @@ locals {
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
-  private_worker_name    = var.private_worker_integration_name
+  private_worker_name    = var.privateworker_name
 }
 
 resource "ibm_iam_authorization_policy" "toolchain_secretsmanager_auth_policy" {
@@ -91,7 +91,7 @@ resource "ibm_cd_toolchain_tool_slack" "slack_tool" {
 }
 
 resource "ibm_cd_toolchain_tool_privateworker" "cd_toolchain_tool_private_worker" {
-  count        = (var.enable_private_worker) ? 0 : 0
+  count        = (var.enable_privateworker) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     name                     = local.private_worker_name

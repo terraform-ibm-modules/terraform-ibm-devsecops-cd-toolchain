@@ -829,6 +829,13 @@
                             "required": false
                         },
                         {
+                            "key": "enable_privateworker",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set true to enable private worker for the CD toolchain.",
+                            "required": false
+                        },
+                        {
                             "key": "enable_slack",
                             "type": "boolean",
                             "default_value": false,
@@ -1411,9 +1418,9 @@
                             "required": false
                         },
                         {
-                            "key": "private_worker_integration_name",
+                            "key": "privateworker_name",
                             "type": "string",
-                            "default_value": "compliance-private-worker",
+                            "default_value": "private-worker-tool-01",
                             "description": "The name of the private worker integration.",
                             "required": false
                         },
@@ -2780,6 +2787,13 @@
                             "required": false
                         },
                         {
+                            "key": "enable_privateworker",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set true to enable private worker for the CD toolchain.",
+                            "required": false
+                        },
+                        {
                             "key": "enable_slack",
                             "type": "boolean",
                             "default_value": false,
@@ -3362,9 +3376,9 @@
                             "required": false
                         },
                         {
-                            "key": "private_worker_integration_name",
+                            "key": "privateworker_name",
                             "type": "string",
-                            "default_value": "compliance-private-worker",
+                            "default_value": "private-worker-tool-01",
                             "description": "The name of the private worker integration.",
                             "required": false
                         },

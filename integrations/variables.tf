@@ -80,7 +80,7 @@ variable "slack_toolchain_bind" {
 variable "slack_toolchain_unbind" {
 }
 
-variable "enable_private_worker" {
+variable "enable_privateworker" {
   type        = bool
   description = "Create a private worker integration"
   default     = false
@@ -200,7 +200,7 @@ variable "kp_integration_name" {
 variable "slack_integration_name" {
 }
 
-variable "private_worker_integration_name" {
+variable "privateworker_name" {
 }
 
 variable "event_notifications_tool_name" {

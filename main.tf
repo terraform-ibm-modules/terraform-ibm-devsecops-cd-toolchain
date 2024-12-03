@@ -488,6 +488,7 @@ module "integrations" {
   ibmcloud_api_key                     = var.ibmcloud_api_key
   toolchain_id                         = ibm_cd_toolchain.toolchain_instance.id
   resource_group                       = var.toolchain_resource_group
+  enable_privateworker                 = var.enable_privateworker
   enable_slack                         = var.enable_slack
   slack_channel_name                   = var.slack_channel_name
   slack_webhook_secret_ref             = local.slack_webhook_secret_ref
@@ -544,7 +545,7 @@ module "integrations" {
   sm_integration_name                  = var.sm_integration_name
   kp_integration_name                  = var.kp_integration_name
   slack_integration_name               = var.slack_integration_name
-  private_worker_integration_name      = var.private_worker_integration_name
+  privateworker_name                   = var.privateworker_name
   event_notifications_tool_name        = var.event_notifications_tool_name
   event_notifications_crn              = var.event_notifications_crn
 }

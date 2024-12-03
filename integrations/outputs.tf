@@ -41,6 +41,6 @@ output "secret_tool_v1" {
 }
 
 output "worker_id" {
-  value = ((var.enable_private_worker) ?
+  value = ((var.enable_privateworker) ?
   ibm_cd_toolchain_tool_privateworker.cd_toolchain_tool_private_worker[0].tool_id : var.worker_id)
 }

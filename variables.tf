@@ -27,6 +27,12 @@ variable "enable_pipeline_git_token" {
   default     = false
 }
 
+variable "enable_privateworker" {
+  type        = bool
+  default     = false
+  description = "Set true to enable private worker for the CD toolchain.|"
+}
+
 variable "toolchain_region" {
   type        = string
   description = "IBM Cloud Region for the toolchain."
@@ -1052,6 +1058,12 @@ variable "privateworker_credentials_secret_name" {
   description = "Name of the privateworker secret in the secret provider."
 }
 
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "private-worker-tool-01"
+}
+
 variable "deployment_repo_git_token_secret_crn" {
   type        = string
   sensitive   = true
@@ -1300,12 +1312,6 @@ variable "slack_integration_name" {
   type        = string
   description = "The name of the Slack integration."
   default     = "slack-compliance"
-}
-
-variable "private_worker_integration_name" {
-  type        = string
-  description = "The name of the private worker integration."
-  default     = "compliance-private-worker"
 }
 
 variable "worker_id" {
