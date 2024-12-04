@@ -102,6 +102,13 @@ locals {
     format("{vault::%s.${local.pipeline_config_repo_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_config_repo_secret_group))
   )
 
+  code_signing_cert_secret_ref = (
+    (var.sm_instance_crn != "") ? var.cos_api_key_secret_crn :
+    (var.enable_key_protect) ? format("{vault::%s.${var.code_signing_cert_secret_name}}", module.integrations.secret_tool) :
+    (var.cos_api_key_secret_group == "") ? format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
+    format("{vault::%s.${var.code_signing_cert_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.cos_api_key_secret_group))
+  )
+
   cos_secret_ref = (
     (var.sm_instance_crn != "") ? var.cos_api_key_secret_crn :
     (var.enable_key_protect) ? format("{vault::%s.${var.cos_api_key_secret_name}}", module.integrations.secret_tool) :
@@ -214,7 +221,7 @@ locals {
     "code-engine-project"        = var.code_engine_project,
     "code-engine-region"         = var.code_engine_region,
     "code-engine-resource-group" = var.code_engine_resource_group,
-    "code-signing-certificate"   = var.code_signing_cert_secret_name,
+    "code-signing-certificate"   = (var.code_signing_cert_secret_name != "") ? local.code_signing_cert_secret_ref : ""
     "cos-api-key"                = (var.cos_api_key_secret_name != "") ? local.cos_secret_ref : "",
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,

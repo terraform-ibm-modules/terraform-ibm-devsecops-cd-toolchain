@@ -1016,6 +1016,23 @@ variable "inventory_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
+variable "code_signing_cert_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the code signing certificate."
+  default     = ""
+  validation {
+    condition     = startswith(var.code_signing_cert_secret_crn, "crn:") || var.code_signing_cert_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "code_signing_cert_secret_group" {
+  type        = string
+  description = "Secret group prefix for the code signing certificate secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "code_signing_cert_secret_name" {
   type        = string
   description = "Set this variable with the name of the secret containing the GPG public key from the Secrets Provider."
