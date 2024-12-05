@@ -34,6 +34,8 @@ module "devsecops_cd_toolchain" {
   code_engine_project                            = var.code_engine_project
   code_engine_region                             = var.code_engine_region
   code_engine_resource_group                     = var.code_engine_resource_group
+  code_signing_cert_secret_crn                   = var.code_signing_cert_secret_crn
+  code_signing_cert_secret_group                 = var.code_signing_cert_secret_group
   code_signing_cert_secret_name                  = var.code_signing_cert_secret_name
   compliance_pipeline_existing_repo_url          = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_group                      = var.compliance_pipeline_group
