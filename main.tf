@@ -586,10 +586,16 @@ module "integrations" {
   artifactory_user                     = var.artifactory_user
   artifactory_repo_url                 = var.artifactory_repo_url
   artifactory_token_secret_ref         = local.artifactory_secret_ref
+  enable_cos                           = var.enable_cos
   cos_dashboard_url                    = var.cos_dashboard_url
   cos_description                      = var.cos_description
   cos_documentation_url                = var.cos_documentation_url
   cos_integration_name                 = var.cos_integration_name
+  cos_api_key_secret_ref               = local.cos_secret_ref
+  cos_endpoint                         = var.cos_endpoint
+  cos_instance_crn                     = var.cos_instance_crn
+  cos_bucket_name                      = var.cos_bucket_name
+  use_legacy_cos_tool                  = var.use_legacy_cos_tool
   privateworker_credentials_secret_ref = local.privateworker_secret_ref
   worker_id                            = var.worker_id
   secret_tool                          = module.integrations.secret_tool
