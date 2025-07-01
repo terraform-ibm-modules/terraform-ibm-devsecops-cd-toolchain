@@ -339,6 +339,7 @@ A Terraform module for provisioning the DevSecOps CD toolchain.
 | <a name="output_deployment_repo_git_provider"></a> [deployment\_repo\_git\_provider](#output\_deployment\_repo\_git\_provider) | The deployment repository provider type. Can be 'hostedgit', 'githubconsolidated' etc. |
 | <a name="output_deployment_repo_url"></a> [deployment\_repo\_url](#output\_deployment\_repo\_url) | The deployment repo URL. |
 | <a name="output_evidence_repo"></a> [evidence\_repo](#output\_evidence\_repo) | The Evidence repo. |
+| <a name="input_evidence_repo_enabled"></a> [evidence\_repo\_enabled](#input\_evidence\_repo\_enabled) | Set to `true` to enable the evidence repository tool integration. | `bool` | `true` | no |
 | <a name="output_evidence_repo_git_id"></a> [evidence\_repo\_git\_id](#output\_evidence\_repo\_git\_id) | The evidence repository Git ID |
 | <a name="output_evidence_repo_git_provider"></a> [evidence\_repo\_git\_provider](#output\_evidence\_repo\_git\_provider) | The evidence repository provider type. Can be 'hostedgit', 'githubconsolidated' etc. |
 | <a name="output_evidence_repo_url"></a> [evidence\_repo\_url](#output\_evidence\_repo\_url) | The evidence repository instance URL, where evidence of the builds and scans are stored, ready for any compliance audit. |

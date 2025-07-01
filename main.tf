@@ -343,6 +343,7 @@ module "issues_repo" {
 }
 
 module "evidence_repo" {
+  count                 = (var.evidence_repo_enabled == true) ? 1 : 0
   source                = "./customizations/repositories"
   depends_on            = [module.integrations]
   tool_name             = "evidence-repo"
@@ -509,10 +510,11 @@ module "pipeline_cd" {
   pipeline_config_repo_existing_url     = var.pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = var.pipeline_config_repo_clone_from_url
   pipeline_repo_url                     = module.compliance_pipelines_repo.repository_url
-  evidence_repo_url                     = module.evidence_repo.repository_url
+  evidence_repo_url                     = try(module.evidence_repo[0].repository_url, "")
   inventory_repo_url                    = module.inventory_repo.repository_url
   issues_repo_url                       = module.issues_repo.repository_url
-  evidence_repo                         = module.evidence_repo.repository
+  evidence_repo                         = try(module.evidence_repo[0].repository, "")
+  evidence_repo_enabled                 = var.evidence_repo_enabled
   inventory_repo                        = module.inventory_repo.repository
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
