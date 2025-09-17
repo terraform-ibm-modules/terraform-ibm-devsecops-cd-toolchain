@@ -25,10 +25,11 @@ locals {
     : "master" # hello-compliance-deployment has branch master
   )
 
+  resolved_resource_region = (var.toolchain_resource_region_override == "") ? var.toolchain_region : var.toolchain_resource_region_override
   compliance_pipelines_git_server = (
     (local.is_staging) ? local.git_dev
-    : (var.toolchain_region == "eu-fr2") ? local.git_fr2
-    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+    : (local.resolved_resource_region == "eu-fr2") ? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", local.resolved_resource_region)
   )
 
   change_management_repo_source = (
