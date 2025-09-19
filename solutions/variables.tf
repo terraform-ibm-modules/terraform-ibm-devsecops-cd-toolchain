@@ -1522,6 +1522,12 @@ variable "toolchain_description" {
   default     = "Toolchain created with Terraform template for DevSecOps CD Best Practices"
 }
 
+variable "toolchain_resource_region_override" {
+  type        = string
+  description = "IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`."
+  default     = ""
+}
+
 variable "toolchain_name" {
   type        = string
   description = "Name of CD the Toolchain."
