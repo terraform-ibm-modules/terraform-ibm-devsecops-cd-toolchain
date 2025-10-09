@@ -251,12 +251,8 @@ module "devsecops_cd_toolchain" {
   trigger_manual_name                            = var.trigger_manual_name
   trigger_manual_promotion_enable                = var.trigger_manual_promotion_enable
   trigger_manual_promotion_name                  = var.trigger_manual_promotion_name
-  trigger_manual_pruner_enable                   = var.trigger_manual_pruner_enable
-  trigger_manual_pruner_name                     = var.trigger_manual_pruner_name
   trigger_timed_cron_schedule                    = var.trigger_timed_cron_schedule
   trigger_timed_enable                           = var.trigger_timed_enable
   trigger_timed_name                             = var.trigger_timed_name
-  trigger_timed_pruner_enable                    = var.trigger_timed_pruner_enable
-  trigger_timed_pruner_name                      = var.trigger_timed_pruner_name
   worker_id                                      = var.worker_id
 }

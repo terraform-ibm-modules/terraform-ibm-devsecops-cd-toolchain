@@ -95,10 +95,10 @@ variable "change_management_repo_git_id" {
 
 variable "change_management_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Choose the default git provider for change management repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.change_management_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.change_management_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
   }
 }
@@ -259,10 +259,10 @@ variable "compliance_pipeline_repo_auth_type" {
 
 variable "compliance_pipeline_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Choose the default git provider for change management repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.compliance_pipeline_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
   }
 }
@@ -435,10 +435,10 @@ variable "create_triggers" {
 
 variable "default_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Choose the default git provider for app repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.default_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.default_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\"."
   }
 }
@@ -506,7 +506,7 @@ variable "deployment_repo_existing_git_id" {
 variable "deployment_repo_existing_git_provider" {
   type        = string
   description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
-  default     = "hostedgit"
+  default     = ""
 }
 
 variable "deployment_repo_existing_url" {
@@ -696,10 +696,10 @@ variable "evidence_repo_git_id" {
 
 variable "evidence_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for evidence repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
   }
 }
@@ -812,10 +812,10 @@ variable "inventory_repo_git_id" {
 
 variable "inventory_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for inventory repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.inventory_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repo."
   }
 }
@@ -923,10 +923,10 @@ variable "issues_repo_git_id" {
 
 variable "issues_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for issue repo "
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.issues_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repo."
   }
 }
@@ -1088,10 +1088,10 @@ variable "pipeline_config_repo_git_id" {
 
 variable "pipeline_config_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for pipeline repo config"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.pipeline_config_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.pipeline_config_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline config repo."
   }
 }
@@ -1606,18 +1606,6 @@ variable "trigger_manual_promotion_name" {
   default     = "Manual Promotion Trigger"
 }
 
-variable "trigger_manual_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the manual Pruner trigger."
-  default     = true
-}
-
-variable "trigger_manual_pruner_name" {
-  type        = string
-  description = "The name of the manual Pruner trigger."
-  default     = "Evidence Pruner Manual Trigger"
-}
-
 variable "trigger_timed_cron_schedule" {
   type        = string
   description = "Only needed for timed triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
@@ -1634,18 +1622,6 @@ variable "trigger_timed_name" {
   type        = string
   description = "The name of the CD pipeline Timed trigger."
   default     = "Git CD Timed Trigger"
-}
-
-variable "trigger_timed_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the timed Pruner trigger."
-  default     = false
-}
-
-variable "trigger_timed_pruner_name" {
-  type        = string
-  description = "The name of the timed Pruner trigger."
-  default     = "Evidence Pruner Timed Trigger"
 }
 
 variable "worker_id" {
