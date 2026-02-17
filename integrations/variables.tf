@@ -90,12 +90,6 @@ variable "enable_privateworker" {
 variable "worker_id" {
 }
 
-variable "scc_evidence_locker_type" {
-}
-
-variable "scc_evidence_repo" {
-}
-
 variable "scc_enable_scc" {
 }
 

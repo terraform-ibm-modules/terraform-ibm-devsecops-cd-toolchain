@@ -7,16 +7,6 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_pipeline_config_repo" {
   locked      = contains(var.default_locked_properties, "pipeline-config-repo") ? "true" : "false"
 }
 
-resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_evidence_repo" {
-  count       = (var.evidence_repo_enabled) ? 1 : 0
-  name        = "evidence-repo"
-  type        = "integration"
-  value       = try(var.evidence_repo.tool_id, "")
-  path        = "parameters.repo_url"
-  pipeline_id = ibm_cd_tekton_pipeline.cd_pipeline_instance.pipeline_id
-  locked      = contains(var.default_locked_properties, "evidence-repo") ? "true" : "false"
-}
-
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_inventory_repo" {
   name        = "inventory-repo"
   type        = "integration"

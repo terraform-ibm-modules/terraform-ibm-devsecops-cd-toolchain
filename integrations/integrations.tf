@@ -155,21 +155,19 @@ resource "ibm_cd_toolchain_tool_custom" "cos_integration" {
 }
 
 resource "ibm_cd_toolchain_tool_securitycompliance" "scc_tool" {
-  count        = (var.scc_enable_scc) ? 1 : 0
+  count        = (var.scc_enable_scc == true && var.enable_cos == true) ? 1 : 0
   toolchain_id = var.toolchain_id
   parameters {
     name                   = var.scc_integration_name
     evidence_namespace     = "cd"
-    evidence_repo_url      = var.scc_evidence_repo
     attachment_id          = var.scc_attachment_id
     instance_crn           = var.scc_instance_crn
     profile_name           = var.scc_profile_name
     profile_version        = var.scc_profile_version
     scc_api_key            = (var.scc_use_profile_attachment == "enabled") ? var.scc_scc_api_key_secret_ref : ""
     use_profile_attachment = var.scc_use_profile_attachment
-    evidence_locker_type = ((var.scc_evidence_locker_type != "") ? var.scc_evidence_locker_type :
-    (var.enable_cos == true && var.use_legacy_cos_tool == false) ? "evidence-bucket" : var.scc_evidence_locker_type)
-    cos_bucket_name = (var.enable_cos == true && var.use_legacy_cos_tool == false) ? data.ibm_cd_toolchain_tool_cos.cos_tool_data[0].parameters[0].bucket_name : var.cos_bucket_name
+    evidence_locker_type   = "evidence-bucket"
+    cos_bucket_name        = (var.use_legacy_cos_tool == false) ? data.ibm_cd_toolchain_tool_cos.cos_tool_data[0].parameters[0].bucket_name : var.cos_bucket_name
   }
 }
 

@@ -446,7 +446,7 @@ variable "default_git_provider" {
 variable "default_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
+  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
 }
 
 variable "deployment_group" {
@@ -668,117 +668,6 @@ variable "event_notifications_tool_name" {
   type        = string
   description = "The name of the Event Notifications integration."
   default     = "Event Notifications"
-}
-
-variable "evidence_group" {
-  type        = string
-  description = "Specify Git user/group for evidence repo."
-  default     = ""
-}
-
-variable "evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
-  default     = ""
-}
-
-variable "evidence_repo_blind_connection" {
-  type        = string
-  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
-}
-
-variable "evidence_repo_git_id" {
-  type        = string
-  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
-  default     = ""
-}
-
-variable "evidence_repo_git_provider" {
-  type        = string
-  default     = ""
-  description = "Git provider for evidence repo"
-  validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
-  }
-}
-
-variable "evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Evidence repository Git Token."
-  default     = ""
-  validation {
-    condition     = startswith(var.evidence_repo_git_token_secret_crn, "crn:") || var.evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
-}
-
-variable "evidence_repo_initialization_type" {
-  type        = string
-  description = "The initialization type for the repo. Can be `new`, `fork`, `clone`, `link`, `new_if_not_exists`, `clone_if_not_exists`, `fork_if_not_exists`."
-  default     = ""
-}
-
-variable "evidence_repo_integration_owner" {
-  type        = string
-  description = "The name of the integration owner."
-  default     = ""
-}
-
-variable "evidence_repo_is_private_repo" {
-  type        = bool
-  description = "Set to `true` to make repository private."
-  default     = true
-}
-
-variable "evidence_repo_issues_enabled" {
-  type        = bool
-  description = "Set to `true` to enable issues."
-  default     = false
-}
-
-variable "evidence_repo_name" {
-  type        = string
-  description = "The repository name."
-  default     = ""
-}
-
-variable "evidence_repo_root_url" {
-  type        = string
-  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
-  default     = ""
-}
-
-variable "evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "evidence_repo_title" {
-  type        = string
-  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
-  default     = ""
-}
-
-variable "evidence_repo_traceability_enabled" {
-  type        = bool
-  description = "Set to `true` to enable traceability."
-  default     = false
-}
-
-variable "evidence_repo_url" {
-  type        = string
-  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
-  default     = ""
 }
 
 variable "ibmcloud_api_key" {
