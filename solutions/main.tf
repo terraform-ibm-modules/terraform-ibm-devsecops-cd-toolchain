@@ -93,10 +93,8 @@ module "devsecops_cd_toolchain" {
   deployment_repo_traceability_enabled           = var.deployment_repo_traceability_enabled
   deployment_source_repo_url                     = var.deployment_source_repo_url
   devsecops_flavor                               = var.devsecops_flavor
-  doi_toolchain_id                               = var.doi_toolchain_id
   enable_artifactory                             = var.enable_artifactory
   enable_change_management_repo                  = var.enable_change_management_repo
-  enable_insights                                = var.enable_insights
   enable_key_protect                             = var.enable_key_protect
   enable_pipeline_git_token                      = var.enable_pipeline_git_token
   enable_pipeline_notifications                  = var.enable_pipeline_notifications
@@ -144,7 +142,6 @@ module "devsecops_cd_toolchain" {
   kp_location                                    = var.kp_location
   kp_name                                        = var.kp_name
   kp_resource_group                              = var.kp_resource_group
-  link_to_doi_toolchain                          = var.link_to_doi_toolchain
   pipeline_branch                                = var.pipeline_branch
   pipeline_config_group                          = var.pipeline_config_group
   pipeline_config_repo_auth_type                 = var.pipeline_config_repo_auth_type
@@ -165,9 +162,6 @@ module "devsecops_cd_toolchain" {
   pipeline_config_repo_secret_group              = var.pipeline_config_repo_secret_group
   pipeline_config_repo_title                     = var.pipeline_config_repo_title
   pipeline_config_repo_traceability_enabled      = var.pipeline_config_repo_traceability_enabled
-  pipeline_doi_api_key_secret_crn                = var.pipeline_doi_api_key_secret_crn
-  pipeline_doi_api_key_secret_group              = var.pipeline_doi_api_key_secret_group
-  pipeline_doi_api_key_secret_name               = var.pipeline_doi_api_key_secret_name
   pipeline_git_tag                               = var.pipeline_git_tag
   pipeline_ibmcloud_api_key_secret_crn           = var.pipeline_ibmcloud_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_group         = var.pipeline_ibmcloud_api_key_secret_group

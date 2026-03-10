@@ -193,15 +193,6 @@ locals {
     replace("${local.sm_ref_format_root}/${var.scc_scc_api_key_secret_group}/${var.scc_scc_api_key_secret_name}", " ", "%20")
   )
 
-  pipeline_doi_api_key_secret_ref = (
-    (var.sm_instance_crn != "") ? var.pipeline_doi_api_key_secret_crn :
-    (var.enable_key_protect) ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", module.integrations.secret_tool) :
-    (var.use_legacy_ref == true && var.pipeline_doi_api_key_secret_group == "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.sm_secret_group)) :
-    (var.use_legacy_ref == true && var.pipeline_doi_api_key_secret_group != "") ? format("{vault::%s.${var.pipeline_doi_api_key_secret_name}}", format("%s.%s", module.integrations.secret_tool, var.pipeline_doi_api_key_secret_group)) :
-    (var.pipeline_doi_api_key_secret_group == "") ? replace("${local.sm_ref_format_root}/${var.sm_secret_group}/${var.pipeline_doi_api_key_secret_name}", " ", "%20") :
-    replace("${local.sm_ref_format_root}/${var.pipeline_doi_api_key_secret_group}/${var.pipeline_doi_api_key_secret_name}", " ", "%20")
-  )
-
   properties_flavor = ((var.devsecops_flavor == "kube") ? "${path.root}/properties-kube.json" :
     (var.devsecops_flavor == "code-engine") ? "${path.root}/properties-code-engine.json" :
     (var.devsecops_flavor == "zos") ? "${path.root}/properties-zos.json" : "${path.root}/properties-kube.json"
@@ -268,8 +259,6 @@ locals {
     "cos-api-key"                = (var.cos_api_key_secret_name != "") ? local.cos_secret_ref : "",
     "cos-bucket-name"            = var.cos_bucket_name,
     "cos-endpoint"               = var.cos_endpoint,
-    "doi-ibmcloud-api-key"       = (var.pipeline_doi_api_key_secret_name == "") ? local.pipeline_apikey_secret_ref : local.pipeline_doi_api_key_secret_ref,
-    "doi-toolchain-id"           = var.doi_toolchain_id,
     "ibmcloud-api-key"           = local.pipeline_apikey_secret_ref,
     "pipeline-config-branch"     = (var.pipeline_config_repo_branch != "") ? var.pipeline_config_repo_branch : local.deployment_repo_branch,
     "region"                     = var.region,
@@ -475,7 +464,6 @@ module "pipeline_cd" {
   inventory_repo                        = module.inventory_repo.repository
   issues_repo                           = module.issues_repo.repository
   secret_tool                           = module.integrations.secret_tool
-  doi_toolchain_id                      = var.doi_toolchain_id
   worker_id                             = module.integrations.worker_id
   tool_artifactory                      = module.integrations.ibm_cd_toolchain_tool_artifactory
   enable_artifactory                    = var.enable_artifactory
@@ -492,7 +480,6 @@ module "pipeline_cd" {
   trigger_manual_promotion_name         = var.trigger_manual_promotion_name
   trigger_manual_promotion_enable       = var.trigger_manual_promotion_enable
   enable_pipeline_notifications         = var.enable_pipeline_notifications
-  link_to_doi_toolchain                 = var.link_to_doi_toolchain
   trigger_git_promotion_listener        = var.trigger_git_promotion_listener
   trigger_git_promotion_enable          = var.trigger_git_promotion_enable
   trigger_git_promotion_branch          = var.trigger_git_promotion_branch
@@ -539,14 +526,11 @@ module "integrations" {
   enable_secrets_manager               = var.enable_secrets_manager
   enable_key_protect                   = var.enable_key_protect
   authorization_policy_creation        = var.authorization_policy_creation
-  enable_insights                      = var.enable_insights
   enable_concert                       = var.enable_concert
   concert_dashboard_url                = var.concert_dashboard_url
   concert_description                  = var.concert_description
   concert_documentation_url            = var.concert_documentation_url
   concert_integration_name             = var.concert_integration_name
-  link_to_doi_toolchain                = var.link_to_doi_toolchain
-  doi_toolchain_id                     = var.doi_toolchain_id
   enable_artifactory                   = var.enable_artifactory
   artifactory_repo_name                = var.artifactory_repo_name
   artifactory_dashboard_url            = var.artifactory_dashboard_url

@@ -17,9 +17,6 @@ variable "worker_id" {
   description = "The Private Worker Id or public"
 }
 
-variable "link_to_doi_toolchain" {
-}
-
 variable "deployment_repo" {
 }
 
@@ -66,9 +63,6 @@ variable "cd_pipeline_max_concurrent_runs" {
   type        = number
   description = "The number of maximum concurrent runs to be supported by CD Pipeline"
   default     = 1
-}
-
-variable "doi_toolchain_id" {
 }
 
 variable "enable_artifactory" {

@@ -446,7 +446,7 @@ variable "default_git_provider" {
 variable "default_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
+  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
 }
 
 variable "deployment_group" {
@@ -598,12 +598,6 @@ variable "devsecops_flavor" {
   default     = "kube"
 }
 
-variable "doi_toolchain_id" {
-  type        = string
-  description = "DevOps Insights Toolchain ID to link to."
-  default     = ""
-}
-
 variable "enable_artifactory" {
   type        = bool
   default     = false
@@ -613,12 +607,6 @@ variable "enable_artifactory" {
 variable "enable_change_management_repo" {
   type        = string
   description = "Set to `true` to enable the Change Management Repo integration."
-  default     = true
-}
-
-variable "enable_insights" {
-  type        = bool
-  description = "Set to `true` to enable the DevOps Insights integration."
   default     = true
 }
 
@@ -921,12 +909,6 @@ variable "kp_resource_group" {
   default     = "Default"
 }
 
-variable "link_to_doi_toolchain" {
-  description = "Enable a link to a DevOpsInsights instance in another toolchain, true or false."
-  type        = bool
-  default     = false
-}
-
 variable "pipeline_branch" {
   type        = string
   description = "The branch within pipeline definitions repository for Compliance CD Toolchain."
@@ -1054,29 +1036,6 @@ variable "pipeline_config_repo_traceability_enabled" {
   type        = bool
   description = "Set to `true` to enable traceability."
   default     = false
-}
-
-variable "pipeline_doi_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the DOI apikey."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_doi_api_key_secret_crn, "crn:") || var.pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "pipeline_doi_api_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "pipeline_doi_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
-  default     = ""
 }
 
 variable "pipeline_git_tag" {
