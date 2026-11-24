@@ -7,3 +7,4 @@
 /.history
 *.tfvars
 provider.tf
+repositories.json
